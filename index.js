@@ -3,7 +3,7 @@ const { Client, Intents, MessageEmbed} = require("discord.js");
 const { token, globalPrefix} = require("./config.json");
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
 
-client.login(token)
+client.login("OTU0NzYwODQ1NTE3MjU4ODAz.Gcl2F9.iHhu_i4sXNv6yb8-6JZII5Hn6eKLU7vSWwsjV0")
 
 client.on("ready", function (e) {
 	console.log(`Logged in as ${client.user.tag}!`)
