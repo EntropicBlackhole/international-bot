@@ -1,0 +1,38 @@
+{
+	"Create": {
+		"use": "<name> <ideology>",
+		"description": "Creates a country"
+	},
+	"Delete": {
+		"use": "None",
+		"description": "Deletes the country"
+	},
+	"Shop": {
+		"use": "None",
+		"description": "Shows the item list, the shop"
+	},
+	"Buy": {
+		"use": "<id_of_item> <amount>",
+		"description": "Buys an item"
+	},
+	"Beg": {
+		"use": "None (probably)",
+		"description": "Begs for money"
+	},
+	"Profile": {
+		"use": "None",
+		"description": "Shows your country profile"
+	},
+	"IdeologyList": {
+		"use": "None",
+		"description": "Shows the list of ideologies"
+	},
+	"War": {
+		"use": "<user>",
+		"description": "Declares war on a country (Ping the user)"
+	},
+	"Help": {
+		"use": "None",
+		"description": "Shows the list of commands"
+	}
+}

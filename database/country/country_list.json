@@ -1,0 +1,43 @@
+{
+  "708026434660204625": {
+    "name": "USZ",
+    "ideology": "democracy",
+    "money": 2833,
+    "items": {
+      "1": 1,
+      "2": 4,
+      "6": 5
+    }
+  },
+  "1000411486289666218": {
+    "name": "The Cowboy Empire",
+    "ideology": "democracy",
+    "money": 3390,
+    "items": {
+      "6": 1
+    }
+  },
+  "754018561621491762": {
+    "name": "Uguari",
+    "ideology": "democracy",
+    "money": 2453,
+    "items": {
+      "6": 1,
+      "7": 1,
+      "8": 1,
+      "9": 3
+    }
+  },
+  "592841797697536011": {
+    "name": "Soumere",
+    "ideology": "democracy",
+    "money": 213,
+    "items": {}
+  },
+  "719674119309754430": {
+    "name": "Hills F Dude DN",
+    "ideology": "fascism",
+    "money": 0,
+    "items": {}
+  }
+}
