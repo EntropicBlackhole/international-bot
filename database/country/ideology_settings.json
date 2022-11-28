@@ -2,27 +2,17 @@
 	"fascism": {
 		"multiplier": -0.1,
 		"discount": 0.1,
-		"approval_of_war": 100
+		"land_gotten_after_war": [0.5, 0.6]
 	},
 	"democracy": {
 		"multiplier": 0.07,
 		"discount": 0.08,
 		"approval_of_war": -1
 	},
-	"republicanism": {
-		"multiplier": 0.05,
-		"discount": 0.05,
-		"approval_of_war": -1
-	},
 	"monarchy": {
 		"multiplier": 0.15,
 		"discount": 0.05,
-		"approval_of_war": 65
-	},
-	"socialism": {
-		"multiplier": 0.02,
-		"discount": 0.15,
-		"approval_of_war": 50
+		"approval_of_war": 1
 	},
 	"anarchism": {
 		"multiplier": -1,

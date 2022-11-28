@@ -1,43 +1,41 @@
 {
-  "708026434660204625": {
-    "name": "USZ",
-    "ideology": "democracy",
-    "money": 2833,
-    "items": {
-      "1": 1,
-      "2": 4,
-      "6": 5
-    }
-  },
-  "1000411486289666218": {
-    "name": "The Cowboy Empire",
-    "ideology": "democracy",
-    "money": 3390,
-    "items": {
-      "6": 1
-    }
-  },
   "754018561621491762": {
-    "name": "Uguari",
+    "name": "test1",
     "ideology": "democracy",
-    "money": 2453,
+    "money": 59,
     "items": {
-      "6": 1,
-      "7": 1,
-      "8": 1,
-      "9": 3
+      "ground_unit": 0,
+      "medical_aid": 0,
+      "robot_dog": 0,
+      "emp_faulty": 0,
+      "navy_unit": 0,
+      "air_unit": 0
+    },
+    "hp": 0,
+    "wars": {
+      "current": "",
+      "participated": [
+        "3"
+      ]
     }
   },
-  "592841797697536011": {
-    "name": "Soumere",
-    "ideology": "democracy",
-    "money": 213,
-    "items": {}
-  },
-  "719674119309754430": {
-    "name": "Hills F Dude DN",
+  "708026434660204625": {
+    "name": "Yugoslavia",
     "ideology": "fascism",
-    "money": 0,
-    "items": {}
+    "money": 123,
+    "items": {
+      "hypernuke": 0,
+      "ground_unit": 0,
+      "robot_dog": 0,
+      "medical_aid": 0,
+      "emp_polished": 0
+    },
+    "hp": 255.2,
+    "wars": {
+      "current": "",
+      "participated": [
+        "3"
+      ]
+    }
   }
 }

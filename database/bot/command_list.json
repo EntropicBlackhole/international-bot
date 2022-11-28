@@ -1,38 +1,57 @@
 {
 	"Create": {
 		"use": "<name> <ideology>",
-		"description": "Creates a country"
+		"description": "Creates a country",
+		"keyword": "None"
 	},
 	"Delete": {
 		"use": "None",
-		"description": "Deletes the country"
+		"description": "Deletes the country",
+		"keyword": "None"
 	},
 	"Shop": {
 		"use": "None",
-		"description": "Shows the item list, the shop"
+		"description": "Shows the item list, the shop",
+		"keyword": "None"
 	},
 	"Buy": {
 		"use": "<id_of_item> <amount>",
-		"description": "Buys an item"
+		"description": "Buys an item",
+		"keyword": "None"
 	},
 	"Beg": {
 		"use": "None (probably)",
-		"description": "Begs for money"
+		"description": "Begs for money",
+		"keyword": "None"
 	},
 	"Profile": {
 		"use": "None",
-		"description": "Shows your country profile"
+		"description": "Shows your country profile",
+		"keyword": "None"
 	},
 	"IdeologyList": {
 		"use": "None",
-		"description": "Shows the list of ideologies"
+		"description": "Shows the list of ideologies",
+		"keyword": "IL"
 	},
 	"War": {
 		"use": "<user>",
-		"description": "Declares war on a country (Ping the user)"
+		"description": "Declares war on a country (Ping the user)",
+		"keyword": "None"
+	},
+	"QOTD": {
+		"use": "<question>",
+		"description": "(Moderator only) Can ask a question in the QOTD channel, automatically includes the @here ping",
+		"keyword": "None"
+	},
+	"Leaderboard": {
+		"use": "None",
+		"description": "Shows the leaderboard with everyone's money",
+		"keyword": "LB"
 	},
 	"Help": {
 		"use": "None",
-		"description": "Shows the list of commands"
+		"description": "Shows the list of commands",
+		"keyword": "None"
 	}
 }

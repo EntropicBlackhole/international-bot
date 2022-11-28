@@ -1,112 +1,155 @@
 [
 	{
-		"name": "Nuke",
-		"description": "Nuke is a powerful weapon that can destroy an entire city. It is a very powerful weapon, but it is quite dangerous. Deals 100 damage",
-		"cost": 200,
+		"name": "Ground Unit",
+		"description": "Is a unit on the ground (Soldiers, Tanks, etc) Deals 10 damage",
+		"cost": 100,
+		"type": ["Battle Unit"],
 		"use": {
 			"type": "attack",
-			"points": 100,
-			"max_use": 1
+			"points": 10,
+			"max_use": 30
 		},
-		"id": "1"
+		"id": "ground_unit"
+	},
+	{
+		"name": "Navy Unit",
+		"description": "Is a unit in the ocean (Ships, Submarines, etc) Deals 10 damage",
+		"cost": 100,
+		"type": ["Battle Unit"],
+		"use": {
+			"type": "attack",
+			"points": 10,
+			"max_use": 30
+		},
+		"id": "navy_unit"
+	},
+	{
+		"name": "Air Unit",
+		"description": "Is a unit in the air (Airplanes, Helicopters, etc) Deals 10 damage",
+		"cost": 100,
+		"type": ["Battle Unit"],
+		"use": {
+			"type": "attack",
+			"points": 10,
+			"max_use": 30
+		},
+		"id": "air_unit"
 	},
 	{
 		"name": "Robot Dog",
 		"description": "Robot dogs are mechanical robots that have the anatomical shape of a dog, these are very useful, as they can be strapped up with guns or other weapons. Deals 20 damage",
 		"cost": 70,
+		"type": ["Battle Unit", "Electric"],
 		"use": {
 			"type": "attack",
 			"points": 20,
-			"max_use": 15
+			"max_use": 10
 		},
-		"id": "2"
+		"id": "robot_dog"
 	},
 	{
-		"name": "EMP Driver Blaster",
-		"description": "Able to disable/destroy any nearby devices (E.G. Communication lines,war robots,mobile phones etc.) (1 use) Deals 150 damage",
-		"cost": 500,
+		"name": "Faulty EMP Driver Blaster",
+		"description": "Able to disable/destroy any nearby devices (E.G. Communication lines,war robots,mobile phones etc.) Can take out 20-40% of electrical devices (in your items)",
+		"cost": 300,
+		"type": ["Battle Unit", "Disabler"],
+		"use": {
+			"type": "disable",
+			"points": [
+				20,
+				40
+			],
+			"max_use": 1
+		},
+		"id": "emp_faulty"
+	},
+	{
+		"name": "Polished EMP Driver Blaster",
+		"description": "Able to disable/destroy any nearby devices (E.G. Communication lines,war robots,mobile phones etc.) Can take out 50-70% of electrical devices (in your items) and might stop a nuke (IHQ 2.2 only) (Except DextraNuke)",
+		"cost": 450,
+		"type": ["Battle Unit", "Disabler"],
+		"use": {
+			"type": "disable",
+			"points": [
+				50,
+				70
+			],
+			"max_use": 1
+		},
+		"id": "emp_polished"
+	},
+	{
+		"name": "Superior EMP Driver Blaster",
+		"description": "Able to disable/destroy any nearby devices (E.G. Communication lines,war robots,mobile phones etc.) Can take out 80-100% of electrical devices (in your items) and might stop a nuke (IHQ 2.2 only) (Except DextraNuke)",
+		"cost": 600,
+		"type": ["Battle Unit", "Disabler"],
+		"use": {
+			"type": "disable",
+			"points": [
+				80,
+				100
+			],
+			"max_use": 1
+		},
+		"id": "emp_superior"
+	},
+	{
+		"name": "Nuke",
+		"description": "Nuke is a powerful weapon that can destroy an entire city. It is a very powerful weapon, but it is quite dangerous. Deals 100 damage",
+		"cost": 200,
+		"type": ["Battle Unit"],
 		"use": {
 			"type": "attack",
-			"points": 150,
-			"max_use": 3
+			"points": 100,
+			"max_use": 1
 		},
-		"id": "3"
+		"id": "nuke"
 	},
 	{
 		"name": "HyperNuke",
-		"description": "Hypernuke is a powerful weapon that can destroy an entire state/province. It is a very powerful weapon, but it is also very dangerous. It is not recommended to use for testing on countryland that is not completely empty. Deals 200 damage",
+		"description": "Hypernuke is a powerful weapon that can destroy an entire state/province. It is a very powerful weapon, but it is also very dangerous. It is not recommended to use for testing on country/land that is not completely empty. Deals 200 damage",
 		"cost": 1000,
+		"type": ["Battle Unit"],
 		"use": {
 			"type": "attack",
 			"points": 200,
 			"max_use": 1
 		},
-		"id": "4"
+		"id": "hypernuke"
 	},
 	{
 		"name": "DextraNuke",
-		"description": "Super Nuke is a powerful weapon that can destroy an entire country. Highly dangerous, do not even buy, or use, unless you are insane. Deals 500 damage",
+		"description": "DextraNuke is a powerful weapon that can destroy an entire country. Highly dangerous, do not even buy, or use, unless you are insane. Deals 500 damage",
 		"cost": 10000,
+		"type": ["Battle Unit"],
 		"use": {
 			"type": "attack",
 			"points": 500,
 			"max_use": 1
 		},
-		"id": "5"
-	},
-	{
-		"name": "Ground Force",
-		"description": "Is a force on the ground (Soldiers, Tanks, etc) Deals 10 damage",
-		"cost": 100,
-		"use": {
-			"type": "attack",
-			"points": 10,
-			"max_use": 30
-		},
-		"id": "6"
-	},
-	{
-		"name": "Navy Force",
-		"description": "Is a force in the ocean (Ships, Submarines, etc) Deals 10 damage",
-		"cost": 100,
-		"use": {
-			"type": "attack",
-			"points": 10,
-			"max_use": 30
-		},
-		"id": "7"
-	},
-	{
-		"name": "Air Force",
-		"description": "Is a force in the air (Airplanes, Helicopters, etc) Deals 10 damage",
-		"cost": 100,
-		"use": {
-			"type": "attack",
-			"points": 10,
-			"max_use": 30
-		},
-		"id": "8"
+		"id": "dextranuke"
 	},
 	{
 		"name": "Medical Aid",
-		"description": "Cures 40 HP, has a max use of 5, being able to heal 200 HP at a time",
+		"description": "Cures 60 HP, has a max use of 5, being able to heal 300 HP at a time",
 		"cost": 150,
+		"type": ["Healing"],
+		"use": {
+			"type": "heal",
+			"points": 60,
+			"max_use": 5
+		},
+		"id": "medical_aid"
+	},
+	{
+		"name": "Lightning Sandwich Packet",
+		"description": "Cures 40 HP, has a max use of 5, being able to heal 200 HP at a time",
+		"cost": 100,
+		"type": ["Healing"],
 		"use": {
 			"type": "heal",
 			"points": 40,
 			"max_use": 5
 		},
-		"id": "9"
-	},
-	{
-		"name": "Lightning Sandwich",
-		"description": "Cures 30 HP, has a max use of 3, being able to heal 90 HP at a time",
-		"cost": 100,
-		"use": {
-			"type": "heal",
-			"points": 30,
-			"max_use": 3
-		},
-		"id": "10"
+		"id": "lightning_sandwich"
 	}
 ]
