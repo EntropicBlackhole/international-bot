@@ -1,29 +1,56 @@
-const fs = require('fs');
-const { Client, Intents, MessageEmbed } = require("discord.js");
-const { token, globalPrefix } = require("./config.json");
-const talkedRecently = new Set();
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
-
+const fs = require('node:fs');
+const path = require('node:path');
+const { Client, MessageEmbed, Events, GatewayIntentBits, Routes, REST, Collection } = require("discord.js");
+const config = require("./database/bot/config.json");
 const express = require('express')
 const server = express()
+
+const talkedRecently = new Set();
+const client = new Client({
+	intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.GuildMembers,
+		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.DirectMessages,
+		GatewayIntentBits.GuildMessageReactions
+	]
+});
+client.login(config.token)
+const commands = [];
+const commandsPath = path.join(__dirname, './database/commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+client.commands = new Collection();
+
+for (const file of commandFiles) {
+	const filePath = path.join(commandsPath, file);
+	const command = require(filePath);
+	commands.push(command.data.toJSON());
+	client.commands.set(command.data.name, command);
+}
+// console.log(client.commands)
+const rest = new REST({ version: '10' }).setToken(config.token);
+rest.put(Routes.applicationCommands(config.clientID), { body: commands })
+	.then(data => console.log(`Successfully registered ${data.length} application commands.`))
+	.catch(console.error);
+
 server.all("/", (req, res) => {
 	res.send("Bot is running!")
 })
 
 keepAlive()
-client.login(token)
 
-client.on("ready", function (e) {
-	console.log(`Logged in as ${client.user.tag}!`)
-})
+client.once(Events.ClientReady, c => {
+	console.log(`Ready! Logged in as ${c.user.tag}`);
+});
 
 const iconURL = "https://cdn.discordapp.com/attachments/950846461573214279/965689742475821086/unknown.png?size=4096"
-const botPFP = "https://i.imgur.com/9tf4GQS.png"
 const ruleBook = "***0.** This means that, due to us being unable to list every single rule violation possible, moderators have the right to punish a user if they think that they are breaking a non-listed rule. (If you think a member of staff is abusing this power report them in report people channel)\n**1.** English should be our main language spoken in the server\n**2.** Any form of discrimination is completely unacceptable. Homophobic, racist and sexist comments result in an instant ban (unless it is in RP, read RP rule #8)\n**3.** No piracy of any kind\n**4.** Keep your username, profile picture SFW (Safe for Work). Any kind of NSFW content in channels or PFP will be deleted and you will receive a punishment\n**5.** You can only self promote if you are active and have a country. A member of staff will determine this\n**6.** Any malicious activity/intentional harming will result in a ban.\n**7.** Please refrain from arguing with mods and above\n**8.** Don't try to find loopholes in rules, that's what rule #0 is for, you'll still be punished\n**9.** Breaking a rule even as a \"joke\" is not tolerated\n**10.** Avoid discussions on sensitive topics, especially religion or IRL politics, depression, self harm and similar can be vented in #vent\n**11.** Do not get mad at pings, if you do, you can adjust the notifications for the server or un-react from the reaction roles. Avoid random pinging\n**12.** Do not beg for roles, services, promotions, money, etc\n**13.** Use channels as they are meant to be used\n**14.** No DM advertising\n**15.** No intentionally spamming mod logs\n**16.** Don't harshly insult people\n**17.** You will get a permanent ban for copying our server, this is not tolerated whatsoever\n**18.** Avoid making loud noises in the VC channels, please\n**19.** If you find a channel you probably shouldn't be able to talk in, please report it, we'll highly thank this\n**20.** Have fun!*\n\n__Punishment system:__\n-First Warning\n-Second Warning\n-Third Warning/1 hour timeout\n-Fourth Warning/Kick\n-Fifth Warning/Ban"
 const responselist = ["Yeah sure why not?", "Uh okay but im starting to doubt it", "No of course not what the heck?", "No", "i mean i guess", "Press X to doubt", "Maybe?", "honestly perhaps but don't ask me", "yes i completely agree now shut up", "NO NOT FOR A SINGLE SECOND"]
 
 client.on("messageCreate", message => {
-	if (message.author.bot) return;	
+	return
+	if (message.author.bot) return;
 	if (message.author.id !== "708026434660204625" && message.author.id !== "716390461211803738" && message.author.id !== "592841797697536011" && message.author.id !== "754018561621491762") return;
 	if (message.channelId !== "1005726612546912296") return;
 
@@ -253,7 +280,7 @@ client.on("messageCreate", message => {
 		countryList[message.author.id].wars.current = newWarID
 		countryList[defender].wars.current = newWarID
 		fs.writeFileSync("./database/country/country_list.json", JSON.stringify(countryList, null, 2))
-		
+
 		warList[newWarID] = war
 		fs.writeFileSync('database/country/wars.json', JSON.stringify(warList, null, 2))
 
@@ -293,10 +320,10 @@ client.on("messageCreate", message => {
 		}
 		else return message.channel.send("You aren't in a war")
 		if (shopItem.use.type == "attack") {
-			var totalPoints = shopItem.use.points*amount
+			var totalPoints = shopItem.use.points * amount
 			message.channel.send(`<@${message.author.id}> has used ${amount} ${shopItem.name}${(amount > 1 ? 's' : '')} and has done \`${totalPoints}\` damage to <@${otherUser}>!`)
 			countryList[otherUser].hp -= totalPoints
-			
+
 		}
 		else if (shopItem.use.type == 'disable') {
 			var points = shopItem.use.points
@@ -310,7 +337,7 @@ client.on("messageCreate", message => {
 			message.channel.send(`You have used ${shopItem.name} against <@${otherUser} and have depleted ${randomTakeout}% of their electric items!!`)
 		}
 		else if (shopItem.use.type == 'heal') {
-			var totalPoints = shopItem.use.points*amount
+			var totalPoints = shopItem.use.points * amount
 			countryList[message.author.id].hp += totalPoints
 			message.channel.send(`You have healed ${totalPoints} HP!`)
 		}
@@ -336,7 +363,7 @@ client.on("messageCreate", message => {
 			.setColor(randomColor())
 			.setTimestamp()
 			.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: botPFP });
-		message.channel.send({embeds: [warEmbed]})
+		message.channel.send({ embeds: [warEmbed] })
 	}
 	else if (command === "help") {
 		description = makeHelpEmbed()
@@ -452,7 +479,7 @@ client.on("messageCreate", message => {
 													countryList[message.author.id] = oldCountry
 													userMember.setNickname(countryList[user.id].name)
 													message.member.setNickname(countryList[message.author.id].name)
-													
+
 													fs.writeFileSync("./database/country/country_list.json", JSON.stringify(countryList, null, 2))
 													logToFile(message.author.id, command + "|transfer|switch", user.id, "Country transferred", "./database/bot/log.json")
 													return message.channel.send('Country has been transferred and switched!')
@@ -488,6 +515,65 @@ client.on("messageCreate", message => {
 	}
 });
 
+client.on(Events.InteractionCreate, async interaction => {
+	if (interaction.isChatInputCommand()) {
+		const command = interaction.client.commands.get(interaction.commandName);
+		if (!command) return;
+		try {
+			await command.execute(interaction, client);
+		} catch (error) {
+			// if (error == 'Error: Request failed with status code 400') return interaction.channel.send("Your prompt was considered invalid/offensive, please try again.")
+			console.error(error);
+			try {
+				const row = new Discord.ActionRowBuilder()
+					.addComponents(
+						new Discord.ButtonBuilder()
+							.setCustomId('show-error')
+							.setLabel('Show error log')
+							.setStyle(Discord.ButtonStyle.Danger),
+					);
+				await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true, components: [row] });
+				client.on('interactionCreate', async interaction => {
+					if (!interaction.isButton()) return;
+					if (interaction.customId == 'show-error') {
+						await interaction.reply({ content: '```' + error + '```', ephemeral: true });
+					}
+				});
+			} catch (e) {
+				const row = new Discord.ActionRowBuilder()
+					.addComponents(
+						new Discord.ButtonBuilder()
+							.setCustomId('show-error')
+							.setLabel('Show error log')
+							.setStyle(Discord.ButtonStyle.Danger),
+					);
+				await interaction.editReply({ content: 'There was an error while executing this command!', ephemeral: true, components: [row] });
+				client.on('interactionCreate', async interaction => {
+					if (!interaction.isButton()) return;
+					if (interaction.customId == 'show-error') {
+						await interaction.reply({ content: '```' + error + '```', ephemeral: true })
+					}
+				});
+			}
+		}
+	}
+	else if (interaction.isAutocomplete()) {
+		const command = interaction.client.commands.get(interaction.commandName);
+
+		if (!command) {
+			console.error(`No command matching ${interaction.commandName} was found.`);
+			return;
+		}
+
+		try {
+			await command.autocomplete(interaction);
+		} catch (error) {
+			console.error(error);
+		}
+	}
+});
+
+
 function capitalize(string) {
 	return string.toLowerCase().split(" ").map(word => word[0].toUpperCase() + word.slice(1)).join(" ")
 }
@@ -514,7 +600,6 @@ function sortObject(obj) {
 		newObj[i] = obj[i]
 	return newObj
 }
-
 function makeLeaderboardEmbed() {
 	let description = "";
 	let object = {};
@@ -577,8 +662,6 @@ function makeWarEmbed(war) {
 	var countryList = JSON.parse(fs.readFileSync("./database/country/country_list.json", "utf8"))
 	return `Attacker: <@${war.attacker}>\nDefender: <@${war.defender}>\nAttacker HP: ${(countryList[war.attacker].hp < 0 ? "0" : countryList[war.attacker].hp)}\nDefender HP: ${(countryList[war.defender].hp < 0 ? "0" : countryList[war.defender].hp)}\nOutcome: ${war.outcome}\n\nTurn: <@${war.turn}>`
 }
-
-
 function makeItemList(items) {
 	let description = ""
 	for (i of Object.keys(items)) {
@@ -621,7 +704,6 @@ function logToFile(author, action, input, output, file) {
 	}
 	return fs.writeFileSync(file, JSON.stringify(readFile, null, 2))
 }
-
 function keepAlive() {
 	server.listen(3000, () => {
 		console.log("Server is ready!")
