@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, MessageEmbed, Events, GatewayIntentBits, Routes, REST, Collection } = require("discord.js");
+const { Client, MessageEmbed, Events, GatewayIntentBits, Routes, REST, Collection, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
 const config = require("./database/bot/config.json");
 const express = require('express')
 const server = express()
@@ -525,12 +525,12 @@ client.on(Events.InteractionCreate, async interaction => {
 			// if (error == 'Error: Request failed with status code 400') return interaction.channel.send("Your prompt was considered invalid/offensive, please try again.")
 			console.error(error);
 			try {
-				const row = new Discord.ActionRowBuilder()
+				const row = new ActionRowBuilder()
 					.addComponents(
-						new Discord.ButtonBuilder()
+						new ButtonBuilder()
 							.setCustomId('show-error')
 							.setLabel('Show error log')
-							.setStyle(Discord.ButtonStyle.Danger),
+							.setStyle(ButtonStyle.Danger),
 					);
 				await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true, components: [row] });
 				client.on('interactionCreate', async interaction => {
@@ -540,12 +540,12 @@ client.on(Events.InteractionCreate, async interaction => {
 					}
 				});
 			} catch (e) {
-				const row = new Discord.ActionRowBuilder()
+				const row = new ActionRowBuilder()
 					.addComponents(
-						new Discord.ButtonBuilder()
+						new ButtonBuilder()
 							.setCustomId('show-error')
 							.setLabel('Show error log')
-							.setStyle(Discord.ButtonStyle.Danger),
+							.setStyle(ButtonStyle.Danger),
 					);
 				await interaction.editReply({ content: 'There was an error while executing this command!', ephemeral: true, components: [row] });
 				client.on('interactionCreate', async interaction => {

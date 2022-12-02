@@ -1,2147 +1,6626 @@
 {
   "Afghanistan": {
-    "products": {
-      "fish": 48,
-      "oil": 50,
-      "crops": 81,
-      "copper": 6,
-      "wood": 32,
-      "coal": 3,
-      "gold": 28
-    }
-  },
-  "Albania": {
-    "products": {
-      "fish": 74,
-      "oil": 43,
-      "crops": 59,
-      "copper": 48,
-      "wood": 20,
-      "coal": 29,
-      "gold": 59
-    }
-  },
-  "Algeria": {
-    "products": {
-      "fish": 68,
-      "oil": 90,
-      "crops": 77,
-      "copper": 92,
-      "wood": 91,
-      "coal": 65,
-      "gold": 60
-    }
-  },
-  "Andorra": {
-    "products": {
-      "fish": 98,
-      "oil": 45,
-      "crops": 97,
-      "copper": 47,
-      "wood": 21,
-      "coal": 58,
-      "gold": 26
-    }
-  },
-  "Angola": {
-    "products": {
-      "fish": 39,
-      "oil": 68,
-      "crops": 52,
-      "copper": 81,
-      "wood": 51,
-      "coal": 63,
-      "gold": 94
-    }
-  },
-  "Antigua and Barbuda": {
-    "products": {
-      "fish": 53,
-      "oil": 1,
-      "crops": 43,
-      "copper": 54,
-      "wood": 93,
-      "coal": 4,
-      "gold": 34
-    }
-  },
-  "Argentina": {
-    "products": {
-      "fish": 50,
-      "oil": 20,
-      "crops": 56,
-      "copper": 26,
-      "wood": 22,
-      "coal": 62,
-      "gold": 75
-    }
-  },
-  "Armenia": {
-    "products": {
-      "fish": 97,
-      "oil": 70,
-      "crops": 59,
-      "copper": 92,
-      "wood": 76,
-      "coal": 27,
-      "gold": 61
-    }
-  },
-  "Australia": {
-    "products": {
-      "fish": 55,
-      "oil": 75,
-      "crops": 18,
-      "copper": 97,
-      "wood": 78,
-      "coal": 2,
-      "gold": 26
-    }
-  },
-  "Austria": {
-    "products": {
-      "fish": 38,
-      "oil": 89,
-      "crops": 17,
-      "copper": 49,
-      "wood": 80,
-      "coal": 59,
-      "gold": 44
-    }
-  },
-  "Azerbaijan": {
-    "products": {
-      "fish": 92,
-      "oil": 32,
-      "crops": 4,
-      "copper": 54,
-      "wood": 83,
-      "coal": 91,
-      "gold": 99
-    }
-  },
-  "Bahamas": {
-    "products": {
-      "fish": 15,
-      "oil": 66,
-      "crops": 9,
-      "copper": 79,
-      "wood": 86,
-      "coal": 58,
-      "gold": 69
-    }
-  },
-  "Bahrain": {
-    "products": {
-      "fish": 57,
-      "oil": 39,
-      "crops": 90,
-      "copper": 40,
-      "wood": 62,
-      "coal": 36,
-      "gold": 32
-    }
-  },
-  "Bangladesh": {
-    "products": {
-      "fish": 51,
-      "oil": 84,
-      "crops": 2,
-      "copper": 36,
-      "wood": 74,
-      "coal": 74,
-      "gold": 93
-    }
-  },
-  "Barbados": {
-    "products": {
-      "fish": 49,
-      "oil": 84,
-      "crops": 56,
-      "copper": 71,
-      "wood": 87,
-      "coal": 28,
-      "gold": 12
-    }
-  },
-  "Belarus": {
-    "products": {
-      "fish": 86,
-      "oil": 90,
-      "crops": 97,
-      "copper": 95,
-      "wood": 64,
-      "coal": 74,
-      "gold": 74
-    }
-  },
-  "Belgium": {
-    "products": {
-      "fish": 37,
-      "oil": 98,
-      "crops": 72,
-      "copper": 13,
-      "wood": 51,
-      "coal": 83,
-      "gold": 6
-    }
-  },
-  "Belize": {
-    "products": {
-      "fish": 19,
-      "oil": 73,
-      "crops": 6,
-      "copper": 51,
-      "wood": 58,
-      "coal": 96,
-      "gold": 81
-    }
-  },
-  "Benin": {
-    "products": {
-      "fish": 47,
-      "oil": 12,
-      "crops": 85,
-      "copper": 90,
-      "wood": 12,
-      "coal": 3,
-      "gold": 48
-    }
-  },
-  "Bhutan": {
-    "products": {
-      "fish": 2,
-      "oil": 26,
-      "crops": 42,
-      "copper": 81,
-      "wood": 7,
-      "coal": 52,
-      "gold": 58
-    }
-  },
-  "Bolivia": {
-    "products": {
-      "fish": 36,
-      "oil": 17,
-      "crops": 14,
-      "copper": 93,
-      "wood": 19,
-      "coal": 92,
-      "gold": 52
-    }
-  },
-  "Bosnia and Herzegovina": {
+    "owner": "",
+    "isTaken": false,
+    "code": "AF",
+    "continent": "Asia",
     "products": {
       "fish": 78,
-      "oil": 68,
-      "crops": 14,
-      "copper": 43,
-      "wood": 16,
-      "coal": 55,
-      "gold": 71
-    }
-  },
-  "Botswana": {
-    "products": {
-      "fish": 94,
-      "oil": 86,
-      "crops": 11,
-      "copper": 29,
-      "wood": 100,
-      "coal": 14,
-      "gold": 90
-    }
-  },
-  "Brazil": {
-    "products": {
-      "fish": 12,
-      "oil": 78,
-      "crops": 27,
-      "copper": 98,
-      "wood": 33,
-      "coal": 53,
-      "gold": 2
-    }
-  },
-  "Brunei": {
-    "products": {
-      "fish": 95,
-      "oil": 87,
-      "crops": 27,
-      "copper": 99,
-      "wood": 97,
-      "coal": 83,
-      "gold": 5
-    }
-  },
-  "Bulgaria": {
-    "products": {
-      "fish": 48,
-      "oil": 47,
-      "crops": 14,
-      "copper": 20,
-      "wood": 97,
-      "coal": 6,
-      "gold": 25
-    }
-  },
-  "Burkina Faso": {
-    "products": {
-      "fish": 12,
-      "oil": 20,
-      "crops": 39,
-      "copper": 2,
-      "wood": 25,
-      "coal": 74,
-      "gold": 50
-    }
-  },
-  "Burundi": {
-    "products": {
-      "fish": 45,
-      "oil": 48,
-      "crops": 23,
-      "copper": 81,
-      "wood": 61,
-      "coal": 5,
-      "gold": 34
-    }
-  },
-  "Côte d'Ivoire": {
-    "products": {
-      "fish": 93,
-      "oil": 12,
-      "crops": 98,
-      "copper": 41,
-      "wood": 78,
-      "coal": 25,
-      "gold": 62
-    }
-  },
-  "Cabo Verde": {
-    "products": {
-      "fish": 96,
+      "oil": 66,
+      "crops": 34,
+      "copper": 69,
+      "wood": 37,
+      "coal": 40,
+      "gold": 58,
+      "meat": 26,
+      "sugar": 21,
+      "metal": 97
+    },
+    "produced": {
+      "fish": 50,
       "oil": 50,
-      "crops": 30,
-      "copper": 14,
-      "wood": 36,
-      "coal": 10,
-      "gold": 37
-    }
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
   },
-  "Cambodia": {
-    "products": {
-      "fish": 10,
-      "oil": 18,
-      "crops": 68,
-      "copper": 43,
-      "wood": 52,
-      "coal": 41,
-      "gold": 2
-    }
-  },
-  "Cameroon": {
-    "products": {
-      "fish": 44,
-      "oil": 38,
-      "crops": 61,
-      "copper": 46,
-      "wood": 14,
-      "coal": 89,
-      "gold": 17
-    }
-  },
-  "Canada": {
-    "products": {
-      "fish": 20,
-      "oil": 8,
-      "crops": 39,
-      "copper": 27,
-      "wood": 54,
-      "coal": 55,
-      "gold": 14
-    }
-  },
-  "Central African Republic": {
-    "products": {
-      "fish": 82,
-      "oil": 2,
-      "crops": 56,
-      "copper": 39,
-      "wood": 16,
-      "coal": 9,
-      "gold": 94
-    }
-  },
-  "Chad": {
-    "products": {
-      "fish": 36,
-      "oil": 77,
-      "crops": 71,
-      "copper": 3,
-      "wood": 43,
-      "coal": 48,
-      "gold": 72
-    }
-  },
-  "Chile": {
-    "products": {
-      "fish": 99,
-      "oil": 27,
-      "crops": 23,
-      "copper": 77,
-      "wood": 16,
-      "coal": 89,
-      "gold": 17
-    }
-  },
-  "China": {
-    "products": {
-      "fish": 63,
-      "oil": 31,
-      "crops": 5,
-      "copper": 82,
-      "wood": 66,
-      "coal": 19,
-      "gold": 39
-    }
-  },
-  "Colombia": {
-    "products": {
-      "fish": 44,
-      "oil": 26,
-      "crops": 87,
-      "copper": 81,
-      "wood": 30,
-      "coal": 38,
-      "gold": 38
-    }
-  },
-  "Comoros": {
+  "Albania": {
+    "owner": "",
+    "isTaken": false,
+    "code": "AL",
+    "continent": "Europe",
     "products": {
       "fish": 8,
-      "oil": 42,
-      "crops": 29,
-      "copper": 31,
-      "wood": 40,
-      "coal": 2,
-      "gold": 34
-    }
-  },
-  "Congo (Congo-Brazzaville)": {
-    "products": {
-      "fish": 28,
+      "oil": 49,
+      "crops": 22,
+      "copper": 87,
+      "wood": 0,
+      "coal": 44,
+      "gold": 95,
+      "meat": 22,
+      "sugar": 86,
+      "metal": 59
+    },
+    "produced": {
+      "fish": 50,
       "oil": 50,
-      "crops": 79,
-      "copper": 39,
-      "wood": 4,
-      "coal": 87,
-      "gold": 22
-    }
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
   },
-  "Costa Rica": {
+  "Algeria": {
+    "owner": "",
+    "isTaken": false,
+    "code": "DZ",
+    "continent": "Africa",
     "products": {
-      "fish": 60,
-      "oil": 76,
-      "crops": 45,
-      "copper": 71,
-      "wood": 74,
-      "coal": 10,
-      "gold": 28
-    }
+      "fish": 69,
+      "oil": 0,
+      "crops": 77,
+      "copper": 3,
+      "wood": 93,
+      "coal": 27,
+      "gold": 71,
+      "meat": 47,
+      "sugar": 90,
+      "metal": 79
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
   },
-  "Croatia": {
+  "American Samoa": {
+    "owner": "",
+    "isTaken": false,
+    "code": "AS",
+    "continent": "Oceania",
     "products": {
-      "fish": 97,
-      "oil": 94,
-      "crops": 21,
-      "copper": 56,
-      "wood": 3,
-      "coal": 86,
-      "gold": 76
-    }
+      "fish": 44,
+      "oil": 88,
+      "crops": 11,
+      "copper": 46,
+      "wood": 19,
+      "coal": 21,
+      "gold": 33,
+      "meat": 50,
+      "sugar": 12,
+      "metal": 91
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
   },
-  "Cuba": {
+  "Andorra": {
+    "owner": "",
+    "isTaken": false,
+    "code": "AD",
+    "continent": "Europe",
     "products": {
       "fish": 5,
-      "oil": 87,
-      "crops": 66,
-      "copper": 58,
-      "wood": 66,
-      "coal": 16,
-      "gold": 83
-    }
+      "oil": 84,
+      "crops": 68,
+      "copper": 46,
+      "wood": 62,
+      "coal": 84,
+      "gold": 25,
+      "meat": 82,
+      "sugar": 94,
+      "metal": 63
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
   },
-  "Cyprus": {
+  "Angola": {
+    "owner": "",
+    "isTaken": false,
+    "code": "AO",
+    "continent": "Africa",
     "products": {
-      "fish": 47,
-      "oil": 1,
-      "crops": 12,
-      "copper": 75,
-      "wood": 59,
-      "coal": 32,
-      "gold": 19
-    }
+      "fish": 58,
+      "oil": 72,
+      "crops": 67,
+      "copper": 32,
+      "wood": 65,
+      "coal": 61,
+      "gold": 0,
+      "meat": 29,
+      "sugar": 54,
+      "metal": 5
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
   },
-  "Czechia (Czech Republic)": {
+  "Argentina": {
+    "owner": "",
+    "isTaken": false,
+    "code": "AR",
+    "continent": "South America",
+    "products": {
+      "fish": 91,
+      "oil": 74,
+      "crops": 85,
+      "copper": 13,
+      "wood": 22,
+      "coal": 38,
+      "gold": 24,
+      "meat": 47,
+      "sugar": 66,
+      "metal": 55
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Armenia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "AM",
+    "continent": "Asia",
+    "products": {
+      "fish": 2,
+      "oil": 98,
+      "crops": 82,
+      "copper": 1,
+      "wood": 59,
+      "coal": 53,
+      "gold": 98,
+      "meat": 73,
+      "sugar": 40,
+      "metal": 49
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Australia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "AU",
+    "continent": "Oceania",
+    "products": {
+      "fish": 54,
+      "oil": 83,
+      "crops": 13,
+      "copper": 1,
+      "wood": 44,
+      "coal": 51,
+      "gold": 81,
+      "meat": 12,
+      "sugar": 97,
+      "metal": 43
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Austria": {
+    "owner": "",
+    "isTaken": false,
+    "code": "AT",
+    "continent": "Europe",
+    "products": {
+      "fish": 48,
+      "oil": 56,
+      "crops": 3,
+      "copper": 47,
+      "wood": 54,
+      "coal": 98,
+      "gold": 53,
+      "meat": 30,
+      "sugar": 22,
+      "metal": 51
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Azerbaijan": {
+    "owner": "",
+    "isTaken": false,
+    "code": "AZ",
+    "continent": "Asia",
+    "products": {
+      "fish": 29,
+      "oil": 2,
+      "crops": 55,
+      "copper": 70,
+      "wood": 42,
+      "coal": 33,
+      "gold": 89,
+      "meat": 48,
+      "sugar": 11,
+      "metal": 34
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Bahamas": {
+    "owner": "",
+    "isTaken": false,
+    "code": "BS",
+    "continent": "North America",
+    "products": {
+      "fish": 79,
+      "oil": 21,
+      "crops": 62,
+      "copper": 52,
+      "wood": 70,
+      "coal": 16,
+      "gold": 2,
+      "meat": 51,
+      "sugar": 48,
+      "metal": 16
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Bahrain": {
+    "owner": "",
+    "isTaken": false,
+    "code": "BH",
+    "continent": "Asia",
+    "products": {
+      "fish": 9,
+      "oil": 86,
+      "crops": 52,
+      "copper": 87,
+      "wood": 5,
+      "coal": 22,
+      "gold": 41,
+      "meat": 94,
+      "sugar": 71,
+      "metal": 95
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Bangladesh": {
+    "owner": "",
+    "isTaken": false,
+    "code": "BD",
+    "continent": "Asia",
+    "products": {
+      "fish": 58,
+      "oil": 74,
+      "crops": 68,
+      "copper": 83,
+      "wood": 81,
+      "coal": 76,
+      "gold": 13,
+      "meat": 35,
+      "sugar": 41,
+      "metal": 10
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Barbados": {
+    "owner": "",
+    "isTaken": false,
+    "code": "BB",
+    "continent": "North America",
+    "products": {
+      "fish": 28,
+      "oil": 37,
+      "crops": 67,
+      "copper": 89,
+      "wood": 86,
+      "coal": 97,
+      "gold": 14,
+      "meat": 12,
+      "sugar": 13,
+      "metal": 28
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Belarus": {
+    "owner": "",
+    "isTaken": false,
+    "code": "BY",
+    "continent": "Europe",
+    "products": {
+      "fish": 97,
+      "oil": 6,
+      "crops": 70,
+      "copper": 67,
+      "wood": 89,
+      "coal": 91,
+      "gold": 4,
+      "meat": 46,
+      "sugar": 72,
+      "metal": 4
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Belgium": {
+    "owner": "",
+    "isTaken": false,
+    "code": "BE",
+    "continent": "Europe",
+    "products": {
+      "fish": 92,
+      "oil": 12,
+      "crops": 70,
+      "copper": 68,
+      "wood": 26,
+      "coal": 69,
+      "gold": 84,
+      "meat": 36,
+      "sugar": 59,
+      "metal": 97
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Belize": {
+    "owner": "",
+    "isTaken": false,
+    "code": "BZ",
+    "continent": "North America",
+    "products": {
+      "fish": 20,
+      "oil": 29,
+      "crops": 59,
+      "copper": 43,
+      "wood": 100,
+      "coal": 34,
+      "gold": 98,
+      "meat": 56,
+      "sugar": 36,
+      "metal": 8
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Benin": {
+    "owner": "",
+    "isTaken": false,
+    "code": "BJ",
+    "continent": "Africa",
+    "products": {
+      "fish": 5,
+      "oil": 79,
+      "crops": 11,
+      "copper": 17,
+      "wood": 42,
+      "coal": 16,
+      "gold": 62,
+      "meat": 92,
+      "sugar": 10,
+      "metal": 74
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Bermuda": {
+    "owner": "",
+    "isTaken": false,
+    "code": "BM",
+    "continent": "North America",
+    "products": {
+      "fish": 24,
+      "oil": 97,
+      "crops": 45,
+      "copper": 82,
+      "wood": 8,
+      "coal": 57,
+      "gold": 82,
+      "meat": 57,
+      "sugar": 62,
+      "metal": 90
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Bhutan": {
+    "owner": "",
+    "isTaken": false,
+    "code": "BT",
+    "continent": "Asia",
+    "products": {
+      "fish": 19,
+      "oil": 17,
+      "crops": 28,
+      "copper": 77,
+      "wood": 94,
+      "coal": 76,
+      "gold": 20,
+      "meat": 94,
+      "sugar": 78,
+      "metal": 54
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Bolivia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "BO",
+    "continent": "South America",
+    "products": {
+      "fish": 99,
+      "oil": 97,
+      "crops": 55,
+      "copper": 87,
+      "wood": 45,
+      "coal": 60,
+      "gold": 4,
+      "meat": 15,
+      "sugar": 17,
+      "metal": 41
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Bosnia And Herzegovina": {
+    "owner": "",
+    "isTaken": false,
+    "code": "BA",
+    "continent": "Europe",
+    "products": {
+      "fish": 18,
+      "oil": 63,
+      "crops": 87,
+      "copper": 41,
+      "wood": 76,
+      "coal": 65,
+      "gold": 97,
+      "meat": 93,
+      "sugar": 5,
+      "metal": 73
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Botswana": {
+    "owner": "",
+    "isTaken": false,
+    "code": "BW",
+    "continent": "Africa",
+    "products": {
+      "fish": 6,
+      "oil": 27,
+      "crops": 54,
+      "copper": 50,
+      "wood": 67,
+      "coal": 7,
+      "gold": 65,
+      "meat": 41,
+      "sugar": 47,
+      "metal": 64
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Brazil": {
+    "owner": "",
+    "isTaken": false,
+    "code": "BR",
+    "continent": "South America",
+    "products": {
+      "fish": 39,
+      "oil": 11,
+      "crops": 2,
+      "copper": 57,
+      "wood": 35,
+      "coal": 28,
+      "gold": 28,
+      "meat": 83,
+      "sugar": 34,
+      "metal": 70
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Brunei": {
+    "owner": "",
+    "isTaken": false,
+    "code": "BN",
+    "continent": "Asia",
+    "products": {
+      "fish": 70,
+      "oil": 78,
+      "crops": 56,
+      "copper": 36,
+      "wood": 89,
+      "coal": 80,
+      "gold": 30,
+      "meat": 98,
+      "sugar": 33,
+      "metal": 98
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Bulgaria": {
+    "owner": "",
+    "isTaken": false,
+    "code": "BG",
+    "continent": "Europe",
+    "products": {
+      "fish": 22,
+      "oil": 87,
+      "crops": 82,
+      "copper": 87,
+      "wood": 1,
+      "coal": 80,
+      "gold": 48,
+      "meat": 44,
+      "sugar": 60,
+      "metal": 59
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Burkina Faso": {
+    "owner": "",
+    "isTaken": false,
+    "code": "BF",
+    "continent": "Africa",
+    "products": {
+      "fish": 30,
+      "oil": 85,
+      "crops": 82,
+      "copper": 44,
+      "wood": 13,
+      "coal": 32,
+      "gold": 26,
+      "meat": 85,
+      "sugar": 68,
+      "metal": 72
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Burundi": {
+    "owner": "",
+    "isTaken": false,
+    "code": "BI",
+    "continent": "Africa",
+    "products": {
+      "fish": 34,
+      "oil": 46,
+      "crops": 21,
+      "copper": 4,
+      "wood": 91,
+      "coal": 24,
+      "gold": 85,
+      "meat": 49,
+      "sugar": 8,
+      "metal": 32
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Cambodia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "KH",
+    "continent": "Asia",
+    "products": {
+      "fish": 63,
+      "oil": 5,
+      "crops": 81,
+      "copper": 41,
+      "wood": 1,
+      "coal": 60,
+      "gold": 39,
+      "meat": 5,
+      "sugar": 19,
+      "metal": 46
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Cameroon": {
+    "owner": "",
+    "isTaken": false,
+    "code": "CM",
+    "continent": "Africa",
+    "products": {
+      "fish": 71,
+      "oil": 38,
+      "crops": 96,
+      "copper": 73,
+      "wood": 89,
+      "coal": 33,
+      "gold": 37,
+      "meat": 35,
+      "sugar": 6,
+      "metal": 39
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Canada": {
+    "owner": "",
+    "isTaken": false,
+    "code": "CA",
+    "continent": "North America",
+    "products": {
+      "fish": 91,
+      "oil": 43,
+      "crops": 33,
+      "copper": 0,
+      "wood": 53,
+      "coal": 19,
+      "gold": 39,
+      "meat": 70,
+      "sugar": 17,
+      "metal": 99
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Cape Verde": {
+    "owner": "",
+    "isTaken": false,
+    "code": "CV",
+    "continent": "Africa",
+    "products": {
+      "fish": 44,
+      "oil": 51,
+      "crops": 7,
+      "copper": 86,
+      "wood": 83,
+      "coal": 27,
+      "gold": 86,
+      "meat": 50,
+      "sugar": 85,
+      "metal": 40
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Central African Republic": {
+    "owner": "",
+    "isTaken": false,
+    "code": "CF",
+    "continent": "Africa",
+    "products": {
+      "fish": 50,
+      "oil": 61,
+      "crops": 38,
+      "copper": 45,
+      "wood": 28,
+      "coal": 57,
+      "gold": 85,
+      "meat": 14,
+      "sugar": 36,
+      "metal": 9
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Chad": {
+    "owner": "",
+    "isTaken": false,
+    "code": "TD",
+    "continent": "Africa",
+    "products": {
+      "fish": 58,
+      "oil": 66,
+      "crops": 42,
+      "copper": 4,
+      "wood": 9,
+      "coal": 49,
+      "gold": 88,
+      "meat": 25,
+      "sugar": 66,
+      "metal": 12
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Chile": {
+    "owner": "",
+    "isTaken": false,
+    "code": "CL",
+    "continent": "South America",
+    "products": {
+      "fish": 71,
+      "oil": 49,
+      "crops": 16,
+      "copper": 73,
+      "wood": 43,
+      "coal": 40,
+      "gold": 45,
+      "meat": 76,
+      "sugar": 21,
+      "metal": 71
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "China": {
+    "owner": "",
+    "isTaken": false,
+    "code": "CN",
+    "continent": "Asia",
+    "products": {
+      "fish": 91,
+      "oil": 34,
+      "crops": 57,
+      "copper": 2,
+      "wood": 32,
+      "coal": 34,
+      "gold": 86,
+      "meat": 1,
+      "sugar": 52,
+      "metal": 90
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Christmas Island": {
+    "owner": "",
+    "isTaken": false,
+    "code": "CX",
+    "continent": "Oceania",
+    "products": {
+      "fish": 2,
+      "oil": 14,
+      "crops": 32,
+      "copper": 8,
+      "wood": 25,
+      "coal": 36,
+      "gold": 71,
+      "meat": 4,
+      "sugar": 96,
+      "metal": 84
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Colombia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "CO",
+    "continent": "South America",
+    "products": {
+      "fish": 20,
+      "oil": 63,
+      "crops": 47,
+      "copper": 92,
+      "wood": 44,
+      "coal": 49,
+      "gold": 29,
+      "meat": 64,
+      "sugar": 91,
+      "metal": 59
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Comoros": {
+    "owner": "",
+    "isTaken": false,
+    "code": "KM",
+    "continent": "Africa",
+    "products": {
+      "fish": 68,
+      "oil": 52,
+      "crops": 96,
+      "copper": 65,
+      "wood": 74,
+      "coal": 1,
+      "gold": 96,
+      "meat": 0,
+      "sugar": 82,
+      "metal": 55
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Congo": {
+    "owner": "",
+    "isTaken": false,
+    "code": "CG",
+    "continent": "Africa",
+    "products": {
+      "fish": 82,
+      "oil": 13,
+      "crops": 26,
+      "copper": 25,
+      "wood": 3,
+      "coal": 65,
+      "gold": 56,
+      "meat": 42,
+      "sugar": 42,
+      "metal": 44
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Democratic Republic of Congo": {
+    "owner": "",
+    "isTaken": false,
+    "code": "CD",
+    "continent": "Africa",
+    "products": {
+      "fish": 41,
+      "oil": 80,
+      "crops": 68,
+      "copper": 26,
+      "wood": 84,
+      "coal": 93,
+      "gold": 43,
+      "meat": 37,
+      "sugar": 4,
+      "metal": 30
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Costa Rica": {
+    "owner": "",
+    "isTaken": false,
+    "code": "CR",
+    "continent": "North America",
+    "products": {
+      "fish": 29,
+      "oil": 97,
+      "crops": 97,
+      "copper": 19,
+      "wood": 20,
+      "coal": 64,
+      "gold": 9,
+      "meat": 19,
+      "sugar": 56,
+      "metal": 97
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Croatia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "HR",
+    "continent": "Europe",
     "products": {
       "fish": 14,
       "oil": 7,
-      "crops": 45,
-      "copper": 16,
-      "wood": 16,
-      "coal": 83,
-      "gold": 6
-    }
-  },
-  "Democratic Republic of the Congo": {
-    "products": {
-      "fish": 100,
-      "oil": 40,
-      "crops": 64,
-      "copper": 16,
-      "wood": 4,
-      "coal": 28,
-      "gold": 28
-    }
-  },
-  "Denmark": {
-    "products": {
-      "fish": 64,
-      "oil": 85,
-      "crops": 36,
-      "copper": 21,
-      "wood": 99,
-      "coal": 60,
-      "gold": 47
-    }
-  },
-  "Djibouti": {
-    "products": {
-      "fish": 66,
-      "oil": 47,
-      "crops": 73,
-      "copper": 52,
-      "wood": 51,
-      "coal": 95,
-      "gold": 42
-    }
-  },
-  "Dominica": {
-    "products": {
-      "fish": 85,
-      "oil": 27,
-      "crops": 18,
-      "copper": 32,
-      "wood": 93,
-      "coal": 2,
-      "gold": 32
-    }
-  },
-  "Dominican Republic": {
-    "products": {
-      "fish": 87,
-      "oil": 95,
-      "crops": 5,
-      "copper": 33,
-      "wood": 14,
-      "coal": 39,
-      "gold": 19
-    }
-  },
-  "Ecuador": {
-    "products": {
-      "fish": 45,
-      "oil": 31,
-      "crops": 64,
-      "copper": 64,
-      "wood": 73,
-      "coal": 82,
-      "gold": 81
-    }
-  },
-  "Egypt": {
-    "products": {
-      "fish": 65,
-      "oil": 82,
-      "crops": 92,
-      "copper": 77,
-      "wood": 61,
-      "coal": 31,
-      "gold": 1
-    }
-  },
-  "El Salvador": {
-    "products": {
-      "fish": 5,
-      "oil": 100,
-      "crops": 41,
-      "copper": 24,
-      "wood": 47,
-      "coal": 9,
-      "gold": 51
-    }
-  },
-  "Equatorial Guinea": {
-    "products": {
-      "fish": 56,
-      "oil": 2,
-      "crops": 95,
-      "copper": 44,
-      "wood": 31,
-      "coal": 24,
-      "gold": 83
-    }
-  },
-  "Eritrea": {
-    "products": {
-      "fish": 0,
-      "oil": 82,
-      "crops": 6,
-      "copper": 44,
-      "wood": 97,
-      "coal": 47,
-      "gold": 67
-    }
-  },
-  "Estonia": {
-    "products": {
-      "fish": 47,
-      "oil": 91,
-      "crops": 6,
-      "copper": 7,
-      "wood": 85,
-      "coal": 88,
-      "gold": 78
-    }
-  },
-  "Eswatini (fmr. \"Swaziland\")": {
-    "products": {
-      "fish": 10,
-      "oil": 17,
-      "crops": 49,
-      "copper": 24,
-      "wood": 10,
-      "coal": 27,
-      "gold": 20
-    }
-  },
-  "Ethiopia": {
-    "products": {
-      "fish": 40,
-      "oil": 17,
-      "crops": 27,
-      "copper": 76,
-      "wood": 55,
-      "coal": 66,
-      "gold": 25
-    }
-  },
-  "Fiji": {
-    "products": {
-      "fish": 37,
-      "oil": 97,
-      "crops": 40,
-      "copper": 1,
-      "wood": 56,
-      "coal": 93,
-      "gold": 4
-    }
-  },
-  "Finland": {
-    "products": {
-      "fish": 21,
-      "oil": 5,
-      "crops": 24,
-      "copper": 74,
-      "wood": 22,
-      "coal": 58,
-      "gold": 34
-    }
-  },
-  "France": {
-    "products": {
-      "fish": 24,
-      "oil": 19,
-      "crops": 93,
-      "copper": 60,
-      "wood": 57,
-      "coal": 34,
-      "gold": 22
-    }
-  },
-  "Gabon": {
-    "products": {
-      "fish": 73,
-      "oil": 52,
-      "crops": 99,
-      "copper": 5,
-      "wood": 75,
-      "coal": 40,
-      "gold": 4
-    }
-  },
-  "Gambia": {
-    "products": {
-      "fish": 20,
-      "oil": 99,
-      "crops": 12,
-      "copper": 83,
-      "wood": 75,
-      "coal": 15,
-      "gold": 22
-    }
-  },
-  "Georgia": {
-    "products": {
-      "fish": 12,
-      "oil": 81,
-      "crops": 40,
-      "copper": 22,
-      "wood": 56,
-      "coal": 37,
-      "gold": 34
-    }
-  },
-  "Germany": {
-    "products": {
-      "fish": 77,
-      "oil": 10,
-      "crops": 24,
-      "copper": 18,
-      "wood": 59,
-      "coal": 61,
-      "gold": 63
-    }
-  },
-  "Ghana": {
-    "products": {
-      "fish": 80,
-      "oil": 96,
-      "crops": 17,
-      "copper": 59,
-      "wood": 88,
-      "coal": 81,
-      "gold": 47
-    }
-  },
-  "Greece": {
-    "products": {
-      "fish": 69,
-      "oil": 64,
-      "crops": 47,
-      "copper": 38,
-      "wood": 60,
-      "coal": 87,
-      "gold": 4
-    }
-  },
-  "Grenada": {
-    "products": {
-      "fish": 6,
-      "oil": 7,
-      "crops": 82,
-      "copper": 19,
-      "wood": 57,
-      "coal": 92,
-      "gold": 67
-    }
-  },
-  "Guatemala": {
-    "products": {
-      "fish": 50,
-      "oil": 87,
-      "crops": 96,
-      "copper": 88,
-      "wood": 78,
-      "coal": 31,
-      "gold": 38
-    }
-  },
-  "Guinea": {
-    "products": {
-      "fish": 21,
-      "oil": 27,
-      "crops": 17,
-      "copper": 8,
-      "wood": 69,
-      "coal": 67,
-      "gold": 10
-    }
-  },
-  "Guinea-Bissau": {
-    "products": {
-      "fish": 64,
-      "oil": 6,
-      "crops": 19,
-      "copper": 30,
-      "wood": 81,
-      "coal": 69,
-      "gold": 64
-    }
-  },
-  "Guyana": {
-    "products": {
-      "fish": 88,
-      "oil": 27,
-      "crops": 30,
-      "copper": 9,
-      "wood": 53,
-      "coal": 18,
-      "gold": 77
-    }
-  },
-  "Haiti": {
-    "products": {
-      "fish": 31,
-      "oil": 71,
-      "crops": 16,
-      "copper": 26,
-      "wood": 31,
-      "coal": 77,
-      "gold": 34
-    }
-  },
-  "Holy See": {
-    "products": {
-      "fish": 63,
-      "oil": 90,
-      "crops": 15,
-      "copper": 24,
-      "wood": 51,
-      "coal": 76,
-      "gold": 42
-    }
-  },
-  "Honduras": {
-    "products": {
-      "fish": 81,
-      "oil": 25,
-      "crops": 75,
-      "copper": 37,
-      "wood": 3,
-      "coal": 23,
-      "gold": 14
-    }
-  },
-  "Hungary": {
-    "products": {
-      "fish": 76,
-      "oil": 81,
-      "crops": 56,
-      "copper": 29,
-      "wood": 3,
-      "coal": 2,
-      "gold": 40
-    }
-  },
-  "Iceland": {
-    "products": {
-      "fish": 96,
-      "oil": 23,
-      "crops": 18,
-      "copper": 92,
-      "wood": 40,
-      "coal": 38,
-      "gold": 73
-    }
-  },
-  "India": {
-    "products": {
-      "fish": 11,
-      "oil": 21,
-      "crops": 15,
-      "copper": 32,
-      "wood": 24,
-      "coal": 55,
-      "gold": 100
-    }
-  },
-  "Indonesia": {
-    "products": {
-      "fish": 58,
-      "oil": 90,
-      "crops": 11,
-      "copper": 87,
-      "wood": 8,
-      "coal": 73,
-      "gold": 31
-    }
-  },
-  "Iran": {
-    "products": {
-      "fish": 88,
-      "oil": 24,
-      "crops": 45,
-      "copper": 17,
-      "wood": 38,
-      "coal": 0,
-      "gold": 99
-    }
-  },
-  "Iraq": {
-    "products": {
-      "fish": 17,
-      "oil": 73,
-      "crops": 10,
-      "copper": 65,
-      "wood": 8,
-      "coal": 85,
-      "gold": 57
-    }
-  },
-  "Ireland": {
-    "products": {
-      "fish": 52,
-      "oil": 39,
-      "crops": 75,
-      "copper": 81,
-      "wood": 78,
-      "coal": 97,
-      "gold": 29
-    }
-  },
-  "Israel": {
-    "products": {
-      "fish": 31,
-      "oil": 16,
-      "crops": 70,
-      "copper": 58,
-      "wood": 30,
-      "coal": 29,
-      "gold": 26
-    }
-  },
-  "Italy": {
-    "products": {
-      "fish": 73,
-      "oil": 19,
-      "crops": 64,
-      "copper": 44,
-      "wood": 53,
-      "coal": 78,
-      "gold": 82
-    }
-  },
-  "Jamaica": {
-    "products": {
-      "fish": 59,
-      "oil": 90,
-      "crops": 100,
-      "copper": 12,
-      "wood": 0,
-      "coal": 68,
-      "gold": 15
-    }
-  },
-  "Japan": {
-    "products": {
-      "fish": 47,
-      "oil": 93,
-      "crops": 77,
-      "copper": 15,
-      "wood": 91,
-      "coal": 64,
-      "gold": 91
-    }
-  },
-  "Jordan": {
-    "products": {
-      "fish": 16,
-      "oil": 97,
-      "crops": 47,
-      "copper": 16,
-      "wood": 60,
-      "coal": 79,
-      "gold": 14
-    }
-  },
-  "Kazakhstan": {
-    "products": {
-      "fish": 82,
-      "oil": 100,
-      "crops": 0,
-      "copper": 64,
-      "wood": 99,
-      "coal": 81,
-      "gold": 99
-    }
-  },
-  "Kenya": {
-    "products": {
-      "fish": 36,
-      "oil": 1,
-      "crops": 70,
-      "copper": 86,
-      "wood": 77,
-      "coal": 92,
-      "gold": 27
-    }
-  },
-  "Kiribati": {
-    "products": {
-      "fish": 34,
-      "oil": 15,
-      "crops": 77,
-      "copper": 86,
-      "wood": 40,
-      "coal": 79,
-      "gold": 67
-    }
-  },
-  "Kuwait": {
-    "products": {
-      "fish": 73,
-      "oil": 74,
-      "crops": 75,
-      "copper": 32,
-      "wood": 4,
-      "coal": 33,
-      "gold": 82
-    }
-  },
-  "Kyrgyzstan": {
-    "products": {
-      "fish": 25,
-      "oil": 28,
-      "crops": 56,
-      "copper": 72,
-      "wood": 89,
-      "coal": 86,
-      "gold": 44
-    }
-  },
-  "Laos": {
-    "products": {
-      "fish": 79,
-      "oil": 32,
-      "crops": 85,
-      "copper": 48,
-      "wood": 95,
-      "coal": 46,
-      "gold": 54
-    }
-  },
-  "Latvia": {
-    "products": {
-      "fish": 15,
-      "oil": 76,
-      "crops": 88,
-      "copper": 0,
-      "wood": 35,
-      "coal": 82,
-      "gold": 60
-    }
-  },
-  "Lebanon": {
-    "products": {
-      "fish": 5,
-      "oil": 37,
-      "crops": 33,
-      "copper": 92,
-      "wood": 87,
-      "coal": 26,
-      "gold": 9
-    }
-  },
-  "Lesotho": {
-    "products": {
-      "fish": 72,
-      "oil": 91,
-      "crops": 31,
-      "copper": 68,
-      "wood": 85,
-      "coal": 98,
-      "gold": 39
-    }
-  },
-  "Liberia": {
-    "products": {
-      "fish": 17,
-      "oil": 48,
-      "crops": 12,
-      "copper": 17,
-      "wood": 83,
-      "coal": 89,
-      "gold": 59
-    }
-  },
-  "Libya": {
-    "products": {
-      "fish": 5,
-      "oil": 83,
-      "crops": 65,
-      "copper": 44,
-      "wood": 59,
-      "coal": 6,
-      "gold": 44
-    }
-  },
-  "Liechtenstein": {
-    "products": {
-      "fish": 86,
-      "oil": 3,
-      "crops": 97,
-      "copper": 53,
-      "wood": 1,
-      "coal": 10,
-      "gold": 54
-    }
-  },
-  "Lithuania": {
-    "products": {
-      "fish": 16,
-      "oil": 78,
-      "crops": 75,
-      "copper": 36,
-      "wood": 63,
-      "coal": 20,
-      "gold": 40
-    }
-  },
-  "Luxembourg": {
-    "products": {
-      "fish": 32,
-      "oil": 13,
-      "crops": 66,
-      "copper": 15,
-      "wood": 9,
-      "coal": 56,
-      "gold": 41
-    }
-  },
-  "Madagascar": {
-    "products": {
-      "fish": 65,
-      "oil": 14,
-      "crops": 0,
-      "copper": 92,
-      "wood": 28,
-      "coal": 12,
-      "gold": 43
-    }
-  },
-  "Malawi": {
-    "products": {
-      "fish": 81,
-      "oil": 88,
-      "crops": 4,
-      "copper": 28,
-      "wood": 43,
-      "coal": 3,
-      "gold": 85
-    }
-  },
-  "Malaysia": {
-    "products": {
-      "fish": 1,
-      "oil": 89,
-      "crops": 30,
-      "copper": 76,
-      "wood": 67,
-      "coal": 16,
-      "gold": 48
-    }
-  },
-  "Maldives": {
-    "products": {
-      "fish": 65,
-      "oil": 8,
-      "crops": 69,
-      "copper": 10,
-      "wood": 37,
-      "coal": 85,
-      "gold": 37
-    }
-  },
-  "Mali": {
-    "products": {
-      "fish": 97,
-      "oil": 50,
-      "crops": 28,
-      "copper": 70,
-      "wood": 27,
-      "coal": 78,
-      "gold": 62
-    }
-  },
-  "Malta": {
-    "products": {
-      "fish": 94,
-      "oil": 17,
-      "crops": 75,
-      "copper": 23,
-      "wood": 47,
-      "coal": 9,
-      "gold": 6
-    }
-  },
-  "Marshall Islands": {
-    "products": {
-      "fish": 49,
-      "oil": 56,
-      "crops": 43,
-      "copper": 75,
-      "wood": 15,
-      "coal": 87,
-      "gold": 2
-    }
-  },
-  "Mauritania": {
-    "products": {
-      "fish": 26,
-      "oil": 25,
-      "crops": 81,
-      "copper": 22,
-      "wood": 87,
-      "coal": 81,
-      "gold": 13
-    }
-  },
-  "Mauritius": {
-    "products": {
-      "fish": 82,
-      "oil": 79,
-      "crops": 70,
-      "copper": 30,
-      "wood": 79,
-      "coal": 42,
-      "gold": 41
-    }
-  },
-  "Mexico": {
-    "products": {
-      "fish": 46,
-      "oil": 91,
-      "crops": 54,
-      "copper": 34,
-      "wood": 76,
-      "coal": 17,
-      "gold": 65
-    }
-  },
-  "Micronesia": {
-    "products": {
-      "fish": 52,
-      "oil": 46,
-      "crops": 77,
-      "copper": 41,
-      "wood": 61,
-      "coal": 27,
-      "gold": 32
-    }
-  },
-  "Moldova": {
-    "products": {
-      "fish": 92,
-      "oil": 19,
-      "crops": 44,
-      "copper": 81,
-      "wood": 64,
-      "coal": 78,
-      "gold": 5
-    }
-  },
-  "Monaco": {
-    "products": {
-      "fish": 58,
-      "oil": 54,
-      "crops": 35,
-      "copper": 2,
-      "wood": 46,
-      "coal": 7,
-      "gold": 50
-    }
-  },
-  "Mongolia": {
-    "products": {
-      "fish": 9,
-      "oil": 86,
-      "crops": 4,
-      "copper": 59,
-      "wood": 37,
-      "coal": 4,
-      "gold": 76
-    }
-  },
-  "Montenegro": {
-    "products": {
-      "fish": 68,
-      "oil": 1,
-      "crops": 97,
-      "copper": 2,
-      "wood": 32,
-      "coal": 21,
-      "gold": 14
-    }
-  },
-  "Morocco": {
-    "products": {
-      "fish": 52,
-      "oil": 11,
-      "crops": 9,
-      "copper": 30,
-      "wood": 22,
-      "coal": 10,
-      "gold": 33
-    }
-  },
-  "Mozambique": {
-    "products": {
-      "fish": 55,
-      "oil": 64,
-      "crops": 64,
-      "copper": 39,
-      "wood": 1,
-      "coal": 31,
-      "gold": 93
-    }
-  },
-  "Myanmar (formerly Burma)": {
-    "products": {
-      "fish": 81,
-      "oil": 48,
-      "crops": 96,
-      "copper": 15,
-      "wood": 53,
-      "coal": 74,
-      "gold": 43
-    }
-  },
-  "Namibia": {
-    "products": {
-      "fish": 94,
-      "oil": 3,
-      "crops": 77,
-      "copper": 82,
-      "wood": 3,
-      "coal": 62,
-      "gold": 4
-    }
-  },
-  "Nauru": {
-    "products": {
-      "fish": 20,
-      "oil": 61,
-      "crops": 17,
-      "copper": 90,
-      "wood": 61,
-      "coal": 11,
-      "gold": 94
-    }
-  },
-  "Nepal": {
-    "products": {
-      "fish": 66,
-      "oil": 34,
-      "crops": 90,
-      "copper": 85,
-      "wood": 83,
-      "coal": 15,
-      "gold": 41
-    }
-  },
-  "Netherlands": {
-    "products": {
-      "fish": 54,
-      "oil": 95,
-      "crops": 43,
-      "copper": 61,
-      "wood": 80,
-      "coal": 54,
-      "gold": 44
-    }
-  },
-  "New Zealand": {
-    "products": {
-      "fish": 73,
-      "oil": 13,
-      "crops": 82,
-      "copper": 83,
-      "wood": 78,
-      "coal": 36,
-      "gold": 72
-    }
-  },
-  "Nicaragua": {
-    "products": {
-      "fish": 27,
-      "oil": 61,
-      "crops": 70,
-      "copper": 50,
-      "wood": 60,
-      "coal": 41,
-      "gold": 85
-    }
-  },
-  "Niger": {
-    "products": {
-      "fish": 75,
-      "oil": 62,
-      "crops": 29,
-      "copper": 22,
-      "wood": 20,
-      "coal": 98,
-      "gold": 44
-    }
-  },
-  "Nigeria": {
-    "products": {
-      "fish": 22,
-      "oil": 53,
-      "crops": 13,
-      "copper": 65,
-      "wood": 82,
-      "coal": 86,
-      "gold": 60
-    }
-  },
-  "North Korea": {
-    "products": {
-      "fish": 98,
-      "oil": 57,
-      "crops": 52,
-      "copper": 76,
-      "wood": 34,
-      "coal": 22,
-      "gold": 75
-    }
-  },
-  "North Macedonia": {
-    "products": {
-      "fish": 28,
-      "oil": 64,
-      "crops": 16,
-      "copper": 34,
-      "wood": 64,
-      "coal": 82,
-      "gold": 23
-    }
-  },
-  "Norway": {
-    "products": {
-      "fish": 88,
-      "oil": 77,
-      "crops": 22,
-      "copper": 75,
-      "wood": 18,
-      "coal": 48,
-      "gold": 67
-    }
-  },
-  "Oman": {
-    "products": {
-      "fish": 50,
-      "oil": 76,
-      "crops": 25,
-      "copper": 60,
-      "wood": 96,
-      "coal": 51,
-      "gold": 90
-    }
-  },
-  "Pakistan": {
-    "products": {
-      "fish": 70,
-      "oil": 68,
-      "crops": 87,
-      "copper": 88,
-      "wood": 82,
-      "coal": 82,
-      "gold": 83
-    }
-  },
-  "Palau": {
-    "products": {
-      "fish": 31,
-      "oil": 46,
-      "crops": 22,
-      "copper": 85,
-      "wood": 23,
-      "coal": 83,
-      "gold": 83
-    }
-  },
-  "Palestine State": {
-    "products": {
-      "fish": 81,
-      "oil": 81,
-      "crops": 50,
-      "copper": 32,
-      "wood": 58,
-      "coal": 91,
-      "gold": 51
-    }
-  },
-  "Panama": {
-    "products": {
-      "fish": 78,
-      "oil": 36,
-      "crops": 23,
-      "copper": 60,
-      "wood": 80,
-      "coal": 65,
-      "gold": 81
-    }
-  },
-  "Papua New Guinea": {
-    "products": {
-      "fish": 35,
-      "oil": 16,
-      "crops": 48,
-      "copper": 63,
-      "wood": 87,
-      "coal": 97,
-      "gold": 9
-    }
-  },
-  "Paraguay": {
-    "products": {
-      "fish": 72,
-      "oil": 86,
-      "crops": 69,
-      "copper": 62,
-      "wood": 97,
-      "coal": 10,
-      "gold": 48
-    }
-  },
-  "Peru": {
-    "products": {
-      "fish": 6,
-      "oil": 41,
-      "crops": 92,
-      "copper": 9,
-      "wood": 15,
-      "coal": 98,
-      "gold": 71
-    }
-  },
-  "Philippines": {
-    "products": {
-      "fish": 2,
-      "oil": 53,
-      "crops": 36,
+      "crops": 59,
       "copper": 84,
-      "wood": 42,
-      "coal": 28,
-      "gold": 21
-    }
-  },
-  "Poland": {
-    "products": {
-      "fish": 34,
-      "oil": 47,
-      "crops": 10,
-      "copper": 94,
-      "wood": 42,
-      "coal": 95,
-      "gold": 34
-    }
-  },
-  "Portugal": {
-    "products": {
-      "fish": 56,
-      "oil": 75,
-      "crops": 14,
-      "copper": 42,
       "wood": 52,
-      "coal": 73,
-      "gold": 87
-    }
-  },
-  "Qatar": {
-    "products": {
-      "fish": 49,
-      "oil": 73,
-      "crops": 60,
-      "copper": 60,
-      "wood": 72,
-      "coal": 15,
-      "gold": 57
-    }
-  },
-  "Romania": {
-    "products": {
-      "fish": 40,
-      "oil": 94,
-      "crops": 77,
-      "copper": 21,
-      "wood": 75,
-      "coal": 43,
-      "gold": 24
-    }
-  },
-  "Russia": {
-    "products": {
-      "fish": 70,
-      "oil": 72,
-      "crops": 43,
-      "copper": 87,
-      "wood": 29,
-      "coal": 63,
-      "gold": 41
-    }
-  },
-  "Rwanda": {
-    "products": {
-      "fish": 93,
-      "oil": 89,
-      "crops": 7,
-      "copper": 33,
-      "wood": 40,
-      "coal": 13,
-      "gold": 15
-    }
-  },
-  "Saint Kitts and Nevis": {
-    "products": {
-      "fish": 54,
-      "oil": 47,
-      "crops": 69,
-      "copper": 33,
-      "wood": 47,
-      "coal": 73,
-      "gold": 41
-    }
-  },
-  "Saint Lucia": {
-    "products": {
-      "fish": 41,
-      "oil": 91,
-      "crops": 37,
-      "copper": 95,
-      "wood": 46,
-      "coal": 73,
-      "gold": 11
-    }
-  },
-  "Saint Vincent and the Grenadines": {
-    "products": {
-      "fish": 8,
-      "oil": 69,
-      "crops": 10,
-      "copper": 100,
-      "wood": 29,
-      "coal": 46,
-      "gold": 95
-    }
-  },
-  "Samoa": {
-    "products": {
-      "fish": 9,
-      "oil": 77,
-      "crops": 17,
-      "copper": 92,
-      "wood": 39,
-      "coal": 97,
-      "gold": 50
-    }
-  },
-  "San Marino": {
-    "products": {
-      "fish": 16,
-      "oil": 37,
-      "crops": 10,
-      "copper": 94,
-      "wood": 59,
-      "coal": 45,
-      "gold": 35
-    }
-  },
-  "Sao Tome and Principe": {
-    "products": {
-      "fish": 12,
-      "oil": 94,
-      "crops": 71,
-      "copper": 95,
-      "wood": 47,
-      "coal": 65,
-      "gold": 36
-    }
-  },
-  "Saudi Arabia": {
-    "products": {
-      "fish": 40,
-      "oil": 20,
-      "crops": 13,
-      "copper": 9,
-      "wood": 70,
-      "coal": 44,
-      "gold": 2
-    }
-  },
-  "Senegal": {
-    "products": {
-      "fish": 76,
-      "oil": 93,
-      "crops": 43,
-      "copper": 4,
-      "wood": 46,
-      "coal": 21,
-      "gold": 72
-    }
-  },
-  "Serbia": {
-    "products": {
-      "fish": 55,
-      "oil": 5,
-      "crops": 20,
-      "copper": 34,
-      "wood": 42,
-      "coal": 3,
-      "gold": 81
-    }
-  },
-  "Seychelles": {
-    "products": {
-      "fish": 16,
-      "oil": 56,
-      "crops": 73,
-      "copper": 62,
-      "wood": 34,
-      "coal": 54,
-      "gold": 88
-    }
-  },
-  "Sierra Leone": {
-    "products": {
-      "fish": 68,
-      "oil": 7,
-      "crops": 16,
-      "copper": 20,
-      "wood": 33,
-      "coal": 25,
-      "gold": 67
-    }
-  },
-  "Singapore": {
-    "products": {
-      "fish": 93,
-      "oil": 95,
-      "crops": 1,
-      "copper": 34,
+      "coal": 34,
+      "gold": 96,
+      "meat": 26,
+      "sugar": 29,
+      "metal": 93
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
       "wood": 50,
-      "coal": 45,
-      "gold": 37
-    }
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
   },
-  "Slovakia": {
+  "Cuba": {
+    "owner": "",
+    "isTaken": false,
+    "code": "CU",
+    "continent": "North America",
     "products": {
-      "fish": 31,
-      "oil": 92,
-      "crops": 89,
-      "copper": 11,
-      "wood": 82,
-      "coal": 47,
-      "gold": 64
-    }
+      "fish": 67,
+      "oil": 19,
+      "crops": 36,
+      "copper": 0,
+      "wood": 71,
+      "coal": 87,
+      "gold": 29,
+      "meat": 31,
+      "sugar": 35,
+      "metal": 81
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
   },
-  "Slovenia": {
+  "Cyprus": {
+    "owner": "",
+    "isTaken": false,
+    "code": "CY",
+    "continent": "Europe",
+    "products": {
+      "fish": 95,
+      "oil": 68,
+      "crops": 11,
+      "copper": 21,
+      "wood": 84,
+      "coal": 51,
+      "gold": 29,
+      "meat": 97,
+      "sugar": 70,
+      "metal": 65
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Czech Republic": {
+    "owner": "",
+    "isTaken": false,
+    "code": "CZ",
+    "continent": "Europe",
     "products": {
       "fish": 30,
-      "oil": 73,
-      "crops": 0,
-      "copper": 4,
-      "wood": 1,
-      "coal": 88,
-      "gold": 24
-    }
-  },
-  "Solomon Islands": {
-    "products": {
-      "fish": 60,
-      "oil": 80,
-      "crops": 2,
-      "copper": 21,
-      "wood": 88,
-      "coal": 52,
-      "gold": 75
-    }
-  },
-  "Somalia": {
-    "products": {
-      "fish": 81,
-      "oil": 13,
-      "crops": 94,
-      "copper": 15,
-      "wood": 13,
-      "coal": 26,
-      "gold": 84
-    }
-  },
-  "South Africa": {
-    "products": {
-      "fish": 87,
-      "oil": 36,
-      "crops": 35,
-      "copper": 65,
-      "wood": 98,
-      "coal": 8,
-      "gold": 74
-    }
-  },
-  "South Korea": {
-    "products": {
-      "fish": 9,
-      "oil": 90,
-      "crops": 90,
-      "copper": 61,
-      "wood": 22,
-      "coal": 38,
-      "gold": 52
-    }
-  },
-  "South Sudan": {
-    "products": {
-      "fish": 56,
-      "oil": 55,
-      "crops": 16,
-      "copper": 42,
-      "wood": 40,
-      "coal": 49,
-      "gold": 90
-    }
-  },
-  "Spain": {
-    "products": {
-      "fish": 36,
-      "oil": 43,
-      "crops": 43,
-      "copper": 49,
-      "wood": 24,
-      "coal": 83,
-      "gold": 25
-    }
-  },
-  "Sri Lanka": {
-    "products": {
-      "fish": 53,
-      "oil": 60,
-      "crops": 71,
-      "copper": 94,
-      "wood": 35,
-      "coal": 55,
-      "gold": 50
-    }
-  },
-  "Sudan": {
-    "products": {
-      "fish": 4,
-      "oil": 67,
-      "crops": 94,
-      "copper": 31,
-      "wood": 6,
-      "coal": 80,
-      "gold": 5
-    }
-  },
-  "Suriname": {
-    "products": {
-      "fish": 80,
-      "oil": 11,
-      "crops": 14,
-      "copper": 41,
-      "wood": 2,
-      "coal": 10,
-      "gold": 89
-    }
-  },
-  "Sweden": {
-    "products": {
-      "fish": 10,
-      "oil": 64,
-      "crops": 43,
-      "copper": 57,
-      "wood": 5,
-      "coal": 56,
-      "gold": 5
-    }
-  },
-  "Switzerland": {
-    "products": {
-      "fish": 5,
-      "oil": 27,
-      "crops": 84,
-      "copper": 66,
-      "wood": 70,
-      "coal": 24,
-      "gold": 39
-    }
-  },
-  "Syria": {
-    "products": {
-      "fish": 31,
-      "oil": 4,
-      "crops": 13,
-      "copper": 87,
-      "wood": 49,
-      "coal": 51,
-      "gold": 66
-    }
-  },
-  "Tajikistan": {
-    "products": {
-      "fish": 31,
-      "oil": 63,
-      "crops": 71,
-      "copper": 35,
-      "wood": 21,
-      "coal": 82,
-      "gold": 65
-    }
-  },
-  "Tanzania": {
-    "products": {
-      "fish": 8,
-      "oil": 88,
-      "crops": 36,
-      "copper": 37,
-      "wood": 76,
-      "coal": 32,
-      "gold": 30
-    }
-  },
-  "Thailand": {
-    "products": {
-      "fish": 22,
-      "oil": 89,
-      "crops": 83,
-      "copper": 62,
-      "wood": 12,
+      "oil": 87,
+      "crops": 17,
+      "copper": 64,
+      "wood": 95,
       "coal": 42,
-      "gold": 51
-    }
+      "gold": 25,
+      "meat": 100,
+      "sugar": 95,
+      "metal": 23
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
   },
-  "Timor-Leste": {
+  "Denmark": {
+    "owner": "",
+    "isTaken": false,
+    "code": "DK",
+    "continent": "Europe",
+    "products": {
+      "fish": 85,
+      "oil": 63,
+      "crops": 82,
+      "copper": 78,
+      "wood": 18,
+      "coal": 39,
+      "gold": 81,
+      "meat": 97,
+      "sugar": 38,
+      "metal": 84
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Djibouti": {
+    "owner": "",
+    "isTaken": false,
+    "code": "DJ",
+    "continent": "Africa",
+    "products": {
+      "fish": 47,
+      "oil": 34,
+      "crops": 34,
+      "copper": 95,
+      "wood": 40,
+      "coal": 94,
+      "gold": 60,
+      "meat": 8,
+      "sugar": 56,
+      "metal": 45
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Dominica": {
+    "owner": "",
+    "isTaken": false,
+    "code": "DO",
+    "continent": "North America",
+    "products": {
+      "fish": 99,
+      "oil": 80,
+      "crops": 31,
+      "copper": 28,
+      "wood": 78,
+      "coal": 2,
+      "gold": 5,
+      "meat": 91,
+      "sugar": 98,
+      "metal": 35
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Dominican Republic": {
+    "owner": "",
+    "isTaken": false,
+    "code": "DO",
+    "continent": "North America",
+    "products": {
+      "fish": 46,
+      "oil": 54,
+      "crops": 84,
+      "copper": 43,
+      "wood": 73,
+      "coal": 27,
+      "gold": 29,
+      "meat": 12,
+      "sugar": 27,
+      "metal": 27
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Ecuador": {
+    "owner": "",
+    "isTaken": false,
+    "code": "EC",
+    "continent": "South America",
     "products": {
       "fish": 45,
       "oil": 59,
-      "crops": 77,
-      "copper": 69,
-      "wood": 30,
-      "coal": 21,
-      "gold": 5
-    }
-  },
-  "Togo": {
-    "products": {
-      "fish": 13,
-      "oil": 67,
-      "crops": 75,
-      "copper": 78,
-      "wood": 70,
-      "coal": 22,
-      "gold": 59
-    }
-  },
-  "Tonga": {
-    "products": {
-      "fish": 0,
-      "oil": 90,
-      "crops": 22,
-      "copper": 56,
-      "wood": 78,
-      "coal": 90,
-      "gold": 54
-    }
-  },
-  "Trinidad and Tobago": {
-    "products": {
-      "fish": 81,
-      "oil": 42,
-      "crops": 74,
-      "copper": 4,
-      "wood": 36,
-      "coal": 99,
-      "gold": 57
-    }
-  },
-  "Tunisia": {
-    "products": {
-      "fish": 10,
-      "oil": 51,
-      "crops": 89,
+      "crops": 24,
+      "copper": 90,
+      "wood": 92,
+      "coal": 71,
+      "gold": 63,
+      "meat": 14,
+      "sugar": 59,
+      "metal": 96
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
       "copper": 50,
-      "wood": 58,
-      "coal": 34,
-      "gold": 1
-    }
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
   },
-  "Turkey": {
+  "Egypt": {
+    "owner": "",
+    "isTaken": false,
+    "code": "EG",
+    "continent": "Africa",
     "products": {
-      "fish": 78,
-      "oil": 69,
-      "crops": 31,
-      "copper": 12,
-      "wood": 27,
-      "coal": 10,
-      "gold": 67
-    }
+      "fish": 33,
+      "oil": 15,
+      "crops": 95,
+      "copper": 76,
+      "wood": 86,
+      "coal": 81,
+      "gold": 53,
+      "meat": 6,
+      "sugar": 98,
+      "metal": 66
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
   },
-  "Turkmenistan": {
+  "El Salvador": {
+    "owner": "",
+    "isTaken": false,
+    "code": "SV",
+    "continent": "North America",
     "products": {
-      "fish": 69,
-      "oil": 91,
-      "crops": 4,
-      "copper": 78,
-      "wood": 52,
-      "coal": 29,
-      "gold": 12
-    }
-  },
-  "Tuvalu": {
-    "products": {
-      "fish": 65,
-      "oil": 42,
-      "crops": 72,
-      "copper": 2,
-      "wood": 95,
-      "coal": 79,
-      "gold": 26
-    }
-  },
-  "Uganda": {
-    "products": {
-      "fish": 98,
-      "oil": 13,
-      "crops": 22,
-      "copper": 64,
-      "wood": 44,
-      "coal": 19,
-      "gold": 98
-    }
-  },
-  "Ukraine": {
-    "products": {
-      "fish": 91,
-      "oil": 17,
-      "crops": 10,
-      "copper": 43,
-      "wood": 5,
+      "fish": 76,
+      "oil": 67,
+      "crops": 41,
+      "copper": 9,
+      "wood": 68,
       "coal": 94,
-      "gold": 17
-    }
+      "gold": 10,
+      "meat": 52,
+      "sugar": 98,
+      "metal": 42
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
   },
-  "United Arab Emirates": {
+  "Equatorial Guinea": {
+    "owner": "",
+    "isTaken": false,
+    "code": "GQ",
+    "continent": "Africa",
     "products": {
-      "fish": 24,
-      "oil": 60,
-      "crops": 4,
-      "copper": 26,
-      "wood": 6,
-      "coal": 36,
-      "gold": 2
-    }
+      "fish": 15,
+      "oil": 9,
+      "crops": 56,
+      "copper": 45,
+      "wood": 93,
+      "coal": 48,
+      "gold": 76,
+      "meat": 57,
+      "sugar": 35,
+      "metal": 38
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
   },
-  "United Kingdom": {
+  "Eritrea": {
+    "owner": "",
+    "isTaken": false,
+    "code": "ER",
+    "continent": "Africa",
     "products": {
-      "fish": 54,
-      "oil": 74,
-      "crops": 49,
-      "copper": 2,
-      "wood": 31,
-      "coal": 76,
-      "gold": 25
-    }
+      "fish": 34,
+      "oil": 2,
+      "crops": 54,
+      "copper": 60,
+      "wood": 12,
+      "coal": 34,
+      "gold": 53,
+      "meat": 85,
+      "sugar": 46,
+      "metal": 25
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
   },
-  "United States of America": {
+  "Estonia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "EE",
+    "continent": "Europe",
+    "products": {
+      "fish": 17,
+      "oil": 51,
+      "crops": 44,
+      "copper": 90,
+      "wood": 13,
+      "coal": 5,
+      "gold": 49,
+      "meat": 44,
+      "sugar": 25,
+      "metal": 40
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Eswatini": {
+    "owner": "",
+    "isTaken": false,
+    "code": "SZ",
+    "continent": "Africa",
+    "products": {
+      "fish": 30,
+      "oil": 29,
+      "crops": 46,
+      "copper": 64,
+      "wood": 52,
+      "coal": 22,
+      "gold": 71,
+      "meat": 84,
+      "sugar": 71,
+      "metal": 91
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Ethiopia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "ET",
+    "continent": "Africa",
+    "products": {
+      "fish": 48,
+      "oil": 89,
+      "crops": 26,
+      "copper": 31,
+      "wood": 7,
+      "coal": 17,
+      "gold": 70,
+      "meat": 39,
+      "sugar": 96,
+      "metal": 9
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Faroe Islands": {
+    "owner": "",
+    "isTaken": false,
+    "code": "FO",
+    "continent": "Europe",
+    "products": {
+      "fish": 70,
+      "oil": 97,
+      "crops": 59,
+      "copper": 68,
+      "wood": 56,
+      "coal": 13,
+      "gold": 24,
+      "meat": 61,
+      "sugar": 1,
+      "metal": 57
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Fiji": {
+    "owner": "",
+    "isTaken": false,
+    "code": "FJ",
+    "continent": "Oceania",
     "products": {
       "fish": 26,
       "oil": 97,
-      "crops": 30,
-      "copper": 36,
-      "wood": 91,
-      "coal": 92,
-      "gold": 12
-    }
+      "crops": 44,
+      "copper": 29,
+      "wood": 49,
+      "coal": 55,
+      "gold": 25,
+      "meat": 93,
+      "sugar": 68,
+      "metal": 42
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
   },
-  "Uruguay": {
+  "Finland": {
+    "owner": "",
+    "isTaken": false,
+    "code": "FI",
+    "continent": "Europe",
     "products": {
-      "fish": 30,
-      "oil": 44,
-      "crops": 4,
-      "copper": 5,
-      "wood": 84,
-      "coal": 27,
-      "gold": 72
-    }
-  },
-  "Uzbekistan": {
-    "products": {
-      "fish": 66,
+      "fish": 40,
       "oil": 64,
-      "crops": 26,
-      "copper": 1,
-      "wood": 82,
-      "coal": 37,
-      "gold": 89
-    }
+      "crops": 71,
+      "copper": 74,
+      "wood": 67,
+      "coal": 58,
+      "gold": 39,
+      "meat": 30,
+      "sugar": 12,
+      "metal": 75
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
   },
-  "Vanuatu": {
-    "products": {
-      "fish": 34,
-      "oil": 37,
-      "crops": 87,
-      "copper": 56,
-      "wood": 99,
-      "coal": 88,
-      "gold": 4
-    }
-  },
-  "Venezuela": {
-    "products": {
-      "fish": 96,
-      "oil": 88,
-      "crops": 26,
-      "copper": 28,
-      "wood": 58,
-      "coal": 23,
-      "gold": 40
-    }
-  },
-  "Vietnam": {
-    "products": {
-      "fish": 72,
-      "oil": 90,
-      "crops": 54,
-      "copper": 25,
-      "wood": 84,
-      "coal": 83,
-      "gold": 90
-    }
-  },
-  "Yemen": {
+  "France": {
+    "owner": "",
+    "isTaken": false,
+    "code": "FR",
+    "continent": "Europe",
     "products": {
       "fish": 77,
-      "oil": 36,
-      "crops": 82,
+      "oil": 56,
+      "crops": 41,
+      "copper": 86,
+      "wood": 15,
+      "coal": 10,
+      "gold": 70,
+      "meat": 73,
+      "sugar": 67,
+      "metal": 96
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "French Guiana": {
+    "owner": "",
+    "isTaken": false,
+    "code": "GF",
+    "continent": "South America",
+    "products": {
+      "fish": 68,
+      "oil": 48,
+      "crops": 5,
+      "copper": 69,
+      "wood": 43,
+      "coal": 70,
+      "gold": 33,
+      "meat": 17,
+      "sugar": 100,
+      "metal": 36
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "French Polynesia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "PF",
+    "continent": "Oceania",
+    "products": {
+      "fish": 12,
+      "oil": 95,
+      "crops": 81,
+      "copper": 87,
+      "wood": 29,
+      "coal": 49,
+      "gold": 8,
+      "meat": 26,
+      "sugar": 47,
+      "metal": 45
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Gabon": {
+    "owner": "",
+    "isTaken": false,
+    "code": "GA",
+    "continent": "Africa",
+    "products": {
+      "fish": 77,
+      "oil": 42,
+      "crops": 16,
+      "copper": 10,
+      "wood": 48,
+      "coal": 55,
+      "gold": 55,
+      "meat": 99,
+      "sugar": 20,
+      "metal": 40
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Gambia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "GM",
+    "continent": "Africa",
+    "products": {
+      "fish": 37,
+      "oil": 2,
+      "crops": 98,
+      "copper": 96,
+      "wood": 23,
+      "coal": 20,
+      "gold": 6,
+      "meat": 58,
+      "sugar": 94,
+      "metal": 45
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Georgia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "GE",
+    "continent": "Asia",
+    "products": {
+      "fish": 8,
+      "oil": 69,
+      "crops": 32,
+      "copper": 83,
+      "wood": 78,
+      "coal": 68,
+      "gold": 36,
+      "meat": 86,
+      "sugar": 6,
+      "metal": 29
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Germany": {
+    "owner": "",
+    "isTaken": false,
+    "code": "DE",
+    "continent": "Europe",
+    "products": {
+      "fish": 26,
+      "oil": 75,
+      "crops": 80,
+      "copper": 76,
+      "wood": 54,
+      "coal": 22,
+      "gold": 25,
+      "meat": 64,
+      "sugar": 71,
+      "metal": 51
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Ghana": {
+    "owner": "",
+    "isTaken": false,
+    "code": "GH",
+    "continent": "Africa",
+    "products": {
+      "fish": 99,
+      "oil": 60,
+      "crops": 22,
       "copper": 1,
-      "wood": 52,
+      "wood": 58,
+      "coal": 79,
+      "gold": 58,
+      "meat": 66,
+      "sugar": 33,
+      "metal": 62
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Gibraltar": {
+    "owner": "",
+    "isTaken": false,
+    "code": "GI",
+    "continent": "Europe",
+    "products": {
+      "fish": 63,
+      "oil": 96,
+      "crops": 70,
+      "copper": 61,
+      "wood": 34,
+      "coal": 94,
+      "gold": 84,
+      "meat": 70,
+      "sugar": 62,
+      "metal": 91
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Greece": {
+    "owner": "",
+    "isTaken": false,
+    "code": "GR",
+    "continent": "Europe",
+    "products": {
+      "fish": 31,
+      "oil": 56,
+      "crops": 59,
+      "copper": 19,
+      "wood": 25,
+      "coal": 92,
+      "gold": 58,
+      "meat": 33,
+      "sugar": 72,
+      "metal": 64
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Greenland": {
+    "owner": "",
+    "isTaken": false,
+    "code": "GL",
+    "continent": "North America",
+    "products": {
+      "fish": 90,
+      "oil": 83,
+      "crops": 62,
+      "copper": 57,
+      "wood": 65,
+      "coal": 62,
+      "gold": 44,
+      "meat": 33,
+      "sugar": 33,
+      "metal": 86
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Grenada": {
+    "owner": "",
+    "isTaken": false,
+    "code": "GD",
+    "continent": "North America",
+    "products": {
+      "fish": 59,
+      "oil": 94,
+      "crops": 58,
+      "copper": 90,
+      "wood": 56,
+      "coal": 6,
+      "gold": 14,
+      "meat": 68,
+      "sugar": 56,
+      "metal": 33
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Guadeloupe": {
+    "owner": "",
+    "isTaken": false,
+    "code": "GP",
+    "continent": "North America",
+    "products": {
+      "fish": 71,
+      "oil": 0,
+      "crops": 42,
+      "copper": 86,
+      "wood": 51,
+      "coal": 54,
+      "gold": 74,
+      "meat": 67,
+      "sugar": 18,
+      "metal": 9
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Guam": {
+    "owner": "",
+    "isTaken": false,
+    "code": "GU",
+    "continent": "Oceania",
+    "products": {
+      "fish": 48,
+      "oil": 85,
+      "crops": 12,
+      "copper": 46,
+      "wood": 81,
+      "coal": 0,
+      "gold": 100,
+      "meat": 11,
+      "sugar": 4,
+      "metal": 74
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Guatemala": {
+    "owner": "",
+    "isTaken": false,
+    "code": "GT",
+    "continent": "North America",
+    "products": {
+      "fish": 7,
+      "oil": 11,
+      "crops": 32,
+      "copper": 10,
+      "wood": 19,
+      "coal": 82,
+      "gold": 49,
+      "meat": 44,
+      "sugar": 22,
+      "metal": 87
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Guernsey": {
+    "owner": "",
+    "isTaken": false,
+    "code": "GG",
+    "continent": "Europe",
+    "products": {
+      "fish": 83,
+      "oil": 25,
+      "crops": 3,
+      "copper": 40,
+      "wood": 75,
       "coal": 77,
-      "gold": 81
-    }
+      "gold": 88,
+      "meat": 61,
+      "sugar": 58,
+      "metal": 3
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Guinea": {
+    "owner": "",
+    "isTaken": false,
+    "code": "GN",
+    "continent": "Africa",
+    "products": {
+      "fish": 95,
+      "oil": 15,
+      "crops": 34,
+      "copper": 25,
+      "wood": 69,
+      "coal": 35,
+      "gold": 27,
+      "meat": 18,
+      "sugar": 56,
+      "metal": 8
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Guinea-Bissau": {
+    "owner": "",
+    "isTaken": false,
+    "code": "GW",
+    "continent": "Africa",
+    "products": {
+      "fish": 51,
+      "oil": 3,
+      "crops": 53,
+      "copper": 87,
+      "wood": 58,
+      "coal": 11,
+      "gold": 1,
+      "meat": 27,
+      "sugar": 45,
+      "metal": 30
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Guyana": {
+    "owner": "",
+    "isTaken": false,
+    "code": "GY",
+    "continent": "South America",
+    "products": {
+      "fish": 34,
+      "oil": 25,
+      "crops": 72,
+      "copper": 9,
+      "wood": 26,
+      "coal": 74,
+      "gold": 89,
+      "meat": 86,
+      "sugar": 90,
+      "metal": 5
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Haiti": {
+    "owner": "",
+    "isTaken": false,
+    "code": "HT",
+    "continent": "North America",
+    "products": {
+      "fish": 83,
+      "oil": 7,
+      "crops": 76,
+      "copper": 45,
+      "wood": 46,
+      "coal": 28,
+      "gold": 94,
+      "meat": 83,
+      "sugar": 29,
+      "metal": 54
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Honduras": {
+    "owner": "",
+    "isTaken": false,
+    "code": "HN",
+    "continent": "North America",
+    "products": {
+      "fish": 83,
+      "oil": 73,
+      "crops": 53,
+      "copper": 50,
+      "wood": 68,
+      "coal": 57,
+      "gold": 42,
+      "meat": 36,
+      "sugar": 86,
+      "metal": 52
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Hong Kong": {
+    "owner": "",
+    "isTaken": false,
+    "code": "HK",
+    "continent": "Asia",
+    "products": {
+      "fish": 92,
+      "oil": 97,
+      "crops": 84,
+      "copper": 15,
+      "wood": 71,
+      "coal": 24,
+      "gold": 82,
+      "meat": 28,
+      "sugar": 27,
+      "metal": 66
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Hungary": {
+    "owner": "",
+    "isTaken": false,
+    "code": "HU",
+    "continent": "Europe",
+    "products": {
+      "fish": 13,
+      "oil": 52,
+      "crops": 96,
+      "copper": 58,
+      "wood": 23,
+      "coal": 53,
+      "gold": 32,
+      "meat": 31,
+      "sugar": 43,
+      "metal": 57
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Iceland": {
+    "owner": "",
+    "isTaken": false,
+    "code": "IS",
+    "continent": "Europe",
+    "products": {
+      "fish": 60,
+      "oil": 53,
+      "crops": 38,
+      "copper": 14,
+      "wood": 68,
+      "coal": 17,
+      "gold": 71,
+      "meat": 67,
+      "sugar": 79,
+      "metal": 7
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "India": {
+    "owner": "",
+    "isTaken": false,
+    "code": "IN",
+    "continent": "Asia",
+    "products": {
+      "fish": 79,
+      "oil": 3,
+      "crops": 40,
+      "copper": 70,
+      "wood": 96,
+      "coal": 0,
+      "gold": 65,
+      "meat": 60,
+      "sugar": 59,
+      "metal": 48
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Indonesia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "ID",
+    "continent": "Asia",
+    "products": {
+      "fish": 76,
+      "oil": 33,
+      "crops": 85,
+      "copper": 10,
+      "wood": 21,
+      "coal": 91,
+      "gold": 29,
+      "meat": 55,
+      "sugar": 13,
+      "metal": 68
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335401,
+    "health": 1000
+  },
+  "Iran": {
+    "owner": "",
+    "isTaken": false,
+    "code": "IR",
+    "continent": "Asia",
+    "products": {
+      "fish": 3,
+      "oil": 36,
+      "crops": 8,
+      "copper": 81,
+      "wood": 29,
+      "coal": 84,
+      "gold": 5,
+      "meat": 51,
+      "sugar": 15,
+      "metal": 93
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Iraq": {
+    "owner": "",
+    "isTaken": false,
+    "code": "IQ",
+    "continent": "Asia",
+    "products": {
+      "fish": 62,
+      "oil": 81,
+      "crops": 49,
+      "copper": 27,
+      "wood": 27,
+      "coal": 4,
+      "gold": 13,
+      "meat": 14,
+      "sugar": 29,
+      "metal": 66
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Ireland": {
+    "owner": "",
+    "isTaken": false,
+    "code": "IE",
+    "continent": "Europe",
+    "products": {
+      "fish": 10,
+      "oil": 51,
+      "crops": 21,
+      "copper": 68,
+      "wood": 87,
+      "coal": 26,
+      "gold": 18,
+      "meat": 42,
+      "sugar": 65,
+      "metal": 72
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Israel": {
+    "owner": "",
+    "isTaken": false,
+    "code": "IL",
+    "continent": "Asia",
+    "products": {
+      "fish": 68,
+      "oil": 74,
+      "crops": 51,
+      "copper": 45,
+      "wood": 74,
+      "coal": 76,
+      "gold": 56,
+      "meat": 60,
+      "sugar": 16,
+      "metal": 77
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Italy": {
+    "owner": "",
+    "isTaken": false,
+    "code": "IT",
+    "continent": "Europe",
+    "products": {
+      "fish": 76,
+      "oil": 10,
+      "crops": 66,
+      "copper": 34,
+      "wood": 57,
+      "coal": 71,
+      "gold": 57,
+      "meat": 74,
+      "sugar": 46,
+      "metal": 31
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Ivory Coast": {
+    "owner": "",
+    "isTaken": false,
+    "code": "CI",
+    "continent": "Africa",
+    "products": {
+      "fish": 91,
+      "oil": 55,
+      "crops": 29,
+      "copper": 69,
+      "wood": 55,
+      "coal": 3,
+      "gold": 98,
+      "meat": 36,
+      "sugar": 29,
+      "metal": 62
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Jamaica": {
+    "owner": "",
+    "isTaken": false,
+    "code": "JM",
+    "continent": "North America",
+    "products": {
+      "fish": 77,
+      "oil": 4,
+      "crops": 39,
+      "copper": 40,
+      "wood": 11,
+      "coal": 59,
+      "gold": 66,
+      "meat": 52,
+      "sugar": 21,
+      "metal": 90
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Japan": {
+    "owner": "",
+    "isTaken": false,
+    "code": "JP",
+    "continent": "Asia",
+    "products": {
+      "fish": 13,
+      "oil": 9,
+      "crops": 56,
+      "copper": 21,
+      "wood": 21,
+      "coal": 22,
+      "gold": 4,
+      "meat": 2,
+      "sugar": 20,
+      "metal": 81
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Jersey": {
+    "owner": "",
+    "isTaken": false,
+    "code": "JE",
+    "continent": "Europe",
+    "products": {
+      "fish": 67,
+      "oil": 96,
+      "crops": 96,
+      "copper": 94,
+      "wood": 86,
+      "coal": 94,
+      "gold": 27,
+      "meat": 12,
+      "sugar": 13,
+      "metal": 39
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Jordan": {
+    "owner": "",
+    "isTaken": false,
+    "code": "JO",
+    "continent": "Asia",
+    "products": {
+      "fish": 86,
+      "oil": 7,
+      "crops": 38,
+      "copper": 64,
+      "wood": 1,
+      "coal": 90,
+      "gold": 86,
+      "meat": 63,
+      "sugar": 64,
+      "metal": 90
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Kazakhstan": {
+    "owner": "",
+    "isTaken": false,
+    "code": "KZ",
+    "continent": "Asia",
+    "products": {
+      "fish": 34,
+      "oil": 10,
+      "crops": 88,
+      "copper": 99,
+      "wood": 86,
+      "coal": 58,
+      "gold": 52,
+      "meat": 2,
+      "sugar": 1,
+      "metal": 15
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Kenya": {
+    "owner": "",
+    "isTaken": false,
+    "code": "KE",
+    "continent": "Africa",
+    "products": {
+      "fish": 37,
+      "oil": 70,
+      "crops": 99,
+      "copper": 78,
+      "wood": 91,
+      "coal": 56,
+      "gold": 98,
+      "meat": 25,
+      "sugar": 9,
+      "metal": 71
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Kiribati": {
+    "owner": "",
+    "isTaken": false,
+    "code": "KI",
+    "continent": "Oceania",
+    "products": {
+      "fish": 100,
+      "oil": 69,
+      "crops": 54,
+      "copper": 80,
+      "wood": 46,
+      "coal": 94,
+      "gold": 73,
+      "meat": 42,
+      "sugar": 53,
+      "metal": 21
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Kuwait": {
+    "owner": "",
+    "isTaken": false,
+    "code": "KW",
+    "continent": "Asia",
+    "products": {
+      "fish": 19,
+      "oil": 47,
+      "crops": 48,
+      "copper": 35,
+      "wood": 80,
+      "coal": 79,
+      "gold": 46,
+      "meat": 85,
+      "sugar": 52,
+      "metal": 13
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Kyrgyzstan": {
+    "owner": "",
+    "isTaken": false,
+    "code": "KG",
+    "continent": "Asia",
+    "products": {
+      "fish": 33,
+      "oil": 66,
+      "crops": 59,
+      "copper": 48,
+      "wood": 57,
+      "coal": 65,
+      "gold": 16,
+      "meat": 76,
+      "sugar": 81,
+      "metal": 87
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Latvia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "LV",
+    "continent": "Europe",
+    "products": {
+      "fish": 94,
+      "oil": 100,
+      "crops": 23,
+      "copper": 87,
+      "wood": 37,
+      "coal": 44,
+      "gold": 25,
+      "meat": 20,
+      "sugar": 14,
+      "metal": 10
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Lebanon": {
+    "owner": "",
+    "isTaken": false,
+    "code": "LB",
+    "continent": "Asia",
+    "products": {
+      "fish": 88,
+      "oil": 33,
+      "crops": 55,
+      "copper": 18,
+      "wood": 53,
+      "coal": 10,
+      "gold": 34,
+      "meat": 38,
+      "sugar": 99,
+      "metal": 28
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Lesotho": {
+    "owner": "",
+    "isTaken": false,
+    "code": "LS",
+    "continent": "Africa",
+    "products": {
+      "fish": 34,
+      "oil": 22,
+      "crops": 23,
+      "copper": 20,
+      "wood": 74,
+      "coal": 48,
+      "gold": 6,
+      "meat": 5,
+      "sugar": 55,
+      "metal": 73
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Liberia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "LR",
+    "continent": "Africa",
+    "products": {
+      "fish": 84,
+      "oil": 51,
+      "crops": 64,
+      "copper": 95,
+      "wood": 17,
+      "coal": 70,
+      "gold": 36,
+      "meat": 41,
+      "sugar": 87,
+      "metal": 85
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Libya": {
+    "owner": "",
+    "isTaken": false,
+    "code": "LY",
+    "continent": "Africa",
+    "products": {
+      "fish": 96,
+      "oil": 74,
+      "crops": 6,
+      "copper": 51,
+      "wood": 28,
+      "coal": 1,
+      "gold": 7,
+      "meat": 42,
+      "sugar": 25,
+      "metal": 82
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Liechtenstein": {
+    "owner": "",
+    "isTaken": false,
+    "code": "LI",
+    "continent": "Europe",
+    "products": {
+      "fish": 26,
+      "oil": 4,
+      "crops": 74,
+      "copper": 49,
+      "wood": 68,
+      "coal": 14,
+      "gold": 95,
+      "meat": 51,
+      "sugar": 91,
+      "metal": 35
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Lithuania": {
+    "owner": "",
+    "isTaken": false,
+    "code": "LT",
+    "continent": "Europe",
+    "products": {
+      "fish": 93,
+      "oil": 13,
+      "crops": 49,
+      "copper": 92,
+      "wood": 31,
+      "coal": 97,
+      "gold": 79,
+      "meat": 96,
+      "sugar": 78,
+      "metal": 23
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Luxembourg": {
+    "owner": "",
+    "isTaken": false,
+    "code": "LU",
+    "continent": "Europe",
+    "products": {
+      "fish": 1,
+      "oil": 29,
+      "crops": 71,
+      "copper": 90,
+      "wood": 14,
+      "coal": 28,
+      "gold": 60,
+      "meat": 46,
+      "sugar": 4,
+      "metal": 27
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Macedonia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "MK",
+    "continent": "Europe",
+    "products": {
+      "fish": 88,
+      "oil": 57,
+      "crops": 32,
+      "copper": 76,
+      "wood": 61,
+      "coal": 30,
+      "gold": 26,
+      "meat": 14,
+      "sugar": 35,
+      "metal": 42
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Madagascar": {
+    "owner": "",
+    "isTaken": false,
+    "code": "MG",
+    "continent": "Africa",
+    "products": {
+      "fish": 31,
+      "oil": 32,
+      "crops": 32,
+      "copper": 34,
+      "wood": 3,
+      "coal": 74,
+      "gold": 96,
+      "meat": 48,
+      "sugar": 30,
+      "metal": 56
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Malawi": {
+    "owner": "",
+    "isTaken": false,
+    "code": "MW",
+    "continent": "Africa",
+    "products": {
+      "fish": 99,
+      "oil": 25,
+      "crops": 84,
+      "copper": 83,
+      "wood": 28,
+      "coal": 41,
+      "gold": 90,
+      "meat": 96,
+      "sugar": 95,
+      "metal": 42
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Malaysia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "MY",
+    "continent": "Asia",
+    "products": {
+      "fish": 92,
+      "oil": 57,
+      "crops": 4,
+      "copper": 58,
+      "wood": 23,
+      "coal": 69,
+      "gold": 88,
+      "meat": 42,
+      "sugar": 26,
+      "metal": 94
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Maldives": {
+    "owner": "",
+    "isTaken": false,
+    "code": "MV",
+    "continent": "Asia",
+    "products": {
+      "fish": 1,
+      "oil": 97,
+      "crops": 6,
+      "copper": 89,
+      "wood": 0,
+      "coal": 12,
+      "gold": 42,
+      "meat": 35,
+      "sugar": 80,
+      "metal": 21
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Mali": {
+    "owner": "",
+    "isTaken": false,
+    "code": "ML",
+    "continent": "Africa",
+    "products": {
+      "fish": 33,
+      "oil": 53,
+      "crops": 67,
+      "copper": 45,
+      "wood": 82,
+      "coal": 95,
+      "gold": 55,
+      "meat": 30,
+      "sugar": 24,
+      "metal": 1
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Malta": {
+    "owner": "",
+    "isTaken": false,
+    "code": "MT",
+    "continent": "Europe",
+    "products": {
+      "fish": 56,
+      "oil": 65,
+      "crops": 68,
+      "copper": 35,
+      "wood": 73,
+      "coal": 60,
+      "gold": 49,
+      "meat": 39,
+      "sugar": 16,
+      "metal": 18
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Marshall Islands": {
+    "owner": "",
+    "isTaken": false,
+    "code": "MH",
+    "continent": "Oceania",
+    "products": {
+      "fish": 17,
+      "oil": 14,
+      "crops": 44,
+      "copper": 54,
+      "wood": 85,
+      "coal": 67,
+      "gold": 27,
+      "meat": 3,
+      "sugar": 48,
+      "metal": 1
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Martinique": {
+    "owner": "",
+    "isTaken": false,
+    "code": "MQ",
+    "continent": "North America",
+    "products": {
+      "fish": 81,
+      "oil": 84,
+      "crops": 22,
+      "copper": 74,
+      "wood": 97,
+      "coal": 64,
+      "gold": 48,
+      "meat": 79,
+      "sugar": 36,
+      "metal": 9
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Mauritania": {
+    "owner": "",
+    "isTaken": false,
+    "code": "MR",
+    "continent": "Africa",
+    "products": {
+      "fish": 54,
+      "oil": 92,
+      "crops": 60,
+      "copper": 64,
+      "wood": 52,
+      "coal": 85,
+      "gold": 99,
+      "meat": 19,
+      "sugar": 22,
+      "metal": 58
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Mauritius": {
+    "owner": "",
+    "isTaken": false,
+    "code": "MU",
+    "continent": "Africa",
+    "products": {
+      "fish": 56,
+      "oil": 11,
+      "crops": 84,
+      "copper": 14,
+      "wood": 22,
+      "coal": 83,
+      "gold": 20,
+      "meat": 23,
+      "sugar": 84,
+      "metal": 97
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Mayotte": {
+    "owner": "",
+    "isTaken": false,
+    "code": "YT",
+    "continent": "Africa",
+    "products": {
+      "fish": 75,
+      "oil": 64,
+      "crops": 28,
+      "copper": 91,
+      "wood": 45,
+      "coal": 74,
+      "gold": 64,
+      "meat": 24,
+      "sugar": 33,
+      "metal": 44
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Mexico": {
+    "owner": "",
+    "isTaken": false,
+    "code": "MX",
+    "continent": "North America",
+    "products": {
+      "fish": 31,
+      "oil": 89,
+      "crops": 42,
+      "copper": 26,
+      "wood": 36,
+      "coal": 38,
+      "gold": 17,
+      "meat": 65,
+      "sugar": 72,
+      "metal": 1
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Micronesia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "FM",
+    "continent": "Oceania",
+    "products": {
+      "fish": 20,
+      "oil": 97,
+      "crops": 34,
+      "copper": 63,
+      "wood": 3,
+      "coal": 29,
+      "gold": 94,
+      "meat": 40,
+      "sugar": 54,
+      "metal": 70
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Moldova": {
+    "owner": "",
+    "isTaken": false,
+    "code": "MD",
+    "continent": "Europe",
+    "products": {
+      "fish": 14,
+      "oil": 58,
+      "crops": 57,
+      "copper": 82,
+      "wood": 48,
+      "coal": 25,
+      "gold": 23,
+      "meat": 82,
+      "sugar": 42,
+      "metal": 83
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Monaco": {
+    "owner": "",
+    "isTaken": false,
+    "code": "MC",
+    "continent": "Europe",
+    "products": {
+      "fish": 13,
+      "oil": 36,
+      "crops": 43,
+      "copper": 6,
+      "wood": 87,
+      "coal": 83,
+      "gold": 25,
+      "meat": 88,
+      "sugar": 39,
+      "metal": 25
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Mongolia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "MN",
+    "continent": "Asia",
+    "products": {
+      "fish": 20,
+      "oil": 15,
+      "crops": 85,
+      "copper": 7,
+      "wood": 68,
+      "coal": 41,
+      "gold": 69,
+      "meat": 20,
+      "sugar": 33,
+      "metal": 61
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Montenegro": {
+    "owner": "",
+    "isTaken": false,
+    "code": "ME",
+    "continent": "Europe",
+    "products": {
+      "fish": 2,
+      "oil": 84,
+      "crops": 10,
+      "copper": 18,
+      "wood": 3,
+      "coal": 52,
+      "gold": 13,
+      "meat": 37,
+      "sugar": 79,
+      "metal": 74
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Montserrat": {
+    "owner": "",
+    "isTaken": false,
+    "code": "MS",
+    "continent": "North America",
+    "products": {
+      "fish": 19,
+      "oil": 9,
+      "crops": 85,
+      "copper": 12,
+      "wood": 64,
+      "coal": 16,
+      "gold": 76,
+      "meat": 62,
+      "sugar": 91,
+      "metal": 69
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Morocco": {
+    "owner": "",
+    "isTaken": false,
+    "code": "MA",
+    "continent": "Africa",
+    "products": {
+      "fish": 5,
+      "oil": 61,
+      "crops": 94,
+      "copper": 75,
+      "wood": 89,
+      "coal": 7,
+      "gold": 26,
+      "meat": 15,
+      "sugar": 63,
+      "metal": 40
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Mozambique": {
+    "owner": "",
+    "isTaken": false,
+    "code": "MZ",
+    "continent": "Africa",
+    "products": {
+      "fish": 51,
+      "oil": 40,
+      "crops": 39,
+      "copper": 96,
+      "wood": 34,
+      "coal": 38,
+      "gold": 83,
+      "meat": 27,
+      "sugar": 42,
+      "metal": 78
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Myanmar": {
+    "owner": "",
+    "isTaken": false,
+    "code": "MM",
+    "continent": "Asia",
+    "products": {
+      "fish": 10,
+      "oil": 62,
+      "crops": 68,
+      "copper": 1,
+      "wood": 9,
+      "coal": 10,
+      "gold": 89,
+      "meat": 67,
+      "sugar": 23,
+      "metal": 10
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Namibia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "NA",
+    "continent": "Africa",
+    "products": {
+      "fish": 23,
+      "oil": 22,
+      "crops": 66,
+      "copper": 92,
+      "wood": 35,
+      "coal": 51,
+      "gold": 5,
+      "meat": 51,
+      "sugar": 53,
+      "metal": 2
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Nauru": {
+    "owner": "",
+    "isTaken": false,
+    "code": "NR",
+    "continent": "Oceania",
+    "products": {
+      "fish": 17,
+      "oil": 28,
+      "crops": 68,
+      "copper": 56,
+      "wood": 12,
+      "coal": 32,
+      "gold": 29,
+      "meat": 43,
+      "sugar": 51,
+      "metal": 22
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Nepal": {
+    "owner": "",
+    "isTaken": false,
+    "code": "NP",
+    "continent": "Asia",
+    "products": {
+      "fish": 68,
+      "oil": 57,
+      "crops": 3,
+      "copper": 38,
+      "wood": 30,
+      "coal": 56,
+      "gold": 98,
+      "meat": 92,
+      "sugar": 30,
+      "metal": 57
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Netherlands": {
+    "owner": "",
+    "isTaken": false,
+    "code": "NL",
+    "continent": "Europe",
+    "products": {
+      "fish": 98,
+      "oil": 80,
+      "crops": 85,
+      "copper": 45,
+      "wood": 84,
+      "coal": 71,
+      "gold": 73,
+      "meat": 62,
+      "sugar": 65,
+      "metal": 4
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "New Caledonia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "NC",
+    "continent": "Oceania",
+    "products": {
+      "fish": 13,
+      "oil": 27,
+      "crops": 85,
+      "copper": 40,
+      "wood": 75,
+      "coal": 16,
+      "gold": 53,
+      "meat": 59,
+      "sugar": 40,
+      "metal": 29
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "New Zealand": {
+    "owner": "",
+    "isTaken": false,
+    "code": "NZ",
+    "continent": "Oceania",
+    "products": {
+      "fish": 8,
+      "oil": 4,
+      "crops": 88,
+      "copper": 30,
+      "wood": 46,
+      "coal": 47,
+      "gold": 22,
+      "meat": 71,
+      "sugar": 54,
+      "metal": 72
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Nicaragua": {
+    "owner": "",
+    "isTaken": false,
+    "code": "NI",
+    "continent": "North America",
+    "products": {
+      "fish": 54,
+      "oil": 34,
+      "crops": 56,
+      "copper": 0,
+      "wood": 50,
+      "coal": 41,
+      "gold": 98,
+      "meat": 91,
+      "sugar": 36,
+      "metal": 71
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Niger": {
+    "owner": "",
+    "isTaken": false,
+    "code": "NE",
+    "continent": "Africa",
+    "products": {
+      "fish": 38,
+      "oil": 23,
+      "crops": 26,
+      "copper": 13,
+      "wood": 73,
+      "coal": 98,
+      "gold": 6,
+      "meat": 3,
+      "sugar": 63,
+      "metal": 59
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Nigeria": {
+    "owner": "",
+    "isTaken": false,
+    "code": "NG",
+    "continent": "Africa",
+    "products": {
+      "fish": 29,
+      "oil": 86,
+      "crops": 69,
+      "copper": 2,
+      "wood": 100,
+      "coal": 45,
+      "gold": 78,
+      "meat": 77,
+      "sugar": 24,
+      "metal": 23
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Niue": {
+    "owner": "",
+    "isTaken": false,
+    "code": "NU",
+    "continent": "Oceania",
+    "products": {
+      "fish": 38,
+      "oil": 97,
+      "crops": 10,
+      "copper": 4,
+      "wood": 25,
+      "coal": 61,
+      "gold": 6,
+      "meat": 13,
+      "sugar": 6,
+      "metal": 16
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "North Korea": {
+    "owner": "",
+    "isTaken": false,
+    "code": "KP",
+    "continent": "Asia",
+    "products": {
+      "fish": 94,
+      "oil": 77,
+      "crops": 96,
+      "copper": 56,
+      "wood": 15,
+      "coal": 68,
+      "gold": 12,
+      "meat": 96,
+      "sugar": 75,
+      "metal": 41
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Northern Mariana Islands": {
+    "owner": "",
+    "isTaken": false,
+    "code": "MP",
+    "continent": "Oceania",
+    "products": {
+      "fish": 70,
+      "oil": 58,
+      "crops": 28,
+      "copper": 41,
+      "wood": 96,
+      "coal": 42,
+      "gold": 90,
+      "meat": 41,
+      "sugar": 78,
+      "metal": 11
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Norway": {
+    "owner": "",
+    "isTaken": false,
+    "code": "NO",
+    "continent": "Europe",
+    "products": {
+      "fish": 13,
+      "oil": 13,
+      "crops": 50,
+      "copper": 21,
+      "wood": 80,
+      "coal": 80,
+      "gold": 72,
+      "meat": 56,
+      "sugar": 79,
+      "metal": 22
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Oman": {
+    "owner": "",
+    "isTaken": false,
+    "code": "OM",
+    "continent": "Asia",
+    "products": {
+      "fish": 43,
+      "oil": 97,
+      "crops": 49,
+      "copper": 40,
+      "wood": 61,
+      "coal": 83,
+      "gold": 74,
+      "meat": 76,
+      "sugar": 38,
+      "metal": 42
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Pakistan": {
+    "owner": "",
+    "isTaken": false,
+    "code": "PK",
+    "continent": "Asia",
+    "products": {
+      "fish": 22,
+      "oil": 39,
+      "crops": 67,
+      "copper": 61,
+      "wood": 99,
+      "coal": 30,
+      "gold": 100,
+      "meat": 50,
+      "sugar": 39,
+      "metal": 28
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Palau": {
+    "owner": "",
+    "isTaken": false,
+    "code": "PW",
+    "continent": "Oceania",
+    "products": {
+      "fish": 38,
+      "oil": 72,
+      "crops": 48,
+      "copper": 97,
+      "wood": 57,
+      "coal": 28,
+      "gold": 79,
+      "meat": 77,
+      "sugar": 78,
+      "metal": 29
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Panama": {
+    "owner": "",
+    "isTaken": false,
+    "code": "PA",
+    "continent": "North America",
+    "products": {
+      "fish": 93,
+      "oil": 12,
+      "crops": 65,
+      "copper": 14,
+      "wood": 5,
+      "coal": 26,
+      "gold": 94,
+      "meat": 65,
+      "sugar": 66,
+      "metal": 64
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Papua New Guinea": {
+    "owner": "",
+    "isTaken": false,
+    "code": "PG",
+    "continent": "Oceania",
+    "products": {
+      "fish": 12,
+      "oil": 99,
+      "crops": 74,
+      "copper": 14,
+      "wood": 2,
+      "coal": 94,
+      "gold": 11,
+      "meat": 22,
+      "sugar": 91,
+      "metal": 61
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Paraguay": {
+    "owner": "",
+    "isTaken": false,
+    "code": "PY",
+    "continent": "South America",
+    "products": {
+      "fish": 85,
+      "oil": 64,
+      "crops": 29,
+      "copper": 32,
+      "wood": 2,
+      "coal": 93,
+      "gold": 6,
+      "meat": 89,
+      "sugar": 43,
+      "metal": 86
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Peru": {
+    "owner": "",
+    "isTaken": false,
+    "code": "PE",
+    "continent": "South America",
+    "products": {
+      "fish": 35,
+      "oil": 30,
+      "crops": 81,
+      "copper": 60,
+      "wood": 83,
+      "coal": 39,
+      "gold": 65,
+      "meat": 98,
+      "sugar": 5,
+      "metal": 69
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Philippines": {
+    "owner": "",
+    "isTaken": false,
+    "code": "PH",
+    "continent": "Asia",
+    "products": {
+      "fish": 77,
+      "oil": 84,
+      "crops": 14,
+      "copper": 27,
+      "wood": 56,
+      "coal": 0,
+      "gold": 28,
+      "meat": 79,
+      "sugar": 59,
+      "metal": 79
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Poland": {
+    "owner": "",
+    "isTaken": false,
+    "code": "PL",
+    "continent": "Europe",
+    "products": {
+      "fish": 97,
+      "oil": 16,
+      "crops": 64,
+      "copper": 42,
+      "wood": 38,
+      "coal": 75,
+      "gold": 33,
+      "meat": 84,
+      "sugar": 44,
+      "metal": 72
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Portugal": {
+    "owner": "",
+    "isTaken": false,
+    "code": "PT",
+    "continent": "Europe",
+    "products": {
+      "fish": 29,
+      "oil": 69,
+      "crops": 69,
+      "copper": 85,
+      "wood": 85,
+      "coal": 45,
+      "gold": 31,
+      "meat": 2,
+      "sugar": 21,
+      "metal": 10
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Qatar": {
+    "owner": "",
+    "isTaken": false,
+    "code": "QA",
+    "continent": "Asia",
+    "products": {
+      "fish": 68,
+      "oil": 55,
+      "crops": 14,
+      "copper": 51,
+      "wood": 37,
+      "coal": 52,
+      "gold": 18,
+      "meat": 24,
+      "sugar": 17,
+      "metal": 26
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Reunion": {
+    "owner": "",
+    "isTaken": false,
+    "code": "RE",
+    "continent": "Africa",
+    "products": {
+      "fish": 86,
+      "oil": 9,
+      "crops": 67,
+      "copper": 66,
+      "wood": 86,
+      "coal": 2,
+      "gold": 50,
+      "meat": 9,
+      "sugar": 65,
+      "metal": 42
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Romania": {
+    "owner": "",
+    "isTaken": false,
+    "code": "RO",
+    "continent": "Europe",
+    "products": {
+      "fish": 20,
+      "oil": 5,
+      "crops": 26,
+      "copper": 85,
+      "wood": 12,
+      "coal": 80,
+      "gold": 2,
+      "meat": 1,
+      "sugar": 80,
+      "metal": 100
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Russia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "RU",
+    "continent": "Europe",
+    "products": {
+      "fish": 86,
+      "oil": 99,
+      "crops": 73,
+      "copper": 16,
+      "wood": 60,
+      "coal": 99,
+      "gold": 7,
+      "meat": 22,
+      "sugar": 37,
+      "metal": 43
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Rwanda": {
+    "owner": "",
+    "isTaken": false,
+    "code": "RW",
+    "continent": "Africa",
+    "products": {
+      "fish": 1,
+      "oil": 68,
+      "crops": 60,
+      "copper": 78,
+      "wood": 22,
+      "coal": 100,
+      "gold": 22,
+      "meat": 55,
+      "sugar": 71,
+      "metal": 62
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Samoa": {
+    "owner": "",
+    "isTaken": false,
+    "code": "WS",
+    "continent": "Oceania",
+    "products": {
+      "fish": 72,
+      "oil": 83,
+      "crops": 63,
+      "copper": 15,
+      "wood": 63,
+      "coal": 41,
+      "gold": 22,
+      "meat": 3,
+      "sugar": 17,
+      "metal": 84
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "San Marino": {
+    "owner": "",
+    "isTaken": false,
+    "code": "SM",
+    "continent": "Europe",
+    "products": {
+      "fish": 20,
+      "oil": 81,
+      "crops": 88,
+      "copper": 9,
+      "wood": 52,
+      "coal": 6,
+      "gold": 14,
+      "meat": 76,
+      "sugar": 27,
+      "metal": 86
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Saudi Arabia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "SA",
+    "continent": "Asia",
+    "products": {
+      "fish": 43,
+      "oil": 61,
+      "crops": 58,
+      "copper": 87,
+      "wood": 41,
+      "coal": 32,
+      "gold": 90,
+      "meat": 71,
+      "sugar": 50,
+      "metal": 84
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Senegal": {
+    "owner": "",
+    "isTaken": false,
+    "code": "SN",
+    "continent": "Africa",
+    "products": {
+      "fish": 8,
+      "oil": 95,
+      "crops": 54,
+      "copper": 25,
+      "wood": 3,
+      "coal": 85,
+      "gold": 29,
+      "meat": 33,
+      "sugar": 47,
+      "metal": 13
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Serbia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "RS",
+    "continent": "Europe",
+    "products": {
+      "fish": 68,
+      "oil": 19,
+      "crops": 91,
+      "copper": 70,
+      "wood": 32,
+      "coal": 37,
+      "gold": 94,
+      "meat": 35,
+      "sugar": 26,
+      "metal": 90
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Seychelles": {
+    "owner": "",
+    "isTaken": false,
+    "code": "SC",
+    "continent": "Africa",
+    "products": {
+      "fish": 35,
+      "oil": 74,
+      "crops": 99,
+      "copper": 90,
+      "wood": 85,
+      "coal": 19,
+      "gold": 58,
+      "meat": 3,
+      "sugar": 27,
+      "metal": 23
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Sierra Leone": {
+    "owner": "",
+    "isTaken": false,
+    "code": "SL",
+    "continent": "Africa",
+    "products": {
+      "fish": 80,
+      "oil": 37,
+      "crops": 54,
+      "copper": 55,
+      "wood": 70,
+      "coal": 20,
+      "gold": 65,
+      "meat": 73,
+      "sugar": 5,
+      "metal": 64
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Singapore": {
+    "owner": "",
+    "isTaken": false,
+    "code": "SG",
+    "continent": "Asia",
+    "products": {
+      "fish": 96,
+      "oil": 53,
+      "crops": 87,
+      "copper": 66,
+      "wood": 11,
+      "coal": 53,
+      "gold": 48,
+      "meat": 51,
+      "sugar": 21,
+      "metal": 68
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Slovakia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "SK",
+    "continent": "Europe",
+    "products": {
+      "fish": 2,
+      "oil": 30,
+      "crops": 89,
+      "copper": 28,
+      "wood": 58,
+      "coal": 75,
+      "gold": 64,
+      "meat": 57,
+      "sugar": 74,
+      "metal": 65
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Somalia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "SO",
+    "continent": "Africa",
+    "products": {
+      "fish": 15,
+      "oil": 7,
+      "crops": 67,
+      "copper": 51,
+      "wood": 57,
+      "coal": 25,
+      "gold": 17,
+      "meat": 4,
+      "sugar": 41,
+      "metal": 98
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "South Africa": {
+    "owner": "",
+    "isTaken": false,
+    "code": "ZA",
+    "continent": "Africa",
+    "products": {
+      "fish": 71,
+      "oil": 98,
+      "crops": 74,
+      "copper": 23,
+      "wood": 57,
+      "coal": 98,
+      "gold": 39,
+      "meat": 10,
+      "sugar": 24,
+      "metal": 31
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "South Korea": {
+    "owner": "",
+    "isTaken": false,
+    "code": "KR",
+    "continent": "Asia",
+    "products": {
+      "fish": 65,
+      "oil": 44,
+      "crops": 49,
+      "copper": 73,
+      "wood": 20,
+      "coal": 82,
+      "gold": 5,
+      "meat": 8,
+      "sugar": 89,
+      "metal": 53
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Spain": {
+    "owner": "",
+    "isTaken": false,
+    "code": "ES",
+    "continent": "Europe",
+    "products": {
+      "fish": 50,
+      "oil": 57,
+      "crops": 96,
+      "copper": 9,
+      "wood": 34,
+      "coal": 25,
+      "gold": 45,
+      "meat": 49,
+      "sugar": 48,
+      "metal": 76
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Sri Lanka": {
+    "owner": "",
+    "isTaken": false,
+    "code": "LK",
+    "continent": "Asia",
+    "products": {
+      "fish": 14,
+      "oil": 5,
+      "crops": 10,
+      "copper": 14,
+      "wood": 97,
+      "coal": 63,
+      "gold": 21,
+      "meat": 44,
+      "sugar": 84,
+      "metal": 25
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Sudan": {
+    "owner": "",
+    "isTaken": false,
+    "code": "SD",
+    "continent": "Africa",
+    "products": {
+      "fish": 36,
+      "oil": 11,
+      "crops": 70,
+      "copper": 74,
+      "wood": 50,
+      "coal": 13,
+      "gold": 29,
+      "meat": 97,
+      "sugar": 14,
+      "metal": 92
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Suriname": {
+    "owner": "",
+    "isTaken": false,
+    "code": "SR",
+    "continent": "South America",
+    "products": {
+      "fish": 31,
+      "oil": 33,
+      "crops": 41,
+      "copper": 21,
+      "wood": 7,
+      "coal": 53,
+      "gold": 66,
+      "meat": 89,
+      "sugar": 49,
+      "metal": 52
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Sweden": {
+    "owner": "",
+    "isTaken": false,
+    "code": "SE",
+    "continent": "Europe",
+    "products": {
+      "fish": 42,
+      "oil": 8,
+      "crops": 14,
+      "copper": 58,
+      "wood": 66,
+      "coal": 70,
+      "gold": 75,
+      "meat": 97,
+      "sugar": 83,
+      "metal": 24
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Switzerland": {
+    "owner": "",
+    "isTaken": false,
+    "code": "CH",
+    "continent": "Europe",
+    "products": {
+      "fish": 87,
+      "oil": 78,
+      "crops": 14,
+      "copper": 75,
+      "wood": 48,
+      "coal": 1,
+      "gold": 39,
+      "meat": 30,
+      "sugar": 18,
+      "metal": 16
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Syria": {
+    "owner": "",
+    "isTaken": false,
+    "code": "SY",
+    "continent": "Asia",
+    "products": {
+      "fish": 20,
+      "oil": 95,
+      "crops": 96,
+      "copper": 56,
+      "wood": 2,
+      "coal": 7,
+      "gold": 29,
+      "meat": 80,
+      "sugar": 13,
+      "metal": 72
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Taiwan": {
+    "owner": "",
+    "isTaken": false,
+    "code": "TW",
+    "continent": "Asia",
+    "products": {
+      "fish": 80,
+      "oil": 3,
+      "crops": 97,
+      "copper": 74,
+      "wood": 15,
+      "coal": 25,
+      "gold": 53,
+      "meat": 52,
+      "sugar": 91,
+      "metal": 66
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Tajikistan": {
+    "owner": "",
+    "isTaken": false,
+    "code": "TJ",
+    "continent": "Asia",
+    "products": {
+      "fish": 83,
+      "oil": 29,
+      "crops": 96,
+      "copper": 83,
+      "wood": 43,
+      "coal": 67,
+      "gold": 56,
+      "meat": 93,
+      "sugar": 12,
+      "metal": 60
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Tanzania": {
+    "owner": "",
+    "isTaken": false,
+    "code": "TZ",
+    "continent": "Africa",
+    "products": {
+      "fish": 26,
+      "oil": 24,
+      "crops": 1,
+      "copper": 99,
+      "wood": 8,
+      "coal": 65,
+      "gold": 99,
+      "meat": 61,
+      "sugar": 79,
+      "metal": 26
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Thailand": {
+    "owner": "",
+    "isTaken": false,
+    "code": "TH",
+    "continent": "Asia",
+    "products": {
+      "fish": 64,
+      "oil": 78,
+      "crops": 43,
+      "copper": 65,
+      "wood": 50,
+      "coal": 69,
+      "gold": 63,
+      "meat": 35,
+      "sugar": 90,
+      "metal": 31
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Timor-Leste": {
+    "owner": "",
+    "isTaken": false,
+    "code": "TL",
+    "continent": "Asia",
+    "products": {
+      "fish": 33,
+      "oil": 8,
+      "crops": 78,
+      "copper": 25,
+      "wood": 83,
+      "coal": 84,
+      "gold": 68,
+      "meat": 20,
+      "sugar": 6,
+      "metal": 69
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Togo": {
+    "owner": "",
+    "isTaken": false,
+    "code": "TG",
+    "continent": "Africa",
+    "products": {
+      "fish": 44,
+      "oil": 91,
+      "crops": 18,
+      "copper": 17,
+      "wood": 6,
+      "coal": 9,
+      "gold": 86,
+      "meat": 76,
+      "sugar": 42,
+      "metal": 39
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Tokelau": {
+    "owner": "",
+    "isTaken": false,
+    "code": "TK",
+    "continent": "Oceania",
+    "products": {
+      "fish": 41,
+      "oil": 23,
+      "crops": 36,
+      "copper": 41,
+      "wood": 49,
+      "coal": 44,
+      "gold": 54,
+      "meat": 32,
+      "sugar": 48,
+      "metal": 20
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Tonga": {
+    "owner": "",
+    "isTaken": false,
+    "code": "TO",
+    "continent": "Oceania",
+    "products": {
+      "fish": 33,
+      "oil": 70,
+      "crops": 25,
+      "copper": 25,
+      "wood": 75,
+      "coal": 12,
+      "gold": 80,
+      "meat": 75,
+      "sugar": 67,
+      "metal": 92
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Tunisia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "TN",
+    "continent": "Africa",
+    "products": {
+      "fish": 11,
+      "oil": 79,
+      "crops": 36,
+      "copper": 7,
+      "wood": 62,
+      "coal": 3,
+      "gold": 68,
+      "meat": 25,
+      "sugar": 38,
+      "metal": 25
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Turkey": {
+    "owner": "",
+    "isTaken": false,
+    "code": "TR",
+    "continent": "Asia",
+    "products": {
+      "fish": 57,
+      "oil": 20,
+      "crops": 89,
+      "copper": 88,
+      "wood": 23,
+      "coal": 67,
+      "gold": 11,
+      "meat": 63,
+      "sugar": 20,
+      "metal": 58
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Turkmenistan": {
+    "owner": "",
+    "isTaken": false,
+    "code": "TM",
+    "continent": "Asia",
+    "products": {
+      "fish": 84,
+      "oil": 29,
+      "crops": 25,
+      "copper": 53,
+      "wood": 38,
+      "coal": 81,
+      "gold": 11,
+      "meat": 26,
+      "sugar": 86,
+      "metal": 73
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Tuvalu": {
+    "owner": "",
+    "isTaken": false,
+    "code": "TV",
+    "continent": "Oceania",
+    "products": {
+      "fish": 90,
+      "oil": 58,
+      "crops": 58,
+      "copper": 10,
+      "wood": 91,
+      "coal": 74,
+      "gold": 61,
+      "meat": 2,
+      "sugar": 22,
+      "metal": 42
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Uganda": {
+    "owner": "",
+    "isTaken": false,
+    "code": "UG",
+    "continent": "Africa",
+    "products": {
+      "fish": 97,
+      "oil": 3,
+      "crops": 51,
+      "copper": 12,
+      "wood": 31,
+      "coal": 18,
+      "gold": 26,
+      "meat": 60,
+      "sugar": 61,
+      "metal": 59
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Ukraine": {
+    "owner": "",
+    "isTaken": false,
+    "code": "UA",
+    "continent": "Europe",
+    "products": {
+      "fish": 20,
+      "oil": 70,
+      "crops": 15,
+      "copper": 76,
+      "wood": 67,
+      "coal": 65,
+      "gold": 58,
+      "meat": 88,
+      "sugar": 18,
+      "metal": 47
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "United Arab Emirates": {
+    "owner": "",
+    "isTaken": false,
+    "code": "AE",
+    "continent": "Asia",
+    "products": {
+      "fish": 94,
+      "oil": 15,
+      "crops": 99,
+      "copper": 24,
+      "wood": 82,
+      "coal": 46,
+      "gold": 85,
+      "meat": 64,
+      "sugar": 46,
+      "metal": 46
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "United Kingdom": {
+    "owner": "",
+    "isTaken": false,
+    "code": "GB",
+    "continent": "Europe",
+    "products": {
+      "fish": 77,
+      "oil": 24,
+      "crops": 6,
+      "copper": 13,
+      "wood": 70,
+      "coal": 53,
+      "gold": 49,
+      "meat": 98,
+      "sugar": 95,
+      "metal": 71
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "United States": {
+    "owner": "",
+    "isTaken": false,
+    "code": "US",
+    "continent": "North America",
+    "products": {
+      "fish": 20,
+      "oil": 40,
+      "crops": 24,
+      "copper": 23,
+      "wood": 63,
+      "coal": 35,
+      "gold": 6,
+      "meat": 58,
+      "sugar": 0,
+      "metal": 52
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Uruguay": {
+    "owner": "",
+    "isTaken": false,
+    "code": "UY",
+    "continent": "South America",
+    "products": {
+      "fish": 11,
+      "oil": 11,
+      "crops": 76,
+      "copper": 99,
+      "wood": 58,
+      "coal": 78,
+      "gold": 36,
+      "meat": 82,
+      "sugar": 45,
+      "metal": 81
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Uzbekistan": {
+    "owner": "",
+    "isTaken": false,
+    "code": "UZ",
+    "continent": "Asia",
+    "products": {
+      "fish": 2,
+      "oil": 36,
+      "crops": 69,
+      "copper": 4,
+      "wood": 30,
+      "coal": 17,
+      "gold": 40,
+      "meat": 37,
+      "sugar": 56,
+      "metal": 22
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Vanuatu": {
+    "owner": "",
+    "isTaken": false,
+    "code": "VU",
+    "continent": "Oceania",
+    "products": {
+      "fish": 70,
+      "oil": 26,
+      "crops": 81,
+      "copper": 44,
+      "wood": 55,
+      "coal": 24,
+      "gold": 88,
+      "meat": 62,
+      "sugar": 34,
+      "metal": 68
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Vatican City": {
+    "owner": "",
+    "isTaken": false,
+    "code": "VA",
+    "continent": "Europe",
+    "products": {
+      "fish": 21,
+      "oil": 61,
+      "crops": 41,
+      "copper": 100,
+      "wood": 61,
+      "coal": 39,
+      "gold": 73,
+      "meat": 64,
+      "sugar": 88,
+      "metal": 53
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Venezuela": {
+    "owner": "",
+    "isTaken": false,
+    "code": "VE",
+    "continent": "South America",
+    "products": {
+      "fish": 87,
+      "oil": 98,
+      "crops": 83,
+      "copper": 30,
+      "wood": 75,
+      "coal": 96,
+      "gold": 42,
+      "meat": 53,
+      "sugar": 48,
+      "metal": 12
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Vietnam": {
+    "owner": "",
+    "isTaken": false,
+    "code": "VN",
+    "continent": "Asia",
+    "products": {
+      "fish": 91,
+      "oil": 64,
+      "crops": 55,
+      "copper": 96,
+      "wood": 74,
+      "coal": 69,
+      "gold": 41,
+      "meat": 77,
+      "sugar": 56,
+      "metal": 92
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Western Sahara": {
+    "owner": "",
+    "isTaken": false,
+    "code": "EH",
+    "continent": "Africa",
+    "products": {
+      "fish": 71,
+      "oil": 89,
+      "crops": 26,
+      "copper": 84,
+      "wood": 41,
+      "coal": 60,
+      "gold": 78,
+      "meat": 61,
+      "sugar": 64,
+      "metal": 46
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
+  },
+  "Yemen": {
+    "owner": "",
+    "isTaken": false,
+    "code": "YE",
+    "continent": "Asia",
+    "products": {
+      "fish": 76,
+      "oil": 22,
+      "crops": 45,
+      "copper": 88,
+      "wood": 38,
+      "coal": 19,
+      "gold": 35,
+      "meat": 33,
+      "sugar": 84,
+      "metal": 31
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
   },
   "Zambia": {
+    "owner": "",
+    "isTaken": false,
+    "code": "ZM",
+    "continent": "Africa",
     "products": {
-      "fish": 49,
-      "oil": 4,
-      "crops": 46,
-      "copper": 84,
-      "wood": 95,
-      "coal": 86,
-      "gold": 39
-    }
+      "fish": 34,
+      "oil": 59,
+      "crops": 41,
+      "copper": 64,
+      "wood": 73,
+      "coal": 39,
+      "gold": 46,
+      "meat": 27,
+      "sugar": 57,
+      "metal": 93
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
   },
   "Zimbabwe": {
+    "owner": "",
+    "isTaken": false,
+    "code": "ZW",
+    "continent": "Africa",
     "products": {
-      "fish": 18,
-      "oil": 29,
-      "crops": 62,
-      "copper": 17,
-      "wood": 48,
-      "coal": 83,
-      "gold": 27
-    }
+      "fish": 99,
+      "oil": 51,
+      "crops": 24,
+      "copper": 76,
+      "wood": 55,
+      "coal": 63,
+      "gold": 67,
+      "meat": 76,
+      "sugar": 91,
+      "metal": 66
+    },
+    "produced": {
+      "fish": 50,
+      "oil": 50,
+      "crops": 50,
+      "copper": 50,
+      "wood": 50,
+      "coal": 50,
+      "gold": 50,
+      "meat": 50,
+      "sugar": 50,
+      "metal": 50
+    },
+    "nextProduce": 1669891335402,
+    "health": 1000
   }
 }
