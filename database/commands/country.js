@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require('discord.js');
 const { Misc } = require('../bot/functions');
 const fs = require('fs');
 const countries = require('../country/country_list.json')
@@ -175,9 +175,25 @@ module.exports = {
 				else if (m.content.toLowerCase() == 'n') return interaction.followUp('Alright then')
 			});
 		}
-		if (subcommand == 'map') {
-
+		if (subcommand == 'list') {
+			const countryEmbed = new EmbedBuilder()
+				.setTitle('Available countries!')
+				.setDescription('US\nHenlo')
+				.setColor(randomColor())
+				.setTimestamp()
+				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
+			const row = new ActionRowBuilder()
+				.addComponents(
+					new ButtonBuilder()
+						.setCustomId('primary')
+						.setEmoji('◀️')
+						.setStyle(ButtonStyle.Primary),
+				);
+			return interaction.editReply({ embeds: [countryEmbed], components: [row]})
 		}
+		if (subcommand == 'map') {
+			return interaction.editReply(`This subcommand is not available yet, check later for more`)
+		}	
 	},
 };
 
