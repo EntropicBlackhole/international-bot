@@ -48,7 +48,7 @@ for (i of text.split('\n')) {
 			metal: 50
 		},
 		nextProduce: Date.now() + 1000*60*60*12,
-		health: 1000 
+		health: 1000
 	}
 }
 fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
