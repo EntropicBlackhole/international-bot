@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require('discord.js');
 const { Misc } = require('../bot/functions');
 const fs = require('fs');
 const countries = require('../country/country_list.json')
@@ -179,17 +179,31 @@ module.exports = {
 			const countryEmbed = new EmbedBuilder()
 				.setTitle('Available countries!')
 				.setDescription('US\nHenlo')
-				.setColor(randomColor())
+				.setColor(misc.randomColor())
 				.setTimestamp()
 				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
 			const row = new ActionRowBuilder()
 				.addComponents(
 					new ButtonBuilder()
-						.setCustomId('primary')
-						.setEmoji('◀️')
+						.setCustomId('back')
+						.setEmoji('◀')
+						.setDisabled(true)
+						.setStyle(ButtonStyle.Primary),
+					new ButtonBuilder()
+						.setCustomId('next')
+						.setEmoji('▶')
 						.setStyle(ButtonStyle.Primary),
 				);
-			return interaction.editReply({ embeds: [countryEmbed], components: [row]})
+			await interaction.editReply({ embeds: [countryEmbed], components: [row]})
+
+			client.on(Events.InteractionCreate, async interaction => {
+				if (!interaction.isButton()) return;
+				if (interaction.customId == 'back') {
+					
+				} else if (interaction.customId == 'next') {
+
+				}
+			});
 		}
 		if (subcommand == 'map') {
 			return interaction.editReply(`This subcommand is not available yet, check later for more`)
