@@ -1,4 +1,5 @@
-const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, Events } = require('discord.js');
+const paginationEmbed = require('discordjs-button-pagination');
 const { Misc } = require('../bot/functions');
 const fs = require('fs');
 const countries = require('../country/country_list.json')
@@ -85,7 +86,7 @@ module.exports = {
 		if (subcommand == 'get') {
 			let country = interaction.options.getString('country');
 			countryOfPlayer = playersCountry[interaction.user.id]
-			if (countryOfPlayer.length > 0) return interaction.editReply('You already have a country')
+			if (countryOfPlayer) return interaction.editReply('You already have a country')
 			if (countries[country].isTaken) return interaction.editReply(`Sorry but ${country} is taken by <@${countries[country].owner}>`)
 			if (!countries[country]) return interaction.editReply(`${country} does not exist`)
 			countries[country].isTaken = true;
@@ -118,7 +119,7 @@ module.exports = {
 							}
 							bank[interaction.user.id] += amount;
 							fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
-							fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries))
+							fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 							return interaction.followUp(`You have successfully sold \`${amount}\` of \`${product}\` in your ${countryOfPlayer.length} occupied countries, you have made a total of \`${amount}\` Imperial Credits!`)
 						} else {
 							countryOfPlayer = m.content;
@@ -127,7 +128,7 @@ module.exports = {
 							let amount = amt * continentMultipliers[countries[countryOfPlayer].continent][product]
 							bank[interaction.user.id] += amount;
 							fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
-							fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries))
+							fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 							return interaction.followUp(`You have successfully sold \`${amount}\` of \`${product}\` in ${countryOfPlayer}, and with the continent multipler (${countries[countryOfPlayer].continent}), which is \`${continentMultipliers[countries[countryOfPlayer].continent][product]}\`, you have made a total of \`${amount}\` Imperial Credits!`)
 						}
 					});
@@ -137,7 +138,7 @@ module.exports = {
 					let amount = amt * continentMultipliers[countries[countryOfPlayer[0]].continent][product]
 					bank[interaction.user.id] += amount;
 					fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
-					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries))
+					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 					return interaction.followUp(`You have successfully sold \`${amount}\` of \`${product}\`, and with the continent multipler (${countries[countryOfPlayer[0]].continent}), which is \`${continentMultipliers[countries[countryOfPlayer[0]].continent][product]}\`, you have made a total of \`${amount}\` Imperial Credits!`)
 				}
 			}
@@ -150,7 +151,7 @@ module.exports = {
 					}
 				}
 				fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
-				fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries))
+				fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 				return interaction.editReply(`You have successfully sold all of your produced stuff, and with the continent multipler, you have made a total of \`${bank[interaction.user.id]}\` Imperial Credits!`)
 			}
 		}
@@ -169,45 +170,99 @@ module.exports = {
 						countries[country].owner = "";
 						delete playersCountry[interaction.user.id];
 					}
-					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries))
+					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 					return interaction.followUp(`You have successfully deleted your country and all territories you may have occupied`)
 				}
 				else if (m.content.toLowerCase() == 'n') return interaction.followUp('Alright then')
 			});
 		}
 		if (subcommand == 'list') {
-			const countryEmbed = new EmbedBuilder()
+			let countryEmbeds = [];
+			let tenCountriesCount = 0;
+			let tenCountries = "";
+			for (i in countries) {
+				if (!countries[i].isTaken) {
+					tenCountries = tenCountries + `${i}\n`
+					tenCountriesCount++
+				}
+				if (tenCountriesCount == 10) {
+					tenCountriesCount = 0;
+					let countryEmbed = new EmbedBuilder()
+						.setTitle('Available countries!')
+						.setDescription(tenCountries.trim())
+						.setColor(misc.randomColor())
+						.setTimestamp()
+						.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
+					countryEmbeds.push(countryEmbed)
+					tenCountries = "";
+				}
+			}
+			let countryEmbed = new EmbedBuilder()
 				.setTitle('Available countries!')
-				.setDescription('US\nHenlo')
+				.setDescription(tenCountries.trim())
 				.setColor(misc.randomColor())
 				.setTimestamp()
 				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
-			const row = new ActionRowBuilder()
-				.addComponents(
-					new ButtonBuilder()
-						.setCustomId('back')
-						.setEmoji('◀')
-						.setDisabled(true)
-						.setStyle(ButtonStyle.Primary),
-					new ButtonBuilder()
-						.setCustomId('next')
-						.setEmoji('▶')
-						.setStyle(ButtonStyle.Primary),
-				);
-			await interaction.editReply({ embeds: [countryEmbed], components: [row]})
+			countryEmbeds.push(countryEmbed)
+			tenCountries = "";
+			let buttonList = [
+				new ButtonBuilder()
+					.setCustomId('back')
+					.setEmoji('◀')
+					.setStyle(ButtonStyle.Primary),
+				new ButtonBuilder()
+					.setCustomId('next')
+					.setEmoji('▶')
+					.setStyle(ButtonStyle.Primary)
+			]
+			await paginationEmbed(interaction, countryEmbeds, buttonList);
 
-			client.on(Events.InteractionCreate, async interaction => {
-				if (!interaction.isButton()) return;
-				if (interaction.customId == 'back') {
-					
-				} else if (interaction.customId == 'next') {
-
-				}
-			});
+			// client.on(Events.InteractionCreate, async i => {
+			// 	if (!i.isButton()) return;
+			// 	if (i.customId == 'back') {
+			// 		currentEmbed--;
+			// 		let row = new ActionRowBuilder()
+			// 			.addComponents(
+			// 				new ButtonBuilder()
+			// 					.setCustomId('back')
+			// 					.setEmoji('◀')
+			// 					.setDisabled(currentEmbed == 0)
+			// 					.setStyle(ButtonStyle.Primary),
+			// 				new ButtonBuilder()
+			// 					.setCustomId('next')
+			// 					.setEmoji('▶')
+			// 					.setDisabled(currentEmbed == countryEmbeds.length - 1)
+			// 					.setStyle(ButtonStyle.Primary),
+			// 			);
+			// 		console.log(currentEmbed)
+			// 		console.log(countryEmbeds)
+			// 		await interaction.editReply({
+			// 			content: "Available countries!", embeds: [countryEmbeds[currentEmbed]], components: [row]
+			// 		})
+			// 	} else if (i.customId == 'next') {
+			// 		currentEmbed++;
+			// 		let row = new ActionRowBuilder()
+			// 			.addComponents(
+			// 				new ButtonBuilder()
+			// 					.setCustomId('back')
+			// 					.setEmoji('◀')
+			// 					.setDisabled(currentEmbed == 0)
+			// 					.setStyle(ButtonStyle.Primary),
+			// 				new ButtonBuilder()
+			// 					.setCustomId('next')
+			// 					.setEmoji('▶')
+			// 					.setDisabled(currentEmbed == countryEmbeds.length - 1)
+			// 					.setStyle(ButtonStyle.Primary),
+			// 			);
+			// 		console.log(currentEmbed)
+			// 		console.log(countryEmbeds.length)
+			// 		await interaction.editReply({ embeds: [countryEmbeds[currentEmbed]], components: [row] })
+			// 	}
+			// });
 		}
 		if (subcommand == 'map') {
 			return interaction.editReply(`This subcommand is not available yet, check later for more`)
-		}	
+		}
 	},
 };
 

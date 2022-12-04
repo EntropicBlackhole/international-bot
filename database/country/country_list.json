@@ -6289,16 +6289,16 @@
       "metal": 52
     },
     "produced": {
-      "fish": 50,
-      "oil": 50,
-      "crops": 50,
-      "copper": 50,
-      "wood": 50,
-      "coal": 50,
-      "gold": 50,
-      "meat": 50,
-      "sugar": 50,
-      "metal": 50
+      "fish": 0,
+      "oil": 0,
+      "crops": 0,
+      "copper": 0,
+      "wood": 0,
+      "coal": 0,
+      "gold": 0,
+      "meat": 0,
+      "sugar": 0,
+      "metal": 0
     },
     "nextProduce": 1669891335402,
     "health": 1000
