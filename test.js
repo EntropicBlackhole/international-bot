@@ -47,6 +47,8 @@ for (i of text.split('\n')) {
 			sugar: 50,
 			metal: 50
 		},
+		items: {},
+		wars: [],
 		nextProduce: Date.now() + 1000*60*60*12,
 		health: 1000
 	}

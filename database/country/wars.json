@@ -1,20 +1,23 @@
 {
-  "1": {
-    "attacker": "708026434660204625",
-    "defender": "716390461211803738",
-    "turn": "716390461211803738",
-    "outcome": "<@708026434660204625> won"
-  },
-  "2": {
-    "attacker": "592841797697536011",
-    "defender": "754018561621491762",
-    "turn": "754018561621491762",
-    "outcome": "<@592841797697536011> won"
-  },
-  "3": {
-    "attacker": "708026434660204625",
-    "defender": "754018561621491762",
-    "turn": "754018561621491762",
-    "outcome": "<@708026434660204625> won"
+  "83fxz": {
+    "name": "83fxz",
+    "id": "83fxz",
+    "attacker": {
+      "708026434660204625": {
+        "name": "EntropicBlackhole",
+        "hasPlayed": false
+      }
+    },
+    "defender": {
+      "841822347932598303": {
+        "name": "C0RENETZ",
+        "hasPlayed": false
+      },
+      "999066347210285056": {
+        "name": "EntropicBot",
+        "hasPlayed": false
+      }
+    },
+    "turn": "Attacker"
   }
 }

@@ -1,3 +1,10 @@
+// console.log('Fetching data from 101.50.67.1')
+// console.log('Person is Sunflower Iversen')
+// console.log('Sunflower seems to be gay and be from west virginia')
+// console.log('Suffers from gayness and emoness')
+// console.log('Is 14 years old, goes to Peakwood High (maybe)')
+// console.log('Likes cinnamon rolls, and probably has a cum jar too')
+
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, MessageEmbed, Events, GatewayIntentBits, Routes, REST, Collection, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");

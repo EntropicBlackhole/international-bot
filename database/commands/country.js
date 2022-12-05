@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, Events } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const paginationEmbed = require('discordjs-button-pagination');
 const { Misc } = require('../bot/functions');
 const fs = require('fs');
@@ -86,7 +86,8 @@ module.exports = {
 		if (subcommand == 'get') {
 			let country = interaction.options.getString('country');
 			countryOfPlayer = playersCountry[interaction.user.id]
-			if (countryOfPlayer) return interaction.editReply('You already have a country')
+			if (countryOfPlayer) { if (countryOfPlayer.length > 0) return interaction.editReply('You already have a country') }
+			else if (countryOfPlayer != undefined) return interaction.editReply('You already have a country')
 			if (countries[country].isTaken) return interaction.editReply(`Sorry but ${country} is taken by <@${countries[country].owner}>`)
 			if (!countries[country]) return interaction.editReply(`${country} does not exist`)
 			countries[country].isTaken = true;
@@ -101,6 +102,8 @@ module.exports = {
 				let product = interaction.options.getString('product');
 				let amt = interaction.options.getInteger('amt');
 				countryOfPlayer = playersCountry[interaction.user.id]
+				if (countryOfPlayer) { if (countryOfPlayer.length == 0) return interaction.editReply('You don\'t have a country') }
+				else if (countryOfPlayer == undefined) return interaction.editReply('You don\'t have a country')
 				if (countryOfPlayer.length > 1) {
 					interaction.editReply(`You have more than 1 country occupied, which one do you wanna sell from? (${countryOfPlayer.join('/')}/all) (Is case sensitive)`)
 					const filter = m => countryOfPlayer.includes(m)
@@ -112,10 +115,10 @@ module.exports = {
 							for (country of countryOfPlayer) {
 								if (countries[country].produced[product] < amt) {
 									await interaction.editReply(`You don't have \`${amt}\` of \`${product}\`, selling all possible of \`${product}\``)
-									amt = countries[country].produced[product]
+									amt = Math.round(countries[country].produced[product])
 								}
 								countries[country].produced[product] -= amt
-								amount += amt * continentMultipliers[countries[country].continent][product]
+								amount += Math.round(amt * continentMultipliers[countries[country].continent][product])
 							}
 							bank[interaction.user.id] += amount;
 							fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
@@ -125,7 +128,7 @@ module.exports = {
 							countryOfPlayer = m.content;
 							if (countries[countryOfPlayer].produced[product] < amt) return interaction.followUp(`You don't have \`${amt}\` of \`${product}\` in ${countryOfPlayer}, you only have \`${countries[countryOfPlayer].produced[product]}\``)
 							countries[countryOfPlayer].produced[product] -= amt
-							let amount = amt * continentMultipliers[countries[countryOfPlayer].continent][product]
+							let amount = Math.round(amt * continentMultipliers[countries[countryOfPlayer].continent][product])
 							bank[interaction.user.id] += amount;
 							fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
 							fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
@@ -135,7 +138,7 @@ module.exports = {
 				} else {
 					if (countries[countryOfPlayer[0]].produced[product] < amt) return interaction.editReply(`You don't have \`${amt}\` of \`${product}\`, you only have \`${countries[countryOfPlayer[0]].produced[product]}\``)
 					countries[countryOfPlayer[0]].produced[product] -= amt
-					let amount = amt * continentMultipliers[countries[countryOfPlayer[0]].continent][product]
+					let amount = Math.round(amt * continentMultipliers[countries[countryOfPlayer[0]].continent][product])
 					bank[interaction.user.id] += amount;
 					fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
 					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
@@ -143,21 +146,26 @@ module.exports = {
 				}
 			}
 			if (subcommand == 'all') {
+				let amount = 0;
 				countryOfPlayer = playersCountry[interaction.user.id]
+				if (countryOfPlayer) { if (countryOfPlayer.length == 0) return interaction.editReply('You don\'t have a country') }
+				else if (countryOfPlayer == undefined) return interaction.editReply('You don\'t have a country')
 				for (country of countryOfPlayer) {
 					for (i in countries[country].produced) {
-						bank[interaction.user.id] += countries[country].produced[i] * continentMultipliers[countries[country].continent][i]
+						amount += Math.round(countries[country].produced[i] * continentMultipliers[countries[country].continent][i])
 						countries[country].produced[i] = 0;
 					}
 				}
+				bank[interaction.user.id] += amount;
 				fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
 				fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
-				return interaction.editReply(`You have successfully sold all of your produced stuff, and with the continent multipler, you have made a total of \`${bank[interaction.user.id]}\` Imperial Credits!`)
+				return interaction.editReply(`You have successfully sold all of your produced stuff, and with the continent multipler, you have made a total of \`${amount}\` Imperial Credits!`)
 			}
 		}
 		if (subcommand == 'leave') {
 			countryOfPlayer = playersCountry[interaction.user.id]
-			if (!countryOfPlayer[0]) return interaction.editReply('You don\'t have a country')
+			if (countryOfPlayer) { if (countryOfPlayer.length == 0) return interaction.editReply('You don\'t have a country') }
+			else if (countryOfPlayer == undefined) return interaction.editReply('You don\'t have a country')
 			if (countries[countryOfPlayer[0]].owner != interaction.user.id) return interaction.editReply('You don\'t own this country')
 			interaction.editReply(`Are you sure you want to leave your country? Any occupied countries will become free. (y/n)`)
 			const filter = m => ['y', 'n'].includes(m.content.toLowerCase())

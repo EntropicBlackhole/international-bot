@@ -1,57 +1,65 @@
-[
-	{
+{
+	"ground_unit": {
 		"name": "Ground Unit",
 		"description": "Is a unit on the ground (Soldiers, Tanks, etc) Deals 10 damage",
 		"cost": 100,
-		"type": ["Battle Unit"],
+		"type": [
+			"Battle Unit"
+		],
 		"use": {
 			"type": "attack",
 			"points": 10,
 			"max_use": 30
-		},
-		"id": "ground_unit"
+		}
 	},
-	{
+	"navy_unit": {
 		"name": "Navy Unit",
 		"description": "Is a unit in the ocean (Ships, Submarines, etc) Deals 10 damage",
 		"cost": 100,
-		"type": ["Battle Unit"],
+		"type": [
+			"Battle Unit"
+		],
 		"use": {
 			"type": "attack",
 			"points": 10,
 			"max_use": 30
-		},
-		"id": "navy_unit"
+		}
 	},
-	{
+	"air_unit": {
 		"name": "Air Unit",
 		"description": "Is a unit in the air (Airplanes, Helicopters, etc) Deals 10 damage",
 		"cost": 100,
-		"type": ["Battle Unit"],
+		"type": [
+			"Battle Unit"
+		],
 		"use": {
 			"type": "attack",
 			"points": 10,
 			"max_use": 30
-		},
-		"id": "air_unit"
+		}
 	},
-	{
+	"robot_dog": {
 		"name": "Robot Dog",
 		"description": "Robot dogs are mechanical robots that have the anatomical shape of a dog, these are very useful, as they can be strapped up with guns or other weapons. Deals 20 damage",
 		"cost": 70,
-		"type": ["Battle Unit", "Electric"],
+		"type": [
+			"Battle Unit",
+			"Electric"
+		],
 		"use": {
 			"type": "attack",
 			"points": 20,
 			"max_use": 10
-		},
-		"id": "robot_dog"
+		}
 	},
-	{
+	"emp_faulty": {
 		"name": "Faulty EMP Driver Blaster",
 		"description": "Able to disable/destroy any nearby devices (E.G. Communication lines,war robots,mobile phones etc.) Can take out 20-40% of electrical devices (in your items)",
 		"cost": 300,
-		"type": ["Battle Unit", "Disabler"],
+		"type": [
+			"Battle Unit",
+			"Disabler"
+		],
 		"use": {
 			"type": "disable",
 			"points": [
@@ -59,14 +67,16 @@
 				40
 			],
 			"max_use": 1
-		},
-		"id": "emp_faulty"
+		}
 	},
-	{
+	"emp_polished": {
 		"name": "Polished EMP Driver Blaster",
 		"description": "Able to disable/destroy any nearby devices (E.G. Communication lines,war robots,mobile phones etc.) Can take out 50-70% of electrical devices (in your items) and might stop a nuke (IHQ 2.2 only) (Except DextraNuke)",
 		"cost": 450,
-		"type": ["Battle Unit", "Disabler"],
+		"type": [
+			"Battle Unit",
+			"Disabler"
+		],
 		"use": {
 			"type": "disable",
 			"points": [
@@ -74,14 +84,16 @@
 				70
 			],
 			"max_use": 1
-		},
-		"id": "emp_polished"
+		}
 	},
-	{
+	"emp_superior": {
 		"name": "Superior EMP Driver Blaster",
 		"description": "Able to disable/destroy any nearby devices (E.G. Communication lines,war robots,mobile phones etc.) Can take out 80-100% of electrical devices (in your items) and might stop a nuke (IHQ 2.2 only) (Except DextraNuke)",
 		"cost": 600,
-		"type": ["Battle Unit", "Disabler"],
+		"type": [
+			"Battle Unit",
+			"Disabler"
+		],
 		"use": {
 			"type": "disable",
 			"points": [
@@ -89,67 +101,71 @@
 				100
 			],
 			"max_use": 1
-		},
-		"id": "emp_superior"
+		}
 	},
-	{
+	"nuke": {
 		"name": "Nuke",
 		"description": "Nuke is a powerful weapon that can destroy an entire city. It is a very powerful weapon, but it is quite dangerous. Deals 100 damage",
 		"cost": 200,
-		"type": ["Battle Unit"],
+		"type": [
+			"Battle Unit"
+		],
 		"use": {
 			"type": "attack",
 			"points": 100,
 			"max_use": 1
-		},
-		"id": "nuke"
+		}
 	},
-	{
+	"hypernuke": {
 		"name": "HyperNuke",
 		"description": "Hypernuke is a powerful weapon that can destroy an entire state/province. It is a very powerful weapon, but it is also very dangerous. It is not recommended to use for testing on country/land that is not completely empty. Deals 200 damage",
 		"cost": 1000,
-		"type": ["Battle Unit"],
+		"type": [
+			"Battle Unit"
+		],
 		"use": {
 			"type": "attack",
 			"points": 200,
 			"max_use": 1
-		},
-		"id": "hypernuke"
+		}
 	},
-	{
+	"dextranuke": {
 		"name": "DextraNuke",
 		"description": "DextraNuke is a powerful weapon that can destroy an entire country. Highly dangerous, do not even buy, or use, unless you are insane. Deals 500 damage",
 		"cost": 10000,
-		"type": ["Battle Unit"],
+		"type": [
+			"Battle Unit"
+		],
 		"use": {
 			"type": "attack",
 			"points": 500,
 			"max_use": 1
-		},
-		"id": "dextranuke"
+		}
 	},
-	{
+	"medical_aid": {
 		"name": "Medical Aid",
 		"description": "Cures 60 HP, has a max use of 5, being able to heal 300 HP at a time",
 		"cost": 150,
-		"type": ["Healing"],
+		"type": [
+			"Healing"
+		],
 		"use": {
 			"type": "heal",
 			"points": 60,
 			"max_use": 5
-		},
-		"id": "medical_aid"
+		}
 	},
-	{
+	"lightning_sandwich": {
 		"name": "Lightning Sandwich Packet",
 		"description": "Cures 40 HP, has a max use of 5, being able to heal 200 HP at a time",
 		"cost": 100,
-		"type": ["Healing"],
+		"type": [
+			"Healing"
+		],
 		"use": {
 			"type": "heal",
 			"points": 40,
 			"max_use": 5
-		},
-		"id": "lightning_sandwich"
+		}
 	}
-]
+}
