@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, IntegrationApplication } = require('discord.js');
 const paginationEmbed = require('discordjs-button-pagination');
 const { Misc } = require('../bot/functions');
 const misc = new Misc();
@@ -113,8 +113,68 @@ module.exports = {
 		if (subcommand == 'use') {
 			let warID = interaction.options.getString('war-id');
 			let item = interaction.options.getString('item');
-			let amount = interaction.options.get('amount');
+			let amount = interaction.options.get('amount') ? interaction.options.get('amount') : 1;
+			//Check if user has item
+			if (countries[playerCountry[interaction.user.id][0]].wars.includes(warID)) return interaction.editReply(`You aren't in this war`)
+			//Check if user has amount of item
+			if (wars[warID][wars[warID].turn.toLowerCase()][interaction.user.id]) return interaction.editReply(`It's not your side's turn yet`)
+			//Check if the user is in this specific war
+			if (!countries[playerCountry[interaction.user.id][0]].items[item]) return interaction.editReply(`You don't own ${item}`)
+			//Check if it's users turn
+			if (countries[playerCountry[interaction.user.id][0]].items[item] < amount) return interaction.editReply(`You only have ${countries[playerCountry[interaction.user.id][0]].items[item]} of ${item}, not ${amount}`)
+			let itemUse = shop[item].use.type
+			let points = shop[item].use.points
+			let maxUse = shop[item].use.max_use
 
+			if (maxUse < amount) return interaction.editReply(`You can only use ${maxUse} of this item`)
+
+			//if the item's use isn't for healing, 
+				//put all the people in the opposite side in an array, 
+			//else, 
+				//put all the people in your own side in an array
+			let peopleSideArray = []
+			for (id of Object.keys(wars[warID][itemUse == 'heal' ? (wars[warID].turn == 'Attacker' ? 'attacker' : 'defender') : (wars[warID].turn == 'Attacker' ? 'defender' : 'attacker')])) {
+				peopleSideArray.push(playerCountry[id][0])
+			}
+			//The ID of the other person to apply the item on
+			var otherUserID = ""
+			if (peopleSideArray.length > 1) { //If theres more than one person in this side:
+				interaction.editReply(`There are multiple people! Which one do you want to use this on? (Case sensitive) (${peopleSideArray.join('/')})`)
+				const filter = m => ((peopleSideArray.includes(m.content)) && m.author.id == interaction.user.id)
+				const collector = interaction.channel.createMessageCollector({ filter, max: 1, time: 15000 });
+				
+				collector.on('collect', m => {
+					otherUserID = countries[m.content].owner //Asign otherUserID to that person
+				});
+			} else otherUserID = Object.keys(wars[warID][itemUse == 'heal' ? (wars[warID].turn == 'Attacker' ? 'attacker' : 'defender') : (wars[warID].turn == 'Attacker' ? 'defender' : 'attacker')])[0]
+			//Else just assign it to the only person in the array
+			//Since no errors have been passed, you can now mark the user's play as true
+			wars[warID][wars[warID].turn.toLowerCase()][interaction.user.id].hasPlayed = true;
+			//TODO: Add it so checks for if everyone in this side has already played, if so, it's the other side's turn
+			//TODO: Also make it so it checks if a side has won 
+			//Everything else seems pretty simple
+			if (itemUse == 'attack') {
+				countries[playerCountry[otherUserID]].health -= points*amount
+				fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
+				fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
+				return interaction.editReply(`Successfully did ${points*amount} damage to <@${otherUserID}>!`)
+			} else if (itemUse == 'disable') {
+				let randomTakeout = Math.round(Math.random() * (parseInt(points[1]) - parseInt(points[0]) + 1)) + parseInt(points[0]);
+				for (item in countries[playerCountry[otherUserID]].items) {
+					let currentItem = shop[item]
+					if (currentItem.type.includes("Electric")) {
+						countries[playerCountry[otherUserID]].items[item] = Math.round((countries[playerCountry[otherUserID]].items[item] * (randomTakeout / 100)))
+					}
+				}
+				fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
+				fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
+				return interaction.editReply(`Successfully removed ${randomTakeout / 100} of electric items from <@${otherUserID}>!`)
+			} else if (itemUse == 'heal') {
+				countries[playerCountry[otherUserID]].health += points*amount
+				fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
+				fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
+				return interaction.editReply(`Successfully healed ${points*amount} HP!`);
+			}
 		}
 		if (subcommand == 'join') {
 			let warID = interaction.options.get('war-id');
@@ -169,6 +229,7 @@ module.exports = {
 			fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2));
 			return interaction.editReply(`Successfully left ${wars[warID].name}!`)
 		}
+		if (subcommand == 'confirm') {}
 	},
 };
 
