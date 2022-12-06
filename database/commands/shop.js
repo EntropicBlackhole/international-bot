@@ -60,6 +60,8 @@ module.exports = {
 			if ((shop[item].cost * amt) > bank[interaction.user.id]) return interaction.editReply(`You don't have ${(shop[item].cost * amt)} Imperial Credits to buy \`${amt}\` of ${shop[item].name}. You only have ${bank[interaction.user.id]} IC`)
 			countries[playerCountry].items[item] += amt
 			bank[interaction.user.id] -= shop[item].cost * amt
+			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
+			fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
 			return interaction.editReply(`You've successfully bought \`${amt}\` of \`${shop[item].name}\` for \`${shop[item].cost * amt}\` IC!`)
 		}
 		if (subcommand == 'list') {
@@ -97,6 +99,8 @@ module.exports = {
 			if (!countries[playerCountry].items[item]) return interaction.editReply(`You don't have this item!`)
 			countries[playerCountry].items[item] -= amt
 			bank[interaction.user.id] += Math.round(((shop[item].cost) / 2) * amt)
+			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
+			fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
 			return interaction.editReply(`You've successfully sold \`${amt}\` of \`${shop[item].name}\` for \`${Math.round(((shop[item].cost) / 2) * amt)}\` IC!`)
 		}
 	},

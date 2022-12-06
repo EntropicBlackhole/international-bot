@@ -1053,7 +1053,7 @@
       "83fxz"
     ],
     "nextProduce": 1670251708419,
-    "health": 1000
+    "health": 600
   },
   "Cape Verde": {
     "owner": "",
@@ -6428,8 +6428,8 @@
     "health": 1000
   },
   "United States": {
-    "owner": "",
-    "isTaken": false,
+    "owner": "708026434660204625",
+    "isTaken": true,
     "code": "US",
     "continent": "North America",
     "products": {
@@ -6456,7 +6456,9 @@
       "sugar": 50,
       "metal": 50
     },
-    "items": {},
+    "items": {
+      "nuke": 0
+    },
     "wars": [
       "83fxz"
     ],
