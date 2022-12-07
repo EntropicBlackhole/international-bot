@@ -1,1 +1,21 @@
-{}
+{
+  "7opi4": {
+    "captainAttacker": "1036807209985790052",
+    "captainDefender": "708026434660204625",
+    "name": "7opi4",
+    "id": "7opi4",
+    "attacker": {
+      "1036807209985790052": {
+        "name": "Kraos",
+        "hasPlayed": true
+      }
+    },
+    "defender": {
+      "708026434660204625": {
+        "name": "EntropicBlackhole",
+        "hasPlayed": false
+      }
+    },
+    "turn": "Attacker"
+  }
+}

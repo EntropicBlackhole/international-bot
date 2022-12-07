@@ -540,10 +540,11 @@ client.on(Events.InteractionCreate, async interaction => {
 							.setStyle(ButtonStyle.Danger),
 					);
 				await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true, components: [row] });
+				
 				client.on('interactionCreate', async interaction => {
 					if (!interaction.isButton()) return;
 					if (interaction.customId == 'show-error') {
-						await interaction.reply({ content: '```' + error + '```', ephemeral: true });
+						await interaction.channel.send({ content: '```' + error + '```', ephemeral: true });
 					}
 				});
 			} catch (e) {
@@ -558,7 +559,7 @@ client.on(Events.InteractionCreate, async interaction => {
 				client.on('interactionCreate', async interaction => {
 					if (!interaction.isButton()) return;
 					if (interaction.customId == 'show-error') {
-						await interaction.reply({ content: '```' + error + '```', ephemeral: true })
+						await interaction.channel.send({ content: '```' + error + '```', ephemeral: true })
 					}
 				});
 			}

@@ -30,6 +30,9 @@ class Misc {
 			return shortenText(newText.join(delimiter), delimiter, max);
 		}
 	}
+	capitalize(string) {
+		return string.replace('_', ' ').toLowerCase().split(" ").map(word => word[0].toUpperCase() + word.slice(1)).join(" ")
+	}
 }
 
 exports.Country = Country

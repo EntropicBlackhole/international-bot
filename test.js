@@ -49,7 +49,7 @@ for (i of text.split('\n')) {
 		},
 		items: {},
 		wars: [],
-		nextProduce: Date.now() + 1000*60*60*12,
+		nextProduce: Date.now() + 1000*60*60*2,
 		health: 1000
 	}
 }

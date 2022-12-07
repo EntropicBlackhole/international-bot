@@ -62,6 +62,9 @@ module.exports = {
 			.setName('list')
 			.setDescription('Lists all the countries'))
 		.addSubcommand(subcommand => subcommand
+			.setName('profile')
+			.setDescription('Displays your current status, items, etc'))
+		.addSubcommand(subcommand => subcommand
 			.setName('map')
 			.setDescription('Shows the world map, and taken countries')),
 	async autocomplete(interaction) {
@@ -270,6 +273,32 @@ module.exports = {
 		}
 		if (subcommand == 'map') {
 			return interaction.editReply(`This subcommand is not available yet, check later for more`)
+		}
+		if (subcommand == 'profile') {
+			let stats = countries[playersCountry[interaction.user.id][0]]
+			let products = []
+			let items = []
+			for (i in stats.produced) products.push(`${misc.capitalize(i)}: ${stats.produced[i]}`)
+			for (i in stats.items) items.push(`${misc.capitalize(i)}: ${stats.items[i]}`)
+			if (items.length == 0) items.push('None')
+			if (stats.wars.length == 0) stats.wars.push('None')
+			console.log(stats.wars)
+			const profileEmbed = new EmbedBuilder()
+				.setTitle(playersCountry[interaction.user.id][0])
+				.setFields(
+					{ name: 'Owner', value: client.users.cache.find(user => user.id === stats.owner).username },
+					{ name: 'ISO Code', value: stats.code },
+					{ name: 'Continent', value: stats.continent },
+					{ name: 'Products', value: products.join('\n') },
+					{ name: 'Items', value: items.join('\n') },
+					{ name: 'Current wars', value: stats.wars.join('\n') },
+					{ name: 'Health', value: stats.health.toString() },
+					{ name: 'Money', value: bank[interaction.user.id].toString() }
+				)
+				.setColor(misc.randomColor())
+				.setTimestamp()
+				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
+			return interaction.editReply({ embeds: [profileEmbed]})
 		}
 	},
 };

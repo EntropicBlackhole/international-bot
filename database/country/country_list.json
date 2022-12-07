@@ -1020,7 +1020,7 @@
     "health": 1000
   },
   "Canada": {
-    "owner": "841822347932598303",
+    "owner": "708026434660204625",
     "isTaken": true,
     "code": "CA",
     "continent": "North America",
@@ -1037,26 +1037,27 @@
       "metal": 84
     },
     "produced": {
-      "fish": 50,
-      "oil": 50,
-      "crops": 50,
-      "copper": 50,
-      "wood": 50,
-      "coal": 50,
-      "gold": 50,
-      "meat": 50,
-      "sugar": 50,
-      "metal": 50
+      "fish": 0,
+      "oil": 0,
+      "crops": 0,
+      "copper": 0,
+      "wood": 0,
+      "coal": 0,
+      "gold": 0,
+      "meat": 0,
+      "sugar": 0,
+      "metal": 0
     },
     "items": {
-      "robot_dog": 21,
-      "medical_aid": 15
+      "hypernuke": 0,
+      "ground_unit": 0,
+      "robot_dog": 0,
+      "emp_polished": 0,
+      "medical_aid": 0
     },
-    "wars": [
-      "83fxz"
-    ],
+    "wars": [],
     "nextProduce": 1670251708419,
-    "health": 600
+    "health": 100
   },
   "Cape Verde": {
     "owner": "",
@@ -2963,8 +2964,8 @@
     "health": 1000
   },
   "Ireland": {
-    "owner": "",
-    "isTaken": false,
+    "owner": "1036807209985790052",
+    "isTaken": true,
     "code": "IE",
     "continent": "Europe",
     "products": {
@@ -2980,18 +2981,24 @@
       "metal": 44
     },
     "produced": {
-      "fish": 50,
-      "oil": 50,
-      "crops": 50,
-      "copper": 50,
-      "wood": 50,
-      "coal": 50,
-      "gold": 50,
-      "meat": 50,
-      "sugar": 50,
-      "metal": 50
+      "fish": 0,
+      "oil": 0,
+      "crops": 0,
+      "copper": 0,
+      "wood": 0,
+      "coal": 0,
+      "gold": 0,
+      "meat": 0,
+      "sugar": 0,
+      "metal": 0
     },
-    "items": {},
+    "items": {
+      "hypernuke": 2,
+      "ground_unit": 42,
+      "robot_dog": 45,
+      "emp_polished": 3,
+      "medical_aid": 0
+    },
     "wars": [],
     "nextProduce": 1670251708420,
     "health": 1000
@@ -4017,8 +4024,8 @@
     "health": 1000
   },
   "Mexico": {
-    "owner": "999066347210285056",
-    "isTaken": true,
+    "owner": "",
+    "isTaken": false,
     "code": "MX",
     "continent": "North America",
     "products": {
@@ -4046,9 +4053,7 @@
       "metal": 50
     },
     "items": {},
-    "wars": [
-      "83fxz"
-    ],
+    "wars": [],
     "nextProduce": 1670251708420,
     "health": 1000
   },
@@ -6461,16 +6466,10 @@
       "sugar": 50,
       "metal": 50
     },
-    "items": {
-      "nuke": 0,
-      "emp_polished": 0,
-      "medical_aid": 0
-    },
-    "wars": [
-      "83fxz"
-    ],
+    "items": {},
+    "wars": [],
     "nextProduce": 1670251708420,
-    "health": 1300
+    "health": 1000
   },
   "Uruguay": {
     "owner": "",

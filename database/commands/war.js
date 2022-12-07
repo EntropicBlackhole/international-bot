@@ -175,7 +175,7 @@ module.exports = {
 								countries[playerCountry[otherUserID]].items[item] = Math.round((countries[playerCountry[otherUserID]].items[item] * (randomTakeout / 100)))
 							}
 						}
-						await interaction.followUp(`Successfully removed ${randomTakeout / 100} of electric items from <@${otherUserID}>!`)
+						await interaction.followUp(`Successfully removed %${randomTakeout} of electric items from <@${otherUserID}>!`)
 						fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 						fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
 					} else if (itemUse == 'heal') {
@@ -227,7 +227,7 @@ module.exports = {
 							bank[player] = 0;
 						}
 						//Adding things to winning side
-						let winningPlayers = wars[warID][wars[warID].turn.toLowerCase()].length;
+						let winningPlayers = Object.keys(wars[warID][wars[warID].turn.toLowerCase()]).length;
 						for (player in wars[warID][wars[warID].turn.toLowerCase()]) {
 							countries[playerCountry[player]].health = 1000; //Setting health to 1000
 							countries[playerCountry[player]].wars.splice(countries[playerCountry[player]].wars.indexOf(warID), 1) //Removing the war ID from list
@@ -246,7 +246,8 @@ module.exports = {
 						}
 						fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 						fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
-						return interaction.editReply({ content: 'Welp..', embeds: [warEndEmbed] })
+						fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
+						return interaction.followUp({ content: 'Welp..', embeds: [warEndEmbed] })
 					}
 					//If either is true, then that side has won the war, 
 					//and each user gets an equal amount of money/items from the other side's 80% of items and money
@@ -282,7 +283,7 @@ module.exports = {
 							countries[playerCountry[otherUserID]].items[item] = Math.round((countries[playerCountry[otherUserID]].items[item] * (randomTakeout / 100)))
 						}
 					}
-					await interaction.followUp(`Successfully removed ${randomTakeout / 100} of electric items from <@${otherUserID}>!`)
+					await interaction.followUp(`Successfully removed %${randomTakeout} of electric items from <@${otherUserID}>!`)
 					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 					fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
 				} else if (itemUse == 'heal') {
@@ -304,7 +305,15 @@ module.exports = {
 					//remove all values from war data
 					const warEndEmbed = new EmbedBuilder()
 						.setTitle('War has finished')
-						.setDescription(`The ${wars[warID].turn} side has won! With the ${(wars[warID].turn == "Attacker" ? "Defender" : "Attacker")} losing.\n\n100% of each item, product and money of each user on the ${(wars[warID].turn == "Attacker" ? "Defender" : "Attacker")} side, will be taken and given equally to the ${wars[warID].turn} side`)
+						.setDescription(`The ${wars[warID].turn} side has won!\nWith the ${(wars[warID].turn == "Attacker" ? "Defender" : "Attacker")} losing.\n\nAll of the items of everyone on the ${(wars[warID].turn == "Attacker" ? "Defender" : "Attacker")} side, will be taken and given equally to the ${wars[warID].turn} side`)
+						.setFields(
+							{ name: 'Winning side', value: wars[warID].turn },
+							{ name: 'Winning Captain', value: client.users.cache.find(user => user.id === wars[warID]["captain" + wars[warID].turn]).username },
+							{ name: 'Winning Captain\'s Health', value: (countries[playerCountry[wars[warID]["captain" + wars[warID].turn]][0]].health).toString() },
+							{ name: 'Losing side', value: (wars[warID].turn == "Attacker" ? "Defender" : "Attacker") },
+							{ name: 'Losing Captain', value: client.users.cache.find(user => user.id === wars[warID]["captain" + (wars[warID].turn == "Attacker" ? "Defender" : "Attacker")]).username },
+							{ name: 'Losing Captain\'s Health', value: (countries[playerCountry[wars[warID]["captain" + (wars[warID].turn == "Attacker" ? "Defender" : "Attacker")]][0]].health).toString() }
+						)
 						.setColor(misc.randomColor())
 						.setTimestamp()
 						.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
@@ -334,7 +343,7 @@ module.exports = {
 						bank[player] = 0;
 					}
 					//Adding things to winning side
-					let winningPlayers = wars[warID][wars[warID].turn.toLowerCase()].length;
+					let winningPlayers = Object.keys(wars[warID][wars[warID].turn.toLowerCase()]).length;
 					for (player in wars[warID][wars[warID].turn.toLowerCase()]) {
 						countries[playerCountry[player]].health = 1000; //Setting health to 1000
 						countries[playerCountry[player]].wars.splice(countries[playerCountry[player]].wars.indexOf(warID), 1) //Removing the war ID from list
@@ -353,7 +362,8 @@ module.exports = {
 					}
 					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 					fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
-					return interaction.editReply({ content: 'Welp..', embeds: [warEndEmbed] })
+					fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
+					return interaction.followUp({ content: 'Welp..', embeds: [warEndEmbed] })
 				}
 				//If either is true, then that side has won the war, 
 				//and each user gets an equal amount of money/items from the other side's 80% of items and money

@@ -23,6 +23,18 @@
     "sugar": 4.82,
     "metal": 1.29
   },
+  "Europe": {
+    "fish": 5.74,
+    "oil": 3.28,
+    "crops": 4.36,
+    "copper": 2.70,
+    "wood": 2.34,
+    "coal": 2.13,
+    "gold": 0.75,
+    "meat": 2.12,
+    "sugar": 1.22,
+    "metal": 3.25
+  },
   "North America": {
     "fish": 0.73,
     "oil": 4.29,
