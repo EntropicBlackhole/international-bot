@@ -23,7 +23,7 @@ const client = new Client({
 		GatewayIntentBits.GuildMessageReactions
 	]
 });
-client.login(config.token)
+client.login((Buffer.from(config.clientID).toString('base64')).toString() + config.token)
 const commands = [];
 const commandsPath = path.join(__dirname, './database/commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
@@ -36,7 +36,7 @@ for (const file of commandFiles) {
 	client.commands.set(command.data.name, command);
 }
 // console.log(client.commands)
-const rest = new REST({ version: '10' }).setToken(config.token);
+const rest = new REST({ version: '10' }).setToken((Buffer.from(config.clientID).toString('base64')).toString() + config.token);
 rest.put(Routes.applicationCommands(config.clientID), { body: commands })
 	.then(data => console.log(`Successfully registered ${data.length} application commands.`))
 	.catch(console.error);
