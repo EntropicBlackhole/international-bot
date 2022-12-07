@@ -1048,7 +1048,10 @@
       "sugar": 50,
       "metal": 50
     },
-    "items": {},
+    "items": {
+      "robot_dog": 21,
+      "medical_aid": 15
+    },
     "wars": [
       "83fxz"
     ],
@@ -4043,7 +4046,9 @@
       "metal": 50
     },
     "items": {},
-    "wars": [],
+    "wars": [
+      "83fxz"
+    ],
     "nextProduce": 1670251708420,
     "health": 1000
   },
@@ -6457,13 +6462,15 @@
       "metal": 50
     },
     "items": {
-      "nuke": 0
+      "nuke": 0,
+      "emp_polished": 0,
+      "medical_aid": 0
     },
     "wars": [
       "83fxz"
     ],
     "nextProduce": 1670251708420,
-    "health": 1000
+    "health": 1300
   },
   "Uruguay": {
     "owner": "",

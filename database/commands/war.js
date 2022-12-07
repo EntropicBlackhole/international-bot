@@ -39,7 +39,7 @@ module.exports = {
 				.setChoices(...shopList))
 			.addIntegerOption(option => option
 				.setName('amount')
-				.setDescription('Amount of the item to use (Some have a max amount of uses per war)')
+				.setDescription('Amount of the item to use (Some have a max amount of uses per round)')
 				.setRequired(true)))
 		.addSubcommand(subcommand => subcommand
 			.setName('join')
@@ -118,6 +118,8 @@ module.exports = {
 			if (!countries[playerCountry[interaction.user.id][0]].wars.includes(warID)) return interaction.editReply(`You aren't in this war`)
 			//Check if it's users turn
 			if (!wars[warID][wars[warID].turn.toLowerCase()][interaction.user.id]) return interaction.editReply(`It's not your side's turn yet`)
+			//Check if user has already played
+			if (wars[warID][wars[warID].turn.toLowerCase()][interaction.user.id].hasPlayed) return interaction.editReply(`You've already played this turn, wait till others finish make their move, or have the captain confirm the end of the turn with \`/war confirm <war-id>\``)
 			//Check if user has item
 			if (!countries[playerCountry[interaction.user.id][0]].items[item]) return interaction.editReply(`You don't own ${item}`)
 			//Check if user has amount of item
@@ -129,9 +131,9 @@ module.exports = {
 			if (maxUse < amount) return interaction.editReply(`You can only use ${maxUse} of this item`)
 
 			//if the item's use isn't for healing, 
-				//put all the people in the opposite side in an array, 
+			//put all the people in the opposite side in an array, 
 			//else, 
-				//put all the people in your own side in an array
+			//put all the people in your own side in an array
 			let peopleSideArray = []
 			for (id of Object.keys(wars[warID][itemUse == 'heal' ? (wars[warID].turn == 'Attacker' ? 'attacker' : 'defender') : (wars[warID].turn == 'Attacker' ? 'defender' : 'attacker')])) {
 				peopleSideArray.push(playerCountry[id][0])
@@ -142,20 +144,20 @@ module.exports = {
 				interaction.editReply(`There are multiple people! Which one do you want to use this on? (Case sensitive) (${peopleSideArray.join('/')})`)
 				const filter = m => ((peopleSideArray.includes(m.content)) && m.author.id == interaction.user.id)
 				const collector = interaction.channel.createMessageCollector({ filter, max: 1, time: 15000 });
-				
-				collector.on('collect', m => {
+
+				collector.on('collect', async m => {
 					otherUserID = countries[m.content].owner //Asign otherUserID to that person
+
 					//Since no errors have been passed, you can now mark the user's play as true
 					wars[warID][wars[warID].turn.toLowerCase()][interaction.user.id].hasPlayed = true;
-					//TODO: Add it so checks for if everyone in this side has already played, if so, it's the other side's turn
 					//TODO: Also make it so it checks if a side has won 
 					//Everything else seems pretty simple
-					countries[playerCountry[interaction.user.id][0]].items[item] -= 1;
+					countries[playerCountry[interaction.user.id][0]].items[item] -= amount;
 					if (itemUse == 'attack') {
 						countries[playerCountry[otherUserID]].health -= points * amount
+						await interaction.followUp(`Successfully did ${points * amount} damage to <@${otherUserID}>!`)
 						fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 						fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
-						return interaction.followUp(`Successfully did ${points * amount} damage to <@${otherUserID}>!`)
 					} else if (itemUse == 'disable') {
 						let randomTakeout = Math.round(Math.random() * (parseInt(points[1]) - parseInt(points[0]) + 1)) + parseInt(points[0]);
 						for (item in countries[playerCountry[otherUserID]].items) {
@@ -164,30 +166,39 @@ module.exports = {
 								countries[playerCountry[otherUserID]].items[item] = Math.round((countries[playerCountry[otherUserID]].items[item] * (randomTakeout / 100)))
 							}
 						}
+						await interaction.followUp(`Successfully removed ${randomTakeout / 100} of electric items from <@${otherUserID}>!`)
 						fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 						fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
-						return interaction.followUp(`Successfully removed ${randomTakeout / 100} of electric items from <@${otherUserID}>!`)
 					} else if (itemUse == 'heal') {
 						countries[playerCountry[otherUserID]].health += points * amount
+						await interaction.followUp(`Successfully healed ${points * amount} HP!`);
 						fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 						fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
-						return interaction.followUp(`Successfully healed ${points * amount} HP!`);
 					}
+					let haveAllPlayed = true;
+					for (let player in wars[warID][wars[warID].turn.toLowerCase()]) if (wars[warID][wars[warID].turn.toLowerCase()][player].hasPlayed == false) haveAllPlayed = false;
+					if (haveAllPlayed) {
+						for (let player in wars[warID][wars[warID].turn.toLowerCase()]) wars[warID][wars[warID].turn.toLowerCase()][player].hasPlayed = false;
+						wars[warID].turn = (wars[warID].turn == "Attacker" ? "Defender" : "Attacker")
+						await interaction.followUp(`It's the ${wars[warID].turn}s turn now! Use \`/war use <item>\` to do your play!`)
+					}
+					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
+					fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
 				});
 			} else {
 				otherUserID = Object.keys(wars[warID][itemUse == 'heal' ? (wars[warID].turn == 'Attacker' ? 'attacker' : 'defender') : (wars[warID].turn == 'Attacker' ? 'defender' : 'attacker')])[0]
 				//Else just assign it to the only person in the array
+
 				//Since no errors have been passed, you can now mark the user's play as true
 				wars[warID][wars[warID].turn.toLowerCase()][interaction.user.id].hasPlayed = true;
-				//TODO: Add it so checks for if everyone in this side has already played, if so, it's the other side's turn
 				//TODO: Also make it so it checks if a side has won 
 				//Everything else seems pretty simple
-				countries[playerCountry[interaction.user.id][0]].items[item] -= 1;
+				countries[playerCountry[interaction.user.id][0]].items[item] -= amount;
 				if (itemUse == 'attack') {
 					countries[playerCountry[otherUserID]].health -= points * amount
+					await interaction.followUp(`Successfully did ${points * amount} damage to <@${otherUserID}>!`)
 					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 					fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
-					return interaction.followUp(`Successfully did ${points * amount} damage to <@${otherUserID}>!`)
 				} else if (itemUse == 'disable') {
 					let randomTakeout = Math.round(Math.random() * (parseInt(points[1]) - parseInt(points[0]) + 1)) + parseInt(points[0]);
 					for (item in countries[playerCountry[otherUserID]].items) {
@@ -196,20 +207,29 @@ module.exports = {
 							countries[playerCountry[otherUserID]].items[item] = Math.round((countries[playerCountry[otherUserID]].items[item] * (randomTakeout / 100)))
 						}
 					}
+					await interaction.followUp(`Successfully removed ${randomTakeout / 100} of electric items from <@${otherUserID}>!`)
 					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 					fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
-					return interaction.followUp(`Successfully removed ${randomTakeout / 100} of electric items from <@${otherUserID}>!`)
 				} else if (itemUse == 'heal') {
 					countries[playerCountry[otherUserID]].health += points * amount
+					await interaction.followUp(`Successfully healed ${points * amount} HP!`);
 					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 					fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
-					return interaction.followUp(`Successfully healed ${points * amount} HP!`);
 				}
+				let haveAllPlayed = true;
+				for (let player in wars[warID][wars[warID].turn.toLowerCase()]) if (wars[warID][wars[warID].turn.toLowerCase()][player].hasPlayed == false) haveAllPlayed = false;
+				if (haveAllPlayed) {
+					for (let player in wars[warID][wars[warID].turn.toLowerCase()])	wars[warID][wars[warID].turn.toLowerCase()][player].hasPlayed = false;
+					wars[warID].turn = (wars[warID].turn == "Attacker" ? "Defender" : "Attacker")
+					await interaction.followUp(`It's the ${wars[warID].turn}s turn now! Use \`/war use <item>\` to do your play!`)
+				}
+				fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
+				fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
 			}
 		}
 		if (subcommand == 'join') {
-			let warID = interaction.options.get('war-id');
-			let side = interaction.options.get('side');
+			let warID = interaction.options.getString('war-id');
+			let side = interaction.options.getString('side');
 			wars[warID][side][interaction.user.id] = {
 				name: interaction.user.username,
 				hasPlayed: false
@@ -242,7 +262,7 @@ module.exports = {
 						{ name: `Attacker${attackerNameArray.length > 1 ? "s" : ''}`, value: attackerNameArray.join("\n") },
 						{ name: `Defender${defenderNameArray.length > 1 ? "s" : ''}`, value: defenderNameArray.join("\n") },
 						{ name: "Turn", value: wars[i].turn },
-						{ name: "War ID", value: wars[i].id}
+						{ name: "War ID", value: wars[i].id }
 					)
 					.setColor(misc.randomColor())
 					.setTimestamp()
@@ -252,7 +272,7 @@ module.exports = {
 			await paginationEmbed(interaction, embedList, buttonList)
 		}
 		if (subcommand == 'resign') {
-			let warID = interaction.options.get('war-id');
+			let warID = interaction.options.getString('war-id');
 			for (let player in wars[warID].attacker) if (player == interaction.user.id) delete wars[warID].attacker[player]
 			for (let player in wars[warID].defender) if (player == interaction.user.id) delete wars[warID].defender[player]
 			countries[playerCountry[interaction.user.id][0]].wars.splice(countries[playerCountry[interaction.user.id][0]].wars.indexOf(warID), 1)
@@ -260,7 +280,12 @@ module.exports = {
 			fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2));
 			return interaction.editReply(`Successfully left ${wars[warID].name}!`)
 		}
-		if (subcommand == 'confirm') {}
+		if (subcommand == 'confirm') { }
 	},
 };
 
+/*
+TODO: Make it so it checks when a side has won the war
+TODO: Make it so the captain can confirm the turn is over
+TODO: Add in the war object a captain key for each side and the value of the user's id
+*/

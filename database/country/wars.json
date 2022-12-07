@@ -3,18 +3,18 @@
     "name": "83fxz",
     "id": "83fxz",
     "attacker": {
+      "999066347210285056": {
+        "name": "EntropicBot",
+        "hasPlayed": false
+      },
       "708026434660204625": {
         "name": "EntropicBlackhole",
-        "hasPlayed": true
+        "hasPlayed": false
       }
     },
     "defender": {
       "841822347932598303": {
         "name": "C0RENETZ",
-        "hasPlayed": false
-      },
-      "999066347210285056": {
-        "name": "EntropicBot",
         "hasPlayed": false
       }
     },
