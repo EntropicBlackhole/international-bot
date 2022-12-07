@@ -60,6 +60,12 @@ module.exports = {
 			.setName('list')
 			.setDescription('List of current ongoing wars'))
 		.addSubcommand(subcommand => subcommand
+			.setName('confirm')
+			.setDescription('Confirm your side\'s turn being done')
+			.addStringOption(option => option
+				.setName('war-id')
+				.setDescription('War ID whom\'s war\'s side to confirm')))
+		.addSubcommand(subcommand => subcommand
 			.setName('resign')
 			.setDescription('Resign from a war, is a loss to your side, and if your side loses, you will lose items')
 			.addStringOption(option => option
@@ -71,6 +77,8 @@ module.exports = {
 		const countries = JSON.parse(fs.readFileSync('./database/country/country_list.json'))
 		const playerCountry = JSON.parse(fs.readFileSync('./database/country/players_country.json'))
 		const wars = JSON.parse(fs.readFileSync('./database/country/wars.json'))
+		const bank = JSON.parse(fs.readFileSync('./database/economy/bank.json'))
+
 		const subcommand = interaction.options.getSubcommand();
 		if (subcommand == 'declare') {
 			let user = interaction.options.getUser('user');
@@ -89,6 +97,8 @@ module.exports = {
 				.setTimestamp()
 				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
 			let warObject = {
+				captainAttacker: interaction.user.id,
+				captainDefender: user.id,
 				name: randomWarID,
 				id: randomWarID,
 				attacker: {},
@@ -150,7 +160,6 @@ module.exports = {
 
 					//Since no errors have been passed, you can now mark the user's play as true
 					wars[warID][wars[warID].turn.toLowerCase()][interaction.user.id].hasPlayed = true;
-					//TODO: Also make it so it checks if a side has won 
 					//Everything else seems pretty simple
 					countries[playerCountry[interaction.user.id][0]].items[item] -= amount;
 					if (itemUse == 'attack') {
@@ -175,6 +184,73 @@ module.exports = {
 						fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 						fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
 					}
+					//TODO: Also make it so it checks if a side has won
+					//Check either if the captain's health is 0, or if the rest of the team's health is 0, 
+					let captainHealth = countries[playerCountry[wars[warID]["captain" + (wars[warID].turn == "Attacker" ? "Defender" : "Attacker")]]].health
+					if (captainHealth < 1) countries[playerCountry[wars[warID]["captain" + (wars[warID].turn == "Attacker" ? "Defender" : "Attacker")]]].health = 0;
+					let isTeamDead = true;
+					for (player in wars[warID][(wars[warID].turn == "Attacker" ? "Defender" : "Attacker").toLowerCase()]) {
+						if (countries[playerCountry[player]].health < 1) countries[playerCountry[player]].health = 0;
+						else isTeamDead = false;
+					}
+					if (captainHealth < 1 || isTeamDead) {
+						//remove all values from war data
+						const warEndEmbed = new EmbedBuilder()
+							.setTitle('War has finished')
+							.setDescription(`The ${wars[warID].turn} side has won! With the ${(wars[warID].turn == "Attacker" ? "Defender" : "Attacker")} losing.\n\n100% of each item, product and money of each user on the ${(wars[warID].turn == "Attacker" ? "Defender" : "Attacker")} side, will be taken and given equally to the ${wars[warID].turn} side`)
+							.setColor(misc.randomColor())
+							.setTimestamp()
+							.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
+						let takenThings = {
+							items: {},
+							produced: {},
+							money: 0
+						}
+						//Taking things from losing side
+						for (player in wars[warID][(wars[warID].turn == "Attacker" ? "Defender" : "Attacker").toLowerCase()]) {
+							countries[playerCountry[player]].health = 100; //Setting health to 100
+							countries[playerCountry[player]].wars.splice(countries[playerCountry[player]].wars.indexOf(warID), 1) //Removing the war ID from list
+							//Removing the items
+							for (let item in countries[playerCountry[player]].items) {
+								if (!takenThings.items[item]) takenThings.items[item] = 0
+								takenThings.items[item] += countries[playerCountry[player]].items[item]
+								countries[playerCountry[player]].items[item] = 0;
+							}
+							//Removing the products
+							for (let product in countries[playerCountry[player]].produced) {
+								if (!takenThings.produced[product]) takenThings.produced[product] = 0
+								takenThings.produced[product] += countries[playerCountry[player]].produced[product]
+								countries[playerCountry[player]].produced[product] = 0;
+							}
+							//Removing the money
+							takenThings.money += bank[player]
+							bank[player] = 0;
+						}
+						//Adding things to winning side
+						let winningPlayers = wars[warID][wars[warID].turn.toLowerCase()].length;
+						for (player in wars[warID][wars[warID].turn.toLowerCase()]) {
+							countries[playerCountry[player]].health = 1000; //Setting health to 1000
+							countries[playerCountry[player]].wars.splice(countries[playerCountry[player]].wars.indexOf(warID), 1) //Removing the war ID from list
+							//Adding the items
+							for (let item in takenThings.items) {
+								if (!countries[playerCountry[player]].items[item]) countries[playerCountry[player]].items[item] = 0
+								countries[playerCountry[player]].items[item] += Math.ceil(takenThings.items[item] / winningPlayers);
+							}
+							//Adding the products
+							for (let product in takenThings.produced) {
+								if (!countries[playerCountry[player]].produced[product]) countries[playerCountry[player]].produced[product] = 0
+								countries[playerCountry[player]].produced[product] += Math.ceil(takenThings.produced[product] / winningPlayers);
+							}
+							//Adding the money
+							bank[player] += Math.ceil(takenThings.money / winningPlayers)
+						}
+						fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
+						fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
+						return interaction.editReply({ content: 'Welp..', embeds: [warEndEmbed] })
+					}
+					//If either is true, then that side has won the war, 
+					//and each user gets an equal amount of money/items from the other side's 80% of items and money
+					//TODO
 					let haveAllPlayed = true;
 					for (let player in wars[warID][wars[warID].turn.toLowerCase()]) if (wars[warID][wars[warID].turn.toLowerCase()][player].hasPlayed == false) haveAllPlayed = false;
 					if (haveAllPlayed) {
@@ -191,7 +267,6 @@ module.exports = {
 
 				//Since no errors have been passed, you can now mark the user's play as true
 				wars[warID][wars[warID].turn.toLowerCase()][interaction.user.id].hasPlayed = true;
-				//TODO: Also make it so it checks if a side has won 
 				//Everything else seems pretty simple
 				countries[playerCountry[interaction.user.id][0]].items[item] -= amount;
 				if (itemUse == 'attack') {
@@ -216,10 +291,77 @@ module.exports = {
 					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 					fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
 				}
+				//TODO: Also make it so it checks if a side has won
+				//Check either if the captain's health is 0, or if the rest of the team's health is 0, 
+				let captainHealth = countries[playerCountry[wars[warID]["captain" + (wars[warID].turn == "Attacker" ? "Defender" : "Attacker")]]].health
+				if (captainHealth < 1) countries[playerCountry[wars[warID]["captain" + (wars[warID].turn == "Attacker" ? "Defender" : "Attacker")]]].health = 0;
+				let isTeamDead = true;
+				for (player in wars[warID][(wars[warID].turn == "Attacker" ? "Defender" : "Attacker").toLowerCase()]) {
+					if (countries[playerCountry[player]].health < 1) countries[playerCountry[player]].health = 0;
+					else isTeamDead = false;
+				}
+				if (captainHealth < 1 || isTeamDead) {
+					//remove all values from war data
+					const warEndEmbed = new EmbedBuilder()
+						.setTitle('War has finished')
+						.setDescription(`The ${wars[warID].turn} side has won! With the ${(wars[warID].turn == "Attacker" ? "Defender" : "Attacker")} losing.\n\n100% of each item, product and money of each user on the ${(wars[warID].turn == "Attacker" ? "Defender" : "Attacker")} side, will be taken and given equally to the ${wars[warID].turn} side`)
+						.setColor(misc.randomColor())
+						.setTimestamp()
+						.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
+					let takenThings = {
+						items: {},
+						produced: {},
+						money: 0
+					}
+					//Taking things from losing side
+					for (player in wars[warID][(wars[warID].turn == "Attacker" ? "Defender" : "Attacker").toLowerCase()]) {
+						countries[playerCountry[player]].health = 100; //Setting health to 100
+						countries[playerCountry[player]].wars.splice(countries[playerCountry[player]].wars.indexOf(warID), 1) //Removing the war ID from list
+						//Removing the items
+						for (let item in countries[playerCountry[player]].items) {
+							if (!takenThings.items[item]) takenThings.items[item] = 0
+							takenThings.items[item] += countries[playerCountry[player]].items[item]
+							countries[playerCountry[player]].items[item] = 0;
+						}
+						//Removing the products
+						for (let product in countries[playerCountry[player]].produced) {
+							if (!takenThings.produced[product]) takenThings.produced[product] = 0
+							takenThings.produced[product] += countries[playerCountry[player]].produced[product]
+							countries[playerCountry[player]].produced[product] = 0;
+						}
+						//Removing the money
+						takenThings.money += bank[player]
+						bank[player] = 0;
+					}
+					//Adding things to winning side
+					let winningPlayers = wars[warID][wars[warID].turn.toLowerCase()].length;
+					for (player in wars[warID][wars[warID].turn.toLowerCase()]) {
+						countries[playerCountry[player]].health = 1000; //Setting health to 1000
+						countries[playerCountry[player]].wars.splice(countries[playerCountry[player]].wars.indexOf(warID), 1) //Removing the war ID from list
+						//Adding the items
+						for (let item in takenThings.items) {
+							if (!countries[playerCountry[player]].items[item]) countries[playerCountry[player]].items[item] = 0
+							countries[playerCountry[player]].items[item] += Math.ceil(takenThings.items[item] / winningPlayers);
+						}
+						//Adding the products
+						for (let product in takenThings.produced) {
+							if (!countries[playerCountry[player]].produced[product]) countries[playerCountry[player]].produced[product] = 0
+							countries[playerCountry[player]].produced[product] += Math.ceil(takenThings.produced[product] / winningPlayers);
+						}
+						//Adding the money
+						bank[player] += Math.ceil(takenThings.money / winningPlayers)
+					}
+					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
+					fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
+					return interaction.editReply({ content: 'Welp..', embeds: [warEndEmbed] })
+				}
+				//If either is true, then that side has won the war, 
+				//and each user gets an equal amount of money/items from the other side's 80% of items and money
+				//TODO
 				let haveAllPlayed = true;
 				for (let player in wars[warID][wars[warID].turn.toLowerCase()]) if (wars[warID][wars[warID].turn.toLowerCase()][player].hasPlayed == false) haveAllPlayed = false;
 				if (haveAllPlayed) {
-					for (let player in wars[warID][wars[warID].turn.toLowerCase()])	wars[warID][wars[warID].turn.toLowerCase()][player].hasPlayed = false;
+					for (let player in wars[warID][wars[warID].turn.toLowerCase()]) wars[warID][wars[warID].turn.toLowerCase()][player].hasPlayed = false;
 					wars[warID].turn = (wars[warID].turn == "Attacker" ? "Defender" : "Attacker")
 					await interaction.followUp(`It's the ${wars[warID].turn}s turn now! Use \`/war use <item>\` to do your play!`)
 				}
@@ -254,11 +396,19 @@ module.exports = {
 			for (i in wars) {
 				let attackerNameArray = [];
 				let defenderNameArray = [];
-				for (player in wars[i].attacker) attackerNameArray.push(wars[i].attacker[player].name + ": " + playerCountry[player][0])
-				for (player in wars[i].defender) defenderNameArray.push(wars[i].defender[player].name + ": " + playerCountry[player][0])
+				for (player in wars[i].attacker) {
+					attackerNameArray.push(wars[i].attacker[player].name + ": " + playerCountry[player][0])
+					if (player == wars[i].captainAttacker) { var captainAttackerName = wars[i].attacker[player].name }
+				}
+				for (player in wars[i].defender) {
+					defenderNameArray.push(wars[i].defender[player].name + ": " + playerCountry[player][0])
+					if (player == wars[i].captainDefender) { var captainDefenderName = wars[i].defender[player].name }
+				}
 				const warEmbed = new EmbedBuilder()
 					.setTitle(wars[i].name)
 					.setFields(
+						{ name: `Attacker Captain`, value: captainAttackerName },
+						{ name: `Defender Captain`, value: captainDefenderName },
 						{ name: `Attacker${attackerNameArray.length > 1 ? "s" : ''}`, value: attackerNameArray.join("\n") },
 						{ name: `Defender${defenderNameArray.length > 1 ? "s" : ''}`, value: defenderNameArray.join("\n") },
 						{ name: "Turn", value: wars[i].turn },
@@ -280,12 +430,23 @@ module.exports = {
 			fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2));
 			return interaction.editReply(`Successfully left ${wars[warID].name}!`)
 		}
-		if (subcommand == 'confirm') { }
+		if (subcommand == 'confirm') {
+			let warID = interaction.options.getString('war-id');
+			//Check if the user is in this specific war
+			if (!countries[playerCountry[interaction.user.id][0]].wars.includes(warID)) return interaction.editReply(`You aren't in this war`)
+			//Check if it's users turn
+			if (!wars[warID][wars[warID].turn.toLowerCase()][interaction.user.id]) return interaction.editReply(`It's not your side's turn yet`)
+			//Check if the user is the captain of this side's war
+			if (wars[warID]["captain" + wars[warID].turn] != interaction.user.id) return interaction.editReply(`You aren't the captain of this side in this war`)
+			for (let player in wars[warID][wars[warID].turn.toLowerCase()]) wars[warID][wars[warID].turn.toLowerCase()][player].hasPlayed = false;
+			wars[warID].turn = (wars[warID].turn == "Attacker" ? "Defender" : "Attacker")
+			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
+			fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
+			return interaction.followUp(`It's the ${wars[warID].turn}s turn now! Use \`/war use <item>\` to do your play!`)
+		}
 	},
 };
 
 /*
-TODO: Make it so it checks when a side has won the war
-TODO: Make it so the captain can confirm the turn is over
-TODO: Add in the war object a captain key for each side and the value of the user's id
+TODO: Put the side's captain on war list embed
 */
