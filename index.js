@@ -55,6 +55,7 @@ const iconURL = "https://cdn.discordapp.com/attachments/950846461573214279/96568
 const ruleBook = "***0.** This means that, due to us being unable to list every single rule violation possible, moderators have the right to punish a user if they think that they are breaking a non-listed rule. (If you think a member of staff is abusing this power report them in report people channel)\n**1.** English should be our main language spoken in the server\n**2.** Any form of discrimination is completely unacceptable. Homophobic, racist and sexist comments result in an instant ban (unless it is in RP, read RP rule #8)\n**3.** No piracy of any kind\n**4.** Keep your username, profile picture SFW (Safe for Work). Any kind of NSFW content in channels or PFP will be deleted and you will receive a punishment\n**5.** You can only self promote if you are active and have a country. A member of staff will determine this\n**6.** Any malicious activity/intentional harming will result in a ban.\n**7.** Please refrain from arguing with mods and above\n**8.** Don't try to find loopholes in rules, that's what rule #0 is for, you'll still be punished\n**9.** Breaking a rule even as a \"joke\" is not tolerated\n**10.** Avoid discussions on sensitive topics, especially religion or IRL politics, depression, self harm and similar can be vented in #vent\n**11.** Do not get mad at pings, if you do, you can adjust the notifications for the server or un-react from the reaction roles. Avoid random pinging\n**12.** Do not beg for roles, services, promotions, money, etc\n**13.** Use channels as they are meant to be used\n**14.** No DM advertising\n**15.** No intentionally spamming mod logs\n**16.** Don't harshly insult people\n**17.** You will get a permanent ban for copying our server, this is not tolerated whatsoever\n**18.** Avoid making loud noises in the VC channels, please\n**19.** If you find a channel you probably shouldn't be able to talk in, please report it, we'll highly thank this\n**20.** Have fun!*\n\n__Punishment system:__\n-First Warning\n-Second Warning\n-Third Warning/1 hour timeout\n-Fourth Warning/Kick\n-Fifth Warning/Ban"
 const responselist = ["Yeah sure why not?", "Uh okay but im starting to doubt it", "No of course not what the heck?", "No", "i mean i guess", "Press X to doubt", "Maybe?", "honestly perhaps but don't ask me", "yes i completely agree now shut up", "NO NOT FOR A SINGLE SECOND"]
 
+//Completely deprecated, is only staying to fetch code out of
 client.on("messageCreate", message => {
 	return
 	if (message.author.bot) return;
@@ -531,38 +532,24 @@ client.on(Events.InteractionCreate, async interaction => {
 		} catch (error) {
 			// if (error == 'Error: Request failed with status code 400') return interaction.channel.send("Your prompt was considered invalid/offensive, please try again.")
 			console.error(error);
-			try {
-				const row = new ActionRowBuilder()
-					.addComponents(
-						new ButtonBuilder()
-							.setCustomId('show-error')
-							.setLabel('Show error log')
-							.setStyle(ButtonStyle.Danger),
-					);
-				await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true, components: [row] });
-				
-				client.on('interactionCreate', async interaction => {
-					if (!interaction.isButton()) return;
-					if (interaction.customId == 'show-error') {
-						await interaction.channel.send({ content: '```' + error + '```', ephemeral: true });
-					}
-				});
-			} catch (e) {
-				const row = new ActionRowBuilder()
-					.addComponents(
-						new ButtonBuilder()
-							.setCustomId('show-error')
-							.setLabel('Show error log')
-							.setStyle(ButtonStyle.Danger),
-					);
-				await interaction.editReply({ content: 'There was an error while executing this command!', ephemeral: true, components: [row] });
-				client.on('interactionCreate', async interaction => {
-					if (!interaction.isButton()) return;
-					if (interaction.customId == 'show-error') {
-						await interaction.channel.send({ content: '```' + error + '```', ephemeral: true })
-					}
-				});
+			const row = new ActionRowBuilder()
+				.addComponents(
+					new ButtonBuilder()
+						.setCustomId('show-error')
+						.setLabel('Show error log')
+						.setStyle(ButtonStyle.Danger),
+				);
+			if (interaction.deferred == false) {
+				await interaction.deferReply();
 			}
+			await interaction.editReply({ content: 'There was an error while executing this command!', ephemeral: true, components: [row] });
+
+			client.on('interactionCreate', async i => {
+				if (!i.isButton()) return;
+				if (i.customId == 'show-error') {
+					await interaction.followUp({ content: '```' + error + '```', ephemeral: true });
+				}
+			});
 		}
 	}
 	else if (interaction.isAutocomplete()) {

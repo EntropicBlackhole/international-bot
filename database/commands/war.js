@@ -431,7 +431,7 @@ module.exports = {
 			}
 			await paginationEmbed(interaction, embedList, buttonList)
 		}
-		if (subcommand == 'resign') {
+		else if (subcommand == 'resign') {
 			let warID = interaction.options.getString('war-id');
 			for (let player in wars[warID].attacker) if (player == interaction.user.id) delete wars[warID].attacker[player]
 			for (let player in wars[warID].defender) if (player == interaction.user.id) delete wars[warID].defender[player]
@@ -440,7 +440,7 @@ module.exports = {
 			fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2));
 			return interaction.editReply(`Successfully left ${wars[warID].name}!`)
 		}
-		if (subcommand == 'confirm') {
+		else if (subcommand == 'confirm') {
 			let warID = interaction.options.getString('war-id');
 			//Check if the user is in this specific war
 			if (!countries[playerCountry[interaction.user.id][0]].wars.includes(warID)) return interaction.editReply(`You aren't in this war`)

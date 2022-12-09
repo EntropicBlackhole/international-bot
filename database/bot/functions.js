@@ -1,6 +1,52 @@
+const alliance = require("../commands/alliance");
 
-class Country {
-
+class Alliance {
+	create({ name, leader, rules = "" }) {
+		let allianceObject = {
+			// ID: Math.floor((Math.random() * 10000000) + 9000000).toString(36),
+			name: name,
+			leader: leader,
+			rules: rules,
+			members: [],
+			bank: 0,
+			settings: {
+				withdraw_per_interval: 500,
+				interval_of_withdraw: 1000 * 60 * 60 * 1
+			},
+			lastWithdraw: {}
+		}
+		return allianceObject
+	}
+	addMember({ allianceObject, member }) {
+		allianceObject.members.push(member);
+		return allianceObject
+	}
+	depositBank({ allianceObject, amount }) {
+		allianceObject.bank += amount;
+		return allianceObject
+	}
+	withdrawBank({ allianceObject, amount, user }) {
+		if (amount > allianceObject.settings.withdraw_per_interval) return -1
+		if (allianceObject.lastWithdraw[user] + allianceObject.settings.interval_of_withdraw > Date.now()) return 0
+		allianceObject.lastWithdraw[user] = Date.now()
+		allianceObject.bank -= amount;
+		return allianceObject
+	}
+	changeRules({ allianceObject, newRules, user }) {
+		if (user != allianceObject.leader) return 0
+		allianceObject.rules = newRules;
+		return allianceObject
+	}
+	changeSettings({ allianceObject, setting, newValue, user }) {
+		if (setting != 'withdraw_per_interval' || setting != 'interval_of_withdraw') return -1
+		if (user != allianceObject.leader) return 0
+		allianceObject.settings[setting] = newValue
+		return allianceObject
+	}
+	removeMember(allianceObject, member) {
+		allianceObject.members.splice(allianceObject.members.indexOf(member), 1)
+		return allianceObject
+	}
 }
 class Misc {
 	async searchQuery(list, query) {
@@ -35,5 +81,5 @@ class Misc {
 	}
 }
 
-exports.Country = Country
+exports.Alliance = Alliance
 exports.Misc = Misc

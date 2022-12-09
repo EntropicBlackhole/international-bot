@@ -23,6 +23,7 @@ for (i of text.split('\n')) {
 		isTaken: false,
 		code: code,
 		continent: continent,
+		alliances: [],
 		products: {
 			fish: Math.round(Math.random()* 100),
 			oil: Math.round(Math.random() * 100),
@@ -54,4 +55,4 @@ for (i of text.split('\n')) {
 	}
 }
 fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
-// */
+//TODO: Add bank into country object as money
