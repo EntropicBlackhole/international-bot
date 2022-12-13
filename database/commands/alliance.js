@@ -50,14 +50,25 @@ module.exports = {
 				.setRequired(true)))
 		.addSubcommand(subcommand => subcommand
 			.setName('edit-rules')
-			.setDescription('Edit rules!')
+			.setDescription('Edit rules! (Use "\\n" without the quotes to make a new line (Like pressing enter))')
 			.addStringOption(option => option
 				.setName('name')
 				.setDescription('Name of the alliance whom\'s rules to edit!')
 				.setRequired(true))
 			.addStringOption(option => option
 				.setName('new-rules')
-				.setDescription('New rules to set!')
+				.setDescription('New rules to set! (Use "\\n" without the quotes to make a new line (Like pressing enter))')
+				.setRequired(true)))
+		.addSubcommand(subcommand => subcommand
+			.setName('kick')
+			.setDescription('Kicks a member from the alliance!')
+			.addStringOption(option => option
+				.setName('name')
+				.setDescription('Name of your alliance')
+				.setRequired(true))
+			.addUserOption(option => option
+				.setName('user')
+				.setDescription('User to kick from your alliance')
 				.setRequired(true)))
 		.addSubcommandGroup(subcommandGroup => subcommandGroup
 			.setName('settings')
@@ -67,7 +78,8 @@ module.exports = {
 				.setDescription('List of your alliances settings!')
 				.addStringOption(option => option
 					.setName('name')
-					.setDescription('Name of the alliance whom\'s settings to list')))
+					.setDescription('Name of the alliance whom\'s settings to list')
+					.setRequired(true)))
 			.addSubcommand(subcommand => subcommand
 				.setName('change')
 				.setDescription('Change your alliance\'s settings!')
@@ -78,10 +90,14 @@ module.exports = {
 				.addStringOption(option => option
 					.setName('setting')
 					.setDescription('Setting to change')
+					.setChoices(
+						{ name: "Withdraw Per Interval", value: "withdraw_per_interval" },
+						{ name: "Interval Of Withdraw", value: "interval_of_withdraw" }
+					)
 					.setRequired(true))
-				.addStringOption(option => option
+				.addIntegerOption(option => option
 					.setName('new-value')
-					.setDescription('New value of that setting')
+					.setDescription('New value of that setting (Interval is in miliseconds, do your maths)')
 					.setRequired(true))))
 		.addSubcommand(subcommand => subcommand
 			.setName('profile')
@@ -90,6 +106,9 @@ module.exports = {
 				.setName('name')
 				.setDescription('Name of the desired alliance')
 				.setRequired(true)))
+		.addSubcommand(subcommand => subcommand
+			.setName('list')
+			.setDescription('Lists all the alliances!'))
 		.addSubcommand(subcommand => subcommand
 			.setName('leave')
 			.setDescription('Leave an alliance!')
@@ -110,8 +129,10 @@ module.exports = {
 		const subcommandGroup = interaction.options.getSubcommandGroup();
 		const alliances = JSON.parse(fs.readFileSync('./database/country/alliances.json'))
 		const countries = JSON.parse(fs.readFileSync('./database/country/country_list.json'))
-		const playerCountry = JSON.parse(fs.readFileSync('./database/country/players_country.json'))
+		const playersCountry = JSON.parse(fs.readFileSync('./database/country/players_country.json'))
 		const bank = JSON.parse(fs.readFileSync('./database/economy/bank.json'))
+		if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
+		else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
 		if (subcommand == 'create') {
 			let name = interaction.options.getString('name');
 			let newAlliance = alliance.create({
@@ -119,25 +140,29 @@ module.exports = {
 				leader: interaction.user.id
 			})
 			alliances[name] = newAlliance;
-			countries[playerCountry[interaction.user.id][0]].alliances.push(name)
+			countries[playersCountry[interaction.user.id][0]].alliances.push(name)
 			fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
 			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2));
 			return interaction.editReply(`Successfully created ${name}! Check it out with \`/alliance profile\``);
-		}
+		} //Finished
 		if (subcommand == 'join') {
-			let name = interaction.options.getString('name').toLowerCase();
+			let name = interaction.options.getString('name');
+			if ([{}, undefined, null].includes(alliances[name])) return interaction.editReply(`"${name}" does not exist`);
+			if (alliances[name].members.includes(interaction.user.id)) return interaction.editReply(`You are already in this alliance!`)
 			alliances[name] = alliance.addMember({
 				allianceObject: alliances[name],
 				member: interaction.user.id
 			})
-			countries[playerCountry[interaction.user.id][0]].alliances.push(name)
+			countries[playersCountry[interaction.user.id][0]].alliances.push(name)
 			fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
 			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2));
 			return interaction.editReply(`Successfully joined ${name}!`);
-		}
+		} //Finished
 		if (subcommand == 'deposit') {
 			let name = interaction.options.getString('name');
 			let amount = interaction.options.getInteger('amount');
+			if ([{}, undefined, null].includes(alliances[name])) return interaction.editReply(`"${name}" does not exist`);
+			if (bank[interaction.user.id] < amount) return interaction.editReply(`You don't have ${amount} IC in your bank, you only have ${bank[interaction.user.id]}`);
 			alliances[name] = alliance.depositBank({
 				allianceObject: alliances[name],
 				amount: amount
@@ -146,43 +171,63 @@ module.exports = {
 			fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
 			fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2));
 			return interaction.editReply(`Successfully deposited ${amount} to ${name}!`);
-		}
+		} //Finished
 		if (subcommand == 'withdraw') {
 			let name = interaction.options.getString('name');
 			let amount = interaction.options.getInteger('amount');
+			if ([{}, undefined, null].includes(alliances[name])) return interaction.editReply(`"${name}" does not exist`);
 			let check = alliance.withdrawBank({
 				allianceObject: alliances[name],
 				amount: amount,
 				user: interaction.user.id
 			})
 			if (check === -1) return interaction.editReply(`You cannot withdraw this amount, you can only withdraw ${alliances[name].settings.withdraw_per_interval}`)
-			else if (check === 0) return interaction.editReply(`You have already withdrawed, please wait until you can redraw again at ${(alliances[name].lastWithdraw[user] + alliances[name].settings.interval_of_withdraw).toUTCString()}`)
+			else if (check === 0) return interaction.editReply(`The bank does not have ${amount}, it only has ${alliances[name].bank}`) //Format it to say in 2 hours or 30 minutes depending on the current time
+			else if (check === 1) return interaction.editReply(`You have already withdrawed, please wait until you can redraw again in ${misc.msToTime((alliances[name].lastWithdraw[interaction.user.id] + alliances[name].settings.interval_of_withdraw) - Date.now())}`)
 			alliances[name] = check
 			bank[interaction.user.id] += amount;
 			fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
 			fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2));
 			return interaction.editReply(`Successfully withdrawn ${amount} from ${name}!`);
-		}
+		} //Finished
 		if (subcommand == 'edit-rules') {
 			let name = interaction.options.getString('name');
 			let newRules = interaction.options.getString('new-rules');
+			if ([{}, undefined, null].includes(alliances[name])) return interaction.editReply(`"${name}" does not exist`);
 			let check = alliance.changeRules({
 				allianceObject: alliances[name],
 				newRules: newRules,
+				user: interaction.user.id
 			})
 			if (check === 0) return interaction.editReply(`You aren't the leader of this alliance`);
 			alliances[name] = check
 			fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
 			return interaction.editReply(`Successfully updated the rules!`);
-		}
+		} //Finished
+		if (subcommand == 'kick') {
+			let name = interaction.options.getString('name');
+			let user = interaction.options.getUser('user');
+			if ([{}, undefined, null].includes(alliances[name])) return interaction.editReply(`"${name}" does not exist`);
+			if (alliances[name].leader != interaction.user.id) return interaction.editReply(`You aren't the leader of this alliance`);
+			if (!alliances[name].members.includes(user.id)) return interaction.editReply(`This user is not in this alliance`);
+			alliances[name] = alliance.removeMember({
+				allianceObject: alliances[name],
+				member: user.id
+			})
+			countries[playersCountry[user.id][0]].alliances.splice(countries[playersCountry[user.id][0]].alliances.indexOf(name), 1)
+			fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
+			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2));
+			return interaction.editReply(`Successfully kicked ${user}!`);
+		} //Finished
 		if (subcommandGroup == 'settings') {
 			if (subcommand == 'list') {
 				let name = interaction.options.getString('name');
+				if ([{}, undefined, null].includes(alliances[name])) return interaction.editReply(`"${name}" does not exist`);
 				const settingsEmbed = new EmbedBuilder()
 					.setTitle(name)
 					.setFields(
-						{ name: "Withdraw Per Interval", value: alliances[name].settings.withdraw_per_interval },
-						{ name: "Interval Of Withdraw", value: alliances[name].settings.interval_of_withdraw }
+						{ name: "Withdraw Per Interval", value: "\"" + alliances[name].settings.withdraw_per_interval.toString() + "\"" },
+						{ name: "Interval Of Withdraw", value: "\"" + alliances[name].settings.interval_of_withdraw.toString() + "\" (" + misc.msToTime(alliances[name].settings.interval_of_withdraw.toString()) + ")" }
 					)
 					.setColor(misc.randomColor())
 					.setTimestamp()
@@ -192,7 +237,8 @@ module.exports = {
 			if (subcommand == 'change') {
 				let name = interaction.options.getString('name');
 				let setting = interaction.options.getString('setting');
-				let newValue = interaction.options.getString('new-value');
+				let newValue = interaction.options.getInteger('new-value');
+				if ([{}, undefined, null].includes(alliances[name])) return interaction.editReply(`"${name}" does not exist`);
 				let check = alliance.changeSettings({
 					allianceObject: alliances[name],
 					setting: setting,
@@ -205,35 +251,41 @@ module.exports = {
 				fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
 				return interaction.editReply(`Successfully updated the settings!`);
 			}
-		}
+		} //Finished
 		if (subcommand == 'profile') {
 			let name = interaction.options.getString('name');
+			if ([{}, undefined, null].includes(alliances[name])) return interaction.editReply(`"${name}" does not exist`);
 			const profileEmbed = new EmbedBuilder()
 				.setTitle(name)
 				.setFields(
-					{ name: "Leader", value: alliances[name].leader },
-					{ name: "Rules", value: alliances[name].rules },
-					{ name: "Members", value: alliances[name].members.join('\n') },
-					{ name: "Bank", value: alliances[name].bank },
-					{ name: "Withdraw Per Interval", value: alliances[name].settings.withdraw_per_interval, inline: true },
-					{ name: "Interval Of Withdraw", value: alliances[name].settings.interval_of_withdraw, inline: true }
+					{ name: "Leader", value: client.users.cache.find(user => user.id == alliances[name].leader).username },
+					{ name: "Rules", value: (alliances[name].rules ? alliances[name].rules : "None") },
+					{ name: "Members", value: alliances[name].members.map(member => client.users.cache.find(user => user.id == member).username).join('\n') },
+					{ name: "Bank", value: alliances[name].bank.toString() },
+					{ name: "Withdraw Per Interval", value: alliances[name].settings.withdraw_per_interval.toString() + ' IC', inline: true },
+					{ name: "Interval Of Withdraw", value: misc.msToTime(alliances[name].settings.interval_of_withdraw.toString()), inline: true }
 				)
 				.setColor(misc.randomColor())
 				.setTimestamp()
 				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
 			fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
 			return interaction.editReply({ embeds: [profileEmbed] });
-		}
+		} //Finished
 		if (subcommand == 'leave') {
 			let name = interaction.options.getString('name');
-			alliances[name] = alliance.removeMember(interaction.user.id)
-			countries[countryPlayer[interaction.user.id][0]].alliances.splice(countries[countryPlayer[interaction.user.id][0]].alliances.indexOf(name), 1)
+			if ([{}, undefined, null].includes(alliances[name])) return interaction.editReply(`"${name}" does not exist`);
+			alliances[name] = alliance.removeMember({
+				allianceObject: alliances[name],
+				member: interaction.user.id
+			})
+			countries[playersCountry[interaction.user.id][0]].alliances.splice(countries[playersCountry[interaction.user.id][0]].alliances.indexOf(name), 1)
 			fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
 			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2));
 			return interaction.editReply(`Successfully left ${name}!`);
-		}
+		} //Finished
 		if (subcommand == 'delete') {
 			let name = interaction.options.getString('name');
+			if ([{}, undefined, null].includes(alliances[name])) return interaction.editReply(`"${name}" does not exist`);
 			interaction.editReply(`Hold on, are you sure you want to delete this alliance? You'll still get the money from the bank directly to you. (y/n)`)
 			const filter = m => (['y', 'n'].includes(m.content.toLowerCase()) && m.author.id == interaction.user.id)
 			const collector = interaction.channel.createMessageCollector({ filter, max: 1, time: 30000 });
@@ -241,14 +293,16 @@ module.exports = {
 			collector.on('collect', async m => {
 				if (m.content.toLowerCase() == 'n') return interaction.editReply('Alright then')
 				else if (m.content.toLowerCase() == 'y') {
+					bank[interaction.user.id] += alliances[name].bank
+					for (member of alliances[name].members) countries[playersCountry[member][0]].alliances.splice(countries[playersCountry[member][0]].alliances.indexOf(name), 1)
 					delete alliances[name]
-					countries[countryPlayer[interaction.user.id][0]].alliances.splice(countries[countryPlayer[interaction.user.id][0]].alliances.indexOf(name), 1)
 					fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
 					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2));
-					return interaction.editReply(`Successfully deleted ${name}!`);
+					fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2));
+					return interaction.followUp(`Successfully deleted ${name}!`);
 				}
 			})
-		}
+		} //Finished
 		if (subcommand == 'list') {
 			let embedList = [];
 			let buttonList = [
@@ -265,22 +319,20 @@ module.exports = {
 				let profileEmbed = new EmbedBuilder()
 					.setTitle(i)
 					.setFields(
-						{ name: "Leader", value: alliances[i].leader },
-						{ name: "Rules", value: alliances[i].rules },
-						{ name: "Members", value: alliances[i].members.join('\n') },
-						{ name: "Bank", value: alliances[i].bank },
-						{ name: "Withdraw Per Interval", value: alliances[i].settings.withdraw_per_interval, inline: true },
-						{ name: "Interval Of Withdraw", value: alliances[i].settings.interval_of_withdraw, inline: true }
+						{ name: "Leader", value: client.users.cache.find(user => user.id == alliances[i].leader).username },
+						{ name: "Rules", value: (alliances[i].rules ? alliances[i].rules : "None") },
+						{ name: "Members", value: alliances[i].members.map(member => client.users.cache.find(user => user.id == member).username).join('\n') },
+						{ name: "Bank", value: alliances[i].bank.toString() },
+						{ name: "Withdraw Per Interval", value: alliances[i].settings.withdraw_per_interval.toString() + ' IC', inline: true },
+						{ name: "Interval Of Withdraw", value: misc.msToTime(alliances[i].settings.interval_of_withdraw.toString()), inline: true }
 					)
 					.setColor(misc.randomColor())
 					.setTimestamp()
 					.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
-					embedList.push(profileEmbed)
+				embedList.push(profileEmbed)
 			}
 			paginationEmbed(interaction, embedList, buttonList)
 
-		}
+		} //Finished
 	},
 };
-
-

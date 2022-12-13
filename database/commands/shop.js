@@ -48,17 +48,17 @@ module.exports = {
 	async execute(interaction, client) {
 		const bank = JSON.parse(fs.readFileSync('./database/economy/bank.json'))
 		const countries = JSON.parse(fs.readFileSync('./database/country/country_list.json'))
-		const playerCountry = JSON.parse(fs.readFileSync('./database/country/players_country.json'))[interaction.user.id]
-		if (playerCountry) { if (playerCountry.length == 0) return interaction.editReply('You don\'t have a country') }
-		else if (playerCountry == undefined) return interaction.editReply('You don\'t have a country')
+		const playersCountry = JSON.parse(fs.readFileSync('./database/country/players_country.json'))
+		if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
+		else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
 		await interaction.deferReply();
 		const subcommand = interaction.options.getSubcommand();
 		if (subcommand == 'buy') {
 			let item = interaction.options.getString('item');
 			let amt = (interaction.options.getInteger('amt') ? interaction.options.getInteger('amt') : 1)
-			if (!countries[playerCountry].items[item]) countries[playerCountry].items[item] = 0
+			if (!countries[playersCountry[interaction.user.id][0]].items[item]) countries[playersCountry[interaction.user.id][0]].items[item] = 0
 			if ((shop[item].cost * amt) > bank[interaction.user.id]) return interaction.editReply(`You don't have ${(shop[item].cost * amt)} Imperial Credits to buy \`${amt}\` of ${shop[item].name}. You only have ${bank[interaction.user.id]} IC`)
-			countries[playerCountry].items[item] += amt
+			countries[playersCountry[interaction.user.id][0]].items[item] += amt
 			bank[interaction.user.id] -= shop[item].cost * amt
 			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 			fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
@@ -96,8 +96,8 @@ module.exports = {
 		if (subcommand == 'sell') {
 			let item = interaction.options.getString('item');
 			let amt = (interaction.options.getInteger('amt') ? interaction.options.getInteger('amt') : 1)
-			if (!countries[playerCountry].items[item]) return interaction.editReply(`You don't have this item!`)
-			countries[playerCountry].items[item] -= amt
+			if (!countries[playersCountry[interaction.user.id][0]].items[item]) return interaction.editReply(`You don't have this item!`)
+			countries[playersCountry[interaction.user.id][0]].items[item] -= amt
 			bank[interaction.user.id] += Math.round(((shop[item].cost) / 2) * amt)
 			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 			fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))

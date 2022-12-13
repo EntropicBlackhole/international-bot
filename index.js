@@ -1,16 +1,13 @@
-// console.log('Fetching data from 101.50.67.1')
-// console.log('Person is Sunflower Iversen')
-// console.log('Sunflower seems to be gay and be from west virginia')
-// console.log('Suffers from gayness and emoness')
-// console.log('Is 14 years old, goes to Peakwood High (maybe)')
-// console.log('Likes cinnamon rolls, and probably has a cum jar too')
+//DEBUGGING EVERYTHING
 
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, MessageEmbed, Events, GatewayIntentBits, Routes, REST, Collection, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
 const config = require("./database/bot/config.json");
-const express = require('express')
-const server = express()
+const { Misc } = require('./database/bot/functions')
+const misc = new Misc()
+// const express = require('express')
+// const server = express()
 
 const talkedRecently = new Set();
 const client = new Client({
@@ -41,19 +38,16 @@ rest.put(Routes.applicationCommands(config.clientID), { body: commands })
 	.then(data => console.log(`Successfully registered ${data.length} application commands.`))
 	.catch(console.error);
 
-server.all("/", (req, res) => {
-	res.send("Bot is running!")
-})
+// server.all("/", (req, res) => {
+// 	res.send("Bot is running!")
+// })
 
-keepAlive()
+// keepAlive()
 
 client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
+	misc.produceInterval()
 });
-
-const iconURL = "https://cdn.discordapp.com/attachments/950846461573214279/965689742475821086/unknown.png?size=4096"
-const ruleBook = "***0.** This means that, due to us being unable to list every single rule violation possible, moderators have the right to punish a user if they think that they are breaking a non-listed rule. (If you think a member of staff is abusing this power report them in report people channel)\n**1.** English should be our main language spoken in the server\n**2.** Any form of discrimination is completely unacceptable. Homophobic, racist and sexist comments result in an instant ban (unless it is in RP, read RP rule #8)\n**3.** No piracy of any kind\n**4.** Keep your username, profile picture SFW (Safe for Work). Any kind of NSFW content in channels or PFP will be deleted and you will receive a punishment\n**5.** You can only self promote if you are active and have a country. A member of staff will determine this\n**6.** Any malicious activity/intentional harming will result in a ban.\n**7.** Please refrain from arguing with mods and above\n**8.** Don't try to find loopholes in rules, that's what rule #0 is for, you'll still be punished\n**9.** Breaking a rule even as a \"joke\" is not tolerated\n**10.** Avoid discussions on sensitive topics, especially religion or IRL politics, depression, self harm and similar can be vented in #vent\n**11.** Do not get mad at pings, if you do, you can adjust the notifications for the server or un-react from the reaction roles. Avoid random pinging\n**12.** Do not beg for roles, services, promotions, money, etc\n**13.** Use channels as they are meant to be used\n**14.** No DM advertising\n**15.** No intentionally spamming mod logs\n**16.** Don't harshly insult people\n**17.** You will get a permanent ban for copying our server, this is not tolerated whatsoever\n**18.** Avoid making loud noises in the VC channels, please\n**19.** If you find a channel you probably shouldn't be able to talk in, please report it, we'll highly thank this\n**20.** Have fun!*\n\n__Punishment system:__\n-First Warning\n-Second Warning\n-Third Warning/1 hour timeout\n-Fourth Warning/Kick\n-Fifth Warning/Ban"
-const responselist = ["Yeah sure why not?", "Uh okay but im starting to doubt it", "No of course not what the heck?", "No", "i mean i guess", "Press X to doubt", "Maybe?", "honestly perhaps but don't ask me", "yes i completely agree now shut up", "NO NOT FOR A SINGLE SECOND"]
 
 //Completely deprecated, is only staying to fetch code out of
 client.on("messageCreate", message => {
