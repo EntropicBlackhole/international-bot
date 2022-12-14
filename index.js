@@ -1,13 +1,10 @@
-//DEBUGGING EVERYTHING
-
+const { ReactionRole } = require("discordjs-reaction-role");
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, MessageEmbed, Events, GatewayIntentBits, Routes, REST, Collection, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
+const { Client, MessageEmbed, Events, GatewayIntentBits, Partials, Routes, REST, Collection, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
 const config = require("./database/bot/config.json");
 const { Misc } = require('./database/bot/functions')
 const misc = new Misc()
-// const express = require('express')
-// const server = express()
 
 const talkedRecently = new Set();
 const client = new Client({
@@ -18,8 +15,12 @@ const client = new Client({
 		GatewayIntentBits.MessageContent,
 		GatewayIntentBits.DirectMessages,
 		GatewayIntentBits.GuildMessageReactions
-	]
+	],
+	partials: [Partials.Message, Partials.Channel, Partials.Reaction],
 });
+const reactionRoles = JSON.parse(fs.readFileSync('./database/server/reaction-roles.json'))
+const rr = new ReactionRole(client, reactionRoles);
+
 client.login((Buffer.from(config.clientID).toString('base64')).toString() + config.token)
 const commands = [];
 const commandsPath = path.join(__dirname, './database/commands');
@@ -41,7 +42,7 @@ rest.put(Routes.applicationCommands(config.clientID), { body: commands })
 // server.all("/", (req, res) => {
 // 	res.send("Bot is running!")
 // })
-
+// https://discord.com/api/oauth2/authorize?client_id=954760845517258803&permissions=8&scope=bot%20applications.commands
 // keepAlive()
 
 client.once(Events.ClientReady, c => {
@@ -517,12 +518,16 @@ client.on("messageCreate", message => {
 	}
 });
 
+client.on(Events.GuildMemberAdd, async member => {
+	for (let roleToAdd of JSON.parse(fs.readFileSync('./database/server/autoroles.json'))) member.roles.add(member.guild.roles.cache.find(role => role.id == roleToAdd))
+})
+
 client.on(Events.InteractionCreate, async interaction => {
 	if (interaction.isChatInputCommand()) {
 		const command = interaction.client.commands.get(interaction.commandName);
 		if (!command) return;
 		try {
-			await command.execute(interaction, client);
+			await command.execute(interaction, client, rr);
 		} catch (error) {
 			// if (error == 'Error: Request failed with status code 400') return interaction.channel.send("Your prompt was considered invalid/offensive, please try again.")
 			console.error(error);
