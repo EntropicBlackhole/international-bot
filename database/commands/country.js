@@ -204,6 +204,15 @@ module.exports = {
 					tenCountries = "";
 				}
 			}
+			tenCountriesCount = 0;
+			let countryEmbed = new EmbedBuilder()
+				.setTitle('Available countries!')
+				.setDescription(tenCountries.trim())
+				.setColor(misc.randomColor())
+				.setTimestamp()
+				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
+			countryEmbeds.push(countryEmbed)
+			tenCountries = "";
 			let buttonList = [
 				new ButtonBuilder()
 					.setCustomId('back')

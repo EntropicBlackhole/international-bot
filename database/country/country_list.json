@@ -1068,20 +1068,20 @@
       "metal": 91
     },
     "produced": {
-      "fish": 50,
-      "oil": 50,
-      "crops": 50,
-      "copper": 50,
-      "wood": 50,
-      "coal": 50,
-      "gold": 50,
-      "meat": 50,
-      "sugar": 50,
-      "metal": 50
+      "fish": 58,
+      "oil": 118,
+      "crops": 138,
+      "copper": 143,
+      "wood": 98,
+      "coal": 116,
+      "gold": 133,
+      "meat": 122,
+      "sugar": 69,
+      "metal": 141
     },
     "items": {},
     "wars": [],
-    "nextProduce": 1670962186374,
+    "nextProduce": 1671152759623,
     "health": 1000
   },
   "Cape Verde": {

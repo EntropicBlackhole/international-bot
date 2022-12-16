@@ -31,7 +31,10 @@ module.exports = {
 				.addBooleanOption(option => option
 					.setName('remove')
 					.setDescription('Do you want to remove instead of adding this role? True if yes')
-					.setRequired(true)))),
+					.setRequired(true))))
+		.addSubcommand(subcommand => subcommand
+			.setName('kill')
+			.setDescription('Kills the bot!')),
 	async execute(interaction, client, rr) {
 		let guild = client.guilds.cache.get(interaction.guild.id);
 		let member = guild.members.cache.get(interaction.user.id);
@@ -85,6 +88,9 @@ module.exports = {
 				fs.writeFileSync('./database/server/autoroles.json', JSON.stringify(autoroles, null, 2));
 				return interaction.reply(`Successfully put ${role.name} as an autorole!`)
 			}
+		} 
+		else if (subcommand == 'kill') {
+			process.exit(0);
 		}
 	},
 };
