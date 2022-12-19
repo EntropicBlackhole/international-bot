@@ -512,7 +512,7 @@ client.on(Events.MessageCreate, async message => {
 });
 
 client.on(Events.GuildMemberAdd, async member => {
-	for (let roleToAdd of JSON.parse(fs.readFileSync('./database/server/autoroles.json'))) member.roles.add(member.guild.roles.cache.find(role => role.id == roleToAdd))
+	if (member.guild.id == '1046195813212225556') for (let roleToAdd of JSON.parse(fs.readFileSync('./database/server/autoroles.json'))) member.roles.add(member.guild.roles.cache.find(role => role.id == roleToAdd))
 })
 
 client.on(Events.InteractionCreate, async interaction => {
