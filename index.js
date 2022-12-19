@@ -5,7 +5,6 @@ const { Client, MessageEmbed, Events, GatewayIntentBits, Partials, Routes, REST,
 const config = require("./database/bot/config.json");
 const { Misc } = require('./database/bot/functions')
 const misc = new Misc()
-
 const talkedRecently = new Set();
 const client = new Client({
 	intents: [
@@ -21,6 +20,7 @@ const client = new Client({
 const reactionRoles = JSON.parse(fs.readFileSync('./database/server/reaction-roles.json'))
 const rr = new ReactionRole(client, reactionRoles);
 
+
 client.login((Buffer.from(config.clientID).toString('base64')).toString() + config.token)
 const commands = [];
 const commandsPath = path.join(__dirname, './database/commands');
@@ -33,17 +33,10 @@ for (const file of commandFiles) {
 	commands.push(command.data.toJSON());
 	client.commands.set(command.data.name, command);
 }
-// console.log(client.commands)
 const rest = new REST({ version: '10' }).setToken((Buffer.from(config.clientID).toString('base64')).toString() + config.token);
 rest.put(Routes.applicationCommands(config.clientID), { body: commands })
 	.then(data => console.log(`Successfully registered ${data.length} application commands.`))
 	.catch(console.error);
-
-// server.all("/", (req, res) => {
-// 	res.send("Bot is running!")
-// })
-// https://discord.com/api/oauth2/authorize?client_id=954760845517258803&permissions=8&scope=bot%20applications.commands
-// keepAlive()
 
 client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
@@ -51,7 +44,7 @@ client.once(Events.ClientReady, c => {
 });
 
 //Completely deprecated, is only staying to fetch code out of
-client.on("messageCreate", message => {
+client.on(Events.MessageCreate, async message => {
 	return
 	if (message.author.bot) return;
 	if (message.author.id !== "708026434660204625" && message.author.id !== "716390461211803738" && message.author.id !== "592841797697536011" && message.author.id !== "754018561621491762") return;
