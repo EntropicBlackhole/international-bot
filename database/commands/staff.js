@@ -7,7 +7,7 @@ const misc = new Misc();
 module.exports = {
 	name: "Staff",
 	description: "Only for staff, do not touch",
-	usage: "server [reaction-roles, autoroles <role> <remove>]",
+	usage: "server [reaction-roles, autoroles <role> <remove>], warn [create <user> <reason?>, delete <id>, list], kill",
 	data: new SlashCommandBuilder()
 		.setName('staff')
 		.setDescription('Staff Only')
@@ -32,6 +32,29 @@ module.exports = {
 					.setName('remove')
 					.setDescription('Do you want to remove instead of adding this role? True if yes')
 					.setRequired(true))))
+		.addSubcommandGroup(subcommandGroup => subcommandGroup
+			.setName('warn')
+			.setDescription('Uses the pentawarn system to warn users')
+			.addSubcommand(subcommand => subcommand
+				.setName('create')
+				.setDescription('Create a warning')
+				.addUserOption(option => option
+					.setName('user')
+					.setDescription('Who do you want to warn?')
+					.setRequired(true))
+				.addStringOption(option => option
+					.setName('reason')
+					.setDescription('Why do you want to warn this user?')))
+			.addSubcommand(subcommand => subcommand
+				.setName('delete')
+				.setDescription('Delete a warning')
+				.addIntegerOption(option => option
+					.setName('id')
+					.setDescription('ID of the warning')
+					.setRequired(true)))
+			.addSubcommand(subcommand => subcommand
+				.setName('list')
+				.setDescription('Lists all warnings in the server')))
 		.addSubcommand(subcommand => subcommand
 			.setName('kill')
 			.setDescription('Kills the bot!')),
@@ -42,17 +65,17 @@ module.exports = {
 
 		let subcommandGroup = interaction.options.getSubcommandGroup();
 		let subcommand = interaction.options.getSubcommand();
-		
+
 		if (subcommandGroup == 'server') {
 			const autoroles = JSON.parse(fs.readFileSync('./database/server/autoroles.json'))
 			let reactionRoles = JSON.parse(fs.readFileSync('./database/server/reaction-roles.json'))
-			if (subcommand == 'reaction-roles') { 
+			if (subcommand == 'reaction-roles') {
 				await interaction.deferReply();
 				let channel = interaction.options.getChannel('channel-to-post-in')
 				await interaction.editReply('Format your message like this:\n\n@Role|✅\n@Role2|❌\n@Role3|💠\n\nI\'ll give you 3 minutes')
 				const filter = m => m.author.id == interaction.user.id;
 				const collector = interaction.channel.createMessageCollector({ filter, max: 1, time: 180000 });
-				
+
 				collector.on('collect', m => {
 					const rrEmbed = new EmbedBuilder()
 						.setTitle('Get your reaction roles!')
@@ -80,7 +103,7 @@ module.exports = {
 					})
 				});
 			}
-			else if (subcommand == 'autoroles') { 
+			else if (subcommand == 'autoroles') {
 				let role = interaction.options.getRole('role');
 				let remove = interaction.options.getBoolean('remove');
 
@@ -88,7 +111,43 @@ module.exports = {
 				fs.writeFileSync('./database/server/autoroles.json', JSON.stringify(autoroles, null, 2));
 				return interaction.reply(`Successfully put ${role.name} as an autorole!`)
 			}
-		} 
+		}
+		else if (subcommandGroup == 'warn') {
+			const warns = JSON.parse(fs.readFileSync('./database/server/warns.json'));
+			if (subcommand == 'create') {
+				let user = interaction.options.getUser('user');
+				let reason = interaction.options.getString('reason') ? interaction.options.getString('reason') : "No reason specified";
+
+				//Actual code here
+				warns[interaction.user.id] //This is the warning list for each user
+
+				fs.writeFileSync('./database/server/warns.json', JSON.stringify(warns, null, 2));
+			}
+			else if (subcommand == 'delete') {
+				let id = interaction.options.getInteger('id');
+
+				//Actual code here
+				warns[interaction.user.id] //This is the warning list for each user
+
+				fs.writeFileSync('./database/server/warns.json', JSON.stringify(warns, null, 2));
+			}
+			else if (subcommand == 'list') {
+				//List this using an embed, heres the embed template:
+				//By the way, do something like this:
+				//EntropicBlackhole
+				//#1: No reason specified
+				//#2: Doing bad things
+
+				//Basically check warns.json and try to imagine how that would be used
+				const warnEmbed = new EmbedBuilder()
+					.setTitle('')
+					.setFields()
+					.setColor(misc.randomColor())
+					.setTimestamp()
+					.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
+				//interaction.reply({ embeds: [warnEmbed] })
+			}
+		}
 		else if (subcommand == 'kill') {
 			process.exit(0);
 		}
