@@ -60,7 +60,10 @@ module.exports = {
 			.setDescription('Leaves your country, are you sure?'))
 		.addSubcommand(subcommand => subcommand
 			.setName('list')
-			.setDescription('Lists all the countries'))
+			.setDescription('Lists all the countries! (Include the country parameter to see its stats!)')
+			.addStringOption(option => option
+				.setName('country')
+				.setDescription('Country to see stats of (optional)')))
 		.addSubcommand(subcommand => subcommand
 			.setName('profile')
 			.setDescription('Displays your current status, items, etc'))
@@ -182,17 +185,61 @@ module.exports = {
 				}
 				else if (m.content.toLowerCase() == 'n') return interaction.followUp('Alright then')
 			});
-		}
+		} //Finished
 		if (subcommand == 'list') {
-			let countryEmbeds = [];
-			let tenCountriesCount = 0;
-			let tenCountries = "";
-			for (i in countries) {
-				if (!countries[i].isTaken) {
-					tenCountries = tenCountries + `${i}\n`
-					tenCountriesCount++
+			let country = interaction.options.getString('country');
+			if (country) {
+				let stats = countries[country]
+				let products = []
+				let continentProductMult = []
+				let items = []
+				for (i in stats.products) { products.push(`${misc.capitalize(i)}: ${stats.products[i]}`); continentProductMult.push(`${misc.capitalize(i)}: ${continentMultipliers[stats.continent][i].toString()}`); }
+				for (i in stats.items) items.push(`${misc.capitalize(i)}: ${stats.items[i]}`);
+
+				if (products.length == 0) products.push('None')
+				if (items.length == 0) items.push('None')
+				if (stats.wars.length == 0) stats.wars.push('None')
+				if (stats.alliances.length == 0) stats.alliances.push('None')
+
+				let countryEmbed = new EmbedBuilder()
+					.setTitle(country)
+					.setFields(
+						{ name: 'Owner', value: (stats.owner != "" ? client.users.cache.find(user => user.id === stats.owner).username : "None") },
+						{ name: 'ISO Code', value: stats.code, inline: true },
+						{ name: 'Continent', value: stats.continent, inline: true },
+						{ name: 'Product Rate', value: products.join('\n') },
+						{ name: 'Continent Multipliers', value: continentProductMult.join('\n') },
+						{ name: 'Alliances', value: stats.alliances.join('\n'), inline: true },
+						{ name: 'Items', value: items.join('\n'), inline: true },
+						{ name: 'Current wars', value: stats.wars.join('\n'), inline: true },
+						{ name: 'Health', value: stats.health.toString(), inline: true }
+					)
+					.setColor(misc.randomColor())
+					.setTimestamp()
+					.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
+				interaction.editReply({ embeds: [countryEmbed] })
+			} else {
+				let countryEmbeds = [];
+				let tenCountriesCount = 0;
+				let tenCountries = "";
+				for (i in countries) {
+					if (!countries[i].isTaken) {
+						tenCountries = tenCountries + `${i}\n`
+						tenCountriesCount++
+					}
+					if (tenCountriesCount == 10) {
+						tenCountriesCount = 0;
+						let countryEmbed = new EmbedBuilder()
+							.setTitle('Available countries!')
+							.setDescription(tenCountries.trim())
+							.setColor(misc.randomColor())
+							.setTimestamp()
+							.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
+						countryEmbeds.push(countryEmbed)
+						tenCountries = "";
+					}
 				}
-				if (tenCountriesCount == 10) {
+				if (tenCountries) {
 					tenCountriesCount = 0;
 					let countryEmbed = new EmbedBuilder()
 						.setTitle('Available countries!')
@@ -203,72 +250,18 @@ module.exports = {
 					countryEmbeds.push(countryEmbed)
 					tenCountries = "";
 				}
+				let buttonList = [
+					new ButtonBuilder()
+						.setCustomId('back')
+						.setEmoji('◀')
+						.setStyle(ButtonStyle.Primary),
+					new ButtonBuilder()
+						.setCustomId('next')
+						.setEmoji('▶')
+						.setStyle(ButtonStyle.Primary)
+				]
+				await paginationEmbed(interaction, countryEmbeds, buttonList);
 			}
-			if (tenCountries) {
-				tenCountriesCount = 0;
-			let countryEmbed = new EmbedBuilder()
-				.setTitle('Available countries!')
-				.setDescription(tenCountries.trim())
-				.setColor(misc.randomColor())
-				.setTimestamp()
-				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
-			countryEmbeds.push(countryEmbed)
-			tenCountries = "";
-			}
-			let buttonList = [
-				new ButtonBuilder()
-					.setCustomId('back')
-					.setEmoji('◀')
-					.setStyle(ButtonStyle.Primary),
-				new ButtonBuilder()
-					.setCustomId('next')
-					.setEmoji('▶')
-					.setStyle(ButtonStyle.Primary)
-			]
-			await paginationEmbed(interaction, countryEmbeds, buttonList);
-
-			// client.on(Events.InteractionCreate, async i => {
-			// 	if (!i.isButton()) return;
-			// 	if (i.customId == 'back') {
-			// 		currentEmbed--;
-			// 		let row = new ActionRowBuilder()
-			// 			.addComponents(
-			// 				new ButtonBuilder()
-			// 					.setCustomId('back')
-			// 					.setEmoji('◀')
-			// 					.setDisabled(currentEmbed == 0)
-			// 					.setStyle(ButtonStyle.Primary),
-			// 				new ButtonBuilder()
-			// 					.setCustomId('next')
-			// 					.setEmoji('▶')
-			// 					.setDisabled(currentEmbed == countryEmbeds.length - 1)
-			// 					.setStyle(ButtonStyle.Primary),
-			// 			);
-			// 		console.log(currentEmbed)
-			// 		console.log(countryEmbeds)
-			// 		await interaction.editReply({
-			// 			content: "Available countries!", embeds: [countryEmbeds[currentEmbed]], components: [row]
-			// 		})
-			// 	} else if (i.customId == 'next') {
-			// 		currentEmbed++;
-			// 		let row = new ActionRowBuilder()
-			// 			.addComponents(
-			// 				new ButtonBuilder()
-			// 					.setCustomId('back')
-			// 					.setEmoji('◀')
-			// 					.setDisabled(currentEmbed == 0)
-			// 					.setStyle(ButtonStyle.Primary),
-			// 				new ButtonBuilder()
-			// 					.setCustomId('next')
-			// 					.setEmoji('▶')
-			// 					.setDisabled(currentEmbed == countryEmbeds.length - 1)
-			// 					.setStyle(ButtonStyle.Primary),
-			// 			);
-			// 		console.log(currentEmbed)
-			// 		console.log(countryEmbeds.length)
-			// 		await interaction.editReply({ embeds: [countryEmbeds[currentEmbed]], components: [row] })
-			// 	}
-			// });
 		} //Finished
 		if (subcommand == 'map') {
 			return interaction.editReply(`This subcommand is not available yet, check later for more`)
@@ -302,7 +295,7 @@ module.exports = {
 				.setColor(misc.randomColor())
 				.setTimestamp()
 				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
-			return interaction.editReply({ embeds: [profileEmbed]})
+			return interaction.editReply({ embeds: [profileEmbed] })
 		} //Finished
 	},
 };

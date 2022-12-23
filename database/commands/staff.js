@@ -60,7 +60,7 @@ module.exports = {
 			.setDescription('Appeal bans and make ban appeals!')
 			.addSubcommand(subcommand => subcommand
 				.setName('create')
-				.setDescription('Create a new appeal, why were you punished in the first place?')
+				.setDescription('Create a new appeal request, why were you punished in the first place?')
 				.addStringOption(option => option
 					.setName('reason')
 					.setDescription('Reason that you\'re appealing for')
@@ -68,22 +68,22 @@ module.exports = {
 			.addSubcommand(subcommand => subcommand
 				.setName('see')
 				.setDescription('See in full description an appeal')
-				.addOption(option => option
-					.setName('id')
+				.addUserOption(option => option
+					.setName('user')
 					.setDescription('ID of the appeal')
 					.setRequired(true)))
 			.addSubcommand(subcommand => subcommand
 				.setName('accept')
 				.setDescription('Accept an appeal, user will be invited back to the server')
-				.addOption(option => option
-					.setName('id')
+				.addUserOption(option => option
+					.setName('user')
 					.setDescription('ID of the appeal')
 					.setRequired(true)))
 			.addSubcommand(subcommand => subcommand
 				.setName('decline')
 				.setDescription('Decline an appeal, user will be notified')
-				.addOption(option => option
-					.setName('id')
+				.addUserOption(option => option
+					.setName('user')
 					.setDescription('ID of the appeal')
 					.setRequired(true)))
 			.addSubcommand(subcommand => subcommand
@@ -97,7 +97,7 @@ module.exports = {
 		let member = guild.members.cache.get(interaction.user.id);
 		let subcommandGroup = interaction.options.getSubcommandGroup();
 		let subcommand = interaction.options.getSubcommand();
-		if ((!member.roles.cache.has('1046195813229015180')) && (subcommandGroup != 'appeal' && subcommand != 'create')) return interaction.reply({ content: "You can't use this command", ephemeral: true })
+		if ((!member.roles.cache.has('1046195813229015180')) && (subcommandGroup != 'appeal' || subcommand != 'create')) return interaction.reply({ content: "You can't use this command", ephemeral: true })
 
 		if (subcommandGroup == 'server') {
 			const autoroles = JSON.parse(fs.readFileSync('./database/server/autoroles.json'))
@@ -182,20 +182,79 @@ module.exports = {
 			}
 		}
 		else if (subcommandGroup == 'appeal') {
+			const appeals = JSON.parse(fs.readFileSync('./database/server/appeals.json'));
 			if (subcommand == 'create') {
+				// if (appeals[interaction.user.id]) return await interaction.reply('You have already created an appeal request, please wait until it gets reviewed'); //Commented out because what if mods forget
 				let reason = interaction.options.getString('reason');
+				let newAppeal = {
+					reason: reason,
+					time: Date.now()
+				}
+				appeals[interaction.user.id] = newAppeal;
+				fs.writeFileSync('./database/server/appeals.json', JSON.stringify(appeals, null, 2));
+				let appealEmbedToUser = new EmbedBuilder()
+					.setTitle('Appeal created')
+					.setDescription(`Your appeal has been created and sent to the moderators!`)
+					.addFields({ name: interaction.user.username, value: '```' + reason + '```' })
+					.setColor(misc.randomColor())
+					.setTimestamp()
+					.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
+				await interaction.reply({ embeds: [appealEmbedToUser] })
+				let appealEmbedToMods = new EmbedBuilder()
+					.setTitle(`${interaction.user.username} has created an appeal request`)
+					.addFields({ name: interaction.user.username, value: '```' + reason + '```' })
+					.setColor(misc.randomColor())
+					.setTimestamp()
+					.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
+				return client.channels.cache.get("1055682859777663026").send({ embeds: [appealEmbedToMods] });
+
 			}
 			if (subcommand == 'see') {
-				let id = interaction.options.getInteger('id');
+				let user = interaction.options.getUser('user');
+				let appealEmbed = new EmbedBuilder()
+					.setTitle(user.username)
+					.setDescription(appeals[user.id].reason)
+					.setColor(misc.randomColor())
+					.setTimestamp(appeals[user.id].time)
+					.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
+				return interaction.reply({ embeds: [appealEmbed] })
 			}
 			if (subcommand == 'accept') {
-				let id = interaction.options.getInteger('id');
+				let user = interaction.options.getUser('user');
+				delete appeals[user.id]
+				fs.writeFileSync('./database/server/appeals.json', JSON.stringify(appeals, null, 2));
+				try {
+					interaction.guild.members.unban(user);
+				} catch (e) {
+					console.log(user)
+					console.log(e)
+				}
+				let appealEmbed = new EmbedBuilder()
+					.setTitle(user.username)
+					.setDescription('Your appeal request has been accepted! Feel free to come back! https://discord.gg/WJGrVQkHcu')
+					.setColor(misc.randomColor())
+					.setTimestamp()
+					.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
+				await client.users.send(user.id, { embeds: [appealEmbed] });
+				return interaction.reply('Notified user that their request was accepted!')
 			}
 			if (subcommand == 'decline') {
-				let id = interaction.options.getInteger('id');
+				let user = interaction.options.getUser('user');
+				delete appeals[user.id]
+				fs.writeFileSync('./database/server/appeals.json', JSON.stringify(appeals, null, 2));
+				await client.users.send(user.id, "We're really sorry, your request appeal was declined, feel free to try again soon");
+				return interaction.reply('Notified user that their request was declined!')
 			}
 			if (subcommand == 'list') {
-
+				let appealList = [];
+				for (i in appeals) appealList.push({ name: client.users.cache.find(user => user.id == i).username, value: '```' + appeals[i].reason + '```' })
+				let appealEmbed = new EmbedBuilder()
+					.setTitle('Appeal List')
+					.setFields(...appealList)
+					.setColor(misc.randomColor())
+					.setTimestamp()
+					.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
+				interaction.reply({ embeds: [appealEmbed] })
 			}
 		}
 		else if (subcommand == 'kill') {
