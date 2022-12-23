@@ -7,7 +7,7 @@ const misc = new Misc();
 module.exports = {
 	name: "Staff",
 	description: "Only for staff, do not touch",
-	usage: "server [reaction-roles, autoroles <role> <remove>], warn [create <user> <reason?>, delete <id>, list], kill",
+	usage: "server [reaction-roles, autoroles <role> <remove>], warn [create <user> <reason?>, delete <id>, list], appeal [create, list], kill",
 	data: new SlashCommandBuilder()
 		.setName('staff')
 		.setDescription('Staff Only')
@@ -55,16 +55,49 @@ module.exports = {
 			.addSubcommand(subcommand => subcommand
 				.setName('list')
 				.setDescription('Lists all warnings in the server')))
+		.addSubcommandGroup(subcommandGroup => subcommandGroup
+			.setName('appeal')
+			.setDescription('Appeal bans and make ban appeals!')
+			.addSubcommand(subcommand => subcommand
+				.setName('create')
+				.setDescription('Create a new appeal, why were you punished in the first place?')
+				.addStringOption(option => option
+					.setName('reason')
+					.setDescription('Reason that you\'re appealing for')
+					.setRequired(true)))
+			.addSubcommand(subcommand => subcommand
+				.setName('see')
+				.setDescription('See in full description an appeal')
+				.addOption(option => option
+					.setName('id')
+					.setDescription('ID of the appeal')
+					.setRequired(true)))
+			.addSubcommand(subcommand => subcommand
+				.setName('accept')
+				.setDescription('Accept an appeal, user will be invited back to the server')
+				.addOption(option => option
+					.setName('id')
+					.setDescription('ID of the appeal')
+					.setRequired(true)))
+			.addSubcommand(subcommand => subcommand
+				.setName('decline')
+				.setDescription('Decline an appeal, user will be notified')
+				.addOption(option => option
+					.setName('id')
+					.setDescription('ID of the appeal')
+					.setRequired(true)))
+			.addSubcommand(subcommand => subcommand
+				.setName('list')
+				.setDescription('Lists all of the appeals currently open')))
 		.addSubcommand(subcommand => subcommand
 			.setName('kill')
 			.setDescription('Kills the bot!')),
 	async execute(interaction, client, rr) {
 		let guild = client.guilds.cache.get(interaction.guild.id);
 		let member = guild.members.cache.get(interaction.user.id);
-		if (!member.roles.cache.has('1046195813229015180')) return interaction.reply({ content: "You can't use this command", ephemeral: true })
-
 		let subcommandGroup = interaction.options.getSubcommandGroup();
 		let subcommand = interaction.options.getSubcommand();
+		if ((!member.roles.cache.has('1046195813229015180')) && (subcommandGroup != 'appeal' && subcommand != 'create')) return interaction.reply({ content: "You can't use this command", ephemeral: true })
 
 		if (subcommandGroup == 'server') {
 			const autoroles = JSON.parse(fs.readFileSync('./database/server/autoroles.json'))
@@ -146,6 +179,23 @@ module.exports = {
 					.setTimestamp()
 					.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
 				//interaction.reply({ embeds: [warnEmbed] })
+			}
+		}
+		else if (subcommandGroup == 'appeal') {
+			if (subcommand == 'create') {
+				let reason = interaction.options.getString('reason');
+			}
+			if (subcommand == 'see') {
+				let id = interaction.options.getInteger('id');
+			}
+			if (subcommand == 'accept') {
+				let id = interaction.options.getInteger('id');
+			}
+			if (subcommand == 'decline') {
+				let id = interaction.options.getInteger('id');
+			}
+			if (subcommand == 'list') {
+
 			}
 		}
 		else if (subcommand == 'kill') {
