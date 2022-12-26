@@ -1,13 +1,10 @@
 {
-  "name": "international-bot-3.1",
-  "version": "1.0.0",
-  "description": "",
+  "name": "international-bot-5.0",
+  "version": "5.0.0",
+  "description": "A nation roleplay bot!",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [],
-  "author": "",
+  "author": "EntropicBlackhole",
   "license": "ISC",
   "dependencies": {
     "@discordjs/builders": "^0.12.0",

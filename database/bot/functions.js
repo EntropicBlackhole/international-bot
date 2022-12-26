@@ -22,10 +22,12 @@ class Alliance {
 		return allianceObject
 	}
 	depositBank({ allianceObject, amount }) {
+		if (Math.sign(amount) == -1) return -2
 		allianceObject.bank += amount;
 		return allianceObject
 	}
 	withdrawBank({ allianceObject, amount, user }) {
+		if (Math.sign(amount) == -1) return -2
 		if (amount > allianceObject.settings.withdraw_per_interval) return -1
 		if (amount > allianceObject.bank) return 0
 		if (allianceObject.lastWithdraw[user] + allianceObject.settings.interval_of_withdraw > Date.now()) return 1
@@ -39,6 +41,7 @@ class Alliance {
 		return allianceObject
 	}
 	changeSettings({ allianceObject, setting, newValue, user }) {
+		if (Math.sign(newValue) == -1) return -2
 		if (setting != 'withdraw_per_interval' && setting != 'interval_of_withdraw') return -1
 		if (user != allianceObject.leader) return 0
 		allianceObject.settings[setting] = newValue
@@ -127,6 +130,20 @@ class Misc {
 			return null
 		}
 		return d;
+	}
+	sortObject(obj) {
+		for (i in obj) if (Number.isInteger(i)) return obj; //Cannot sort if this has numbers
+		var newObj = {};
+		var array = Object.keys(obj).map(function (key) {
+			return [key, obj[key]];
+		}).sort(function (a, b) {
+			return a[1] - b[1];
+		}).map(function (item) {
+			return item[0];
+		}).reverse();
+		for (i of array)
+			newObj[i] = obj[i]
+		return newObj
 	}
 }
 

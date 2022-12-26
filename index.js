@@ -1,7 +1,7 @@
 const { ReactionRole } = require("discordjs-reaction-role");
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, MessageEmbed, Events, GatewayIntentBits, Partials, Routes, REST, Collection, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
+const { Client, EmbedBuilder, Events, GatewayIntentBits, Partials, Routes, REST, Collection, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
 const config = require("./database/bot/config.json");
 const { Misc } = require('./database/bot/functions')
 const misc = new Misc()
@@ -513,6 +513,13 @@ client.on(Events.MessageCreate, async message => {
 
 client.on(Events.GuildMemberAdd, async member => {
 	if (member.guild.id == '1046195813212225556') for (let roleToAdd of JSON.parse(fs.readFileSync('./database/server/autoroles.json'))) member.roles.add(member.guild.roles.cache.find(role => role.id == roleToAdd))
+	const welcomeEmbed = new EmbedBuilder()
+		.setTitle('Welcome to International Headquarters!')
+		.setDescription('Hello there! Welcome to IHQ! Check out these channels!\n\n<#1046195813925265484> Read the rules!\n<#1046195813925265486> Follow updates!\n<#1046195814114000926> Read all about our lore!\n<#1046195813925265487> What does each role do?\n<#1046195814114000928> Talk talk!\n<#1046195814114000933> Follow qotd!\n<#1046195814285979676> Roleplay with us!!\n<#1046195814466330640> Get your roles!!\n<#1046195814466330637> Get perks with boosting!!')
+		.setColor(misc.randomColor())
+		.setTimestamp()
+		.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
+	client.channels.cache.get("1046195813925265483").send({ embeds: [welcomeEmbed] });
 })
 
 client.on(Events.InteractionCreate, async interaction => {

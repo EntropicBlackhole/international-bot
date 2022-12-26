@@ -928,20 +928,20 @@
       "metal": 67
     },
     "produced": {
-      "fish": 50,
-      "oil": 50,
-      "crops": 50,
-      "copper": 50,
-      "wood": 50,
-      "coal": 50,
-      "gold": 50,
-      "meat": 50,
-      "sugar": 50,
-      "metal": 50
+      "fish": 51,
+      "oil": 83,
+      "crops": 100,
+      "copper": 115,
+      "wood": 144,
+      "coal": 125,
+      "gold": 123,
+      "meat": 96,
+      "sugar": 128,
+      "metal": 117
     },
     "items": {},
     "wars": [],
-    "nextProduce": 1670962186374,
+    "nextProduce": 1672039329332,
     "health": 1000
   },
   "Burundi": {
@@ -2118,20 +2118,20 @@
       "metal": 26
     },
     "produced": {
-      "fish": 50,
-      "oil": 50,
-      "crops": 50,
-      "copper": 50,
-      "wood": 50,
-      "coal": 50,
-      "gold": 50,
-      "meat": 50,
-      "sugar": 50,
-      "metal": 50
+      "fish": 86,
+      "oil": 126,
+      "crops": 118,
+      "copper": 133,
+      "wood": 88,
+      "coal": 82,
+      "gold": 140,
+      "meat": 90,
+      "sugar": 142,
+      "metal": 76
     },
     "items": {},
     "wars": [],
-    "nextProduce": 1670962186374,
+    "nextProduce": 1672031109045,
     "health": 1000
   },
   "France": {
@@ -2310,11 +2310,14 @@
     "health": 1000
   },
   "Germany": {
-    "owner": "",
-    "isTaken": false,
+    "owner": "532376544128008194",
+    "isTaken": true,
     "code": "DE",
     "continent": "Europe",
-    "alliances": [],
+    "alliances": [
+      "bussy saka",
+      "bussy saka v2"
+    ],
     "products": {
       "fish": 50,
       "oil": 16,
@@ -2329,20 +2332,24 @@
     },
     "produced": {
       "fish": 50,
-      "oil": 50,
-      "crops": 50,
-      "copper": 50,
-      "wood": 50,
-      "coal": 50,
-      "gold": 50,
-      "meat": 50,
-      "sugar": 50,
-      "metal": 50
+      "oil": 16,
+      "crops": 2,
+      "copper": 1,
+      "wood": 87,
+      "coal": 9,
+      "gold": 0,
+      "meat": 22,
+      "sugar": 16,
+      "metal": 98
     },
-    "items": {},
-    "wars": [],
-    "nextProduce": 1670962186374,
-    "health": 1000
+    "items": {
+      "ground_unit": 0
+    },
+    "wars": [
+      "6ecqj"
+    ],
+    "nextProduce": 1672039149220,
+    "health": 800
   },
   "Ghana": {
     "owner": "",
@@ -4130,8 +4137,8 @@
     "health": 1000
   },
   "Mexico": {
-    "owner": "",
-    "isTaken": false,
+    "owner": "719674119309754430",
+    "isTaken": true,
     "code": "MX",
     "continent": "North America",
     "alliances": [],
@@ -4148,21 +4155,25 @@
       "metal": 77
     },
     "produced": {
-      "fish": 50,
-      "oil": 50,
-      "crops": 50,
-      "copper": 50,
-      "wood": 50,
-      "coal": 50,
-      "gold": 50,
-      "meat": 50,
-      "sugar": 50,
-      "metal": 50
+      "fish": 0,
+      "oil": 0,
+      "crops": 0,
+      "copper": 0,
+      "wood": 0,
+      "coal": 0,
+      "gold": 0,
+      "meat": 0,
+      "sugar": 0,
+      "metal": 0
     },
-    "items": {},
-    "wars": [],
-    "nextProduce": 1670962186374,
-    "health": 1000
+    "items": {
+      "ground_unit": 0
+    },
+    "wars": [
+      "6ecqj"
+    ],
+    "nextProduce": 1672039469426,
+    "health": 900
   },
   "Micronesia": {
     "owner": "",
@@ -4813,20 +4824,20 @@
       "metal": 12
     },
     "produced": {
-      "fish": 50,
-      "oil": 50,
-      "crops": 50,
-      "copper": 50,
-      "wood": 50,
-      "coal": 50,
-      "gold": 50,
-      "meat": 50,
-      "sugar": 50,
-      "metal": 50
+      "fish": 150,
+      "oil": 113,
+      "crops": 126,
+      "copper": 69,
+      "wood": 83,
+      "coal": 104,
+      "gold": 132,
+      "meat": 99,
+      "sugar": 123,
+      "metal": 62
     },
     "items": {},
     "wars": [],
-    "nextProduce": 1670962186374,
+    "nextProduce": 1672039439407,
     "health": 1000
   },
   "Norway": {

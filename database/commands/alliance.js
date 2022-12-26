@@ -163,10 +163,12 @@ module.exports = {
 			let amount = interaction.options.getInteger('amount');
 			if ([{}, undefined, null].includes(alliances[name])) return interaction.editReply(`"${name}" does not exist`);
 			if (bank[interaction.user.id] < amount) return interaction.editReply(`You don't have ${amount} IC in your bank, you only have ${bank[interaction.user.id]}`);
-			alliances[name] = alliance.depositBank({
+			let check = alliance.depositBank({
 				allianceObject: alliances[name],
 				amount: amount
 			})
+			if (check === -2) return interaction.editReply(`The amount cannot be negative!`);
+			alliances[name] = check;
 			bank[interaction.user.id] -= amount;
 			fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
 			fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2));
@@ -181,9 +183,10 @@ module.exports = {
 				amount: amount,
 				user: interaction.user.id
 			})
+			if (check === -2) return interaction.editReply(`The amount cannot be negative!`);
 			if (check === -1) return interaction.editReply(`You cannot withdraw this amount, you can only withdraw ${alliances[name].settings.withdraw_per_interval}`)
 			else if (check === 0) return interaction.editReply(`The bank does not have ${amount}, it only has ${alliances[name].bank}`) //Format it to say in 2 hours or 30 minutes depending on the current time
-			else if (check === 1) return interaction.editReply(`You have already withdrawed, please wait until you can redraw again in ${misc.msToTime((alliances[name].lastWithdraw[interaction.user.id] + alliances[name].settings.interval_of_withdraw) - Date.now())}`)
+			else if (check === 1) return interaction.editReply(`You have already withdrawed, please wait until you can withdraw again in ${misc.msToTime((alliances[name].lastWithdraw[interaction.user.id] + alliances[name].settings.interval_of_withdraw) - Date.now())}`)
 			alliances[name] = check
 			bank[interaction.user.id] += amount;
 			fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
@@ -245,7 +248,8 @@ module.exports = {
 					newValue: newValue,
 					user: interaction.user.id
 				})
-				if (check == -1) return interaction.editReply(`Please choose a valid setting to change`);
+				if (check == -2) return interaction.editReply('The new value cannot be negative')
+				else if (check == -1) return interaction.editReply(`Please choose a valid setting to change`);
 				else if (check == 0) return interaction.editReply(`You aren't the leader of this alliance`)
 				alliances[name] = check;
 				fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
