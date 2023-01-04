@@ -1,0 +1,200 @@
+Afghanistan|Asia|AF
+Albania|Europe|AL
+Algeria|Africa|DZ
+Andorra|Europe|AD
+Angola|Africa|AO
+Argentina|South America|AR
+Armenia|Asia|AM
+Australia|Oceania|AU
+Austria|Europe|AT
+Azerbaijan|Asia|AZ
+Bahamas|North America|BS
+Bahrain|Asia|BH
+Bangladesh|Asia|BD
+Barbados|North America|BB
+Belarus|Europe|BY
+Belgium|Europe|BE
+Belize|North America|BZ
+Benin|Africa|BJ
+Bermuda|North America|BM
+Bhutan|Asia|BT
+Bolivia|South America|BO
+Bosnia And Herzegovina|Europe|BA
+Botswana|Africa|BW
+Brazil|South America|BR
+Brunei|Asia|BN
+Bulgaria|Europe|BG
+Burkina Faso|Africa|BF
+Burundi|Africa|BI
+Cambodia|Asia|KH
+Cameroon|Africa|CM
+Canada|North America|CA
+Cape Verde|Africa|CV
+Central African Republic|Africa|CF
+Chad|Africa|TD
+Chile|South America|CL
+China|Asia|CN
+Christmas Island|Oceania|CX
+Colombia|South America|CO
+Comoros|Africa|KM
+Congo|Africa|CG
+Democratic Republic of Congo|Africa|CD
+Costa Rica|North America|CR
+Croatia|Europe|HR
+Cuba|North America|CU
+Cyprus|Europe|CY
+Czech Republic|Europe|CZ
+Denmark|Europe|DK
+Djibouti|Africa|DJ
+Dominica|North America|DO
+Dominican Republic|North America|DO
+Ecuador|South America|EC
+Egypt|Africa|EG
+El Salvador|North America|SV
+Equatorial Guinea|Africa|GQ
+Eritrea|Africa|ER
+Estonia|Europe|EE
+Eswatini|Africa|SZ
+Ethiopia|Africa|ET
+Faroe Islands|Europe|FO
+Fiji|Oceania|FJ
+Finland|Europe|FI
+France|Europe|FR
+French Guiana|South America|GF
+Gabon|Africa|GA
+Gambia|Africa|GM
+Georgia|Asia|GE
+Germany|Europe|DE
+Ghana|Africa|GH
+Gibraltar|Europe|GI
+Greece|Europe|GR
+Greenland|North America|GL
+Grenada|North America|GD
+Guadeloupe|North America|GP
+Guam|Oceania|GU
+Guatemala|North America|GT
+Guinea|Africa|GN
+Guinea-Bissau|Africa|GW
+Guyana|South America|GY
+Haiti|North America|HT
+Honduras|North America|HN
+Hong Kong|Asia|HK
+Hungary|Europe|HU
+Iceland|Europe|IS
+India|Asia|IN
+Indonesia|Asia|ID
+Iran|Asia|IR
+Iraq|Asia|IQ
+Ireland|Europe|IE
+Israel|Asia|IL
+Italy|Europe|IT
+Ivory Coast|Africa|CI
+Jamaica|North America|JM
+Japan|Asia|JP
+Jersey|Europe|JE
+Jordan|Asia|JO
+Kazakhstan|Asia|KZ
+Kenya|Africa|KE
+Kiribati|Oceania|KI
+Kuwait|Asia|KW
+Kyrgyzstan|Asia|KG
+Latvia|Europe|LV
+Lebanon|Asia|LB
+Lesotho|Africa|LS
+Liberia|Africa|LR
+Libya|Africa|LY
+Liechtenstein|Europe|LI
+Lithuania|Europe|LT
+Luxembourg|Europe|LU
+Macedonia|Europe|MK
+Madagascar|Africa|MG
+Malawi|Africa|MW
+Malaysia|Asia|MY
+Maldives|Asia|MV
+Mali|Africa|ML
+Malta|Europe|MT
+Marshall Islands|Oceania|MH
+Martinique|North America|MQ
+Mauritania|Africa|MR
+Mexico|North America|MX
+Micronesia|Oceania|FM
+Moldova|Europe|MD
+Monaco|Europe|MC
+Mongolia|Asia|MN
+Montenegro|Europe|ME
+Montserrat|North America|MS
+Morocco|Africa|MA
+Mozambique|Africa|MZ
+Myanmar|Asia|MM
+Namibia|Africa|NA
+Nauru|Oceania|NR
+Nepal|Asia|NP
+Netherlands|Europe|NL
+New Caledonia|Oceania|NC
+New Zealand|Oceania|NZ
+Nicaragua|North America|NI
+Niger|Africa|NE
+Nigeria|Africa|NG
+North Korea|Asia|KP
+Norway|Europe|NO
+Oman|Asia|OM
+Pakistan|Asia|PK
+Palau|Oceania|PW
+Panama|North America|PA
+Papua New Guinea|Oceania|PG
+Paraguay|South America|PY
+Peru|South America|PE
+Philippines|Asia|PH
+Poland|Europe|PL
+Portugal|Europe|PT
+Qatar|Asia|QA
+Reunion|Africa|RE
+Romania|Europe|RO
+Russia|Europe|RU
+Rwanda|Africa|RW
+Samoa|Oceania|WS
+San Marino|Europe|SM
+Saudi Arabia|Asia|SA
+Senegal|Africa|SN
+Serbia|Europe|RS
+Seychelles|Africa|SC
+Sierra Leone|Africa|SL
+Singapore|Asia|SG
+Slovakia|Europe|SK
+Somalia|Africa|SO
+South Africa|Africa|ZA
+South Korea|Asia|KR
+Spain|Europe|ES
+Sri Lanka|Asia|LK
+Sudan|Africa|SD
+Suriname|South America|SR
+Sweden|Europe|SE
+Switzerland|Europe|CH
+Syria|Asia|SY
+Taiwan|Asia|TW
+Tajikistan|Asia|TJ
+Tanzania|Africa|TZ
+Thailand|Asia|TH
+Timor-Leste|Asia|TL
+Togo|Africa|TG
+Tokelau|Oceania|TK
+Tonga|Oceania|TO
+Tunisia|Africa|TN
+Turkey|Asia|TR
+Turkmenistan|Asia|TM
+Tuvalu|Oceania|TV
+Uganda|Africa|UG
+Ukraine|Europe|UA
+United Arab Emirates|Asia|AE
+United Kingdom|Europe|GB
+United States|North America|US
+Uruguay|South America|UY
+Uzbekistan|Asia|UZ
+Vanuatu|Oceania|VU
+Vatican City|Europe|VA
+Venezuela|South America|VE
+Vietnam|Asia|VN
+Western Sahara|Africa|EH
+Yemen|Asia|YE
+Zambia|Africa|ZM
+Zimbabwe|Africa|ZW

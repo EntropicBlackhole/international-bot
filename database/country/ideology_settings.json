@@ -1,0 +1,22 @@
+{
+	"fascism": {
+		"multiplier": -0.1,
+		"discount": 0.1,
+		"land_gotten_after_war": [0.5, 0.6]
+	},
+	"democracy": {
+		"multiplier": 0.07,
+		"discount": 0.08,
+		"approval_of_war": -1
+	},
+	"monarchy": {
+		"multiplier": 0.15,
+		"discount": 0.05,
+		"approval_of_war": 1
+	},
+	"anarchism": {
+		"multiplier": -1,
+		"discount": -1,
+		"approval_of_war": -1
+	}
+}

@@ -1,0 +1,21 @@
+{
+  "6ecqj": {
+    "captainAttacker": "719674119309754430",
+    "captainDefender": "532376544128008194",
+    "name": "6ecqj",
+    "id": "6ecqj",
+    "attacker": {
+      "719674119309754430": {
+        "name": "Insert_txt_Here09",
+        "hasPlayed": false
+      }
+    },
+    "defender": {
+      "532376544128008194": {
+        "name": "Moosey98",
+        "hasPlayed": false
+      }
+    },
+    "turn": "Attacker"
+  }
+}
