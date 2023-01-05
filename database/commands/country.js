@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const paginationEmbed = require('discordjs-button-pagination');
 const { Misc } = require('../bot/functions');
 const fs = require('fs');
 const countries = require('../country/country_list.json')
@@ -274,7 +273,7 @@ module.exports = {
 						.setEmoji('▶')
 						.setStyle(ButtonStyle.Primary)
 				]
-				await paginationEmbed(interaction, countryEmbeds, buttonList);
+				await misc.paginationEmbed(interaction, countryEmbeds, buttonList);
 			}
 		} //Finished
 		if (subcommand == 'map') {

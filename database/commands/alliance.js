@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const paginationEmbed = require('discordjs-button-pagination');
 const { Misc, Alliance } = require('../bot/functions');
 const misc = new Misc();
 const alliance = new Alliance();
@@ -335,7 +334,7 @@ module.exports = {
 					.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
 				embedList.push(profileEmbed)
 			}
-			paginationEmbed(interaction, embedList, buttonList)
+			misc.paginationEmbed(interaction, embedList, buttonList)
 
 		} //Finished
 	},

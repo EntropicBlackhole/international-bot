@@ -1050,8 +1050,8 @@
     "health": 1000
   },
   "Canada": {
-    "owner": "",
-    "isTaken": false,
+    "owner": "708026434660204625",
+    "isTaken": true,
     "code": "CA",
     "continent": "North America",
     "alliances": [],
@@ -1068,20 +1068,23 @@
       "metal": 91
     },
     "produced": {
-      "fish": 58,
-      "oil": 118,
-      "crops": 138,
-      "copper": 143,
-      "wood": 98,
-      "coal": 116,
-      "gold": 133,
-      "meat": 122,
-      "sugar": 69,
-      "metal": 141
+      "fish": 8,
+      "oil": 68,
+      "crops": 88,
+      "copper": 93,
+      "wood": 48,
+      "coal": 66,
+      "gold": 83,
+      "meat": 72,
+      "sugar": 19,
+      "metal": 91
     },
-    "items": {},
+    "items": {
+      "hypernuke": 2,
+      "navy_unit": 9
+    },
     "wars": [],
-    "nextProduce": 1671152759623,
+    "nextProduce": 1672881515399,
     "health": 1000
   },
   "Cape Verde": {
@@ -2331,16 +2334,16 @@
       "metal": 98
     },
     "produced": {
-      "fish": 50,
-      "oil": 16,
-      "crops": 2,
-      "copper": 1,
-      "wood": 87,
-      "coal": 9,
+      "fish": 200,
+      "oil": 64,
+      "crops": 8,
+      "copper": 4,
+      "wood": 348,
+      "coal": 36,
       "gold": 0,
-      "meat": 22,
-      "sugar": 16,
-      "metal": 98
+      "meat": 88,
+      "sugar": 64,
+      "metal": 392
     },
     "items": {
       "ground_unit": 0
@@ -2348,7 +2351,7 @@
     "wars": [
       "6ecqj"
     ],
-    "nextProduce": 1672039149220,
+    "nextProduce": 1672885228873,
     "health": 800
   },
   "Ghana": {
@@ -2457,8 +2460,8 @@
     "health": 1000
   },
   "Greenland": {
-    "owner": "",
-    "isTaken": false,
+    "owner": "716390461211803738",
+    "isTaken": true,
     "code": "GL",
     "continent": "North America",
     "alliances": [],
@@ -2475,21 +2478,21 @@
       "metal": 51
     },
     "produced": {
-      "fish": 50,
-      "oil": 50,
-      "crops": 50,
-      "copper": 50,
-      "wood": 50,
-      "coal": 50,
-      "gold": 50,
-      "meat": 50,
-      "sugar": 50,
-      "metal": 50
+      "fish": 40,
+      "oil": 3,
+      "crops": 87,
+      "copper": 3,
+      "wood": 27,
+      "coal": 17,
+      "gold": 33,
+      "meat": 67,
+      "sugar": 86,
+      "metal": 51
     },
     "items": {},
     "wars": [],
-    "nextProduce": 1670962186374,
-    "health": 1000
+    "nextProduce": 1672882586185,
+    "health": 100
   },
   "Grenada": {
     "owner": "",
@@ -4155,16 +4158,16 @@
       "metal": 77
     },
     "produced": {
-      "fish": 0,
-      "oil": 0,
-      "crops": 0,
-      "copper": 0,
-      "wood": 0,
+      "fish": 39,
+      "oil": 33,
+      "crops": 33,
+      "copper": 255,
+      "wood": 258,
       "coal": 0,
-      "gold": 0,
-      "meat": 0,
-      "sugar": 0,
-      "metal": 0
+      "gold": 297,
+      "meat": 87,
+      "sugar": 21,
+      "metal": 231
     },
     "items": {
       "ground_unit": 0
@@ -4172,7 +4175,7 @@
     "wars": [
       "6ecqj"
     ],
-    "nextProduce": 1672039469426,
+    "nextProduce": 1672885228873,
     "health": 900
   },
   "Micronesia": {

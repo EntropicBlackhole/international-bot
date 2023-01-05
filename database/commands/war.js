@@ -1,5 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, IntegrationApplication } = require('discord.js');
-const paginationEmbed = require('discordjs-button-pagination');
+const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
 const { Misc } = require('../bot/functions');
 const misc = new Misc();
 const fs = require('fs');
@@ -106,6 +105,7 @@ module.exports = {
 				captainDefender: user.id,
 				name: randomWarID,
 				id: randomWarID,
+				isFinished: false,
 				attacker: {},
 				defender: {},
 				turn: "Attacker"
@@ -129,6 +129,8 @@ module.exports = {
 			let warID = interaction.options.getString('war-id');
 			let item = interaction.options.getString('item');
 			let amount = interaction.options.getInteger('amount') ? interaction.options.getInteger('amount') : 1;
+			if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
+			else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
 			//Check if the user is in this specific war
 			if (!countries[playersCountry[interaction.user.id][0]].wars.includes(warID)) return interaction.editReply(`You aren't in this war`)
 			//Check if it's users turn
@@ -139,6 +141,8 @@ module.exports = {
 			if (!countries[playersCountry[interaction.user.id][0]].items[item]) return interaction.editReply(`You don't own ${item}`)
 			//Check if user has amount of item
 			if (countries[playersCountry[interaction.user.id][0]].items[item] < amount) return interaction.editReply(`You only have ${countries[playersCountry[interaction.user.id][0]].items[item]} of ${item}, not ${amount}`)
+			//Check if war has already ended
+			if (wars[warID].isFinished) return interaction.editReply('This war has already ended dumbass')
 			let itemUse = shop[item].use.type
 			let points = shop[item].use.points
 			let maxUse = shop[item].use.max_use
@@ -197,7 +201,7 @@ module.exports = {
 					if (captainHealth < 1) countries[playersCountry[wars[warID]["captain" + (wars[warID].turn == "Attacker" ? "Defender" : "Attacker")]]].health = 0;
 					let isTeamDead = true;
 					for (player in wars[warID][(wars[warID].turn == "Attacker" ? "Defender" : "Attacker").toLowerCase()]) {
-						if (countries[playersCountry[player]].health < 1) countries[playersCountry[player]].health = 0;
+						if (countries[playersCountry[player][0]].health < 1) countries[playersCountry[player][0]].health = 0;
 						else isTeamDead = false;
 					}
 					if (captainHealth < 1 || isTeamDead) {
@@ -215,19 +219,19 @@ module.exports = {
 						}
 						//Taking things from losing side
 						for (player in wars[warID][(wars[warID].turn == "Attacker" ? "Defender" : "Attacker").toLowerCase()]) {
-							countries[playersCountry[player]].health = 100; //Setting health to 100
-							countries[playersCountry[player]].wars.splice(countries[playersCountry[player]].wars.indexOf(warID), 1) //Removing the war ID from list
+							countries[playersCountry[player][0]].health = 100; //Setting health to 100
+							countries[playersCountry[player][0]].wars.splice(countries[playersCountry[player][0]].wars.indexOf(warID), 1) //Removing the war ID from list
 							//Removing the items
-							for (let item in countries[playersCountry[player]].items) {
+							for (let item in countries[playersCountry[player][0]].items) {
 								if (!takenThings.items[item]) takenThings.items[item] = 0
-								takenThings.items[item] += countries[playersCountry[player]].items[item]
-								countries[playersCountry[player]].items[item] = 0;
+								takenThings.items[item] += countries[playersCountry[player][0]].items[item]
+								countries[playersCountry[player][0]].items[item] = 0;
 							}
 							//Removing the products
-							for (let product in countries[playersCountry[player]].produced) {
+							for (let product in countries[playersCountry[player][0]].produced) {
 								if (!takenThings.produced[product]) takenThings.produced[product] = 0
-								takenThings.produced[product] += countries[playersCountry[player]].produced[product]
-								countries[playersCountry[player]].produced[product] = 0;
+								takenThings.produced[product] += countries[playersCountry[player][0]].produced[product]
+								countries[playersCountry[player][0]].produced[product] = 0;
 							}
 							//Removing the money
 							takenThings.money += bank[player]
@@ -236,17 +240,17 @@ module.exports = {
 						//Adding things to winning side
 						let winningPlayers = Object.keys(wars[warID][wars[warID].turn.toLowerCase()]).length;
 						for (player in wars[warID][wars[warID].turn.toLowerCase()]) {
-							countries[playersCountry[player]].health = 1000; //Setting health to 1000
-							countries[playersCountry[player]].wars.splice(countries[playersCountry[player]].wars.indexOf(warID), 1) //Removing the war ID from list
+							countries[playersCountry[player][0]].health = 1000; //Setting health to 1000
+							countries[playersCountry[player][0]].wars.splice(countries[playersCountry[player][0]].wars.indexOf(warID), 1) //Removing the war ID from list
 							//Adding the items
 							for (let item in takenThings.items) {
-								if (!countries[playersCountry[player]].items[item]) countries[playersCountry[player]].items[item] = 0
-								countries[playersCountry[player]].items[item] += Math.ceil(takenThings.items[item] / winningPlayers);
+								if (!countries[playersCountry[player][0]].items[item]) countries[playersCountry[player][0]].items[item] = 0
+								countries[playersCountry[player][0]].items[item] += Math.ceil(takenThings.items[item] / winningPlayers);
 							}
 							//Adding the products
 							for (let product in takenThings.produced) {
-								if (!countries[playersCountry[player]].produced[product]) countries[playersCountry[player]].produced[product] = 0
-								countries[playersCountry[player]].produced[product] += Math.ceil(takenThings.produced[product] / winningPlayers);
+								if (!countries[playersCountry[player][0]].produced[product]) countries[playersCountry[player][0]].produced[product] = 0
+								countries[playersCountry[player][0]].produced[product] += Math.ceil(takenThings.produced[product] / winningPlayers);
 							}
 							//Adding the money
 							bank[player] += Math.ceil(takenThings.money / winningPlayers)
@@ -344,7 +348,7 @@ module.exports = {
 				if (captainHealth < 1) countries[playersCountry[wars[warID]["captain" + (wars[warID].turn == "Attacker" ? "Defender" : "Attacker")]]].health = 0;
 				let isTeamDead = true;
 				for (player in wars[warID][(wars[warID].turn == "Attacker" ? "Defender" : "Attacker").toLowerCase()]) {
-					if (countries[playersCountry[player]].health < 1) countries[playersCountry[player]].health = 0;
+					if (countries[playersCountry[player][0]].health < 1) countries[playersCountry[player][0]].health = 0;
 					else isTeamDead = false;
 				}
 				if (captainHealth < 1 || isTeamDead) {
@@ -362,19 +366,19 @@ module.exports = {
 					}
 					//Taking things from losing side
 					for (player in wars[warID][(wars[warID].turn == "Attacker" ? "Defender" : "Attacker").toLowerCase()]) {
-						countries[playersCountry[player]].health = 100; //Setting health to 100
-						countries[playersCountry[player]].wars.splice(countries[playersCountry[player]].wars.indexOf(warID), 1) //Removing the war ID from list
+						countries[playersCountry[player][0]].health = 100; //Setting health to 100
+						countries[playersCountry[player][0]].wars.splice(countries[playersCountry[player][0]].wars.indexOf(warID), 1) //Removing the war ID from list
 						//Removing the items
-						for (let item in countries[playersCountry[player]].items) {
+						for (let item in countries[playersCountry[player][0]].items) {
 							if (!takenThings.items[item]) takenThings.items[item] = 0
-							takenThings.items[item] += countries[playersCountry[player]].items[item]
-							countries[playersCountry[player]].items[item] = 0;
+							takenThings.items[item] += countries[playersCountry[player][0]].items[item]
+							countries[playersCountry[player][0]].items[item] = 0;
 						}
 						//Removing the products
-						for (let product in countries[playersCountry[player]].produced) {
+						for (let product in countries[playersCountry[player][0]].produced) {
 							if (!takenThings.produced[product]) takenThings.produced[product] = 0
-							takenThings.produced[product] += countries[playersCountry[player]].produced[product]
-							countries[playersCountry[player]].produced[product] = 0;
+							takenThings.produced[product] += countries[playersCountry[player][0]].produced[product]
+							countries[playersCountry[player][0]].produced[product] = 0;
 						}
 						//Removing the money
 						takenThings.money += bank[player]
@@ -383,17 +387,17 @@ module.exports = {
 					//Adding things to winning side
 					let winningPlayers = Object.keys(wars[warID][wars[warID].turn.toLowerCase()]).length;
 					for (player in wars[warID][wars[warID].turn.toLowerCase()]) {
-						countries[playersCountry[player]].health = 1000; //Setting health to 1000
-						countries[playersCountry[player]].wars.splice(countries[playersCountry[player]].wars.indexOf(warID), 1) //Removing the war ID from list
+						countries[playersCountry[player][0]].health = 1000; //Setting health to 1000
+						countries[playersCountry[player][0]].wars.splice(countries[playersCountry[player][0]].wars.indexOf(warID), 1) //Removing the war ID from list
 						//Adding the items
 						for (let item in takenThings.items) {
-							if (!countries[playersCountry[player]].items[item]) countries[playersCountry[player]].items[item] = 0
-							countries[playersCountry[player]].items[item] += Math.ceil(takenThings.items[item] / winningPlayers);
+							if (!countries[playersCountry[player][0]].items[item]) countries[playersCountry[player][0]].items[item] = 0
+							countries[playersCountry[player][0]].items[item] += Math.ceil(takenThings.items[item] / winningPlayers);
 						}
 						//Adding the products
 						for (let product in takenThings.produced) {
-							if (!countries[playersCountry[player]].produced[product]) countries[playersCountry[player]].produced[product] = 0
-							countries[playersCountry[player]].produced[product] += Math.ceil(takenThings.produced[product] / winningPlayers);
+							if (!countries[playersCountry[player][0]].produced[product]) countries[playersCountry[player][0]].produced[product] = 0
+							countries[playersCountry[player][0]].produced[product] += Math.ceil(takenThings.produced[product] / winningPlayers);
 						}
 						//Adding the money
 						bank[player] += Math.ceil(takenThings.money / winningPlayers)
@@ -457,6 +461,10 @@ module.exports = {
 		if (subcommand == 'join') {
 			let warID = interaction.options.getString('war-id');
 			let side = interaction.options.getString('side');
+			if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
+			else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
+			//Check if war has already ended
+			if (wars[warID].isFinished) return interaction.editReply('This war has already ended dumbass')
 			wars[warID][side][interaction.user.id] = {
 				name: interaction.user.username,
 				hasPlayed: false
@@ -482,11 +490,11 @@ module.exports = {
 				let attackerNameArray = [];
 				let defenderNameArray = [];
 				for (player in wars[i].attacker) {
-					attackerNameArray.push(wars[i].attacker[player].name + ": " + playersCountry[player][0])
+					attackerNameArray.push(wars[i].attacker[player].name + ": " + playersCountry[player][0][0])
 					if (player == wars[i].captainAttacker) { var captainAttackerName = wars[i].attacker[player].name }
 				}
 				for (player in wars[i].defender) {
-					defenderNameArray.push(wars[i].defender[player].name + ": " + playersCountry[player][0])
+					defenderNameArray.push(wars[i].defender[player].name + ": " + playersCountry[player][0][0])
 					if (player == wars[i].captainDefender) { var captainDefenderName = wars[i].defender[player].name }
 				}
 				const warEmbed = new EmbedBuilder()
@@ -504,22 +512,28 @@ module.exports = {
 					.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
 				embedList.push(warEmbed)
 			}
-			await paginationEmbed(interaction, embedList, buttonList)
+			await misc.paginationEmbed(interaction, embedList, buttonList)
 		}
 		else if (subcommand == 'surrender') {
 			//if the captain surrenders, just shift the array that they're on and take the first player in the array
 			//and turn them into the new captain
 			//If there are no members left, that side loses
+			if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
+			else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
+			
 			let warID = interaction.options.getString('war-id');
+			//Check if war has already ended
+			if (wars[warID].isFinished) return interaction.editReply('This war has already ended dumbass')
 			for (let side of ['attacker', 'defender']) {
 				for (let player in wars[warID][side]) if (player == interaction.user.id) {
+					var tempPlayerData = wars[warID][side][player]
 					delete wars[warID][side][player]
 					if (Object.keys(wars[warID][side]).length == 0) {
 						let captainHealth = countries[playersCountry[wars[warID]["captain" + misc.capitalize(side)]]].health
 						if (captainHealth < 1) countries[playersCountry[wars[warID]["captain" + misc.capitalize(side)]]].health = 0;
 						let isTeamDead = true;
 						for (player in wars[warID][side]) {
-							if (countries[playersCountry[player]].health < 1) countries[playersCountry[player]].health = 0;
+							if (countries[playersCountry[player][0]].health < 1) countries[playersCountry[player][0]].health = 0;
 							else isTeamDead = false;
 						}
 						if (captainHealth < 1 || isTeamDead) {
@@ -537,19 +551,20 @@ module.exports = {
 							}
 							//Taking things from losing side
 							for (player in wars[warID][(side == "attacker" ? "Defender" : "Attacker").toLowerCase()]) {
-								countries[playersCountry[player]].health = 100; //Setting health to 100
-								countries[playersCountry[player]].wars.splice(countries[playersCountry[player]].wars.indexOf(warID), 1) //Removing the war ID from list
+
+								countries[playersCountry[player][0]].health = 100; //Setting health to 100
+								countries[playersCountry[player][0]].wars.splice(countries[playersCountry[player][0]].wars.indexOf(warID), 1) //Removing the war ID from list
 								//Removing the items
-								for (let item in countries[playersCountry[player]].items) {
+								for (let item in countries[playersCountry[player][0]].items) {
 									if (!takenThings.items[item]) takenThings.items[item] = 0
-									takenThings.items[item] += countries[playersCountry[player]].items[item]
-									countries[playersCountry[player]].items[item] = 0;
+									takenThings.items[item] += countries[playersCountry[player][0]].items[item]
+									countries[playersCountry[player][0]].items[item] = 0;
 								}
 								//Removing the products
-								for (let product in countries[playersCountry[player]].produced) {
+								for (let product in countries[playersCountry[player][0]].produced) {
 									if (!takenThings.produced[product]) takenThings.produced[product] = 0
-									takenThings.produced[product] += countries[playersCountry[player]].produced[product]
-									countries[playersCountry[player]].produced[product] = 0;
+									takenThings.produced[product] += countries[playersCountry[player][0]].produced[product]
+									countries[playersCountry[player][0]].produced[product] = 0;
 								}
 								//Removing the money
 								takenThings.money += bank[player]
@@ -558,25 +573,25 @@ module.exports = {
 							//Adding things to winning side
 							let winningPlayers = Object.keys(wars[warID][side]).length;
 							for (player in wars[warID][side]) {
-								countries[playersCountry[player]].health = 1000; //Setting health to 1000
-								countries[playersCountry[player]].wars.splice(countries[playersCountry[player]].wars.indexOf(warID), 1) //Removing the war ID from list
+								countries[playersCountry[player][0]].health = 1000; //Setting health to 1000
+								countries[playersCountry[player][0]].wars.splice(countries[playersCountry[player][0]].wars.indexOf(warID), 1) //Removing the war ID from list
 								//Adding the items
 								for (let item in takenThings.items) {
-									if (!countries[playersCountry[player]].items[item]) countries[playersCountry[player]].items[item] = 0
-									countries[playersCountry[player]].items[item] += Math.ceil(takenThings.items[item] / winningPlayers);
+									if (!countries[playersCountry[player][0]].items[item]) countries[playersCountry[player][0]].items[item] = 0
+									countries[playersCountry[player][0]].items[item] += Math.ceil(takenThings.items[item] / winningPlayers);
 								}
 								//Adding the products
 								for (let product in takenThings.produced) {
-									if (!countries[playersCountry[player]].produced[product]) countries[playersCountry[player]].produced[product] = 0
-									countries[playersCountry[player]].produced[product] += Math.ceil(takenThings.produced[product] / winningPlayers);
+									if (!countries[playersCountry[player][0]].produced[product]) countries[playersCountry[player][0]].produced[product] = 0
+									countries[playersCountry[player][0]].produced[product] += Math.ceil(takenThings.produced[product] / winningPlayers);
 								}
 								//Adding the money
 								bank[player] += Math.ceil(takenThings.money / winningPlayers)
 							}
 							//Transferring possible countries to winning side
-							let winningSide = wars[warID][side] //Winning side //!! I think it is because this is an object
+							let losingSide = Object.keys(wars[warID][side]) //Winning side //!! I think it is because this is an object
 							//!! Of which you can't get a length of, so using Object.keys it would work
-							let losingSide = wars[warID][(side == "attacker" ? "defender" : "attacker")] //Losing side
+							let winningSide = Object.keys(wars[warID][(side == "attacker" ? "defender" : "attacker")]) //Losing side
 
 							//Getting the minimum amount of times to iterate
 							let amtOfIterations = 0;
@@ -586,9 +601,11 @@ module.exports = {
 
 							//Giving the losing captain's country to the winning captain
 							//!! WinningSide seems to be empty here
+							console.log(winningSide, losingSide)
+							playersCountry[losingSide[0]] = [player];
 							playersCountry[winningSide[0]].push(playersCountry[losingSide[0]][0]) //!! Error
-							playersCountry[losingSide[0]] = [];
-							winningSide.shift()
+							
+							winningSide.shift() //I forgot why I was shifting these
 							losingSide.shift()
 							//Iterating
 							for (let i = 0; i < amtOfIterations; i++) {
@@ -614,13 +631,12 @@ module.exports = {
 							}
 							countries[playersCountry[interaction.user.id][0]].wars.splice(countries[playersCountry[interaction.user.id][0]].wars.indexOf(warID), 1)
 							//delete the war id from the rest of the players too
+							wars[warID][side][player] = tempPlayerData
 							fs.writeFileSync('./database/country/players_country.json', JSON.stringify(playersCountry, null, 2))
 							fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 							fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
 							fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
-							
-
-							interaction.editReply(`Successfully left ${wars[warID].name}!`)
+							await interaction.editReply(`Successfully left ${wars[warID].name}!`)
 							return interaction.followUp({ content: 'Welp..', embeds: [warEndEmbed] })
 						}
 					}
@@ -636,7 +652,13 @@ module.exports = {
 			return interaction.editReply(`Successfully left ${wars[warID].name}!`)
 		}
 		else if (subcommand == 'confirm') {
+			if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
+			else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
+			
+
 			let warID = interaction.options.getString('war-id');
+			//Check if war has already ended
+			if (wars[warID].isFinished) return interaction.editReply('This war has already ended dumbass')
 			//Check if the user is in this specific war
 			if (!countries[playersCountry[interaction.user.id][0]].wars.includes(warID)) return interaction.editReply(`You aren't in this war`)
 			//Check if it's users turn

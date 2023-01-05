@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const paginationEmbed = require('discordjs-button-pagination');
 const { Misc } = require('../bot/functions');
 const misc = new Misc();
 const fs = require('fs');
@@ -91,7 +90,7 @@ module.exports = {
 					.setEmoji('▶')
 					.setStyle(ButtonStyle.Primary)
 			]
-			await paginationEmbed(interaction, embedList, buttonList)
+			await misc.paginationEmbed(interaction, embedList, buttonList)
 		}
 		if (subcommand == 'sell') {
 			let item = interaction.options.getString('item');
