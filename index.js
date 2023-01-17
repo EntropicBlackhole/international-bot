@@ -515,12 +515,33 @@ client.on(Events.GuildMemberAdd, async member => {
 	if (member.guild.id == '1046195813212225556') for (let roleToAdd of JSON.parse(fs.readFileSync('./database/server/autoroles.json'))) member.roles.add(member.guild.roles.cache.find(role => role.id == roleToAdd))
 	const welcomeEmbed = new EmbedBuilder()
 		.setTitle('Welcome to International Headquarters!')
-		.setDescription('Hello there! Welcome to IHQ! Check out these channels!\n\n<#1046195813925265484> Read the rules!\n<#1046195813925265486> Follow updates!\n<#1046195814114000926> Read all about our lore!\n<#1046195813925265487> What does each role do?\n<#1046195814114000928> Talk talk!\n<#1046195814114000933> Follow qotd!\n<#1046195814285979676> Roleplay with us!!\n<#1046195814466330640> Get your roles!!\n<#1046195814466330637> Get perks with boosting!!')
+		.setDescription('Hello there! Welcome to IHQ! Check out these channels!\n\n<#1046195813925265484> Read the rules!\n<#1046195813925265486> Follow updates!\n<#1046195814114000926> Read all about our lore!\n<#1046195813925265487> What does each role do?\n<#1046195814114000928> Talk talk!\n<#1046195814114000933> Follow qotd!\n<#1046195814285979676> Roleplay with us!!\n<#1046195814466330640> Get your roles!!\n<#1046195814860599347> Have fun with me!\n<#1046195814466330637> Get perks with boosting!!')
 		.setColor(misc.randomColor())
 		.setTimestamp()
 		.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
 	client.channels.cache.get("1046195813925265483").send({ embeds: [welcomeEmbed] });
 })
+
+client.on(Events.GuildMemberRemove, async member => {
+	const countries = JSON.parse(fs.readFileSync('./database/country/country_list.json'))
+	const playersCountry = JSON.parse(fs.readFileSync('./database/country/players_country.json'))
+	const bank = JSON.parse(fs.readFileSync('./database/economy/bank.json'))
+	const alliances = JSON.parse(fs.readFileSync('./database/country/alliances.json'))
+	if (playersCountry[member.user.id]) {
+		for (country of playersCountry[member.user.id]) {
+			countries[country].isTaken = false;
+			countries[country].owner = "";
+			for (let alliance of countries[country].alliances) if (alliances[alliance].leader == member.user.id) delete alliances[alliance]
+			delete playersCountry[member.user.id];
+		}
+		for (let alliance in alliances) if (alliances[alliance].leader == member.user.id) delete alliances[alliance]
+	}
+	if (bank[member.user.id]) delete bank[member.user.id]
+	fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
+	fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
+	fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
+	fs.writeFileSync('./database/country/players_country.json', JSON.stringify(playersCountry, null, 2));
+});
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (interaction.isChatInputCommand()) {

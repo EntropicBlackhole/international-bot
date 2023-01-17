@@ -150,19 +150,38 @@ module.exports = {
 			if (subcommand == 'create') {
 				let user = interaction.options.getUser('user');
 				let reason = interaction.options.getString('reason') ? interaction.options.getString('reason') : "No reason specified";
-
-				//Actual code here
-				warns[interaction.user.id] //This is the warning list for each user
-
+				let caseID = (warns.amount_of_total_warns + 1).toString()
+				warns.amount_of_total_warns += 1
+				if ([undefined, null, {}].includes(warns[user.id])) {
+					warns[user.id] = {};
+					fs.writeFileSync('./database/server/warns.json', JSON.stringify(warns, null, 2));
+				}
+				warns[user.id][caseID] = reason;
+				if (Object.keys(warns[user.id]).length == 1) { var nextWarning = "Another warning" }
+				else if (Object.keys(warns[user.id]).length == 2) { var nextWarning = "Being timed out for an hour" }
+				else if (Object.keys(warns[user.id]).length == 3) { interaction.guild.members.cache.get(user.id).timeout(3600000); var nextWarning = "Kicked from the server" }
+				else if (Object.keys(warns[user.id]).length == 4) { interaction.guild.members.cache.get(user.id).kick(); var nextWarning = "Banned from the server" }
+				else if (Object.keys(warns[user.id]).length == 5) { interaction.guild.members.cache.get(user.id).ban(); var nextWarning = "There's no coming back now"; delete warns[user.id] }
+				const warnEmbed = new EmbedBuilder()
+					.setTitle('Warned ' + user.username)
+					.setDescription(`Case ID: \`${caseID}\`\nReason: \`${reason}\`\nAmount of warnings: \`${Object.keys(warns[user.id]).length}\`\nNext punishment: \`${nextWarning}\``)
+					.setColor(misc.randomColor())
+					.setTimestamp()
+					.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
 				fs.writeFileSync('./database/server/warns.json', JSON.stringify(warns, null, 2));
+				return interaction.reply({ embeds: [warnEmbed] })
 			}
 			else if (subcommand == 'delete') {
 				let id = interaction.options.getInteger('id');
-
-				//Actual code here
-				warns[interaction.user.id] //This is the warning list for each user
-
+				for (i in warns) if (i != "amount_of_total_warns") for (j in warns[i]) if (parseInt(j) === id) { var userSaved = i; delete warns[i][j] }
+				const warnEmbed = new EmbedBuilder()
+					.setTitle(`Successfully deleted Case ID \`${id}\``)
+					.setDescription(`From ${client.guilds.cache.get(interaction.guild.id).members.cache.get(userSaved).user.username}`)
+					.setColor(misc.randomColor())
+					.setTimestamp()
+					.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
 				fs.writeFileSync('./database/server/warns.json', JSON.stringify(warns, null, 2));
+				return interaction.reply({ embeds: [warnEmbed] })
 			}
 			else if (subcommand == 'list') {
 				//List this using an embed, heres the embed template:
@@ -170,15 +189,21 @@ module.exports = {
 				//EntropicBlackhole
 				//#1: No reason specified
 				//#2: Doing bad things
-
-				//Basically check warns.json and try to imagine how that would be used
+				let mainString = "";
+				for (i in warns) if (i != "amount_of_total_warns") {
+					mainString += client.guilds.cache.get(interaction.guild.id).members.cache.get(i).user.username + "\n```"
+					for (j in warns[i]) {
+						mainString += `#${j}: ${warns[i][j]}\n`
+					}
+					mainString += "```\n"
+				}
 				const warnEmbed = new EmbedBuilder()
-					.setTitle('')
-					.setFields()
+					.setTitle('Warning List')
+					.setDescription(mainString)
 					.setColor(misc.randomColor())
 					.setTimestamp()
 					.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
-				//interaction.reply({ embeds: [warnEmbed] })
+				interaction.reply({ embeds: [warnEmbed] })
 			}
 		}
 		else if (subcommandGroup == 'appeal') {

@@ -56,3 +56,4 @@ for (i of text.split('\n')) {
 }
 fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
 //TODO: Add bank into country object as money
+//!! DO NOT DO ABOVE
