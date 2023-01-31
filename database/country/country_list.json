@@ -3045,8 +3045,8 @@
     "health": 1000
   },
   "Ireland": {
-    "owner": "",
-    "isTaken": false,
+    "owner": "1063597343787716729",
+    "isTaken": true,
     "code": "IE",
     "continent": "Europe",
     "alliances": [],
@@ -3063,20 +3063,20 @@
       "metal": 95
     },
     "produced": {
-      "fish": 50,
-      "oil": 50,
-      "crops": 50,
-      "copper": 50,
-      "wood": 50,
-      "coal": 50,
-      "gold": 50,
-      "meat": 50,
-      "sugar": 50,
-      "metal": 50
+      "fish": 531,
+      "oil": 2196,
+      "crops": 1863,
+      "copper": 2085,
+      "wood": 1123,
+      "coal": 3084,
+      "gold": 2936,
+      "meat": 2825,
+      "sugar": 1974,
+      "metal": 3565
     },
     "items": {},
     "wars": [],
-    "nextProduce": 1673994631854,
+    "nextProduce": 1675183147466,
     "health": 1000
   },
   "Israel": {
