@@ -48,9 +48,9 @@ module.exports = {
 		const bank = JSON.parse(fs.readFileSync('./database/economy/bank.json'))
 		const countries = JSON.parse(fs.readFileSync('./database/country/country_list.json'))
 		const playersCountry = JSON.parse(fs.readFileSync('./database/country/players_country.json'))
+		await interaction.deferReply()
 		if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
 		else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
-		await interaction.deferReply();
 		const subcommand = interaction.options.getSubcommand();
 		if (subcommand == 'buy') {
 			let item = interaction.options.getString('item');
