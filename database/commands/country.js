@@ -277,7 +277,7 @@ module.exports = {
 			}
 		} //Finished
 		if (subcommand == 'map') {
-			return interaction.editReply(`This subcommand is not available yet, check later for more`)
+			return interaction.editReply({ files: [fs.readFileSync('./database/country/World_Map.png')] })
 		} //Finished
 		if (subcommand == 'profile') {
 			if (playersCountry) { if (playersCountry.length == 0) return interaction.editReply('You don\'t have a country') }
