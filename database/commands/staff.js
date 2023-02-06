@@ -7,7 +7,7 @@ const misc = new Misc();
 module.exports = {
 	name: "Staff",
 	description: "Only for staff, do not touch",
-	usage: "server [reaction-roles, autoroles <role> <remove>], warn [create <user> <reason?>, delete <id>, list], appeal [create, list], kill",
+	usage: "server[reaction-roles,autoroles <role> <remove?>]|warn[create <user> <reason?>,delete <id>,list]|appeal[create,list]|kill",
 	data: new SlashCommandBuilder()
 		.setName('staff')
 		.setDescription('Staff Only')

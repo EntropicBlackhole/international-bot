@@ -13,7 +13,7 @@ for (i in shop) {
 module.exports = {
 	name: "War",
 	description: "Make war AND love! Are you the leader of an alliance? Call half of your alliance's troops to fight!",
-	usage: "declare <user>, use <war-id> <item> <amount>, join <war-id> <side>, list, resign <war-id>",
+	usage: "declare <user>|use <war-id> <item> <amount>|join <war-id> <side>|list|resign <war-id>",
 	data: new SlashCommandBuilder()
 		.setName('war')
 		.setDescription("Make war AND love!")

@@ -12,7 +12,7 @@ for (i in countries) {
 module.exports = {
 	name: "Country",
 	description: "Get a country! Sell what you produce! Make love AND war!",
-	usage: "get <country>, sell [unit <product> <amt>, all], leave, map",
+	usage: "get <country>|list <country?>|profile|sell[unit <product> <amt>,all]|leave|map",
 	data: new SlashCommandBuilder()
 		.setName('country')
 		.setDescription("Get a country! Sell what you produce! Make love AND war!")
@@ -200,9 +200,13 @@ module.exports = {
 		} //Finished
 		if (subcommand == 'list') {
 			let country = interaction.options.getString('country');
-			if ((!countries[country]) && country != null) return interaction.editReply(`${country} does not exist (The database is case sensitive, you may want to check your input)`)
+			let capitalizeCheck = false;
+			if ((!countries[country]) && country != null) {
+				if (!countries[misc.capitalize(country)]) return interaction.editReply(`${country} does not exist (The database is case sensitive, you may want to check your input)`)
+				else capitalizeCheck = true;
+			}
 			if (country) {
-				let stats = countries[country]
+				let stats = capitalizeCheck ? countries[misc.capitalize(country)] : countries[country]
 				let products = []
 				let continentProductMult = []
 				let items = []
@@ -215,7 +219,7 @@ module.exports = {
 				if (stats.alliances.length == 0) stats.alliances.push('None')
 
 				let countryEmbed = new EmbedBuilder()
-					.setTitle(country)
+					.setTitle(capitalizeCheck ? misc.capitalize(country) : country)
 					.setFields(
 						{ name: 'Owner', value: (stats.owner != "" ? client.users.cache.find(user => user.id === stats.owner).username : "None") },
 						{ name: 'ISO Code', value: stats.code, inline: true },

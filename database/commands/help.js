@@ -8,7 +8,7 @@ const fs = require('fs');
 module.exports = {
 	name: "Help",
 	description: "Shows this description of commands!",
-	usage: "None",
+	usage: "",
 	data: new SlashCommandBuilder()
 		.setName("help")
 		.setDescription("Shows this description of commands!"),
@@ -22,9 +22,20 @@ module.exports = {
 		for (const file of commandFiles) {
 			const filePath = path.join(__dirname, file);
 			const command = require(filePath);
+
+			//Parsing the actual command usage
+			let usage = "";
+			let squareBracketsRegex = /(?<=\[).*?(?=\])/g
+			let angleBracketsRegex = /(?<=\<).*?(?=\>)/g
+
+			for (let i of command.usage.split('|'))
+				if (i.includes('['))
+					for (let j of i.match(squareBracketsRegex)[0].split(','))
+						usage += `/${command.name.toLowerCase()} ${i.split('[')[0]} ${j}\n`
+				else usage += `/${command.name.toLowerCase()} ${i}\n`
 			helpEmbed.addFields([{
 				name: command.name,
-				value: codeBlock(`Description: ${command.description}\n\nUsage: ${command.usage}`)
+				value: codeBlock(`Description: ${command.description}\n\n${usage}`)
 			}])
 		}
 		interaction.reply({ embeds: [helpEmbed] })

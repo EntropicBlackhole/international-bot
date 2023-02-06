@@ -7,7 +7,7 @@ const fs = require('fs');
 module.exports = {
 	name: "Alliance",
 	description: "Create, join leave and delete alliances!",
-	usage: "create <name>, join <name>, deposit <name> <amount>, withdraw <name> <amount>, settings [list, change <name> <setting> <new-value>], leave <name>, delete <name>",
+	usage: "create <name>|join <name>|deposit <name> <amount>|withdraw <name> <amount>|edit-rules <new-rules>|kick <member>|settings[list,change <name> <setting> <new-value>]|profile|list|leave <name>|delete <name>",
 	data: new SlashCommandBuilder()
 		.setName('alliance')
 		.setDescription("Create, join leave and delete alliances!")

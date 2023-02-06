@@ -13,7 +13,7 @@ for (i in shop) {
 module.exports = {
 	name: "Shop",
 	description: "Buy things! You can sell your things at half the original cost!",
-	usage: "buy <item> <amt>, list, sell <item> <amt>",
+	usage: "buy <item> <amt>|list|sell <item> <amt>",
 	data: new SlashCommandBuilder()
 		.setName('shop')
 		.setDescription("Buy things! You can sell your things at half the original cost!")
