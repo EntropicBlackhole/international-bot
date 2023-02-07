@@ -520,14 +520,8 @@ client.on(Events.GuildMemberAdd, async member => {
 		.setColor(misc.randomColor())
 		.setTimestamp()
 		.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
-	const newUserEmbed = new EmbedBuilder()
-		.setTitle('Starting commands')
-		.setDescription('')
-		.setColor(randomColor())
-		.setTimestamp()
-		.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
 	await client.channels.cache.get("1046195813925265483").send({ embeds: [welcomeEmbed] });
-	await client.channels.cache.get('1046195814285979674').send('Hey! ' + member + ', heres a small list of commands for you to get started! Do `/help`!')
+	await client.channels.cache.get('1046195814285979674').send('Hey! <@' + client.users.cache.find(user => user.id == member.user.id) + '>, do `/help` to get started!!')
 })
 
 client.on(Events.GuildMemberRemove, async member => {

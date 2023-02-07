@@ -14,5 +14,33 @@
     "lastWithdraw": {
       "532376544128008194": 1672027227743
     }
+  },
+  "Ireland": {
+    "name": "Ireland",
+    "leader": "422848756795441172",
+    "rules": "",
+    "members": [
+      "422848756795441172"
+    ],
+    "bank": 0,
+    "settings": {
+      "withdraw_per_interval": 500,
+      "interval_of_withdraw": 3600000
+    },
+    "lastWithdraw": {}
+  },
+  "Axes Powers": {
+    "name": "Axes Powers",
+    "leader": "422848756795441172",
+    "rules": "",
+    "members": [
+      "422848756795441172"
+    ],
+    "bank": 0,
+    "settings": {
+      "withdraw_per_interval": 500,
+      "interval_of_withdraw": 3600000
+    },
+    "lastWithdraw": {}
   }
 }
