@@ -283,7 +283,7 @@ module.exports = {
 			}
 		} //Finished
 		if (subcommand == 'map') {
-			return interaction.editReply({ files: [fs.readFileSync('./database/country/World_Map.png')] })
+			return interaction.editReply({ files: [fs.readFileSync('./database/country/IHQ.png')] })
 		} //Finished
 		if (subcommand == 'profile') {
 			if (playersCountry) { if (playersCountry.length == 0) return interaction.editReply('You don\'t have a country') }

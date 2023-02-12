@@ -3063,20 +3063,20 @@
       "metal": 95
     },
     "produced": {
-      "fish": 843,
-      "oil": 3588,
-      "crops": 3039,
-      "copper": 3405,
-      "wood": 1819,
-      "coal": 5052,
-      "gold": 4808,
-      "meat": 4625,
-      "sugar": 3222,
-      "metal": 5845
+      "fish": 338,
+      "oil": 1508,
+      "crops": 1274,
+      "copper": 1430,
+      "wood": 754,
+      "coal": 2132,
+      "gold": 2028,
+      "meat": 1950,
+      "sugar": 1352,
+      "metal": 2470
     },
     "items": {},
     "wars": [],
-    "nextProduce": 1676224919749,
+    "nextProduce": 1676211598093,
     "health": 1000
   },
   "Israel": {
