@@ -1,13 +1,11 @@
 const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { Misc } = require('../bot/functions');
 const fs = require('fs');
-const countries = require('../country/country_list.json')
-let countryList = [];
-
+const trie = require('trie');
+const counTrie = new trie.Trie();
 const misc = new Misc();
-for (i in countries) {
-	countryList.push(i)
-}
+
+counTrie.loadJson(fs.readFileSync('./database/country/trie.json'))
 
 module.exports = {
 	name: "Country",
@@ -21,7 +19,7 @@ module.exports = {
 			.setDescription('Get a country!')
 			.addStringOption(option => option
 				.setName('country')
-				.setDescription('Choose one wisely! Look at the list to see what they produce!')
+				.setDescription('Choose one wisely! (Case sensitive, place more than 2 letters to search)')
 				.setRequired(true)
 				.setAutocomplete(true)))
 		.addSubcommandGroup(subcommandGroup => subcommandGroup
@@ -71,12 +69,16 @@ module.exports = {
 			.setDescription('Shows the world map, and taken countries')),
 	async autocomplete(interaction) {
 		const focusedValue = interaction.options.getFocused();
-		const choices = countryList;
-		let filtered = await misc.searchQuery(choices, focusedValue);
-		filtered = filtered.slice(0, 24)
-		await interaction.respond(
-			filtered.map(choice => ({ name: choice, value: choice })),
-		);
+		if (focusedValue.length >= 2) {
+			let filtered = counTrie.getMatchingWords(focusedValue, false)
+			if (filtered.length > 0) filtered = filtered.slice(0, 24)
+			else filtered = [];
+			await interaction.respond(
+				filtered.map(choice => ({ name: choice, value: choice })),
+			);
+		}
+		else await interaction.respond([])
+
 	},
 	async execute(interaction, client) {
 		await interaction.deferReply();

@@ -9,12 +9,8 @@
   "dependencies": {
     "@discordjs/builders": "^0.12.0",
     "@discordjs/rest": "^0.3.0",
-    "discord-api-types": "^0.30.0",
     "discord.js": "^14.6.0",
     "discordjs-reaction-role": "^3.1.0",
-    "express": "^4.18.1",
-    "fusionmaps": "^3.18.0",
-    "requests": "^0.3.0",
-    "xmlhttprequest-ssl": "^2.1.0"
+    "trie": "^0.2.1"
   }
 }
