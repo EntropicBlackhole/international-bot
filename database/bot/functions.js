@@ -1,5 +1,5 @@
 const fs = require('fs')
-const { ActionRowBuilder } = require('discord.js');
+const { ActionRowBuilder, Attachment, AttachmentBuilder } = require('discord.js');
 
 class Alliance {
 	create({ name, leader, rules = "" }) {
@@ -67,16 +67,19 @@ class Misc {
 		}
 		return filteredList
 	}
-	async produceInterval() {
-		setInterval(() => {
-			const countries = JSON.parse(fs.readFileSync('./database/country/country_list.json'))
+	async produceInterval(client) {
+		const database = new Database(client)
+		setInterval(async () => {
+			const countries = await database.getData('country_list');
+			let changed = false;
 			for (let country in countries) {
 				if (Date.now() < countries[country].nextProduce) continue;
 				if (!countries[country].isTaken) continue;
 				countries[country].nextProduce = Date.now() + 1000 * 60 * 60 * 2
 				for (let product in countries[country].products) countries[country].produced[product] += countries[country].products[product]
+				changed = true
 			}
-			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
+			if (changed == true) database.postData('country_list', countries)
 		}, 10000)
 	}
 	subStrBetweenChar(string, start, end) {
@@ -219,6 +222,61 @@ class Misc {
 		return curPage;
 	};
 }
-
+class Database {
+	constructor(client) {
+		this.indexTable = {
+			country: {
+				id: "1081623705517555782",
+				alliances: "1081989745355260075",
+				continent_multipliers: "1081989747355947120",
+				country_list: "1081989738925408467",
+				players_country: "1081989740951244891",
+				trie: "1081989731115614328",
+				wars: "1081989743451066388",
+				IHQMap: "1081989771867467927"
+			},
+			economy: {
+				id: "1081624138843685005",
+				bank: "1081992119117431014",
+				shop_items: "1081992114587570256"
+			},
+			server: {
+				id: "1081624158284300299",
+				appeals: "1081992546139525191",
+				autoroles: "1081992548186329119",
+				"reaction-roles": "1081992540657557514",
+				warns: "1081992544323391599"
+			}
+		},
+			this.client = client
+	}
+	async getData(columName) {
+		for (let table in this.indexTable) {
+			for (let column in this.indexTable[table]) {
+				if (column == columName) {
+					let message = await this.client.channels.cache.get(this.indexTable[table].id).messages.fetch(this.indexTable[table][column])
+					let data = await fetch(message.attachments.first().url).then(
+						(res) => res.json())
+					return data
+				}
+			}
+		}
+		return null
+	}
+	async postData(columName, data) {
+		for (let table in this.indexTable) {
+			for (let column in this.indexTable[table]) {
+				if (column == columName) {
+					let message = await this.client.channels.cache.get(this.indexTable[table].id).messages.fetch(this.indexTable[table][column])
+					fs.writeFileSync(`./database/cache/${columName}.${columName == 'IHQMap' ? 'png' : 'json'}`, JSON.stringify(data, null, 2))
+					await message.edit({ files: [new AttachmentBuilder(`./database/cache/${columName}.${columName == 'IHQMap' ? 'png' : 'json'}`)] })
+					try { fs.unlinkSync(`./database/cache/${columName}.${columName == 'IHQMap' ? 'png' : 'json'}`) } catch (e) { console.error(e.message) }
+				}
+			}
+		}
+		return null
+	}
+}
 exports.Alliance = Alliance
 exports.Misc = Misc
+exports.Database = Database

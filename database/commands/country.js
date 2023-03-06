@@ -5,7 +5,7 @@ const trie = require('trie');
 const counTrie = new trie.Trie();
 const misc = new Misc();
 
-counTrie.loadJson(fs.readFileSync('./database/country/trie.json'))
+counTrie.loadJson(fs.readFileSync('./database/bot/trie.json'))
 
 module.exports = {
 	name: "Country",
@@ -80,14 +80,14 @@ module.exports = {
 		else await interaction.respond([])
 
 	},
-	async execute(interaction, client) {
+	async execute({ interaction, client, database }) {
 		await interaction.deferReply();
-		const countries = JSON.parse(fs.readFileSync('./database/country/country_list.json'))
-		const playersCountry = JSON.parse(fs.readFileSync('./database/country/players_country.json'))
-		const continentMultipliers = JSON.parse(fs.readFileSync('./database/country/continent_multipliers.json'))
-		const bank = JSON.parse(fs.readFileSync('./database/economy/bank.json'))
+		const countries = await database.getData('country_list')
+		const playersCountry = await database.getData('players_country')
+		const continentMultipliers = await database.getData('continent_multipliers')
+		const bank = await database.getData('bank')
 		if ([{}, undefined].includes(bank[interaction.user.id])) bank[interaction.user.id] = 0;
-		fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
+		await database.postData('bank', bank)
 		const subcommand = interaction.options.getSubcommand();
 		const subcommandGroup = interaction.options.getSubcommandGroup();
 		if (subcommand == 'get') {
@@ -99,8 +99,8 @@ module.exports = {
 			countries[country].isTaken = true;
 			countries[country].owner = interaction.user.id
 			playersCountry[interaction.user.id] = [country];
-			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
-			fs.writeFileSync('./database/country/players_country.json', JSON.stringify(playersCountry, null, 2))
+			await database.postData('country_list', countries)
+			await database.postData('players_country', playersCountry)
 			let member = interaction.guild.members.cache.get(interaction.user.id);
 			let countryRole = member.guild.roles.cache.find(role => role.id == '1046195813229015175')
 			let nonCountryRole = member.guild.roles.cache.find(role => role.id == '1046195813229015174')
@@ -132,8 +132,8 @@ module.exports = {
 								amount += Math.round(amt * continentMultipliers[countries[country].continent][product])
 							}
 							bank[interaction.user.id] += amount;
-							fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
-							fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
+							await database.postData('bank', bank)
+							await database.postData('country_list', countries)
 							return interaction.followUp(`You have successfully sold \`${amt}\` of \`${product}\` in your ${playersCountry[interaction.user.id].length} occupied countries, you have made a total of \`${amount}\` Imperial Credits!`)
 						} else {
 							countryOfPlayer = m.content;
@@ -141,8 +141,8 @@ module.exports = {
 							countries[countryOfPlayer].produced[product] -= amt
 							let amount = Math.round(amt * continentMultipliers[countries[countryOfPlayer].continent][product])
 							bank[interaction.user.id] += amount;
-							fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
-							fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
+							await database.postData('bank', bank)
+							await database.postData('country_list', countries)
 							return interaction.followUp(`You have successfully sold \`${amt}\` of \`${product}\` in ${countryOfPlayer}, and with the continent multipler (${countries[countryOfPlayer].continent}), which is \`${continentMultipliers[countries[countryOfPlayer].continent][product]}\`, you have made a total of \`${amount}\` Imperial Credits!`)
 						}
 					});
@@ -151,8 +151,8 @@ module.exports = {
 					countries[playersCountry[interaction.user.id][0]].produced[product] -= amt
 					let amount = Math.round(amt * continentMultipliers[countries[playersCountry[interaction.user.id][0]].continent][product])
 					bank[interaction.user.id] += amount;
-					fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
-					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
+					await database.postData('bank', bank)
+					await database.postData('country_list', countries)
 					return interaction.followUp(`You have successfully sold \`${amt}\` of \`${product}\`, and with the continent multipler (${countries[playersCountry[interaction.user.id][0]].continent}), which is \`${continentMultipliers[countries[playersCountry[interaction.user.id][0]].continent][product]}\`, you have made a total of \`${amount}\` Imperial Credits!`)
 				}
 			}
@@ -167,8 +167,8 @@ module.exports = {
 					}
 				}
 				bank[interaction.user.id] += amount;
-				fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
-				fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
+				await database.postData('bank', bank)
+				await database.postData('country_list', countries)
 				return interaction.editReply(`You have successfully sold all of your produced stuff, and with the continent multipler, you have made a total of \`${amount}\` Imperial Credits!`)
 			}
 		} //Finished
@@ -187,8 +187,8 @@ module.exports = {
 						countries[country].owner = "";
 						delete playersCountry[interaction.user.id];
 					}
-					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
-					fs.writeFileSync('./database/country/players_country.json', JSON.stringify(playersCountry, null, 2));
+					await database.postData('country_list', countries)
+					await database.postData('players_country', playersCountry);
 					let member = interaction.guild.members.cache.get(interaction.user.id);
 					let countryRole = member.guild.roles.cache.find(role => role.id == '1046195813229015175')
 					let nonCountryRole = member.guild.roles.cache.find(role => role.id == '1046195813229015174')
@@ -283,7 +283,7 @@ module.exports = {
 			}
 		} //Finished
 		if (subcommand == 'map') {
-			return interaction.editReply({ files: [fs.readFileSync('./database/country/IHQ.png')] })
+			return interaction.editReply({ files: [await database.getData('IHQMap')] })
 		} //Finished
 		if (subcommand == 'profile') {
 			if (playersCountry) { if (playersCountry.length == 0) return interaction.editReply('You don\'t have a country') }

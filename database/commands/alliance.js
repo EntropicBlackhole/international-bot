@@ -2,7 +2,6 @@ const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle } = requir
 const { Misc, Alliance } = require('../bot/functions');
 const misc = new Misc();
 const alliance = new Alliance();
-const fs = require('fs');
 
 module.exports = {
 	name: "Alliance",
@@ -122,14 +121,14 @@ module.exports = {
 				.setName('name')
 				.setDescription('Say my name before killing me')
 				.setRequired(true))),
-	async execute(interaction, client) {
+	async execute({ interaction, client, database }) {
 		await interaction.deferReply();
 		const subcommand = interaction.options.getSubcommand();
 		const subcommandGroup = interaction.options.getSubcommandGroup();
-		const alliances = JSON.parse(fs.readFileSync('./database/country/alliances.json'))
-		const countries = JSON.parse(fs.readFileSync('./database/country/country_list.json'))
-		const playersCountry = JSON.parse(fs.readFileSync('./database/country/players_country.json'))
-		const bank = JSON.parse(fs.readFileSync('./database/economy/bank.json'))
+		const alliances = await database.getData('alliances')
+		const countries = await database.getData('country_list')
+		const playersCountry = await database.getData('players_country')
+		const bank = await database.getData('bank')
 		if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
 		else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
 		if (subcommand == 'create') {
@@ -140,8 +139,8 @@ module.exports = {
 			})
 			alliances[name] = newAlliance;
 			countries[playersCountry[interaction.user.id][0]].alliances.push(name)
-			fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
-			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2));
+			await database.postData('alliances', alliances);
+			await database.postData('country_list', countries);
 			return interaction.editReply(`Successfully created ${name}! Check it out with \`/alliance profile\``);
 		} //Finished
 		if (subcommand == 'join') {
@@ -153,8 +152,8 @@ module.exports = {
 				member: interaction.user.id
 			})
 			countries[playersCountry[interaction.user.id][0]].alliances.push(name)
-			fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
-			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2));
+			await database.postData('alliances', alliances);
+			await database.postData('country_list', countries);
 			return interaction.editReply(`Successfully joined ${name}!`);
 		} //Finished
 		if (subcommand == 'deposit') {
@@ -169,8 +168,8 @@ module.exports = {
 			if (check === -2) return interaction.editReply(`The amount cannot be negative!`);
 			alliances[name] = check;
 			bank[interaction.user.id] -= amount;
-			fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
-			fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2));
+			await database.postData('alliances', alliances);
+			await database.postData('bank', bank);
 			return interaction.editReply(`Successfully deposited ${amount} to ${name}!`);
 		} //Finished
 		if (subcommand == 'withdraw') {
@@ -188,8 +187,8 @@ module.exports = {
 			else if (check === 1) return interaction.editReply(`You have already withdrawed, please wait until you can withdraw again in ${misc.msToTime((alliances[name].lastWithdraw[interaction.user.id] + alliances[name].settings.interval_of_withdraw) - Date.now())}`)
 			alliances[name] = check
 			bank[interaction.user.id] += amount;
-			fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
-			fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2));
+			await database.postData('alliances', alliances);
+			await database.postData('bank', bank);
 			return interaction.editReply(`Successfully withdrawn ${amount} from ${name}!`);
 		} //Finished
 		if (subcommand == 'edit-rules') {
@@ -203,7 +202,7 @@ module.exports = {
 			})
 			if (check === 0) return interaction.editReply(`You aren't the leader of this alliance`);
 			alliances[name] = check
-			fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
+			await database.postData('alliances', alliances);
 			return interaction.editReply(`Successfully updated the rules!`);
 		} //Finished
 		if (subcommand == 'kick') {
@@ -217,8 +216,8 @@ module.exports = {
 				member: user.id
 			})
 			countries[playersCountry[user.id][0]].alliances.splice(countries[playersCountry[user.id][0]].alliances.indexOf(name), 1)
-			fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
-			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2));
+			await database.postData('alliances', alliances);
+			await database.postData('country_list', countries);
 			return interaction.editReply(`Successfully kicked ${user}!`);
 		} //Finished
 		if (subcommandGroup == 'settings') {
@@ -251,7 +250,7 @@ module.exports = {
 				else if (check == -1) return interaction.editReply(`Please choose a valid setting to change`);
 				else if (check == 0) return interaction.editReply(`You aren't the leader of this alliance`)
 				alliances[name] = check;
-				fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
+				await database.postData('alliances', alliances);
 				return interaction.editReply(`Successfully updated the settings!`);
 			}
 		} //Finished
@@ -271,7 +270,7 @@ module.exports = {
 				.setColor(misc.randomColor())
 				.setTimestamp()
 				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
-			fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
+			await database.postData('alliances', alliances);
 			return interaction.editReply({ embeds: [profileEmbed] });
 		} //Finished
 		if (subcommand == 'leave') {
@@ -282,8 +281,8 @@ module.exports = {
 				member: interaction.user.id
 			})
 			countries[playersCountry[interaction.user.id][0]].alliances.splice(countries[playersCountry[interaction.user.id][0]].alliances.indexOf(name), 1)
-			fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
-			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2));
+			await database.postData('alliances', alliances);
+			await database.postData('country_list', countries);
 			return interaction.editReply(`Successfully left ${name}!`);
 		} //Finished
 		if (subcommand == 'delete') {
@@ -299,9 +298,9 @@ module.exports = {
 					bank[interaction.user.id] += alliances[name].bank
 					for (member of alliances[name].members) countries[playersCountry[member][0]].alliances.splice(countries[playersCountry[member][0]].alliances.indexOf(name), 1)
 					delete alliances[name]
-					fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
-					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2));
-					fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2));
+					await database.postData('alliances', alliances);
+					await database.postData('country_list', countries);
+					await database.postData('bank', bank);
 					return interaction.followUp(`Successfully deleted ${name}!`);
 				}
 			})

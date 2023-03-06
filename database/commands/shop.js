@@ -1,8 +1,8 @@
 const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { Misc } = require('../bot/functions');
+const { Misc, Database } = require('../bot/functions');
 const misc = new Misc();
-const fs = require('fs');
-let shop = require('../economy/shop_items.json');
+
+let shop = require('../bot/shop_items.json');
 let shopList = []; //shoplift lol
 for (i in shop) {
 	shopList.push({
@@ -44,23 +44,24 @@ module.exports = {
 				.setName('amt')
 				.setDescription('Amount of item to sell!')
 				.setMinValue(1))),
-	async execute(interaction, client) {
-		const bank = JSON.parse(fs.readFileSync('./database/economy/bank.json'))
-		const countries = JSON.parse(fs.readFileSync('./database/country/country_list.json'))
-		const playersCountry = JSON.parse(fs.readFileSync('./database/country/players_country.json'))
+	async execute({ interaction, client, database }) {
 		await interaction.deferReply()
+		const bank = await database.getData('bank')
+		const countries = await database.getData('country_list')
+		const playersCountry = await database.getData('players_country')
+		
 		if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
 		else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
 		const subcommand = interaction.options.getSubcommand();
 		if (subcommand == 'buy') {
 			let item = interaction.options.getString('item');
-			let amt = (interaction.options.getInteger('amt') ? interaction.options.getInteger('amt') : 1)
+			let amt = (interaction.options.getInteger('amt') ?? 1)
 			if (!countries[playersCountry[interaction.user.id][0]].items[item]) countries[playersCountry[interaction.user.id][0]].items[item] = 0
 			if ((shop[item].cost * amt) > bank[interaction.user.id]) return interaction.editReply(`You don't have ${(shop[item].cost * amt)} Imperial Credits to buy \`${amt}\` of ${shop[item].name}. You only have ${bank[interaction.user.id]} IC`)
 			countries[playersCountry[interaction.user.id][0]].items[item] += amt
 			bank[interaction.user.id] -= shop[item].cost * amt
-			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
-			fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
+			await database.postData("country_list", countries)
+			await database.postData('bank', bank)
 			return interaction.editReply(`You've successfully bought \`${amt}\` of \`${shop[item].name}\` for \`${shop[item].cost * amt}\` IC!`)
 		}
 		if (subcommand == 'list') {
@@ -98,8 +99,8 @@ module.exports = {
 			if (!countries[playersCountry[interaction.user.id][0]].items[item]) return interaction.editReply(`You don't have this item!`)
 			countries[playersCountry[interaction.user.id][0]].items[item] -= amt
 			bank[interaction.user.id] += Math.round(((shop[item].cost) / 2) * amt)
-			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
-			fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
+			await database.postData('country_list', countries);
+			await database.postData('bank', bank)
 			return interaction.editReply(`You've successfully sold \`${amt}\` of \`${shop[item].name}\` for \`${Math.round(((shop[item].cost) / 2) * amt)}\` IC!`)
 		}
 	},

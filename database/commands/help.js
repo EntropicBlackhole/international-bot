@@ -12,7 +12,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("help")
 		.setDescription("Shows this description of commands!"),
-	async execute(interaction, client) {
+	async execute({ interaction, client }) {
 		const commandFiles = fs.readdirSync(__dirname).filter(file => file.endsWith('.js'));
 		const helpEmbed = new EmbedBuilder()
 			.setTitle('List of commands!')
@@ -26,7 +26,6 @@ module.exports = {
 			//Parsing the actual command usage
 			let usage = "";
 			let squareBracketsRegex = /(?<=\[).*?(?=\])/g
-			let angleBracketsRegex = /(?<=\<).*?(?=\>)/g
 
 			for (let i of command.usage.split('|'))
 				if (i.includes('['))

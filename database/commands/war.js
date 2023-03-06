@@ -1,8 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
 const { Misc } = require('../bot/functions');
 const misc = new Misc();
-const fs = require('fs');
-let shop = require('../economy/shop_items.json');
+let shop = require('../bot/shop_items.json');
 let shopList = []; //shoplift lol
 for (i in shop) {
 	shopList.push({
@@ -71,12 +70,12 @@ module.exports = {
 				.setName('war-id')
 				.setDescription('ID of war')
 				.setRequired(true))),
-	async execute(interaction, client) {
+	async execute({ interaction, client, database }) {
 		await interaction.deferReply();
-		const countries = JSON.parse(fs.readFileSync('./database/country/country_list.json'))
-		const playersCountry = JSON.parse(fs.readFileSync('./database/country/players_country.json'))
-		const wars = JSON.parse(fs.readFileSync('./database/country/wars.json'))
-		const bank = JSON.parse(fs.readFileSync('./database/economy/bank.json'))
+		const countries = await database.getData('country_list')
+		const playersCountry = await database.getData('players_country')
+		const wars = await database.getData('wars')
+		const bank = await database.getData('bank')
 		if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
 		else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
 		const subcommand = interaction.options.getSubcommand();
@@ -121,8 +120,8 @@ module.exports = {
 			wars[randomWarID] = warObject;
 			countries[playersCountry[interaction.user.id][0]].wars.push(randomWarID)
 			countries[playersCountry[user.id][0]].wars.push(randomWarID)
-			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2));
-			fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
+			await database.postData('country_list', countries);
+			await database.postData('wars', wars)
 			return interaction.editReply({ embeds: [warEmbed] })
 		}
 		if (subcommand == 'use') {
@@ -174,8 +173,8 @@ module.exports = {
 					if (itemUse == 'attack') {
 						countries[playersCountry[otherUserID]].health -= points * amount
 						await interaction.followUp(`Successfully did ${points * amount} damage to <@${otherUserID}>!`)
-						fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
-						fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
+						await database.postData('country_list', countries)
+						await database.postData('wars', wars)
 					} else if (itemUse == 'disable') {
 						let randomTakeout = Math.round(Math.random() * (parseInt(points[1]) - parseInt(points[0]) + 1)) + parseInt(points[0]);
 						for (item in countries[playersCountry[otherUserID]].items) {
@@ -185,13 +184,13 @@ module.exports = {
 							}
 						}
 						await interaction.followUp(`Successfully removed %${randomTakeout} of electric items from <@${otherUserID}>!`)
-						fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
-						fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
+						await database.postData('country_list', countries)
+						await database.postData('wars', wars)
 					} else if (itemUse == 'heal') {
 						countries[playersCountry[otherUserID]].health += points * amount
 						await interaction.followUp(`Successfully healed ${points * amount} HP!`);
-						fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
-						fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
+						await database.postData('country_list', countries)
+						await database.postData('wars', wars)
 					}
 					//TODO: Also make it so it checks if a side has won
 					//Check either if the captain's health is 0, or if the rest of the team's health is 0, 
@@ -292,10 +291,10 @@ module.exports = {
 							playersCountry[winningSide[i]].push(playersCountry[losingSide[i]][0])
 							playersCountry[losingSide[i]] = [];
 						}
-						fs.writeFileSync('./database/country/players_country.json', JSON.stringify(playersCountry, null, 2))
-						fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
-						fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
-						fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
+						await database.postData('players_country', playersCountry)
+						await database.postData('country_list', countries)
+						await database.postData('wars', wars)
+						await database.postData('bank', bank)
 						return interaction.followUp({ content: 'Welp..', embeds: [warEndEmbed] })
 					}
 					//TODO
@@ -306,9 +305,9 @@ module.exports = {
 						wars[warID].turn = (wars[warID].turn == "Attacker" ? "Defender" : "Attacker")
 						await interaction.followUp(`It's the ${wars[warID].turn}s turn now! Use \`/war use <item>\` to do your play!`)
 					}
-					fs.writeFileSync('./database/country/players_country.json', JSON.stringify(playersCountry, null, 2))
-					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
-					fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
+					await database.postData('players_country', playersCountry)
+					await database.postData('country_list', countries)
+					await database.postData('wars', wars)
 				});
 			} else {
 				otherUserID = Object.keys(wars[warID][itemUse == 'heal' ? (wars[warID].turn == 'Attacker' ? 'attacker' : 'defender') : (wars[warID].turn == 'Attacker' ? 'defender' : 'attacker')])[0]
@@ -321,8 +320,8 @@ module.exports = {
 				if (itemUse == 'attack') {
 					countries[playersCountry[otherUserID]].health -= points * amount
 					await interaction.followUp(`Successfully did ${points * amount} damage to <@${otherUserID}>!`)
-					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
-					fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
+					await database.postData('country_list', countries)
+					await database.postData('wars', wars)
 				} else if (itemUse == 'disable') {
 					let randomTakeout = Math.round(Math.random() * (parseInt(points[1]) - parseInt(points[0]) + 1)) + parseInt(points[0]);
 					for (item in countries[playersCountry[otherUserID]].items) {
@@ -332,13 +331,13 @@ module.exports = {
 						}
 					}
 					await interaction.followUp(`Successfully removed %${randomTakeout} of electric items from <@${otherUserID}>!`)
-					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
-					fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
+					await database.postData('country_list', countries)
+					await database.postData('wars', wars)
 				} else if (itemUse == 'heal') {
 					countries[playersCountry[otherUserID]].health += points * amount
 					await interaction.followUp(`Successfully healed ${points * amount} HP!`);
-					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
-					fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
+					await database.postData('country_list', countries)
+					await database.postData('wars', wars)
 				}
 				//TODO: Also make it so it checks if a side has won
 				//Check either if the captain's health is 0, or if the rest of the team's health is 0, 
@@ -439,10 +438,10 @@ module.exports = {
 						playersCountry[winningSide[i]].push(playersCountry[losingSide[i]][0])
 						playersCountry[losingSide[i]] = [];
 					}
-					fs.writeFileSync('./database/country/players_country.json', JSON.stringify(playersCountry, null, 2))
-					fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
-					fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
-					fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
+					await database.postData('players_country', playersCountry)
+					await database.postData('country_list', countries)
+					await database.postData('wars', wars)
+					await database.postData('bank', bank)
 					return interaction.followUp({ content: 'Welp..', embeds: [warEndEmbed] })
 				}
 				//TODO
@@ -453,9 +452,9 @@ module.exports = {
 					wars[warID].turn = (wars[warID].turn == "Attacker" ? "Defender" : "Attacker")
 					await interaction.followUp(`It's the ${wars[warID].turn}s turn now! Use \`/war use <item>\` to do your play!`)
 				}
-				fs.writeFileSync('./database/country/players_country.json', JSON.stringify(playersCountry, null, 2))
-				fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
-				fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
+				await database.postData('players_country', playersCountry)
+				await database.postData('country_list', countries)
+				await database.postData('wars', wars)
 			}
 		}
 		if (subcommand == 'join') {
@@ -470,8 +469,8 @@ module.exports = {
 				hasPlayed: false
 			}
 			countries[playersCountry[interaction.user.id][0]].wars.push(warID)
-			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2));
-			fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2));
+			await database.postData('country_list', countries);
+			await database.postData('wars', wars);
 			return interaction.editReply(`Successfully joined ${wars[warID].name} on the ${side} side! Do /war use to start fighting!`)
 		}
 		if (subcommand == 'list') {
@@ -632,10 +631,10 @@ module.exports = {
 							countries[playersCountry[interaction.user.id][0]].wars.splice(countries[playersCountry[interaction.user.id][0]].wars.indexOf(warID), 1)
 							//delete the war id from the rest of the players too
 							wars[warID][side][player] = tempPlayerData
-							fs.writeFileSync('./database/country/players_country.json', JSON.stringify(playersCountry, null, 2))
-							fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
-							fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
-							fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
+							await database.postData('players_country', playersCountry)
+							await database.postData('country_list', countries)
+							await database.postData('wars', wars)
+							await database.postData('bank', bank)
 							await interaction.editReply(`Successfully left ${wars[warID].name}!`)
 							return interaction.followUp({ content: 'Welp..', embeds: [warEndEmbed] })
 						}
@@ -647,8 +646,8 @@ module.exports = {
 			// for (let player in wars[warID].defender) if (player == interaction.user.id) delete wars[warID].defender[player]
 			countries[playersCountry[interaction.user.id][0]].wars.splice(countries[playersCountry[interaction.user.id][0]].wars.indexOf(warID), 1)
 
-			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2));
-			fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2));
+			await database.postData('country_list', countries);
+			await database.postData('wars', wars);
 			return interaction.editReply(`Successfully left ${wars[warID].name}!`)
 		}
 		else if (subcommand == 'confirm') {
@@ -667,8 +666,8 @@ module.exports = {
 			if (wars[warID]["captain" + wars[warID].turn] != interaction.user.id) return interaction.editReply(`You aren't the captain of this side in this war`)
 			for (let player in wars[warID][wars[warID].turn.toLowerCase()]) wars[warID][wars[warID].turn.toLowerCase()][player].hasPlayed = false;
 			wars[warID].turn = (wars[warID].turn == "Attacker" ? "Defender" : "Attacker")
-			fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
-			fs.writeFileSync('./database/country/wars.json', JSON.stringify(wars, null, 2))
+			await database.postData('country_list', countries)
+			await database.postData('wars', wars)
 			return interaction.followUp(`It's the ${wars[warID].turn}s turn now! Use \`/war use <item>\` to do your play!`)
 		}
 	},

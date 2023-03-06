@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { ReactionRole } = require("discordjs-reaction-role");
-const fs = require('fs');
 const { Misc } = require('../bot/functions')
 const misc = new Misc();
 
@@ -92,7 +91,7 @@ module.exports = {
 		.addSubcommand(subcommand => subcommand
 			.setName('kill')
 			.setDescription('Kills the bot!')),
-	async execute(interaction, client, rr) {
+	async execute({ interaction, client, rr, database }) {
 		let guild = client.guilds.cache.get(interaction.guild.id);
 		let member = guild.members.cache.get(interaction.user.id);
 		let subcommandGroup = interaction.options.getSubcommandGroup();
@@ -100,8 +99,8 @@ module.exports = {
 		if ((!member.roles.cache.has('1046195813229015180')) && (subcommandGroup != 'appeal' || subcommand != 'create')) return interaction.reply({ content: "You can't use this command", ephemeral: true })
 
 		if (subcommandGroup == 'server') {
-			const autoroles = JSON.parse(fs.readFileSync('./database/server/autoroles.json'))
-			let reactionRoles = JSON.parse(fs.readFileSync('./database/server/reaction-roles.json'))
+			const autoroles = await database.getData('autoroles')
+			let reactionRoles = await database.getData('reaction-roles')
 			if (subcommand == 'reaction-roles') {
 				await interaction.deferReply();
 				let channel = interaction.options.getChannel('channel-to-post-in')
@@ -117,7 +116,7 @@ module.exports = {
 						.setTimestamp()
 						.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
 					let list = m.content.split('\n');
-					client.channels.cache.get(channel.id).send({ embeds: [rrEmbed] }).then((m) => {
+					client.channels.cache.get(channel.id).send({ embeds: [rrEmbed] }).then(async (m) => {
 						for (i of list) {
 							let role = i.split('|')[0].trim().replace(/\D/g, "");
 							let emoji = i.split('|')[1].replace('\r', '').trim();
@@ -128,9 +127,9 @@ module.exports = {
 								roleId: role
 							})
 						}
-						fs.writeFileSync('./database/server/reaction-roles.json', JSON.stringify(reactionRoles, null, 2))
+						await database.postData('reaction-roles', reactionRoles)
 						rr.teardown()
-						reactionRoles = JSON.parse(fs.readFileSync('./database/server/reaction-roles.json'))
+						reactionRoles = await database.getData('reaction-roles')
 						rr = new ReactionRole(client, reactionRoles);
 						return interaction.followUp('Created reaction roles! Check them out in <#' + channel + '>')
 					})
@@ -141,12 +140,12 @@ module.exports = {
 				let remove = interaction.options.getBoolean('remove');
 
 				if (!remove) autoroles.push(role.id); else autoroles.splice(autoroles.indexOf(role.id), 1);
-				fs.writeFileSync('./database/server/autoroles.json', JSON.stringify(autoroles, null, 2));
+				await database.postData('autoroles', autoroles);
 				return interaction.reply(`Successfully put ${role.name} as an autorole!`)
 			}
 		}
 		else if (subcommandGroup == 'warn') {
-			const warns = JSON.parse(fs.readFileSync('./database/server/warns.json'));
+			const warns = await database.getData('warns');
 			if (subcommand == 'create') {
 				let user = interaction.options.getUser('user');
 				let reason = interaction.options.getString('reason') ? interaction.options.getString('reason') : "No reason specified";
@@ -154,7 +153,7 @@ module.exports = {
 				warns.amount_of_total_warns += 1
 				if ([undefined, null, {}].includes(warns[user.id])) {
 					warns[user.id] = {};
-					fs.writeFileSync('./database/server/warns.json', JSON.stringify(warns, null, 2));
+					await database.postData('warns', warns);
 				}
 				warns[user.id][caseID] = reason;
 				if (Object.keys(warns[user.id]).length == 1) { var nextWarning = "Another warning" }
@@ -168,7 +167,7 @@ module.exports = {
 					.setColor(misc.randomColor())
 					.setTimestamp()
 					.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
-				fs.writeFileSync('./database/server/warns.json', JSON.stringify(warns, null, 2));
+				await database.postData('warns', warns);
 				return interaction.reply({ embeds: [warnEmbed] })
 			}
 			else if (subcommand == 'delete') {
@@ -180,15 +179,10 @@ module.exports = {
 					.setColor(misc.randomColor())
 					.setTimestamp()
 					.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
-				fs.writeFileSync('./database/server/warns.json', JSON.stringify(warns, null, 2));
+				await database.postData('warns', warns);
 				return interaction.reply({ embeds: [warnEmbed] })
 			}
 			else if (subcommand == 'list') {
-				//List this using an embed, heres the embed template:
-				//By the way, do something like this:
-				//EntropicBlackhole
-				//#1: No reason specified
-				//#2: Doing bad things
 				let mainString = "";
 				for (i in warns) if (i != "amount_of_total_warns") {
 					mainString += client.guilds.cache.get(interaction.guild.id).members.cache.get(i).user.username + "\n```"
@@ -197,6 +191,7 @@ module.exports = {
 					}
 					mainString += "```\n"
 				}
+				if (mainString == '') mainString = "None";
 				const warnEmbed = new EmbedBuilder()
 					.setTitle('Warning List')
 					.setDescription(mainString)
@@ -207,7 +202,7 @@ module.exports = {
 			}
 		}
 		else if (subcommandGroup == 'appeal') {
-			const appeals = JSON.parse(fs.readFileSync('./database/server/appeals.json'));
+			const appeals = await database.getData('appeals');
 			if (subcommand == 'create') {
 				// if (appeals[interaction.user.id]) return await interaction.reply('You have already created an appeal request, please wait until it gets reviewed'); //Commented out because what if mods forget
 				let reason = interaction.options.getString('reason');
@@ -216,7 +211,7 @@ module.exports = {
 					time: Date.now()
 				}
 				appeals[interaction.user.id] = newAppeal;
-				fs.writeFileSync('./database/server/appeals.json', JSON.stringify(appeals, null, 2));
+				await database.postData('appeals', appeals);
 				let appealEmbedToUser = new EmbedBuilder()
 					.setTitle('Appeal created')
 					.setDescription(`Your appeal has been created and sent to the moderators!`)
@@ -247,7 +242,7 @@ module.exports = {
 			if (subcommand == 'accept') {
 				let user = interaction.options.getUser('user');
 				delete appeals[user.id]
-				fs.writeFileSync('./database/server/appeals.json', JSON.stringify(appeals, null, 2));
+				await database.postData('appeals', appeals);
 				try {
 					interaction.guild.members.unban(user);
 				} catch (e) {
@@ -266,7 +261,7 @@ module.exports = {
 			if (subcommand == 'decline') {
 				let user = interaction.options.getUser('user');
 				delete appeals[user.id]
-				fs.writeFileSync('./database/server/appeals.json', JSON.stringify(appeals, null, 2));
+				await database.postData('appeals', appeals);
 				await client.users.send(user.id, "We're really sorry, your request appeal was declined, feel free to try again soon");
 				return interaction.reply('Notified user that their request was declined!')
 			}
