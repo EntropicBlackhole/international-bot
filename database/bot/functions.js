@@ -268,7 +268,7 @@ class Database {
 			for (let column in this.indexTable[table]) {
 				if (column == columName) {
 					let message = await this.client.channels.cache.get(this.indexTable[table].id).messages.fetch(this.indexTable[table][column])
-					fs.writeFileSync(`./database/cache/${columName}.${columName == 'IHQMap' ? 'png' : 'json'}`, JSON.stringify(data, null, 2))
+					await fs.writeFileSync(`./database/cache/${columName}.${columName == 'IHQMap' ? 'png' : 'json'}`, JSON.stringify(data, null, 2))
 					await message.edit({ files: [new AttachmentBuilder(`./database/cache/${columName}.${columName == 'IHQMap' ? 'png' : 'json'}`)] })
 					try { fs.unlinkSync(`./database/cache/${columName}.${columName == 'IHQMap' ? 'png' : 'json'}`) } catch (e) { console.error(e.message) }
 				}
