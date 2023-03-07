@@ -48,10 +48,10 @@ client.once(Events.ClientReady, async c => {
 
 client.on(Events.GuildMemberAdd, async member => {
 	if (member.guild.id != '1046195813212225556') return
-	for (let roleToAdd of database.getData('autoroles')) member.roles.add(member.guild.roles.cache.find(role => role.id == roleToAdd))
+	for (let roleToAdd of await database.getData('autoroles')) member.roles.add(member.guild.roles.cache.find(role => role.id == roleToAdd))
 	const welcomeEmbed = new EmbedBuilder()
 		.setTitle('Welcome to International Headquarters!')
-		.setDescription('Hello there! Welcome to IHQ! Check out these channels!\n\n<#1046195813925265484> Read the rules!\n<#1046195813925265486> Follow updates!\n<#1046195814114000926> Read all about our lore!\n<#1046195813925265487> What does each role do?\n<#1046195814114000928> Talk talk!\n<#1046195814114000933> Follow qotd!\n<#1046195814285979676> Roleplay with us!!\n<#1046195814466330640> Get your roles!!\n<#1046195814860599347> Have fun with me!\n<#1046195814466330637> Get perks with boosting!!')
+		.setDescription('Hello there! Welcome to IHQ! Check out these channels!\n\n<#1046195813925265484> Read the rules!\n<#1046195813925265486> Follow updates!\n<#1046195814114000926> Read all about our lore!\n<#1046195813925265487> What does each role do?\n<#1082506193634869379> I\'m new! What do I do to start?\n<#1046195814114000928> Talk talk!\n<#1046195814114000933> Follow qotd!\n<#1046195814285979676> Roleplay with us!!\n<#1046195814466330640> Get your roles!!\n<#1046195814860599347> Have fun with me!\n<#1046195814466330637> Get perks with boosting!!')
 		.setColor(misc.randomColor())
 		.setTimestamp()
 		.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
@@ -60,10 +60,10 @@ client.on(Events.GuildMemberAdd, async member => {
 });
 
 client.on(Events.GuildMemberRemove, async member => {
-	const countries = JSON.parse(fs.readFileSync('./database/country/country_list.json'))
-	const playersCountry = JSON.parse(fs.readFileSync('./database/country/players_country.json'))
-	const bank = JSON.parse(fs.readFileSync('./database/economy/bank.json'))
-	const alliances = JSON.parse(fs.readFileSync('./database/country/alliances.json'))
+	const countries = await database.getData('country_list');
+	const playersCountry = await database.getData('players_country');
+	const bank = await database.getData('bank');
+	const alliances = await database.getData('alliances');
 	if (playersCountry[member.user.id]) {
 		for (country of playersCountry[member.user.id]) {
 			countries[country].isTaken = false;
@@ -75,10 +75,9 @@ client.on(Events.GuildMemberRemove, async member => {
 	}
 	if (bank[member.user.id]) delete bank[member.user.id]
 	database.postData('bank', bank);
-	database.postData('bank', bank);
-database.postData('bank', bank);
-database.postData('bank', bank);
-	
+	database.postData('country_list', countries);
+	database.postData('players_country', playersCountry);
+	database.postData('alliances', alliances);
 });
 
 client.on(Events.InteractionCreate, async interaction => {
@@ -100,28 +99,19 @@ client.on(Events.InteractionCreate, async interaction => {
 					new ButtonBuilder()
 						.setCustomId('show-error')
 						.setLabel('Show error log')
-						.setStyle(ButtonStyle.Danger),
-				);
-			if (interaction.deferred == false) {
-				await interaction.deferReply();
-			}
+						.setStyle(ButtonStyle.Danger));
+			if (interaction.deferred == false) await interaction.deferReply();
 			await interaction.editReply({ content: 'There was an error while executing this command!', ephemeral: true, components: [row] });
 
 			client.on('interactionCreate', async i => {
-				if (!i.isButton()) return;
-				if (i.customId == 'show-error') {
-					await interaction.followUp({ content: '```' + error + '```', ephemeral: true });
-				}
+				if (!i.isButton()) return; 
+				else if (i.customId == 'show-error') await interaction.followUp({ content: '```' + error + '```', ephemeral: true });
 			});
 		}
 	}
 	else if (interaction.isAutocomplete()) {
 		const command = interaction.client.commands.get(interaction.commandName);
-
-		if (!command) {
-			console.error(`No command matching ${interaction.commandName} was found.`);
-			return;
-		}
+		if (!command) return console.error(`No command matching ${interaction.commandName} was found.`);
 
 		try {
 			await command.autocomplete(interaction);

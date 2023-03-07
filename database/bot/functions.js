@@ -70,16 +70,20 @@ class Misc {
 	async produceInterval(client) {
 		const database = new Database(client)
 		setInterval(async () => {
-			const countries = await database.getData('country_list');
-			let changed = false;
-			for (let country in countries) {
-				if (Date.now() < countries[country].nextProduce) continue;
-				if (!countries[country].isTaken) continue;
-				countries[country].nextProduce = Date.now() + 1000 * 60 * 60 * 2
-				for (let product in countries[country].products) countries[country].produced[product] += countries[country].products[product]
-				changed = true
+			try {
+				const countries = await database.getData('country_list');
+				let changed = false;
+				for (let country in countries) {
+					if (Date.now() < countries[country].nextProduce) continue;
+					if (!countries[country].isTaken) continue;
+					countries[country].nextProduce = Date.now() + 1000 * 60 * 60 * 2
+					for (let product in countries[country].products) countries[country].produced[product] += countries[country].products[product]
+					changed = true
+				}
+				if (changed == true) database.postData('country_list', countries)
+			} catch (e) {
+				console.error(e, this.parseDate(Date.now()))
 			}
-			if (changed == true) database.postData('country_list', countries)
 		}, 10000)
 	}
 	subStrBetweenChar(string, start, end) {
@@ -116,8 +120,7 @@ class Misc {
 		}
 		return s;
 	}
-	formatDate(t) {
-		const date = t.date;
+	formatDate(date) {
 		var year = this.Pad(date.getUTCFullYear(), 4);
 		var month = this.Pad(1 + date.getUTCMonth(), 2);
 		var day = this.Pad(date.getUTCDate(), 2);
@@ -162,22 +165,14 @@ class Misc {
 				"Link buttons are not supported"
 			);
 		if (buttonList.length !== 2) throw new Error("Need two buttons.");
-
 		let page = 0;
-
 		const row = new ActionRowBuilder().addComponents(buttonList);
-
-		//has the interaction already been deferred? If not, defer the reply.
-		if (interaction.deferred == false) {
-			await interaction.deferReply();
-		}
-
+		if (interaction.deferred == false) await interaction.deferReply();
 		const curPage = await interaction.editReply({
 			embeds: [pages[page].setFooter({ text: `Page ${page + 1} / ${pages.length}` })],
 			components: [row],
 			fetchReply: true,
 		});
-
 		const filter = (i) =>
 			i.custom_id === buttonList[1].custom_id ||
 			i.custom_id === buttonList[0].custom_id;
@@ -251,27 +246,21 @@ class Database {
 			this.client = client
 	}
 	async getData(columName) {
-		for (let table in this.indexTable) {
-			for (let column in this.indexTable[table]) {
-				if (column == columName) {
-					let message = await this.client.channels.cache.get(this.indexTable[table].id).messages.fetch(this.indexTable[table][column])
-					let data = await fetch(message.attachments.first().url).then(
-						(res) => res.json())
-					return data
-				}
+		for (let table in this.indexTable) for (let column in this.indexTable[table]) {
+			if (column == columName) {
+				let message = await this.client.channels.cache.get(this.indexTable[table].id).messages.fetch(this.indexTable[table][column])
+				return await fetch(message.attachments.first().url).then((res) => res.json())
 			}
 		}
 		return null
 	}
 	async postData(columName, data) {
-		for (let table in this.indexTable) {
-			for (let column in this.indexTable[table]) {
-				if (column == columName) {
-					let message = await this.client.channels.cache.get(this.indexTable[table].id).messages.fetch(this.indexTable[table][column])
-					await fs.writeFileSync(`./database/cache/${columName}.${columName == 'IHQMap' ? 'png' : 'json'}`, JSON.stringify(data, null, 2))
-					await message.edit({ files: [new AttachmentBuilder(`./database/cache/${columName}.${columName == 'IHQMap' ? 'png' : 'json'}`)] })
-					try { fs.unlinkSync(`./database/cache/${columName}.${columName == 'IHQMap' ? 'png' : 'json'}`) } catch (e) { console.error(e.message) }
-				}
+		for (let table in this.indexTable) for (let column in this.indexTable[table]) {
+			if (column == columName) {
+				let message = await this.client.channels.cache.get(this.indexTable[table].id).messages.fetch(this.indexTable[table][column])
+				await fs.writeFileSync(`./database/cache/${columName}.${columName == 'IHQMap' ? 'png' : 'json'}`, JSON.stringify(data, null, 2))
+				await message.edit({ files: [new AttachmentBuilder(`./database/cache/${columName}.${columName == 'IHQMap' ? 'png' : 'json'}`)] })
+				try { fs.unlinkSync(`./database/cache/${columName}.${columName == 'IHQMap' ? 'png' : 'json'}`) } catch (e) { console.error(e.message) }
 			}
 		}
 		return null
