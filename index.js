@@ -48,7 +48,7 @@ client.once(Events.ClientReady, async c => {
 
 client.on(Events.GuildMemberAdd, async member => {
 	if (member.guild.id != '1046195813212225556') return
-	for (let roleToAdd of JSON.parse(fs.readFileSync('./database/server/autoroles.json'))) member.roles.add(member.guild.roles.cache.find(role => role.id == roleToAdd))
+	for (let roleToAdd of database.getData('autoroles')) member.roles.add(member.guild.roles.cache.find(role => role.id == roleToAdd))
 	const welcomeEmbed = new EmbedBuilder()
 		.setTitle('Welcome to International Headquarters!')
 		.setDescription('Hello there! Welcome to IHQ! Check out these channels!\n\n<#1046195813925265484> Read the rules!\n<#1046195813925265486> Follow updates!\n<#1046195814114000926> Read all about our lore!\n<#1046195813925265487> What does each role do?\n<#1046195814114000928> Talk talk!\n<#1046195814114000933> Follow qotd!\n<#1046195814285979676> Roleplay with us!!\n<#1046195814466330640> Get your roles!!\n<#1046195814860599347> Have fun with me!\n<#1046195814466330637> Get perks with boosting!!')
@@ -74,10 +74,11 @@ client.on(Events.GuildMemberRemove, async member => {
 		for (let alliance in alliances) if (alliances[alliance].leader == member.user.id) delete alliances[alliance]
 	}
 	if (bank[member.user.id]) delete bank[member.user.id]
-	fs.writeFileSync('./database/economy/bank.json', JSON.stringify(bank, null, 2))
-	fs.writeFileSync('./database/country/alliances.json', JSON.stringify(alliances, null, 2));
-	fs.writeFileSync('./database/country/country_list.json', JSON.stringify(countries, null, 2))
-	fs.writeFileSync('./database/country/players_country.json', JSON.stringify(playersCountry, null, 2));
+	database.postData('bank', bank);
+	database.postData('bank', bank);
+database.postData('bank', bank);
+database.postData('bank', bank);
+	
 });
 
 client.on(Events.InteractionCreate, async interaction => {
