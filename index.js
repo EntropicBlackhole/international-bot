@@ -15,7 +15,7 @@ const client = new Client({
 	],
 	partials: [Partials.Message, Partials.Channel, Partials.Reaction],
 });
-const database = new Database(client)
+const database = new Database({ client: client, indexTable: indexTable })
 const misc = new Misc()
 //Yes everything above is for starting up
 
@@ -43,7 +43,7 @@ client.once(Events.ClientReady, async c => {
 	// console.log(await database.postData('country_list', JSON.parse(fs.readFileSync('./database/country/country_list.json'))))
 	const reactionRoles = await database.getData('reaction-roles')
 	rr = new ReactionRole(client, reactionRoles);
-	misc.produceInterval(client)
+	// misc.produceInterval(client)
 });
 
 client.on(Events.GuildMemberAdd, async member => {
@@ -89,6 +89,7 @@ client.on(Events.InteractionCreate, async interaction => {
 				interaction: interaction,
 				client: client,
 				database: database,
+				misc: misc,
 				rr: rr
 			});
 		} catch (error) {
@@ -100,11 +101,11 @@ client.on(Events.InteractionCreate, async interaction => {
 						.setCustomId('show-error')
 						.setLabel('Show error log')
 						.setStyle(ButtonStyle.Danger));
-			if (interaction.deferred == false) await interaction.deferReply();
+			if (interaction.deferred == false) try { await interaction.deferReply(); } catch (e) { console.error(e) }
 			await interaction.editReply({ content: 'There was an error while executing this command!', ephemeral: true, components: [row] });
 
 			client.on('interactionCreate', async i => {
-				if (!i.isButton()) return; 
+				if (!i.isButton()) return;
 				else if (i.customId == 'show-error') await interaction.followUp({ content: '```' + error + '```', ephemeral: true });
 			});
 		}

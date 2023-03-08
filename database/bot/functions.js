@@ -1,5 +1,5 @@
 const fs = require('fs')
-const { ActionRowBuilder, Attachment, AttachmentBuilder } = require('discord.js');
+const { ActionRowBuilder, AttachmentBuilder } = require('discord.js');
 
 class Alliance {
 	create({ name, leader, rules = "" }) {
@@ -218,52 +218,35 @@ class Misc {
 	};
 }
 class Database {
-	constructor(client) {
-		this.indexTable = {
-			country: {
-				id: "1081623705517555782",
-				alliances: "1081989745355260075",
-				continent_multipliers: "1081989747355947120",
-				country_list: "1081989738925408467",
-				players_country: "1081989740951244891",
-				trie: "1081989731115614328",
-				wars: "1081989743451066388",
-				IHQMap: "1081989771867467927"
-			},
-			economy: {
-				id: "1081624138843685005",
-				bank: "1081992119117431014",
-				shop_items: "1081992114587570256"
-			},
-			server: {
-				id: "1081624158284300299",
-				appeals: "1081992546139525191",
-				autoroles: "1081992548186329119",
-				"reaction-roles": "1081992540657557514",
-				warns: "1081992544323391599"
-			}
-		},
-			this.client = client
+	constructor({ client, indexTable }) {
+		this.client = client
+		this.indexTable = indexTable
 	}
-	async getData(columName) {
+	async getData(columnName) {
 		for (let table in this.indexTable) for (let column in this.indexTable[table]) {
-			if (column == columName) {
+			if (column == columnName) {
 				let message = await this.client.channels.cache.get(this.indexTable[table].id).messages.fetch(this.indexTable[table][column])
 				return await fetch(message.attachments.first().url).then((res) => res.json())
 			}
 		}
 		return null
 	}
-	async postData(columName, data) {
+	async postData(columnName, data) {
 		for (let table in this.indexTable) for (let column in this.indexTable[table]) {
-			if (column == columName) {
+			if (column == columnName) {
 				let message = await this.client.channels.cache.get(this.indexTable[table].id).messages.fetch(this.indexTable[table][column])
-				await fs.writeFileSync(`./database/cache/${columName}.${columName == 'IHQMap' ? 'png' : 'json'}`, JSON.stringify(data, null, 2))
-				await message.edit({ files: [new AttachmentBuilder(`./database/cache/${columName}.${columName == 'IHQMap' ? 'png' : 'json'}`)] })
-				try { fs.unlinkSync(`./database/cache/${columName}.${columName == 'IHQMap' ? 'png' : 'json'}`) } catch (e) { console.error(e.message) }
+				await fs.writeFileSync(`./database/cache/${columnName}.${columnName == 'IHQMap' ? 'png' : 'json'}`, JSON.stringify(data, null, 2))
+				await message.edit({ files: [new AttachmentBuilder(`./database/cache/${columnName}.${columnName == 'IHQMap' ? 'png' : 'json'}`)] })
+				try { fs.unlinkSync(`./database/cache/${columnName}.${columnName == 'IHQMap' ? 'png' : 'json'}`) } catch (e) { console.error(e.message) }
 			}
 		}
 		return null
+	}
+	async createTable(tableName, columnName) {
+		if (this.indexTable[tableName] == undefined) this.indexTable[tableName] = {}
+		this.indexTable[tableName][columnName] = {}
+		fs.writeFileSync('./database/bot/indexTable.json', JSON.stringify(this.indexTable, null, 2));
+		return this.indexTable
 	}
 }
 exports.Alliance = Alliance
