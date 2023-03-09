@@ -235,7 +235,7 @@ class Database {
 		for (let table in this.indexTable) for (let column in this.indexTable[table]) {
 			if (column == columnName) {
 				let message = await this.client.channels.cache.get(this.indexTable[table].id).messages.fetch(this.indexTable[table][column])
-				await fs.writeFileSync(`./database/cache/${columnName}.${columnName == 'IHQMap' ? 'png' : 'json'}`, JSON.stringify(data, null, 2))
+				fs.writeFileSync(`./database/cache/${columnName}.${columnName == 'IHQMap' ? 'png' : 'json'}`, JSON.stringify(data, null, 2))
 				await message.edit({ files: [new AttachmentBuilder(`./database/cache/${columnName}.${columnName == 'IHQMap' ? 'png' : 'json'}`)] })
 				try { fs.unlinkSync(`./database/cache/${columnName}.${columnName == 'IHQMap' ? 'png' : 'json'}`) } catch (e) { console.error(e.message) }
 			}
@@ -243,9 +243,12 @@ class Database {
 		return null
 	}
 	async createTable(tableName, columnName) {
-		if (this.indexTable[tableName] == undefined) this.indexTable[tableName] = {}
-		this.indexTable[tableName][columnName] = {}
+		if (this.indexTable[tableName] == undefined) return Error(`Table ${tableName} doesn't exist and must manually be created`)
+		fs.writeFileSync(`./database/cache/${columnName}.json`, JSON.stringify({}, null, 2))
+		let message = await this.client.channels.cache.get(this.indexTable[tableName].id).send({ files: [new AttachmentBuilder(`./database/cache/${columnName}.json`)] })
+		this.indexTable[tableName][columnName] = message.id
 		fs.writeFileSync('./database/bot/indexTable.json', JSON.stringify(this.indexTable, null, 2));
+		try { fs.unlinkSync(`./database/cache/${columnName}.json`) } catch (e) { console.error(e.message) }
 		return this.indexTable
 	}
 }

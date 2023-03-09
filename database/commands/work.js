@@ -82,22 +82,31 @@ module.exports = {
 			await database.postData('country_list', countries)
 		}
 		if (subcommand == 'plant') {
-			let product = interaction.options.get('product');
+			let product = interaction.options.getString('product');
 			let randAmt = Math.floor(Math.random() * (10));
+			let producedPlants = await database.getData('produce_cache')
+			if (producedPlants[interaction.user.id] == undefined) producedPlants[interaction.user.id] = {
+				crops: 0,
+				wood: 0,
+				sugar: 0,
+				harvestTime: Date.now() + 1000 * 60 * 15
+			}
+			producedPlants[product] += randAmt;
 			const produceEmbed = new EmbedBuilder()
 				.setTitle('Flora life')
-				.setDescription(`You've planted ${randAmt} ${product == 'wood' ? 'tree' : (product == 'sugar' ? 'sugarcane' : 'crop')}${randAmt == 1 ? '' : 's'}!`)
+				.setDescription(`You've planted ${randAmt} ${product == 'wood' ? 'tree' : (product == 'sugar' ? 'sugarcane' : 'crop')}${randAmt == 1 ? '' : 's'}! Harvest ${randAmt == 1 ? 'it' : 'these'} in 15 minutes!`)
 				.setColor(misc.randomColor())
 				.setTimestamp()
 				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
-			countries[playersCountry[interaction.user.id][0]].produced.fish += randAmt
+			// countries[playersCountry[interaction.user.id][0]].produced[product] += randAmt
+			await database.postData('produce_cache', producedPlants)
 			await database.postData('country_list', countries)
 		}
 		if (subcommand == 'harvest') {
-			let product = interaction.options.get('product');
+			let product = interaction.options.getString('product');
 		}
 		if (subcommand == 'mine') {
-			let product = interaction.options.get('product');
+			let product = interaction.options.getString('product');
 		}
 		if (subcommand == 'slaughter') {
 			let randAmt = Math.floor(Math.random() * (10));

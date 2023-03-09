@@ -3,6 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Client, EmbedBuilder, Events, GatewayIntentBits, Partials, Routes, REST, Collection, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
 const config = require("./database/bot/config.json");
+const indexTable = require('./database/bot/indexTable.json')
 const { Misc, Database } = require('./database/bot/functions')
 const client = new Client({
 	intents: [
@@ -17,6 +18,7 @@ const client = new Client({
 });
 const database = new Database({ client: client, indexTable: indexTable })
 const misc = new Misc()
+
 //Yes everything above is for starting up
 
 //Upload all the commands
@@ -41,6 +43,7 @@ rest.put(Routes.applicationCommands(config.clientID), { body: commands })
 client.once(Events.ClientReady, async c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
 	// console.log(await database.postData('country_list', JSON.parse(fs.readFileSync('./database/country/country_list.json'))))
+	// await database.createTable('country', 'produce_cache')
 	const reactionRoles = await database.getData('reaction-roles')
 	rr = new ReactionRole(client, reactionRoles);
 	// misc.produceInterval(client)
