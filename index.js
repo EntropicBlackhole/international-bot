@@ -47,6 +47,10 @@ client.once(Events.ClientReady, async c => {
 	const reactionRoles = await database.getData('reaction-roles')
 	rr = new ReactionRole(client, reactionRoles);
 	// misc.produceInterval(client)
+	// let temp = await database.getData('produce_cache')
+	// temp["1063597343787716729"].plantedCache.harvestTime = 1678494602074
+	// await database.postData('produce_cache', temp)
+	
 });
 
 client.on(Events.GuildMemberAdd, async member => {
@@ -104,8 +108,7 @@ client.on(Events.InteractionCreate, async interaction => {
 						.setCustomId('show-error')
 						.setLabel('Show error log')
 						.setStyle(ButtonStyle.Danger));
-			if (interaction.deferred == false) try { await interaction.deferReply(); } catch (e) { console.error(e) }
-			await interaction.editReply({ content: 'There was an error while executing this command!', ephemeral: true, components: [row] });
+			await interaction.channel.send({ content: 'There was an error while executing this command!', ephemeral: true, components: [row] });
 
 			client.on('interactionCreate', async i => {
 				if (!i.isButton()) return;

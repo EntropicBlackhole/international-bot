@@ -24,7 +24,10 @@ module.exports = {
 			.setDescription('Copper, gold or coal?'))
 		.addSubcommand(subcommand => subcommand
 			.setName('slaughter')
-			.setDescription('Meat of course, but this is technically fake meat so no worries')),
+			.setDescription('Meat of course, but this is technically fake meat so no worries'))
+		.addSubcommand(subcommand => subcommand
+			.setName('forge')
+			.setDescription('Forge metal you found!')),
 	async execute({ interaction, client, database, misc }) {
 		// interaction.reply('no use yet, krissy is working on this command still')
 		// return
@@ -36,7 +39,14 @@ module.exports = {
 		const subcommand = interaction.options.getSubcommand();
 		let producedCacheTimer = await database.getData('produce_cache')
 		if (producedCacheTimer[interaction.user.id] == undefined) producedCacheTimer[interaction.user.id] = {
-			timer: {},
+			timer: {
+				fish: 0,
+				oil: 0,
+				plants: 0,
+				mine: 0,
+				meat: 0,
+				metal: 0,
+			},
 			plantedCache: {
 				crops: 0,
 				wood: 0,
@@ -44,10 +54,9 @@ module.exports = {
 				harvestTime: 0
 			}
 		}
-
-
 		if (subcommand == 'fish') {
-			let randAmt = Math.floor(Math.random() * (10));
+			if (producedCacheTimer[interaction.user.id].timer.fish > Date.now()) return interaction.editReply(`You can fish fishy fish in ${misc.msToTime(producedCacheTimer[interaction.user.id].timer.fish - Date.now())}`)
+			let randAmt = Math.floor(Math.random() * (20 - 1) + 1);
 			var produceEmbed = new EmbedBuilder()
 				.setTitle('Fishy business')
 				.setDescription(`You've caught ${randAmt} fish${randAmt == 1 ? '' : 'es'}!`)
@@ -55,10 +64,11 @@ module.exports = {
 				.setTimestamp()
 				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
 			countries[playersCountry[interaction.user.id][0]].produced.fish += randAmt
-			await database.postData('country_list', countries)
+			producedCacheTimer[interaction.user.id].timer.fish = Date.now() + 1000 * 60 * 3
 		}
 		else if (subcommand == 'extract') {
-			let randAmt = Math.floor(Math.random() * (10));
+			if (producedCacheTimer[interaction.user.id].timer.oil > Date.now()) return interaction.editReply(`You can extract oil in ${misc.msToTime(producedCacheTimer[interaction.user.id].timer.oil - Date.now())}`)
+			let randAmt = Math.floor(Math.random() * (20 - 1) + 1);
 			var produceEmbed = new EmbedBuilder()
 				.setTitle('Oily lands')
 				.setDescription(`You've extracted ${randAmt} liter${randAmt == 1 ? '' : 's'} of oil!`)
@@ -66,12 +76,13 @@ module.exports = {
 				.setTimestamp()
 				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
 			countries[playersCountry[interaction.user.id][0]].produced.oil += randAmt
-			await database.postData('country_list', countries)
+			producedCacheTimer[interaction.user.id].timer.oil = Date.now() + 1000 * 60 * 3
 		}
 		else if (subcommand == 'plant') {
-			let randAmtCrops = Math.floor(Math.random() * (10));
-			let randAmtTrees = Math.floor(Math.random() * (10));
-			let randAmtSugarcane = Math.floor(Math.random() * (10));
+			if (producedCacheTimer[interaction.user.id].timer.plants > Date.now()) return interaction.editReply(`You can plant in ${misc.msToTime(producedCacheTimer[interaction.user.id].timer.plants - Date.now())}`)
+			let randAmtCrops = Math.floor(Math.random() * (30 - 1) + 1);
+			let randAmtTrees = Math.floor(Math.random() * (30 - 1) + 1);
+			let randAmtSugarcane = Math.floor(Math.random() * (30 - 1) + 1);
 			producedCacheTimer[interaction.user.id].plantedCache.crops += randAmtCrops;
 			producedCacheTimer[interaction.user.id].plantedCache.wood += randAmtTrees;
 			producedCacheTimer[interaction.user.id].plantedCache.sugar += randAmtSugarcane;
@@ -83,17 +94,33 @@ module.exports = {
 				.setTimestamp()
 				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
 			producedCacheTimer[interaction.user.id].timer.plants = Date.now() + 1000 * 60 * (randAmtCrops + randAmtTrees + randAmtSugarcane)
-			await database.postData('produce_cache', producedCacheTimer)
-			await database.postData('country_list', countries)
 		}
 		else if (subcommand == 'harvest') {
-
+			if (producedCacheTimer[interaction.user.id].plantedCache.harvestTime > Date.now()) return interaction.editReply(`You can harvest your plants in ${misc.msToTime((producedCacheTimer[interaction.user.id].plantedCache.harvestTime - Date.now()) / 1000 / 60)}`)
+			let harvestAmt = {
+				crops: 0,
+				wood: 0,
+				sugar: 0
+			};
+			for (let plant in producedCacheTimer[interaction.user.id].plantedCache) {
+				if (plant == 'harvestTime') break
+				let plantAmt = producedCacheTimer[interaction.user.id].plantedCache[plant]
+				countries[playersCountry[interaction.user.id][0]].produced[plant] += plantAmt
+				harvestAmt[plant] = plantAmt
+				producedCacheTimer[interaction.user.id].plantedCache[plant] = 0
+			}
+			var produceEmbed = new EmbedBuilder()
+				.setTitle('Flora unlife')
+				.setDescription(`You've harvested ${harvestAmt.crops} crop${harvestAmt.crops == 1 ? '' : 's'}, ${harvestAmt.wood} tree${harvestAmt.wood == 1 ? '' : 's'} and ${harvestAmt.sugar} sugarcane!`)
+				.setColor(misc.randomColor())
+				.setTimestamp()
+				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
 		}
 		else if (subcommand == 'mine') {
-			if (producedCacheTimer[interaction.user.id].timer.mine > Date.now()) return interaction.editReply(`You can mine in ${Math.floor((producedCacheTimer[interaction.user.id].timer.mine - Date.now()) / 1000 / 60)} min`)
-			let randAmtCopper = Math.floor(Math.random() * (10));
-			let randAmtGold = Math.floor(Math.random() * (10));
-			let randAmtCoal = Math.floor(Math.random() * (10));
+			if (producedCacheTimer[interaction.user.id].timer.mine > Date.now()) return interaction.editReply(`You can mine in ${misc.msToTime(producedCacheTimer[interaction.user.id].timer.mine - Date.now())}`)
+			let randAmtCopper = Math.floor(Math.random() * (20 - 1) + 1);
+			let randAmtGold = Math.floor(Math.random() * (20 - 1) + 1);
+			let randAmtCoal = Math.floor(Math.random() * (20 - 1) + 1);
 			var produceEmbed = new EmbedBuilder()
 				.setTitle('Don\'t mine at night')
 				.setDescription(`You've mined ${randAmtCopper} copper, ${randAmtGold} gold and ${randAmtCoal} coal!`)
@@ -104,12 +131,10 @@ module.exports = {
 			countries[playersCountry[interaction.user.id][0]].produced.copper += randAmtCopper
 			countries[playersCountry[interaction.user.id][0]].produced.gold += randAmtGold
 			countries[playersCountry[interaction.user.id][0]].produced.coal += randAmtCoal
-			await database.postData('produce_cache', producedCacheTimer)
-			await database.postData('country_list', countries)
-			// return interaction.editReply({ embeds: [produceEmbed] })
 		}
 		else if (subcommand == 'slaughter') {
-			let randAmt = Math.floor(Math.random() * (10));
+			if (producedCacheTimer[interaction.user.id].timer.meat > Date.now()) return interaction.editReply(`You can slaughter virtual fake meat in ${misc.msToTime(producedCacheTimer[interaction.user.id].timer.meat - Date.now())}`)
+			let randAmt = Math.floor(Math.random() * (20 - 1) + 1);
 			var produceEmbed = new EmbedBuilder()
 				.setTitle('It\'s artificial meat I swear')
 				.setDescription(`You've slaughtered ${randAmt} virtual non real animal${randAmt == 1 ? '' : 's'}!`)
@@ -117,9 +142,22 @@ module.exports = {
 				.setTimestamp()
 				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
 			countries[playersCountry[interaction.user.id][0]].produced.meat += randAmt
-			await database.postData('produce_cache', producedCacheTimer)
-			await database.postData('country_list', countries)
+			producedCacheTimer[interaction.user.id].timer.meat = Date.now() + 1000 * 60 * 3
 		}
+		else if (subcommand == 'forge') {
+			if (producedCacheTimer[interaction.user.id].timer.metal > Date.now()) return interaction.editReply(`You can forge your metal scraps together in ${misc.msToTime(producedCacheTimer[interaction.user.id].timer.metal - Date.now())}`)
+			let randAmt = Math.floor(Math.random() * (20 - 1) + 1);
+			var produceEmbed = new EmbedBuilder()
+				.setTitle('Forged scraps')
+				.setDescription(`You've forged ${randAmt} piece${randAmt == 1 ? '' : 's'} of metal!`)
+				.setColor(misc.randomColor())
+				.setTimestamp()
+				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
+			countries[playersCountry[interaction.user.id][0]].produced.metal += randAmt
+			producedCacheTimer[interaction.user.id].timer.metal = Date.now() + 1000 * 60 * 3
+		}
+		await database.postData('produce_cache', producedCacheTimer)
+		await database.postData('country_list', countries)
 		return interaction.editReply({ embeds: [produceEmbed] })
 	},
 };

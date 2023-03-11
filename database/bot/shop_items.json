@@ -2,7 +2,7 @@
 	"ground_unit": {
 		"name": "Ground Unit",
 		"description": "Is a unit on the ground (Soldiers, Tanks, etc) Deals 10 damage",
-		"cost": 100,
+		"cost": 50,
 		"type": [
 			"Battle Unit"
 		],
@@ -15,7 +15,7 @@
 	"navy_unit": {
 		"name": "Navy Unit",
 		"description": "Is a unit in the ocean (Ships, Submarines, etc) Deals 10 damage",
-		"cost": 100,
+		"cost": 50,
 		"type": [
 			"Battle Unit"
 		],
@@ -28,7 +28,7 @@
 	"air_unit": {
 		"name": "Air Unit",
 		"description": "Is a unit in the air (Airplanes, Helicopters, etc) Deals 10 damage",
-		"cost": 100,
+		"cost": 50,
 		"type": [
 			"Battle Unit"
 		],
@@ -106,7 +106,7 @@
 	"nuke": {
 		"name": "Nuke",
 		"description": "Nuke is a powerful weapon that can destroy an entire city. It is a very powerful weapon, but it is quite dangerous. Deals 100 damage",
-		"cost": 200,
+		"cost": 500,
 		"type": [
 			"Battle Unit"
 		],
@@ -132,20 +132,20 @@
 	"dextranuke": {
 		"name": "DextraNuke",
 		"description": "DextraNuke is a powerful weapon that can destroy an entire country. Highly dangerous, do not even buy, or use, unless you are insane. Deals 500 damage",
-		"cost": 10000,
+		"cost": 5000,
 		"type": [
 			"Battle Unit"
 		],
 		"use": {
 			"type": "attack",
-			"points": 500,
+			"points": 700,
 			"max_use": 1
 		}
 	},
 	"medical_aid": {
 		"name": "Medical Aid",
 		"description": "Cures 60 HP, has a max use of 5, being able to heal 300 HP at a time",
-		"cost": 150,
+		"cost": 100,
 		"type": [
 			"Healing"
 		],
@@ -158,7 +158,7 @@
 	"lightning_sandwich": {
 		"name": "Lightning Sandwich Packet",
 		"description": "Cures 40 HP, has a max use of 5, being able to heal 200 HP at a time",
-		"cost": 100,
+		"cost": 60,
 		"type": [
 			"Healing"
 		],
@@ -167,5 +167,161 @@
 			"points": 40,
 			"max_use": 5
 		}
-	}
+	},
+	"": {
+		"name": "",
+		"description": "",
+		"cost": 0,
+		"type": [],
+		"use": {
+			"type": "",
+			"points": 0,
+			"max_use": 0
+		}
+	},
+	"": {
+		"name": "",
+		"description": "",
+		"cost": 0,
+		"type": [],
+		"use": {
+			"type": "",
+			"points": 0,
+			"max_use": 0
+		}
+	},
+	"": {
+		"name": "",
+		"description": "",
+		"cost": 0,
+		"type": [],
+		"use": {
+			"type": "",
+			"points": 0,
+			"max_use": 0
+		}
+	},
+	"": {
+		"name": "",
+		"description": "",
+		"cost": 0,
+		"type": [],
+		"use": {
+			"type": "",
+			"points": 0,
+			"max_use": 0
+		}
+	},
+	"": {
+		"name": "",
+		"description": "",
+		"cost": 0,
+		"type": [],
+		"use": {
+			"type": "",
+			"points": 0,
+			"max_use": 0
+		}
+	},
+	"": {
+		"name": "",
+		"description": "",
+		"cost": 0,
+		"type": [],
+		"use": {
+			"type": "",
+			"points": 0,
+			"max_use": 0
+		}
+	},
+	"": {
+		"name": "",
+		"description": "",
+		"cost": 0,
+		"type": [],
+		"use": {
+			"type": "",
+			"points": 0,
+			"max_use": 0
+		}
+	},
+	"": {
+		"name": "",
+		"description": "",
+		"cost": 0,
+		"type": [],
+		"use": {
+			"type": "",
+			"points": 0,
+			"max_use": 0
+		}
+	},
+	"": {
+		"name": "",
+		"description": "",
+		"cost": 0,
+		"type": [],
+		"use": {
+			"type": "",
+			"points": 0,
+			"max_use": 0
+		}
+	},
+	"": {
+		"name": "",
+		"description": "",
+		"cost": 0,
+		"type": [],
+		"use": {
+			"type": "",
+			"points": 0,
+			"max_use": 0
+		}
+	},
+	"": {
+		"name": "",
+		"description": "",
+		"cost": 0,
+		"type": [],
+		"use": {
+			"type": "",
+			"points": 0,
+			"max_use": 0
+		}
+	},
+	"": {
+		"name": "",
+		"description": "",
+		"cost": 0,
+		"type": [],
+		"use": {
+			"type": "",
+			"points": 0,
+			"max_use": 0
+		}
+	},
+	"nuke_shield": {
+		"name": "Nuclear Blast Neutron Shield",
+		"description": "Creates a neutron shield across your entire country, dense enough to block explosion and radiation of the nuke from hitting your country",
+		"cost": 600,
+		"type": [
+			"Defense"
+		],
+		"use": {
+			"type": "defense",
+			"points": -1,
+			"max_use": 1
+		}
+	},
 }
+/*
+-Nuclear Blast Neutron Shield (2 uses)
+-Energy Shield Packet (1 round use)
+-Energy Damage Reflector Packet (1 round use)
+-Ballistic Missile (Reaches those in your same continent)
+-Intercontinental Ballistic Missile (Reaches those everywhere in the world)
+-Healing Spray (Heals 5 health, but is cheap, has max use of 30)
+-Atlantis Tea (Heals 15 health, max use 3
+-Tanks (Do 20 damage each, but max use of 5)
+-Reinforced Tanks (Do 30 damage each, max use is 5)
+*/
