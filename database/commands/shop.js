@@ -50,8 +50,8 @@ module.exports = {
 		const countries = await database.getData('country_list')
 		const playersCountry = await database.getData('players_country')
 		
-		if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
-		else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
+		// if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
+		// else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
 		const subcommand = interaction.options.getSubcommand();
 		if (subcommand == 'buy') {
 			let item = interaction.options.getString('item');
