@@ -13,10 +13,6 @@ module.exports = {
 		.setName("help")
 		.setDescription("Shows this description of commands!"),
 	async execute({ interaction, client }) {
-		// let role = interaction.guild.members.cache.get("708026434660204625").roles.cache.get(role => role.id == '1046195813249982492');
-		// client.guilds.cache.get(interaction.guild.id).members.cache.get(player).user.username
-		// console.log(role)
-		// role.setPermissions([PermissionsBitField.Flags.SendMessages])
 		const commandFiles = fs.readdirSync(__dirname).filter(file => file.endsWith('.js'));
 		const helpEmbed = new EmbedBuilder()
 			.setTitle('List of commands!')

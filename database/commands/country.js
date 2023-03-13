@@ -22,36 +22,9 @@ module.exports = {
 				.setDescription('Choose one wisely! (Case sensitive, place more than 2 letters to search)')
 				.setRequired(true)
 				.setAutocomplete(true)))
-		.addSubcommandGroup(subcommandGroup => subcommandGroup
+		.addSubcommand(subcommandGroup => subcommandGroup
 			.setName('sell')
-			.setDescription('Sell your products')
-			.addSubcommand(subcommand => subcommand
-				.setName('unit')
-				.setDescription('Sell an amount of a product')
-				.addStringOption(option => option
-					.setName('product')
-					.setDescription('The product to sell')
-					.setRequired(true)
-					.setChoices(
-						{ name: "Fish", value: "fish" },
-						{ name: "Oil", value: "oil" },
-						{ name: "Crops", value: "crops" },
-						{ name: "Copper", value: "copper" },
-						{ name: "Wood", value: "wood" },
-						{ name: "Coal", value: "coal" },
-						{ name: "Gold", value: "gold" },
-						{ name: "Meat", value: "meat" },
-						{ name: "Sugar", value: "sugar" },
-						{ name: "Metal", value: "metal" }
-					))
-				.addIntegerOption(option => option
-					.setName('amt')
-					.setDescription('Amount to sell')
-					.setMinValue(1)
-					.setRequired(true)))
-			.addSubcommand(subcommand => subcommand
-				.setName('all')
-				.setDescription('Sells all of your products (Recommended)')))
+			.setDescription('Sells all of your products'))
 		.addSubcommand(subcommand => subcommand
 			.setName('leave')
 			.setDescription('Leaves your country, are you sure?'))
@@ -73,28 +46,29 @@ module.exports = {
 			let filtered = counTrie.getMatchingWords(focusedValue, false)
 			if (filtered.length > 0) filtered = filtered.slice(0, 24)
 			else filtered = [];
-			await interaction.respond(
-				filtered.map(choice => ({ name: choice, value: choice })),
-			);
+			await interaction.respond(filtered.map(choice => ({ name: choice, value: choice })));
 		}
 		else await interaction.respond([])
 
 	},
 	async execute({ interaction, client, database }) {
 		await interaction.deferReply();
+
 		const countries = await database.getData('country_list')
 		const playersCountry = await database.getData('players_country')
 		const continentMultipliers = await database.getData('continent_multipliers')
 		const bank = await database.getData('bank')
-		if ([{}, undefined].includes(bank[interaction.user.id])) bank[interaction.user.id] = 0;
-		await database.postData('bank', bank)
+
 		const subcommand = interaction.options.getSubcommand();
 		const subcommandGroup = interaction.options.getSubcommandGroup();
+
+		if ([{}, undefined].includes(bank[interaction.user.id])) { bank[interaction.user.id] = 0; await database.postData('bank', bank) }
+		if ((playersCountry[interaction.user.id] == undefined) && (subcommand != 'get')) return interaction.editReply('You don\'t have a country')
+
 		if (subcommand == 'get') {
 			let country = interaction.options.getString('country');
 			if (!countries[country]) return interaction.editReply(`${country} does not exist`)
-			if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length > 0) return interaction.editReply('You already have a country') }
-			else if (playersCountry[interaction.user.id] != undefined) return interaction.editReply('You already have a country')
+			if (playersCountry[interaction.user.id]) return interaction.editReply('You already have a country')
 			if (countries[country].isTaken) return interaction.editReply(`Sorry but ${country} is taken by <@${countries[country].owner}>`)
 			countries[country].isTaken = true;
 			countries[country].owner = interaction.user.id
@@ -109,84 +83,37 @@ module.exports = {
 			await member.setNickname(misc.capitalize(country))
 			return interaction.editReply(`You have successfully become the leader of ${country}!`)
 		} //Finished
-		if (subcommandGroup == 'sell') {
-			if (subcommand == 'unit') {
-				let product = interaction.options.getString('product');
-				let amt = interaction.options.getInteger('amt');
-				if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
-				else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
-				if (playersCountry[interaction.user.id].length > 1) {
-					interaction.editReply(`You have more than 1 country occupied, which one do you wanna sell from? (${playersCountry[interaction.user.id].join('/')}/all) (Is case sensitive)`)
-					const filter = m => ((playersCountry[interaction.user.id].includes(m.content)) || (m.content.toLowerCase() === 'all'))
-					const collector = interaction.channel.createMessageCollector({ filter, time: 60000 });
-
-					collector.on('collect', async m => {
-						if (m.content.toLowerCase() == 'all') {
-							let amount = 0;
-							for (country of playersCountry[interaction.user.id]) {
-								if (countries[country].produced[product] < amt) {
-									await interaction.editReply(`You don't have \`${amt}\` of \`${product}\`, selling all possible of \`${product}\``)
-									amt = Math.round(countries[country].produced[product])
-								}
-								countries[country].produced[product] -= amt
-								amount += Math.round(amt * continentMultipliers[countries[country].continent][product])
-							}
-							bank[interaction.user.id] += amount;
-							await database.postData('bank', bank)
-							await database.postData('country_list', countries)
-							return interaction.followUp(`You have successfully sold \`${amt}\` of \`${product}\` in your ${playersCountry[interaction.user.id].length} occupied countries, you have made a total of \`${amount}\` Imperial Credits!`)
-						} else {
-							countryOfPlayer = m.content;
-							if (countries[countryOfPlayer].produced[product] < amt) return interaction.followUp(`You don't have \`${amt}\` of \`${product}\` in ${countryOfPlayer}, you only have \`${countries[countryOfPlayer].produced[product]}\``)
-							countries[countryOfPlayer].produced[product] -= amt
-							let amount = Math.round(amt * continentMultipliers[countries[countryOfPlayer].continent][product])
-							bank[interaction.user.id] += amount;
-							await database.postData('bank', bank)
-							await database.postData('country_list', countries)
-							return interaction.followUp(`You have successfully sold \`${amt}\` of \`${product}\` in ${countryOfPlayer}, and with the continent multipler (${countries[countryOfPlayer].continent}), which is \`${continentMultipliers[countries[countryOfPlayer].continent][product]}\`, you have made a total of \`${amount}\` Imperial Credits!`)
-						}
-					});
-				} else {
-					if (countries[playersCountry[interaction.user.id][0]].produced[product] < amt) return interaction.editReply(`You don't have \`${amt}\` of \`${product}\`, you only have \`${countries[playersCountry[interaction.user.id][0]].produced[product]}\``)
-					countries[playersCountry[interaction.user.id][0]].produced[product] -= amt
-					let amount = Math.round(amt * continentMultipliers[countries[playersCountry[interaction.user.id][0]].continent][product])
-					bank[interaction.user.id] += amount;
-					await database.postData('bank', bank)
-					await database.postData('country_list', countries)
-					return interaction.followUp(`You have successfully sold \`${amt}\` of \`${product}\`, and with the continent multipler (${countries[playersCountry[interaction.user.id][0]].continent}), which is \`${continentMultipliers[countries[playersCountry[interaction.user.id][0]].continent][product]}\`, you have made a total of \`${amount}\` Imperial Credits!`)
+		if (subcommand == 'sell') {
+			let amount = 0;
+			for (i in countries[playersCountry[interaction.user.id].mainland].produced) {
+				amount += Math.floor(countries[playersCountry[interaction.user.id].mainland].produced[i] * (continentMultipliers[countries[playersCountry[interaction.user.id].mainland].continent][i] ** 2) + (countries[playersCountry[interaction.user.id].mainland].produced[i] * (countries[playersCountry[interaction.user.id].mainland].products[i] / 100)))
+				countries[playersCountry[interaction.user.id].mainland].produced[i] = 0;
+			}
+			for (country of playersCountry[interaction.user.id].conquered) {
+				for (i in countries[country].produced) { //The amount of the product produced, times its continent multiplier which is squared, and then added the percentage of the produced priced as in stats.products
+					amount += Math.floor(countries[country].produced[i] * (continentMultipliers[countries[country].continent][i] ** 2) + (countries[country].produced[i] * (countries[country].products[i] / 100)))
+					countries[country].produced[i] = 0;
 				}
 			}
-			if (subcommand == 'all') {
-				let amount = 0;
-				if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
-				else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
-				for (country of playersCountry[interaction.user.id]) {
-					for (i in countries[country].produced) {
-						amount += Math.round(countries[country].produced[i] * continentMultipliers[countries[country].continent][i])
-						countries[country].produced[i] = 0;
-					}
-				}
-				bank[interaction.user.id] += amount;
-				await database.postData('bank', bank)
-				await database.postData('country_list', countries)
-				return interaction.editReply(`You have successfully sold all of your produced stuff, and with the continent multipler, you have made a total of \`${amount}\` Imperial Credits!`)
-			}
+			bank[interaction.user.id] += amount;
+			await database.postData('bank', bank)
+			await database.postData('country_list', countries)
+			return interaction.editReply(`You have successfully sold all of your produced stuff, and with the continent multipler, you have made a total of \`${amount}\` Imperial Credits!`)
 		} //Finished
 		if (subcommand == 'leave') {
-			if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
-			else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
-			if (countries[playersCountry[interaction.user.id][0]].owner != interaction.user.id) return interaction.editReply('You don\'t own this country')
 			interaction.editReply(`Are you sure you want to leave your country? Any occupied countries will become free. (y/n)`)
 			const filter = m => ['y', 'n'].includes(m.content.toLowerCase())
-			const collector = interaction.channel.createMessageCollector({ filter, time: 15000 });
+			const collector = interaction.channel.createMessageCollector({ filter, time: 30000 });
 
 			collector.on('collect', async m => {
 				if (m.content.toLowerCase() == 'y') {
-					for (country of playersCountry[interaction.user.id]) {
+					countries[playersCountry[interaction.user.id].mainland].isTaken = false;
+					countries[playersCountry[interaction.user.id].mainland].owner = "";
+					for (country of playersCountry[interaction.user.id].conquered) {
 						countries[country].isTaken = false;
 						countries[country].owner = "";
-						delete playersCountry[interaction.user.id];
 					}
+					delete playersCountry[interaction.user.id];
 					await database.postData('country_list', countries)
 					await database.postData('players_country', playersCountry);
 					let member = interaction.guild.members.cache.get(interaction.user.id);
@@ -209,13 +136,13 @@ module.exports = {
 			}
 			if (country) {
 				let stats = capitalizeCheck ? countries[misc.capitalize(country)] : countries[country]
-				let products = []
+				let productMult = []
 				let continentProductMult = []
 				let items = []
-				for (i in stats.products) { products.push(`${misc.capitalize(i)}: ${stats.products[i]}`); continentProductMult.push(`${misc.capitalize(i)}: ${continentMultipliers[stats.continent][i].toString()}`); }
+				for (i in stats.productMult) { productMult.push(`${misc.capitalize(i)}: ${stats.productMult[i]}`); continentProductMult.push(`${misc.capitalize(i)}: ${continentMultipliers[stats.continent][i].toString()}`); }
 				for (i in stats.items) items.push(`${misc.capitalize(i)}: ${stats.items[i]}`);
 
-				if (products.length == 0) products.push('None')
+				if (productMult.length == 0) productMult.push('None')
 				if (items.length == 0) items.push('None')
 				if (stats.wars.length == 0) stats.wars.push('None')
 				if (stats.alliances.length == 0) stats.alliances.push('None')
@@ -226,7 +153,7 @@ module.exports = {
 						{ name: 'Owner', value: (stats.owner != "" ? client.users.cache.find(user => user.id === stats.owner).username : "None") },
 						{ name: 'ISO Code', value: stats.code, inline: true },
 						{ name: 'Continent', value: stats.continent, inline: true },
-						{ name: 'Product Rate', value: products.join('\n') },
+						{ name: 'Product Rate', value: productMult.join('\n') },
 						{ name: 'Continent Multipliers', value: continentProductMult.join('\n') },
 						{ name: 'Alliances', value: stats.alliances.join('\n'), inline: true },
 						{ name: 'Items', value: items.join('\n'), inline: true },
@@ -286,9 +213,7 @@ module.exports = {
 			return interaction.editReply({ files: [await database.getData('IHQMap')] })
 		} //Finished
 		if (subcommand == 'profile') {
-			if (playersCountry) { if (playersCountry.length == 0) return interaction.editReply('You don\'t have a country') }
-			else if (playersCountry == undefined) return interaction.editReply('You don\'t have a country')
-			let stats = countries[playersCountry[interaction.user.id][0]]
+			let stats = countries[playersCountry[interaction.user.id].mainland]
 			let products = []
 			let items = []
 			for (i in stats.produced) products.push(`${misc.capitalize(i)}: ${stats.produced[i]}`)
@@ -299,7 +224,7 @@ module.exports = {
 			if (stats.wars.length == 0) stats.wars.push('None')
 			if (stats.alliances.length == 0) stats.alliances.push('None')
 			const profileEmbed = new EmbedBuilder()
-				.setTitle(playersCountry[interaction.user.id][0])
+				.setTitle(playersCountry[interaction.user.id].mainland)
 				.setFields(
 					{ name: 'Owner', value: client.users.cache.find(user => user.id === stats.owner).username },
 					{ name: 'ISO Code', value: stats.code, inline: true },

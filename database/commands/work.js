@@ -29,13 +29,10 @@ module.exports = {
 			.setName('forge')
 			.setDescription('Forge metal you found!')),
 	async execute({ interaction, client, database, misc }) {
-		// interaction.reply('no use yet, krissy is working on this command still')
-		// return
 		await interaction.deferReply();
 		const playersCountry = await database.getData('players_country');
 		const countries = await database.getData('country_list');
-		if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
-		else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
+		if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
 		const subcommand = interaction.options.getSubcommand();
 		let producedCacheTimer = await database.getData('produce_cache')
 		if (producedCacheTimer[interaction.user.id] == undefined) producedCacheTimer[interaction.user.id] = {
@@ -63,7 +60,7 @@ module.exports = {
 				.setColor(misc.randomColor())
 				.setTimestamp()
 				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
-			countries[playersCountry[interaction.user.id][0]].produced.fish += randAmt
+			countries[playersCountry[interaction.user.id].mainland].produced.fish += randAmt
 			producedCacheTimer[interaction.user.id].timer.fish = Date.now() + 1000 * 60 * 3
 		}
 		else if (subcommand == 'extract') {
@@ -75,7 +72,7 @@ module.exports = {
 				.setColor(misc.randomColor())
 				.setTimestamp()
 				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
-			countries[playersCountry[interaction.user.id][0]].produced.oil += randAmt
+			countries[playersCountry[interaction.user.id].mainland].produced.oil += randAmt
 			producedCacheTimer[interaction.user.id].timer.oil = Date.now() + 1000 * 60 * 3
 		}
 		else if (subcommand == 'plant') {
@@ -105,10 +102,11 @@ module.exports = {
 			for (let plant in producedCacheTimer[interaction.user.id].plantedCache) {
 				if (plant == 'harvestTime') break
 				let plantAmt = producedCacheTimer[interaction.user.id].plantedCache[plant]
-				countries[playersCountry[interaction.user.id][0]].produced[plant] += plantAmt
+				countries[playersCountry[interaction.user.id].mainland].produced[plant] += plantAmt
 				harvestAmt[plant] = plantAmt
 				producedCacheTimer[interaction.user.id].plantedCache[plant] = 0
 			}
+			if (harvestAmt.crops == 0 && harvestAmt.wood == 0 && harvestAmt.sugar == 0) return interaction.editReply(`You haven't planted anything it seems!`)
 			var produceEmbed = new EmbedBuilder()
 				.setTitle('Flora unlife')
 				.setDescription(`You've harvested ${harvestAmt.crops} crop${harvestAmt.crops == 1 ? '' : 's'}, ${harvestAmt.wood} tree${harvestAmt.wood == 1 ? '' : 's'} and ${harvestAmt.sugar} sugarcane!`)
@@ -128,9 +126,9 @@ module.exports = {
 				.setTimestamp()
 				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
 			producedCacheTimer[interaction.user.id].timer.mine = Date.now() + 1000 * 60 * 3
-			countries[playersCountry[interaction.user.id][0]].produced.copper += randAmtCopper
-			countries[playersCountry[interaction.user.id][0]].produced.gold += randAmtGold
-			countries[playersCountry[interaction.user.id][0]].produced.coal += randAmtCoal
+			countries[playersCountry[interaction.user.id].mainland].produced.copper += randAmtCopper
+			countries[playersCountry[interaction.user.id].mainland].produced.gold += randAmtGold
+			countries[playersCountry[interaction.user.id].mainland].produced.coal += randAmtCoal
 		}
 		else if (subcommand == 'slaughter') {
 			if (producedCacheTimer[interaction.user.id].timer.meat > Date.now()) return interaction.editReply(`You can slaughter virtual fake meat in ${misc.msToTime(producedCacheTimer[interaction.user.id].timer.meat - Date.now())}`)
@@ -141,7 +139,7 @@ module.exports = {
 				.setColor(misc.randomColor())
 				.setTimestamp()
 				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
-			countries[playersCountry[interaction.user.id][0]].produced.meat += randAmt
+			countries[playersCountry[interaction.user.id].mainland].produced.meat += randAmt
 			producedCacheTimer[interaction.user.id].timer.meat = Date.now() + 1000 * 60 * 3
 		}
 		else if (subcommand == 'forge') {
@@ -153,7 +151,7 @@ module.exports = {
 				.setColor(misc.randomColor())
 				.setTimestamp()
 				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
-			countries[playersCountry[interaction.user.id][0]].produced.metal += randAmt
+			countries[playersCountry[interaction.user.id].mainland].produced.metal += randAmt
 			producedCacheTimer[interaction.user.id].timer.metal = Date.now() + 1000 * 60 * 3
 		}
 		await database.postData('produce_cache', producedCacheTimer)

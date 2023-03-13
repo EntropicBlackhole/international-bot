@@ -76,16 +76,13 @@ module.exports = {
 		const playersCountry = await database.getData('players_country')
 		const wars = await database.getData('wars')
 		const bank = await database.getData('bank')
-		if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
-		else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
+
+		if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
+
 		const subcommand = interaction.options.getSubcommand();
 		if (subcommand == 'declare') {
 			let user = interaction.options.getUser('user');
-			if (playersCountry[user.id]) { if (playersCountry[user.id].length == 0) return interaction.editReply(`${user.username} does not have a country`) }
-			else if (playersCountry[user.id] == undefined) return interaction.editReply(`${user.username} does not have a country`)
-
-			if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
-			else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
+			if (playersCountry[user.id] == undefined) return interaction.editReply(`${user.username} doesn't have a country`)
 
 			let randomWarID = Math.floor((Math.random() * 10000000) + 9000000).toString(36)
 			const warEmbed = new EmbedBuilder()
@@ -99,26 +96,27 @@ module.exports = {
 				)
 				.setTimestamp()
 				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
-			let warObject = {
+			wars[randomWarID] = {
 				captainAttacker: interaction.user.id,
 				captainDefender: user.id,
 				name: randomWarID,
 				id: randomWarID,
 				isFinished: false,
-				attacker: {},
-				defender: {},
+				attacker: {
+					[interaction.user.id]: {
+						name: interaction.user.username,
+						hasPlayed: false
+					}
+				},
+				defender: {
+					[user.id]: {
+						name: user.username,
+						hasPlayed: false
+					}
+				},
 				turn: "Attacker"
 			}
-			warObject.attacker[interaction.user.id] = {
-				name: interaction.user.username,
-				hasPlayed: false
-			};
-			warObject.defender[user.id] = {
-				name: user.username,
-				hasPlayed: false
-			};
-			wars[randomWarID] = warObject;
-			countries[playersCountry[interaction.user.id][0]].wars.push(randomWarID)
+			countries[playersCountry[interaction.user.id].mainland].wars.push(randomWarID)
 			countries[playersCountry[user.id][0]].wars.push(randomWarID)
 			await database.postData('country_list', countries);
 			await database.postData('wars', wars)
@@ -127,20 +125,12 @@ module.exports = {
 		if (subcommand == 'use') {
 			let warID = interaction.options.getString('war-id');
 			let item = interaction.options.getString('item');
-			let amount = interaction.options.getInteger('amount') ? interaction.options.getInteger('amount') : 1;
-			if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
-			else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
-			//Check if the user is in this specific war
-			if (!countries[playersCountry[interaction.user.id][0]].wars.includes(warID)) return interaction.editReply(`You aren't in this war`)
-			//Check if it's users turn
+			let amount = interaction.options.getInteger('amount') ?? 1;
+			if (!countries[playersCountry[interaction.user.id].mainland].wars.includes(warID)) return interaction.editReply(`You aren't in this war`)
 			if (!wars[warID][wars[warID].turn.toLowerCase()][interaction.user.id]) return interaction.editReply(`It's not your side's turn yet`)
-			//Check if user has already played
 			if (wars[warID][wars[warID].turn.toLowerCase()][interaction.user.id].hasPlayed) return interaction.editReply(`You've already played this turn, wait till others finish make their move, or have the captain confirm the end of the turn with \`/war confirm <war-id>\``)
-			//Check if user has item
-			if (!countries[playersCountry[interaction.user.id][0]].items[item]) return interaction.editReply(`You don't own ${item}`)
-			//Check if user has amount of item
-			if (countries[playersCountry[interaction.user.id][0]].items[item] < amount) return interaction.editReply(`You only have ${countries[playersCountry[interaction.user.id][0]].items[item]} of ${item}, not ${amount}`)
-			//Check if war has already ended
+			if (!countries[playersCountry[interaction.user.id].mainland].items[item]) return interaction.editReply(`You don't own ${item}`)
+			if (countries[playersCountry[interaction.user.id].mainland].items[item] < amount) return interaction.editReply(`You only have ${countries[playersCountry[interaction.user.id].mainland].items[item]} of ${item}, not ${amount}`)
 			if (wars[warID].isFinished) return interaction.editReply('This war has already ended dumbass')
 			let itemUse = shop[item].use.type
 			let points = shop[item].use.points
@@ -154,10 +144,11 @@ module.exports = {
 			//put all the people in your own side in an array
 			let peopleSideArray = []
 			for (id of Object.keys(wars[warID][itemUse == 'heal' ? (wars[warID].turn == 'Attacker' ? 'attacker' : 'defender') : (wars[warID].turn == 'Attacker' ? 'defender' : 'attacker')])) {
-				peopleSideArray.push(playersCountry[id][0])
+				peopleSideArray.push(playersCountry[id].mainland)
 			}
 			//The ID of the other person to apply the item on
 			var otherUserID = ""
+			let whoToUse = checkWhoToUse()
 			if (peopleSideArray.length > 1) { //If theres more than one person in this side:
 				interaction.editReply(`There are multiple people! Which one do you want to use this on? (Case sensitive) (${peopleSideArray.join('/')})`)
 				const filter = m => ((peopleSideArray.includes(m.content)) && m.author.id == interaction.user.id)
@@ -169,7 +160,7 @@ module.exports = {
 					//Since no errors have been passed, you can now mark the user's play as true
 					wars[warID][wars[warID].turn.toLowerCase()][interaction.user.id].hasPlayed = true;
 					//Everything else seems pretty simple
-					countries[playersCountry[interaction.user.id][0]].items[item] -= amount;
+					countries[playersCountry[interaction.user.id].mainland].items[item] -= amount;
 					if (itemUse == 'attack') {
 						countries[playersCountry[otherUserID]].health -= points * amount
 						await interaction.followUp(`Successfully did ${points * amount} damage to <@${otherUserID}>!`)
@@ -187,7 +178,7 @@ module.exports = {
 						await database.postData('country_list', countries)
 						await database.postData('wars', wars)
 					} else if (itemUse == 'heal') {
-						countries[playersCountry[otherUserID]].health += points * amount
+						countries[playersCountry[otherUserID].mainland].health += points * amount
 						await interaction.followUp(`Successfully healed ${points * amount} HP!`);
 						await database.postData('country_list', countries)
 						await database.postData('wars', wars)
@@ -316,7 +307,7 @@ module.exports = {
 				//Since no errors have been passed, you can now mark the user's play as true
 				wars[warID][wars[warID].turn.toLowerCase()][interaction.user.id].hasPlayed = true;
 				//Everything else seems pretty simple
-				countries[playersCountry[interaction.user.id][0]].items[item] -= amount;
+				countries[playersCountry[interaction.user.id].mainland].items[item] -= amount;
 				if (itemUse == 'attack') {
 					countries[playersCountry[otherUserID]].health -= points * amount
 					await interaction.followUp(`Successfully did ${points * amount} damage to <@${otherUserID}>!`)
@@ -468,7 +459,7 @@ module.exports = {
 				name: interaction.user.username,
 				hasPlayed: false
 			}
-			countries[playersCountry[interaction.user.id][0]].wars.push(warID)
+			countries[playersCountry[interaction.user.id].mainland].wars.push(warID)
 			await database.postData('country_list', countries);
 			await database.postData('wars', wars);
 			return interaction.editReply(`Successfully joined ${wars[warID].name} on the ${side} side! Do /war use to start fighting!`)
@@ -519,7 +510,7 @@ module.exports = {
 			//If there are no members left, that side loses
 			if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
 			else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
-			
+
 			let warID = interaction.options.getString('war-id');
 			//Check if war has already ended
 			if (wars[warID].isFinished) return interaction.editReply('This war has already ended dumbass')
@@ -603,7 +594,7 @@ module.exports = {
 							console.log(winningSide, losingSide)
 							playersCountry[losingSide[0]] = [player];
 							playersCountry[winningSide[0]].push(playersCountry[losingSide[0]][0]) //!! Error
-							
+
 							winningSide.shift() //I forgot why I was shifting these
 							losingSide.shift()
 							//Iterating
@@ -628,7 +619,7 @@ module.exports = {
 								playersCountry[winningSide[i]].push(playersCountry[losingSide[i]][0])
 								playersCountry[losingSide[i]] = [];
 							}
-							countries[playersCountry[interaction.user.id][0]].wars.splice(countries[playersCountry[interaction.user.id][0]].wars.indexOf(warID), 1)
+							countries[playersCountry[interaction.user.id].mainland].wars.splice(countries[playersCountry[interaction.user.id].mainland].wars.indexOf(warID), 1)
 							//delete the war id from the rest of the players too
 							wars[warID][side][player] = tempPlayerData
 							await database.postData('players_country', playersCountry)
@@ -642,9 +633,9 @@ module.exports = {
 					else if (player == wars[warID]["captain" + misc.capitalize(side)]) wars[warID]["captain" + misc.capitalize(side)] = Object.keys(wars[warID][side])[0]
 				}
 			}
-			
+
 			// for (let player in wars[warID].defender) if (player == interaction.user.id) delete wars[warID].defender[player]
-			countries[playersCountry[interaction.user.id][0]].wars.splice(countries[playersCountry[interaction.user.id][0]].wars.indexOf(warID), 1)
+			countries[playersCountry[interaction.user.id].mainland].wars.splice(countries[playersCountry[interaction.user.id].mainland].wars.indexOf(warID), 1)
 
 			await database.postData('country_list', countries);
 			await database.postData('wars', wars);
@@ -653,13 +644,13 @@ module.exports = {
 		else if (subcommand == 'confirm') {
 			if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
 			else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
-			
+
 
 			let warID = interaction.options.getString('war-id');
 			//Check if war has already ended
 			if (wars[warID].isFinished) return interaction.editReply('This war has already ended dumbass')
 			//Check if the user is in this specific war
-			if (!countries[playersCountry[interaction.user.id][0]].wars.includes(warID)) return interaction.editReply(`You aren't in this war`)
+			if (!countries[playersCountry[interaction.user.id].mainland].wars.includes(warID)) return interaction.editReply(`You aren't in this war`)
 			//Check if it's users turn
 			if (!wars[warID][wars[warID].turn.toLowerCase()][interaction.user.id]) return interaction.editReply(`It's not your side's turn yet`)
 			//Check if the user is the captain of this side's war
@@ -672,7 +663,3 @@ module.exports = {
 		}
 	},
 };
-
-/*
-TODO: Put the side's captain on war list embed
-*/

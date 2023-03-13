@@ -50,15 +50,14 @@ module.exports = {
 		const countries = await database.getData('country_list')
 		const playersCountry = await database.getData('players_country')
 		
-		// if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
-		// else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
+		if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
 		const subcommand = interaction.options.getSubcommand();
 		if (subcommand == 'buy') {
 			let item = interaction.options.getString('item');
 			let amt = (interaction.options.getInteger('amt') ?? 1)
-			if (!countries[playersCountry[interaction.user.id][0]].items[item]) countries[playersCountry[interaction.user.id][0]].items[item] = 0
+			if (!countries[playersCountry[interaction.user.id].mainland].items[item]) countries[playersCountry[interaction.user.id].mainland].items[item] = 0
 			if ((shop[item].cost * amt) > bank[interaction.user.id]) return interaction.editReply(`You don't have ${(shop[item].cost * amt)} Imperial Credits to buy \`${amt}\` of ${shop[item].name}. You only have ${bank[interaction.user.id]} IC`)
-			countries[playersCountry[interaction.user.id][0]].items[item] += amt
+			countries[playersCountry[interaction.user.id].mainland].items[item] += amt
 			bank[interaction.user.id] -= shop[item].cost * amt
 			await database.postData("country_list", countries)
 			await database.postData('bank', bank)
@@ -95,9 +94,9 @@ module.exports = {
 		}
 		if (subcommand == 'sell') {
 			let item = interaction.options.getString('item');
-			let amt = (interaction.options.getInteger('amt') ? interaction.options.getInteger('amt') : 1)
-			if (!countries[playersCountry[interaction.user.id][0]].items[item]) return interaction.editReply(`You don't have this item!`)
-			countries[playersCountry[interaction.user.id][0]].items[item] -= amt
+			let amt = (interaction.options.getInteger('amt') ?? 1)
+			if (!countries[playersCountry[interaction.user.id].mainland].items[item]) return interaction.editReply(`You don't have this item!`)
+			countries[playersCountry[interaction.user.id].mainland].items[item] -= amt
 			bank[interaction.user.id] += Math.round(((shop[item].cost) / 2) * amt)
 			await database.postData('country_list', countries);
 			await database.postData('bank', bank)

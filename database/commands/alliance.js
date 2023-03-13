@@ -123,22 +123,22 @@ module.exports = {
 				.setRequired(true))),
 	async execute({ interaction, client, database }) {
 		await interaction.deferReply();
+
 		const subcommand = interaction.options.getSubcommand();
 		const subcommandGroup = interaction.options.getSubcommandGroup();
+
 		const alliances = await database.getData('alliances')
 		const countries = await database.getData('country_list')
 		const playersCountry = await database.getData('players_country')
 		const bank = await database.getData('bank')
-		if (playersCountry[interaction.user.id]) { if (playersCountry[interaction.user.id].length == 0) return interaction.editReply('You don\'t have a country') }
-		else if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
+
 		if (subcommand == 'create') {
 			let name = interaction.options.getString('name');
-			let newAlliance = alliance.create({
+			alliances[name] = alliance.create({
 				name: name,
 				leader: interaction.user.id
-			})
-			alliances[name] = newAlliance;
-			countries[playersCountry[interaction.user.id][0]].alliances.push(name)
+			});
+			countries[playersCountry[interaction.user.id].mainland].alliances.push(name)
 			await database.postData('alliances', alliances);
 			await database.postData('country_list', countries);
 			return interaction.editReply(`Successfully created ${name}! Check it out with \`/alliance profile\``);
@@ -151,7 +151,7 @@ module.exports = {
 				allianceObject: alliances[name],
 				member: interaction.user.id
 			})
-			countries[playersCountry[interaction.user.id][0]].alliances.push(name)
+			countries[playersCountry[interaction.user.id].mainland].alliances.push(name)
 			await database.postData('alliances', alliances);
 			await database.postData('country_list', countries);
 			return interaction.editReply(`Successfully joined ${name}!`);
@@ -183,7 +183,7 @@ module.exports = {
 			})
 			if (check === -2) return interaction.editReply(`The amount cannot be negative!`);
 			if (check === -1) return interaction.editReply(`You cannot withdraw this amount, you can only withdraw ${alliances[name].settings.withdraw_per_interval}`)
-			else if (check === 0) return interaction.editReply(`The bank does not have ${amount}, it only has ${alliances[name].bank}`) //Format it to say in 2 hours or 30 minutes depending on the current time
+			else if (check === 0) return interaction.editReply(`The bank does not have ${amount}, it only has ${alliances[name].bank}`)
 			else if (check === 1) return interaction.editReply(`You have already withdrawed, please wait until you can withdraw again in ${misc.msToTime((alliances[name].lastWithdraw[interaction.user.id] + alliances[name].settings.interval_of_withdraw) - Date.now())}`)
 			alliances[name] = check
 			bank[interaction.user.id] += amount;
@@ -215,7 +215,7 @@ module.exports = {
 				allianceObject: alliances[name],
 				member: user.id
 			})
-			countries[playersCountry[user.id][0]].alliances.splice(countries[playersCountry[user.id][0]].alliances.indexOf(name), 1)
+			countries[playersCountry[user.id].mainland].alliances.splice(countries[playersCountry[user.id].mainland].alliances.indexOf(name), 1)
 			await database.postData('alliances', alliances);
 			await database.postData('country_list', countries);
 			return interaction.editReply(`Successfully kicked ${user}!`);
@@ -270,7 +270,6 @@ module.exports = {
 				.setColor(misc.randomColor())
 				.setTimestamp()
 				.setFooter({ text: "Please report any bugs! Thanks! ^^", iconURL: client.user.avatarURL() });
-			await database.postData('alliances', alliances);
 			return interaction.editReply({ embeds: [profileEmbed] });
 		} //Finished
 		if (subcommand == 'leave') {
@@ -280,7 +279,7 @@ module.exports = {
 				allianceObject: alliances[name],
 				member: interaction.user.id
 			})
-			countries[playersCountry[interaction.user.id][0]].alliances.splice(countries[playersCountry[interaction.user.id][0]].alliances.indexOf(name), 1)
+			countries[playersCountry[interaction.user.id].mainland].alliances.splice(countries[playersCountry[interaction.user.id].mainland].alliances.indexOf(name), 1)
 			await database.postData('alliances', alliances);
 			await database.postData('country_list', countries);
 			return interaction.editReply(`Successfully left ${name}!`);
@@ -296,7 +295,7 @@ module.exports = {
 				if (m.content.toLowerCase() == 'n') return interaction.editReply('Alright then')
 				else if (m.content.toLowerCase() == 'y') {
 					bank[interaction.user.id] += alliances[name].bank
-					for (member of alliances[name].members) countries[playersCountry[member][0]].alliances.splice(countries[playersCountry[member][0]].alliances.indexOf(name), 1)
+					for (member of alliances[name].members) countries[playersCountry[member].mainland].alliances.splice(countries[playersCountry[member].mainland].alliances.indexOf(name), 1)
 					delete alliances[name]
 					await database.postData('alliances', alliances);
 					await database.postData('country_list', countries);

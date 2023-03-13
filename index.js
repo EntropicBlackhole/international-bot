@@ -42,15 +42,16 @@ rest.put(Routes.applicationCommands(config.clientID), { body: commands })
 //All event handlers
 client.once(Events.ClientReady, async c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
-	// console.log(await database.postData('country_list', JSON.parse(fs.readFileSync('./database/country/country_list.json'))))
-	// await database.createTable('country', 'produce_cache')
 	const reactionRoles = await database.getData('reaction-roles')
 	rr = new ReactionRole(client, reactionRoles);
-	// misc.produceInterval(client)
-	// let temp = await database.getData('produce_cache')
-	// temp["1063597343787716729"].plantedCache.harvestTime = 1678494602074
-	// await database.postData('produce_cache', temp)
-	
+	// let countries = await database.getData('country_list');
+	// for (country in countries) {
+	// 	for (product in countries[country].products) {
+	// 		countries[country].products[product] = Math.round(Math.random() * 100)
+	// 		countries[country].produced[product] = 50;
+	// 	}
+	// }
+	// await database.postData('country_list', countries)
 });
 
 client.on(Events.GuildMemberAdd, async member => {

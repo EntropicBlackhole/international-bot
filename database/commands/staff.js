@@ -97,12 +97,13 @@ module.exports = {
 		let subcommandGroup = interaction.options.getSubcommandGroup();
 		let subcommand = interaction.options.getSubcommand();
 		if ((!member.roles.cache.has('1046195813229015180')) && (subcommandGroup != 'appeal' || subcommand != 'create')) return interaction.reply({ content: "You can't use this command", ephemeral: true })
-
+		
+		await interaction.deferReply();
 		if (subcommandGroup == 'server') {
 			const autoroles = await database.getData('autoroles')
 			let reactionRoles = await database.getData('reaction-roles')
 			if (subcommand == 'reaction-roles') {
-				await interaction.deferReply();
+				
 				let channel = interaction.options.getChannel('channel-to-post-in')
 				await interaction.editReply('Format your message like this:\n\n@Role|✅\n@Role2|❌\n@Role3|💠\n\nI\'ll give you 3 minutes')
 				const filter = m => m.author.id == interaction.user.id;
@@ -129,7 +130,6 @@ module.exports = {
 						}
 						await database.postData('reaction-roles', reactionRoles)
 						rr.teardown()
-						reactionRoles = await database.getData('reaction-roles')
 						rr = new ReactionRole(client, reactionRoles);
 						return interaction.followUp('Created reaction roles! Check them out in <#' + channel + '>')
 					})
@@ -148,7 +148,7 @@ module.exports = {
 			const warns = await database.getData('warns');
 			if (subcommand == 'create') {
 				let user = interaction.options.getUser('user');
-				let reason = interaction.options.getString('reason') ? interaction.options.getString('reason') : "No reason specified";
+				let reason = interaction.options.getString('reason') ?? "No reason specified";
 				let caseID = (warns.amount_of_total_warns + 1).toString()
 				warns.amount_of_total_warns += 1
 				if ([undefined, null, {}].includes(warns[user.id])) {
