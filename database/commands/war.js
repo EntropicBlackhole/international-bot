@@ -77,7 +77,7 @@ module.exports = {
 		const wars = await database.getData('wars')
 		const bank = await database.getData('bank')
 
-		if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
+		// if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
 
 		const subcommand = interaction.options.getSubcommand();
 		if (subcommand == 'declare') {
@@ -123,6 +123,7 @@ module.exports = {
 			return interaction.editReply({ embeds: [warEmbed] })
 		}
 		if (subcommand == 'use') {
+			/*
 			let warID = interaction.options.getString('war-id');
 			let item = interaction.options.getString('item');
 			let amount = interaction.options.getInteger('amount') ?? 1;
@@ -148,7 +149,11 @@ module.exports = {
 			}
 			//The ID of the other person to apply the item on
 			var otherUserID = ""
-			let whoToUse = checkWhoToUse()
+			*/
+			let peopleSideArray = ['Ireland', 'France', 'Germany']
+			let whoToUse = await checkWhoToUse(peopleSideArray, interaction, countries)
+			console.log(whoToUse)
+			return
 			if (peopleSideArray.length > 1) { //If theres more than one person in this side:
 				interaction.editReply(`There are multiple people! Which one do you want to use this on? (Case sensitive) (${peopleSideArray.join('/')})`)
 				const filter = m => ((peopleSideArray.includes(m.content)) && m.author.id == interaction.user.id)
@@ -663,3 +668,27 @@ module.exports = {
 		}
 	},
 };
+
+async function checkWhoToUse(peopleSideArray, interaction, countries) {
+	if (peopleSideArray.length > 1) {
+		const filter = m => ((peopleSideArray.includes(m.content)) && m.author.id == interaction.user.id)
+		interaction.editReply(`There are multiple people! Which one do you want to use this on? (Case sensitive) (${peopleSideArray.join('/')})`).then(() => {
+			interaction.channel.awaitMessages({ filter, max: 1, time: 30000, errors: ['time'] })
+				.then(collected => {
+					return collected.content
+				})
+				.catch(collected => {
+					interaction.followUp('Looks like nobody got the answer this time.');
+				});
+		});
+		// const filter = m => ((peopleSideArray.includes(m.content)) && m.author.id == interaction.user.id)
+		// const collector = interaction.channel.createMessageCollector({ filter, max: 1, time: 15000 });
+
+		// collector.on('collect', async m => {
+		// 	// console.log(countries[m.content].owner)
+		// 	return countries[m.content].owner
+		// });
+	} else {
+		return peopleSideArray[0]
+	}
+}
