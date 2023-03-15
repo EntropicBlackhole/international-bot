@@ -54,10 +54,11 @@
 	},
 	"emp_faulty": {
 		"name": "Faulty EMP Driver Blaster",
-		"description": "Able to disable/destroy any nearby devices (E.G. Communication lines,war robots,mobile phones etc.) Can take out 20-40% of electrical devices (in your items)",
+		"description": "Able to disable/destroy any nearby devices (E.G. Communication lines, war robots, mobile phones etc.) Can take out 20-40% of electrical devices (in your items)",
 		"cost": 300,
 		"type": [
-			"Disabler"
+			"Disabler",
+			"Electric"
 		],
 		"use": {
 			"type": "disable",
@@ -70,10 +71,11 @@
 	},
 	"emp_polished": {
 		"name": "Polished EMP Driver Blaster",
-		"description": "Able to disable/destroy any nearby devices (E.G. Communication lines,war robots,mobile phones etc.) Can take out 50-70% of electrical devices (in your items) and might stop a nuke (IHQ 2.2 only) (Except DextraNuke)",
+		"description": "Able to disable/destroy any nearby devices (E.G. Communication lines, war robots, mobile phones etc.) Can take out 50-70% of electrical devices (in your items)",
 		"cost": 450,
 		"type": [
-			"Disabler"
+			"Disabler",
+			"Electric"
 		],
 		"use": {
 			"type": "disable",
@@ -86,10 +88,11 @@
 	},
 	"emp_superior": {
 		"name": "Superior EMP Driver Blaster",
-		"description": "Able to disable/destroy any nearby devices (E.G. Communication lines,war robots,mobile phones etc.) Can take out 80-100% of electrical devices (in your items) and might stop a nuke (IHQ 2.2 only) (Except DextraNuke)",
+		"description": "Able to disable/destroy any nearby devices (E.G. Communication lines,war robots,mobile phones etc.) Can take out 80-100% of electrical devices (in your items)",
 		"cost": 600,
 		"type": [
-			"Disabler"
+			"Disabler",
+			"Electric"
 		],
 		"use": {
 			"type": "disable",
