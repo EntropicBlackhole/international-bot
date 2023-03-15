@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
 const { Misc } = require('../bot/functions');
+const fs = require('fs')
 const misc = new Misc();
 let shop = require('../bot/shop_items.json');
 let shopList = []; //shoplift lol
@@ -144,39 +145,38 @@ module.exports = {
 			else if (itemUse == 'attack' || itemUse == 'disable') side = (wars[warID].turn == 'Attacker' ? 'defender' : 'attacker')
 			//Add all people from that side to peopleSideArray
 			for (playerID of Object.keys(wars[warID][side])) peopleSideArray.push(playersCountry[playerID].mainland)
-			peopleSideArray.push('cancel')
 			//Ask a dynamic question based if there's one or more people
-			let questionToAsk = `Are you sure you want to use ${shop[item].name}? (y/n/cancel)`;
-			if (peopleSideArray.length > 1) questionToAsk = `There are multiple people! Which one do you want to use this on? (Case sensitive) (${peopleSideArray.join('/')})`
+			let questionToAsk = `Are you sure you want to use ${shop[item].name}? (y/n)`;
+			if (peopleSideArray.length > 1) questionToAsk = `There are multiple people! Which one do you want to use this on? (Case sensitive) (${peopleSideArray.join('/')}/cancel)`
 			interaction.editReply(questionToAsk)
 			//If there is more than one person, then make it check for anything inside peopleSideArray, otherwise, make it check for y, n or cancel. Of course also that it's the same person
-			const filter = m => ((peopleSideArray.length > 1 ? (peopleSideArray.includes(m.content)) : ['y', 'n', 'cancel'].includes(m.content.toLowerCase())) && m.author.id == interaction.user.id)
+			const filter = m => ((peopleSideArray.length > 1 ? (peopleSideArray.includes(m.content) || m.content.toLowerCase() == 'cancel') : ['y', 'n'].includes(m.content.toLowerCase())) && m.author.id == interaction.user.id)
+			// peopleSideArray.push('cancel')
 			const collector = interaction.channel.createMessageCollector({ filter, max: 1, time: 25000 });
 
 			collector.on('collect', async m => {
 				//If there's only one person, and they say no, return, otherwise, if they say cancel, then also retur 
-				if ((peopleSideArray == 1 && m.content == 'n') || (m.content.toLowerCase() == 'cancel')) return interaction.editReply('Alright!')
-				let otherUserID = "";
-				if (peopleSideArray.length > 1) otherUserID = peopleSideArray[0] //Assign otherUserID to the only person on that side
-				else otherUserID = countries[m.content].owner //Asign otherUserID to that person
-
+				if ((m.content.toLowerCase() == 'n') || (m.content.toLowerCase() == 'cancel')) return interaction.editReply('Alright!')
+				let otherUserCountry = "";
+				if (peopleSideArray.length > 1) otherUserCountry = countries[m.content].owner //Asign otherUserCountry to that person
+				else otherUserCountry = peopleSideArray[0] //Assign otherUserCountry to the only person on that side
 				//Since no errors have been passed, you can now mark the user's play as true
 				wars[warID][wars[warID].turn.toLowerCase()][interaction.user.id].hasPlayed = true;
 				//Everything else seems pretty simple
 				countries[playersCountry[interaction.user.id].mainland].items[item] -= amount;
 				let successfulPlayPrompt = '';
 				if (itemUse == 'attack') {
-					countries[playersCountry[otherUserID].mainland].health -= points * amount
-					successfulPlayPrompt = `Successfully dealt ${points * amount} damage to <@${otherUserID}>'s HP!`;
+					countries[otherUserCountry].health -= points * amount
+					successfulPlayPrompt = `Successfully dealt ${points * amount} damage to <@${countries[otherUserCountry].owner}>'s HP!`;
 				} else if (itemUse == 'disable') {
 					let randomTakeout = Math.round(Math.random() * (parseInt(points[1]) - parseInt(points[0]) + 1)) + parseInt(points[0]);
-					for (item in countries[playersCountry[otherUserID].mainland].items)	if (currentItemshop[item].type.includes("Electric")) countries[playersCountry[otherUserID].mainland].items[item] = Math.round((countries[playersCountry[otherUserID]].items[item] * (randomTakeout / 100)))
-					successfulPlayPrompt = `Successfully removed %${randomTakeout} of electric items from <@${otherUserID}>!`;
+					for (item in countries[otherUserCountry].items)	if (currentItemshop[item].type.includes("Electric")) countries[otherUserCountry].items[item] = Math.round((countries[playersCountry[otherUserCountry]].items[item] * (randomTakeout / 100)))
+					successfulPlayPrompt = `Successfully removed %${randomTakeout} of electric items from <@${countries[otherUserCountry].owner}>!`;
 				} else if (itemUse == 'heal') {
-					countries[playersCountry[otherUserID].mainland].health += points * amount
+					countries[otherUserCountry].health += points * amount
 					successfulPlayPrompt = `Successfully healed ${points * amount} HP!`;
 				} else if (itemUse == 'defense') {
-					countries[playersCountry[otherUserID].mainland].health += points * amount
+					countries[otherUserCountry].health += points * amount
 					successfulPlayPrompt = `Successfully shielded ${points * amount} damage points!`;
 				}
 				await interaction.followUp(successfulPlayPrompt);
@@ -249,16 +249,13 @@ module.exports = {
 						bank[player] += Math.ceil(takenThings.money / winningPlayers)
 					}
 					//Transferring possible countries to winning side
-					let winningSide = wars[warID][wars[warID].turn.toLowerCase()] //Winning side
-					let losingSide = wars[warID][(wars[warID].turn == "Attacker" ? "defender" : "attacker")] //Losing side
-					console.log(winningSide)
-					console.log(losingSide)
+					let winningSide = Object.keys(wars[warID][wars[warID].turn.toLowerCase()]) //Winning side
+					let losingSide = Object.keys(wars[warID][(wars[warID].turn == "Attacker" ? "defender" : "attacker")]) //Losing side
 					//Getting the minimum amount of times to iterate
 					let amtOfIterations = 0;
 					if (winningSide.length < losingSide.length) amtOfIterations = winningSide.length
 					else if (losingSide.length < winningSide.length) amtOfIterations = losingSide.length
 					else amtOfIterations = winningSide.length
-
 					//?? Giving the losing captain's country to the winning captain //Might be deprecated since it'll happen anyways down below
 					// playersCountry[winningSide[0]].conquered.push(playersCountry[losingSide[0]].mainland)
 					// delete playersCountry[losingSide[0]]
@@ -272,14 +269,18 @@ module.exports = {
 							playersCountry[winningSide[i]].conquered.push(country)
 						}
 						//Giving the country 
-						delete playersCountry[losingSide[i]]
 						countries[playersCountry[losingSide[i]].mainland].owner = winningSide[i]
 						playersCountry[winningSide[i]].conquered.push(playersCountry[losingSide[i]].mainland)
+						delete playersCountry[losingSide[i]]
 					}
+					wars[warID].isFinished = true;
 					await database.postData('players_country', playersCountry)
 					await database.postData('country_list', countries)
 					await database.postData('wars', wars)
 					await database.postData('bank', bank)
+					// fs.writeFileSync('./country_list.json', JSON.stringify(countries, null, 2))
+					// fs.writeFileSync('./players_country.json', JSON.stringify(playersCountry, null, 2))
+					// fs.writeFileSync('./wars.json', JSON.stringify(wars, null, 2))
 					return interaction.followUp({ content: 'Welp..', embeds: [warEndEmbed] })
 				} //Since the war has not ended, check for if the turn has finished
 				let haveAllPlayed = true;

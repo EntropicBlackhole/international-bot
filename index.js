@@ -1,7 +1,7 @@
 const { ReactionRole } = require("discordjs-reaction-role");
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, EmbedBuilder, Events, GatewayIntentBits, Partials, Routes, REST, Collection, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
+const { Client, EmbedBuilder, Events, GatewayIntentBits, Partials, Routes, PermissionsBitField, REST, Collection, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
 const config = require("./database/bot/config.json");
 const indexTable = require('./database/bot/indexTable.json')
 const { Misc, Database } = require('./database/bot/functions')
@@ -44,7 +44,32 @@ client.once(Events.ClientReady, async c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
 	const reactionRoles = await database.getData('reaction-roles')
 	rr = new ReactionRole(client, reactionRoles);
+	// let countries = JSON.parse(fs.readFileSync('C:/Users/aschr/Dropbox/PC (2)/Downloads/country_list.json'))
+	// await database.postData('country_list', countries)
+	// await database.postData('wars', {
+	// 	"6o89k": {
+	// 		"captainAttacker": "532376544128008194",
+	// 		"captainDefender": "717465891725508708",
+	// 		"name": "6o89k",
+	// 		"id": "6o89k",
+	// 		"isFinished": true,
+	// 		"attacker": {
+	// 			"532376544128008194": {
+	// 				"name": "Moosey98",
+	// 				"hasPlayed": true
+	// 			}
+	// 		},
+	// 		"defender": {
+	// 			"717465891725508708": {
+	// 				"name": "Shu_Akane",
+	// 				"hasPlayed": false
+	// 			}
+	// 		},
+	// 		"turn": "Attacker"
+	// 	}
+	// })
 	// let countries = await database.getData('country_list');
+	// fs.writeFileSync('./country_list.json', JSON.stringify(countries, null, 2))
 	// for (country in countries) {
 	// 	for (product in countries[country].products) {
 	// 		countries[country].products[product] = Math.round(Math.random() * 100)

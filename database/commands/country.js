@@ -72,7 +72,10 @@ module.exports = {
 			if (countries[country].isTaken) return interaction.editReply(`Sorry but ${country} is taken by <@${countries[country].owner}>`)
 			countries[country].isTaken = true;
 			countries[country].owner = interaction.user.id
-			playersCountry[interaction.user.id] = [country];
+			playersCountry[interaction.user.id] = {
+				mainland: country,
+				conquered: []
+			};
 			await database.postData('country_list', countries)
 			await database.postData('players_country', playersCountry)
 			let member = interaction.guild.members.cache.get(interaction.user.id);
@@ -216,6 +219,7 @@ module.exports = {
 			let stats = countries[playersCountry[interaction.user.id].mainland]
 			let products = []
 			let items = []
+			let territories = playersCountry[interaction.user.id].conquered
 			for (i in stats.produced) products.push(`${misc.capitalize(i)}: ${stats.produced[i]}`)
 			for (i in stats.items) items.push(`${misc.capitalize(i)}: ${stats.items[i]}`)
 
@@ -223,6 +227,7 @@ module.exports = {
 			if (items.length == 0) items.push('None')
 			if (stats.wars.length == 0) stats.wars.push('None')
 			if (stats.alliances.length == 0) stats.alliances.push('None')
+			if (territories.length == 0) territories.push('None')
 			const profileEmbed = new EmbedBuilder()
 				.setTitle(playersCountry[interaction.user.id].mainland)
 				.setFields(
@@ -234,7 +239,8 @@ module.exports = {
 					{ name: 'Items', value: items.join('\n'), inline: true },
 					{ name: 'Current wars', value: stats.wars.join('\n') },
 					{ name: 'Health', value: stats.health.toString(), inline: true },
-					{ name: 'Money', value: bank[interaction.user.id].toString(), inline: true }
+					{ name: 'Money', value: bank[interaction.user.id].toString(), inline: true },
+					{ name: 'Territories', value: territories.join('\n')}
 				)
 				.setColor(misc.randomColor())
 				.setTimestamp()
