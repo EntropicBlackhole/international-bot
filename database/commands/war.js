@@ -350,18 +350,14 @@ module.exports = {
 			await misc.paginationEmbed(interaction, embedList, buttonList)
 		}
 		else if (subcommand == 'surrender') {
-			//if the captain surrenders, just shift the array that they're on and take the first player in the array
-			//and turn them into the new captain
-			//If there are no members left, that side loses
-
 			let warID = interaction.options.getString('war-id');
-			//Check if war has already ended
 			if (wars[warID].isFinished) return interaction.editReply('This war has already ended dumbass')
 			for (let side of ['attacker', 'defender']) {
-				for (let player in wars[warID][side]) if (player == interaction.user.id) {
-					var tempPlayerData = wars[warID][side][player]
+				for (let player in wars[warID][side]) if (player == interaction.user.id) { //Basically just finding the players side
+					var tempPlayerData = wars[warID][side][player] //cached for later
 					delete wars[warID][side][player]
-					if (Object.keys(wars[warID][side]).length == 0) {
+					if (Object.keys(wars[warID][side]).length == 0) { //If the amount of players on this side is 0
+						//Grab captains health of this side
 						let captainHealth = countries[playersCountry[wars[warID]["captain" + misc.capitalize(side)]].mainland].health
 						if (captainHealth < 1) countries[playersCountry[wars[warID]["captain" + misc.capitalize(side)]].mainland].health = 0;
 						let isTeamDead = true;
@@ -422,8 +418,9 @@ module.exports = {
 								bank[player] += Math.ceil(takenThings.money / winningPlayers)
 							}
 							//Transferring possible countries to winning side
-							let losingSide = Object.keys(wars[warID][side]) //Winning side //!! I think it is because this is an object
+							let losingSide = Object.keys(wars[warID][side]) //Winning side //!! I think it is because this is an object 
 							//!! Of which you can't get a length of, so using Object.keys it would work
+							//?? Applying Object.keys makes it work I think
 							let winningSide = Object.keys(wars[warID][(side == "attacker" ? "defender" : "attacker")]) //Losing side
 
 							//Getting the minimum amount of times to iterate
