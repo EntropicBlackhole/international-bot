@@ -78,9 +78,10 @@ module.exports = {
 		const wars = await database.getData('wars')
 		const bank = await database.getData('bank')
 
-		if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
+		if ((playersCountry[interaction.user.id] == undefined) && (subcommand != 'list')) return interaction.editReply('You don\'t have a country')
 
 		const subcommand = interaction.options.getSubcommand();
+		
 		if (subcommand == 'declare') {
 			let user = interaction.options.getUser('user');
 			if (playersCountry[user.id] == undefined) return interaction.editReply(`${user.username} doesn't have a country`)

@@ -132,6 +132,7 @@ module.exports = {
 		const playersCountry = await database.getData('players_country')
 		const bank = await database.getData('bank')
 
+		if ((playersCountry[interaction.user.id] == undefined) && (subcommand != 'list')) return interaction.editReply('You don\'t have a country')
 		if (subcommand == 'create') {
 			let name = interaction.options.getString('name');
 			alliances[name] = alliance.create({

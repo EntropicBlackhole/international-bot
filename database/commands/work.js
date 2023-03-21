@@ -30,11 +30,15 @@ module.exports = {
 			.setDescription('Forge metal you found!')),
 	async execute({ interaction, client, database, misc }) {
 		await interaction.deferReply();
+
 		const playersCountry = await database.getData('players_country');
 		const countries = await database.getData('country_list');
+
 		if (playersCountry[interaction.user.id] == undefined) return interaction.editReply('You don\'t have a country')
+
 		const subcommand = interaction.options.getSubcommand();
 		let producedCacheTimer = await database.getData('produce_cache')
+		
 		if (producedCacheTimer[interaction.user.id] == undefined) producedCacheTimer[interaction.user.id] = {
 			timer: {
 				fish: 0,
@@ -154,6 +158,7 @@ module.exports = {
 			countries[playersCountry[interaction.user.id].mainland].produced.metal += randAmt
 			producedCacheTimer[interaction.user.id].timer.metal = Date.now() + 1000 * 60 * 3
 		}
+
 		await database.postData('produce_cache', producedCacheTimer)
 		await database.postData('country_list', countries)
 		return interaction.editReply({ embeds: [produceEmbed] })
