@@ -226,7 +226,8 @@ class Database {
 		for (let table in this.indexTable) for (let column in this.indexTable[table]) {
 			if (column == columnName) {
 				let message = await this.client.channels.cache.get(this.indexTable[table].id).messages.fetch(this.indexTable[table][column])
-				return await fetch(message.attachments.first().url).then((res) => res.json())
+				let data = await fetch(message.attachments.first().url)
+				return data.url.endsWith('.png') ? data.url : await data.json()
 			}
 		}
 		return null

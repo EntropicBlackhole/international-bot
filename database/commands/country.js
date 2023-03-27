@@ -63,7 +63,7 @@ module.exports = {
 		const subcommandGroup = interaction.options.getSubcommandGroup();
 
 		if ([{}, undefined].includes(bank[interaction.user.id])) { bank[interaction.user.id] = 0; await database.postData('bank', bank) }
-		if ((playersCountry[interaction.user.id] == undefined) && (subcommand != 'get' && subcommand != 'list')) return interaction.editReply('You don\'t have a country')
+		if ((playersCountry[interaction.user.id] == undefined) && (subcommand != 'get' && subcommand != 'list' && subcommand != 'map')) return interaction.editReply('You don\'t have a country')
 
 		if (subcommand == 'get') {
 			let country = interaction.options.getString('country');

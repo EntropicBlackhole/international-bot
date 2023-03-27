@@ -153,3 +153,7 @@ client.on(Events.InteractionCreate, async interaction => {
 		}
 	}
 });
+
+client.on(Events.MessageCreate, async message => {
+	if (message.author.id == '708026434660204625' && message.channel.id == '1055574550940766258') return message.channel.send('Thank you for everything<3')
+})
